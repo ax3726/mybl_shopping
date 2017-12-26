@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -22,6 +21,8 @@ import com.ycblsc.net.RetryWithDelayFunc1;
 import com.ycblsc.net.ex.ApiException;
 import com.ycblsc.net.ex.ResultException;
 import com.ycblsc.widget.TitleBarLayout;
+import com.zhy.autolayout.AutoFrameLayout;
+import com.zhy.autolayout.AutoLinearLayout;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
@@ -81,10 +82,10 @@ public abstract class BaseActivity<P extends BasePresenter, B extends ViewDataBi
         mBinding = DataBindingUtil.inflate(getLayoutInflater(), getLayoutId(), null, false);
         if (isTitleBar()) {
             mTitleBarLayout = new TitleBarLayout(aty);
-            LinearLayout lly = new LinearLayout(aty);
+            AutoLinearLayout lly = new AutoLinearLayout(aty);
             lly.setOrientation(LinearLayout.VERTICAL);
             lly.addView(mTitleBarLayout);
-            FrameLayout fly = new FrameLayout(aty);
+            AutoFrameLayout fly = new AutoFrameLayout(aty);
             fly.addView(mBinding.getRoot());
             WidgetLayoutEmptyBinding emptyBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.widget_layout_empty, null, false);
             emptyBinding.setStateModel(mStateModel);
@@ -98,7 +99,7 @@ public abstract class BaseActivity<P extends BasePresenter, B extends ViewDataBi
                 }
             });
         } else {
-            FrameLayout fly = new FrameLayout(aty);
+            AutoFrameLayout fly = new AutoFrameLayout(aty);
             fly.addView(mBinding.getRoot());
             WidgetLayoutEmptyBinding emptyBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.widget_layout_empty, null, false);
             emptyBinding.setStateModel(mStateModel);
