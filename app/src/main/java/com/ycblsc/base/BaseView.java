@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import com.trello.rxlifecycle.ActivityEvent;
 import com.trello.rxlifecycle.LifecycleTransformer;
 
+import ml.gsy.com.library.common.LoadingDialog;
 import rx.Observable;
 
 /**

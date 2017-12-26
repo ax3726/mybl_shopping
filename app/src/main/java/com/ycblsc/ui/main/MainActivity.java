@@ -1,7 +1,6 @@
 package com.ycblsc.ui.main;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,7 +11,6 @@ import android.widget.RadioGroup;
 import com.ycblsc.R;
 import com.ycblsc.base.BaseActivity;
 import com.ycblsc.base.BaseView;
-import com.ycblsc.base.EmptyState;
 import com.ycblsc.databinding.ActivityMainBinding;
 import com.ycblsc.prestener.main.MainPrestener;
 import com.ycblsc.ui.buycart.BuyCartFragment;
@@ -55,8 +53,6 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
         super.initData();
         mDoubleClickExit = new DoubleClickExitHelper(this);
         initFragment();
-
-
     }
 
     @Override

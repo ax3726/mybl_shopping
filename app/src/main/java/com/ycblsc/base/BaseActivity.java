@@ -27,6 +27,7 @@ import com.zhy.autolayout.AutoLinearLayout;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 
+import ml.gsy.com.library.common.LoadingDialog;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Observable;
 import rx.Subscriber;
