@@ -1,0 +1,11 @@
+package com.ycblsc.prestener.main;
+
+import com.ycblsc.base.BasePresenter;
+import com.ycblsc.base.BaseView;
+
+/**
+ * Created by Administrator on 2017/12/25 0025.
+ */
+
+public class MainPrestener extends BasePresenter<BaseView> {
+}

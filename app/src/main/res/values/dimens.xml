@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="head_top">0dp</dimen>
+
+    <dimen name="default_circle_view_size">100dp</dimen>
+</resources>
