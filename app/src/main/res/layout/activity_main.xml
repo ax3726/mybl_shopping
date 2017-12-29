@@ -41,7 +41,7 @@
                 android:drawablePadding="4dp"
                 android:drawableTop="@drawable/selector_home"
                 android:gravity="center"
-                android:text="首页"
+                android:text="便利架"
                 android:textColor="@color/selector_foot_color"
                 android:textSize="28px" />
 
