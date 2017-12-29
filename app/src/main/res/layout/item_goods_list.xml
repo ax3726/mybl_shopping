@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    android:paddingBottom="20px"
+    android:paddingTop="20px">
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="200px"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="200px"
+            android:layout_height="200px"
+            android:src="@mipmap/ic_launcher"
+
+            />
+
+        <com.zhy.autolayout.AutoRelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30px"
+            android:orientation="vertical"
+            android:paddingBottom="30px"
+            android:paddingTop="30px">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="妙芙欧式蛋糕"
+                android:textColor="@color/colorBlack"
+                android:textSize="34px" />
+
+            <TextView
+                android:id="@+id/tv_des"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_title"
+                android:layout_marginTop="12px"
+                android:text="尽在丝滑口感"
+                android:textColor="@color/color999999"
+                android:textSize="28px" />
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="12px"
+                android:text="¥15.8"
+                android:textColor="@color/colorD00852"
+                android:textSize="28px" />
+
+
+        </com.zhy.autolayout.AutoRelativeLayout>
+
+        <ImageView
+            android:id="@+id/img_shopping"
+            android:layout_width="70px"
+            android:layout_height="70px"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="30px"
+            android:layout_marginLeft="15px"
+            android:src="@drawable/home_buycart_icon" />
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+</com.zhy.autolayout.AutoRelativeLayout>

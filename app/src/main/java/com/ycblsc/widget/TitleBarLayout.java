@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.ycblsc.R;
 import com.ycblsc.databinding.ComonTarbarLayoutBinding;
@@ -37,7 +38,9 @@ public class TitleBarLayout extends LinearLayout {
             mBinding.flyLine.setElevation(15f);
         }*/
     }
-
+    public TextView getTitleView() {
+      return  mBinding.tvTitle;
+    }
     /**
      * 设置标题
      */
