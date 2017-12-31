@@ -26,7 +26,7 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
 
     @Override
     protected void initData() {
-        super.initData();
+        super.initData();//ffff
         mStateModel.setEmptyState(EmptyState.PROGRESS);
 
         new Handler().postDelayed(new Runnable() {

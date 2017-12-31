@@ -13,7 +13,6 @@
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-
         android:layout_height="match_parent">
     <com.zhy.autolayout.AutoLinearLayout
         android:id="@+id/lly_boot"
