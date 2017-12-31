@@ -24,18 +24,11 @@
                 <!-- border_outside_color 外部圆圈的颜色 -->
                 <!-- border_inside_color 内部部圆圈的颜色 -->
                 <!-- border_thickness 外圆和内圆的宽度 -->
-                <com.ycblsc.utils.RoundImageView
+                <ml.gsy.com.library.views.RoundImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/ic_woman"
-                    imagecontrol:border_inside_color="#bc0978"
-                    imagecontrol:border_outside_color="#ba3456"
-                    imagecontrol:border_thickness="10dp" />
+                    android:padding="20sp"
+                    android:src="@drawable/ic_woman" />
 
                 <com.zhy.autolayout.AutoLinearLayout
                     android:layout_width="wrap_content"
@@ -180,12 +173,12 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="31dp"
-                    android:src="@drawable/ic_back"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="31dp" />
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="31dp"
+                    android:layout_marginRight="31dp"
+                    android:src="@drawable/ic_back" />
             </com.zhy.autolayout.AutoRelativeLayout>
             <!---->
             <com.zhy.autolayout.AutoLinearLayout
