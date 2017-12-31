@@ -2,9 +2,7 @@ package com.ycblsc.net;
 
 import com.google.gson.Gson;
 import com.ycblsc.model.BaseBean;
-import com.ycblsc.model.ResponseCodeEnum;
 import com.ycblsc.model.ResultResponse;
-import com.ycblsc.net.ex.ApiException;
 import com.ycblsc.net.ex.ResultException;
 
 import java.io.IOException;
@@ -32,13 +30,17 @@ public class GsonResponseBodyConverter<T> implements Converter<ResponseBody, T> 
         try {
             //ResultResponse 只解析code字段进行约定异常处理
             ResultResponse resultResponse = gson.fromJson(response, ResultResponse.class);
-            if (resultResponse.getStatus()==200) {
+            if (resultResponse.getReturnCode()==1) {
                 return gson.fromJson(response, type);
-            } else if (resultResponse.getStatus()==404) {
+            }
+         /*
+            else if (resultResponse.getStatus()==404) {
                 throw new ApiException(ResponseCodeEnum.NODATA);
-            } else {
+            } */
+
+            else {
                 BaseBean baseBean = gson.fromJson(response, BaseBean.class);
-                throw new ResultException(baseBean.getStatus(), baseBean.getInfo());
+                throw new ResultException(baseBean.getReturnCode(), baseBean.getReturnMessage());
             }
         } finally {
             value.close();

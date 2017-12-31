@@ -42,12 +42,10 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
     private CommonAdapter<String> mGoodsListAdapter;//商品列表
     private List<GoodsTypeModel> mGoodsTypes = new ArrayList<>();
     private List<String> mGoodsList = new ArrayList<>();
-
     @Override
     protected HomePrestener createPresenter() {
         return new HomePrestener();
     }
-
     @Override
     protected void initData() {
         super.initData();
@@ -56,7 +54,7 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                mStateModel.setEmptyState(EmptyState.NORMAL);
+                mStateModel.setEmptyState(EmptyState.EMPTY);
             }
         }, 2000);
 
@@ -66,8 +64,6 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
         mGoodsTypes.add(new GoodsTypeModel("休闲食品", 3));
         mGoodsTypes.add(new GoodsTypeModel("母婴用品", 6));
         mGoodsTypes.add(new GoodsTypeModel("零食", 8));
-
-
         mGoodsTypes.get(0).setIs_select(true);
         mGoodsList.addAll(mGoodsTypes.get(0).getList());
 
