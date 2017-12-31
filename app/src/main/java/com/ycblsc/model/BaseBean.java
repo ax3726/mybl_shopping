@@ -6,31 +6,31 @@ package com.ycblsc.model;
 
 public class BaseBean<T> {
 
-    private String info;
-    private int status;
-    private T data;
+    private String ReturnMessage;
+    private int ReturnCode;
+    private T ReturnData;
 
-    public String getInfo() {
-        return info;
+    public String getReturnMessage() {
+        return ReturnMessage;
     }
 
-    public void setInfo(String info) {
-        this.info = info;
+    public void setReturnMessage(String returnMessage) {
+        ReturnMessage = returnMessage;
     }
 
-    public int getStatus() {
-        return status;
+    public int getReturnCode() {
+        return ReturnCode;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setReturnCode(int returnCode) {
+        ReturnCode = returnCode;
     }
 
-    public T getData() {
-        return data;
+    public T getReturnData() {
+        return ReturnData;
     }
 
-    public void setData(T data) {
-        this.data = data;
+    public void setReturnData(T returnData) {
+        ReturnData = returnData;
     }
 }

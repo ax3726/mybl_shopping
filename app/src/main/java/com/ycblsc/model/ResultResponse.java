@@ -7,22 +7,22 @@ package com.ycblsc.model;
 
 public class ResultResponse {
 
-    private String info;
-    private int status;
+    private String ReturnMessage;
+    private int ReturnCode;
 
-    public String getInfo() {
-        return info;
+    public String getReturnMessage() {
+        return ReturnMessage;
     }
 
-    public void setInfo(String info) {
-        this.info = info;
+    public void setReturnMessage(String returnMessage) {
+        ReturnMessage = returnMessage;
     }
 
-    public int getStatus() {
-        return status;
+    public int getReturnCode() {
+        return ReturnCode;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setReturnCode(int returnCode) {
+        ReturnCode = returnCode;
     }
 }

@@ -36,9 +36,11 @@ public class LoginActivity extends BaseActivity<BasePresenter, ActivityLoginBind
 
     }
 
+
     @Override
     protected void initEvent() {
         super.initEvent();
+
         mBinding.btnLoginIn.setOnClickListener(this);
         mBinding.btnLoginYouke.setOnClickListener(this);
     }

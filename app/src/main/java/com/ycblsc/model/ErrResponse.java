@@ -7,37 +7,31 @@ package com.ycblsc.model;
 public class ErrResponse
 {
     private static final String TAG = "ErrResponse";
-    private int code;
-    private String msg;
-    private String data;
+    private int ReturnCode;
+    private String ReturnMessage;
+    private String ReturnData;
 
-    public int getCode()
-    {
-        return code;
+    public int getReturnCode() {
+        return ReturnCode;
     }
 
-    public void setCode(int code)
-    {
-        this.code = code;
+    public void setReturnCode(int returnCode) {
+        ReturnCode = returnCode;
     }
 
-    public String getMsg()
-    {
-        return msg;
+    public String getReturnMessage() {
+        return ReturnMessage;
     }
 
-    public void setMsg(String msg)
-    {
-        this.msg = msg;
+    public void setReturnMessage(String returnMessage) {
+        ReturnMessage = returnMessage;
     }
 
-    public String getData()
-    {
-        return data;
+    public String getReturnData() {
+        return ReturnData;
     }
 
-    public void setData(String data)
-    {
-        this.data = data;
+    public void setReturnData(String returnData) {
+        ReturnData = returnData;
     }
 }

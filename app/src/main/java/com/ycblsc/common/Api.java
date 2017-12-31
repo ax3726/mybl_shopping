@@ -53,11 +53,13 @@ public class Api {
                             .newBuilder()
                             .scheme(originalRequest.url().scheme())
                             .host(originalRequest.url().host())
-                            .addQueryParameter("common", "aaa");
+                            .addQueryParameter("appKey", "gzqnkj")
+                            .addQueryParameter("_timestamp", System.currentTimeMillis()+"")
+                            .addQueryParameter("_sign", "gzqnkj");
 
                     // 新的请求+请求头部
                     Request newRequest = originalRequest.newBuilder()
-                            .header("Authorization", "token")
+                          //  .header("Authorization", "token")
                             .method(originalRequest.method(), originalRequest.body())
                             .url(authorizedUrlBuilder.build())
                             .build();
