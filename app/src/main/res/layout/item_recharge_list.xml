@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    android:padding="30px"
+    android:gravity="center">
+
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/lin_strokeBg"
+        android:layout_width="260px"
+        android:layout_height="140px"
+        android:gravity="center"
+        android:background="@drawable/shape_recharge_bg"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_moeny"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="30px"
+            android:paddingRight="30px"
+            android:text="60.00元"
+            android:textColor="@color/colorBlack"
+            android:textSize="40px" />
+
+        <TextView
+            android:id="@+id/tv_coupon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="30px"
+            android:paddingRight="30px"
+            android:layout_marginTop="20px"
+            android:gravity="center"
+            android:text="送11元劵"
+            android:textColor="@color/colorBlack" />
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+</com.zhy.autolayout.AutoLinearLayout>

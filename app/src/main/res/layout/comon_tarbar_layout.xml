@@ -3,23 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
-
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:contentInsetEnd="0dp"
-        app:contentInsetStart="0dp"
+        android:background="@color/colorPrimary"
         android:paddingTop="@dimen/head_top"
-        android:background="@drawable/shape_head_bg"
-     >
+        app:contentInsetEnd="0dp"
+        app:contentInsetStart="0dp">
 
 
         <LinearLayout
             android:id="@+id/lly_head"
-
             android:layout_width="match_parent"
             android:layout_height="50dp"
-
             android:orientation="horizontal">
 
             <LinearLayout
@@ -32,7 +28,7 @@
                     android:id="@+id/id_leftBtnImg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                   />
+                    android:src="@drawable/ic_jianytou" />
             </LinearLayout>
 
             <TextView

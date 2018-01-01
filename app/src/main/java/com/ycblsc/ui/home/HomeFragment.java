@@ -54,7 +54,7 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                mStateModel.setEmptyState(EmptyState.EMPTY);
+                mStateModel.setEmptyState(EmptyState.NORMAL);
             }
         }, 2000);
 
