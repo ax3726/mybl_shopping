@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rc_body"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+        </android.support.v7.widget.RecyclerView>
+
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:paddingTop="20px"
+                android:paddingBottom="20px"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="运费："
+                    android:textColor="@color/color666666"
+                    android:textSize="30px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="￥11"
+                    android:textColor="@color/colorED1E6A"
+                    android:textSize="30px" />
+
+            </com.zhy.autolayout.AutoLinearLayout>
+
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:paddingBottom="20px"
+                android:layout_height="wrap_content">
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1px"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="消费金额满100免运费"
+                    android:textColor="@color/color666666"
+                    android:textSize="30px" />
+
+            </com.zhy.autolayout.AutoLinearLayout>
+
+        </com.zhy.autolayout.AutoLinearLayout>
+<View
+    android:layout_width="match_parent"
+    android:layout_height="1px"
+    android:background="@color/colorE7E7E7"
+    />
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+        android:paddingLeft="30px"
+            android:gravity="center_vertical"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="50px"
+                android:src="@drawable/selector_shopping_choose"
+                android:layout_height="50px" />
+            <TextView
+                android:layout_marginLeft="12px"
+                android:layout_width="wrap_content"
+            android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"
+                android:text="全选"
+                android:textColor="@color/color666666"
+                android:textSize="32px" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:layout_height="wrap_content"
+                android:text="合计:"
+                android:textColor="@color/color202020"
+                android:textSize="32px" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥11"
+                android:layout_marginLeft="10px"
+                android:textColor="@color/colorED1E6A"
+                android:textSize="32px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="80px"
+                android:text="结算(2)"
+
+                android:layout_marginLeft="30px"
+                android:gravity="center"
+                android:paddingLeft="20px"
+                android:paddingRight="20px"
+                android:textColor="@color/colorWhite"
+                android:background="@color/colorPrimary"
+                android:textSize="32px" />
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+    </com.zhy.autolayout.AutoLinearLayout>
+</layout>
