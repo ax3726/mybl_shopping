@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
+
     <application
         android:name=".common.MyApplication"
         android:allowBackup="true"
@@ -23,14 +24,14 @@
             android:name="design_height"
             android:value="1280" />
 
-        <activity android:name=".ui.main.MainActivity"
-            android:screenOrientation="portrait"
-            >
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:screenOrientation="portrait">
 
         </activity>
-        <activity android:name=".ui.main.LoginActivity"
-            android:screenOrientation="portrait"
-            >
+        <activity
+            android:name=".ui.main.LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,9 +41,11 @@
         </activity>
         <activity
             android:name=".widget.zxing.android.CaptureActivity"
-            android:theme="@android:style/Theme.NoTitleBar"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar"></activity>
+        <activity
+            android:name=".ui.mine.RechargeActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
