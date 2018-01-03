@@ -318,4 +318,9 @@ public abstract class BaseActivity<P extends BasePresenter, B extends ViewDataBi
                 .retryWhen(RetryWithDelayFunc1.create())
                 .filter(t -> aty!=null).observeOn(AndroidSchedulers.mainThread()).compose(bindToLifecycle());
     }
+
+    @Override
+    public void setEmptyState(@EmptyState int emptyState) {
+        mStateModel.setEmptyState(emptyState);
+    }
 }

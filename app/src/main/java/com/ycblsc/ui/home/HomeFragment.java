@@ -1,7 +1,6 @@
 package com.ycblsc.ui.home;
 
 import android.content.Intent;
-import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -9,11 +8,14 @@ import android.widget.TextView;
 
 import com.ycblsc.R;
 import com.ycblsc.base.BaseFragment;
-import com.ycblsc.base.BaseView;
 import com.ycblsc.base.EmptyState;
+import com.ycblsc.base.StateModel;
 import com.ycblsc.databinding.FragmentHomeLayoutBinding;
-import com.ycblsc.model.GoodsTypeModel;
+import com.ycblsc.model.home.ProductListModel;
+import com.ycblsc.model.home.ProuductTypeModel;
+import com.ycblsc.model.home.ShopInfoModel;
 import com.ycblsc.prestener.home.HomePrestener;
+import com.ycblsc.view.IHomeView;
 import com.ycblsc.widget.zxing.android.CaptureActivity;
 
 import java.util.ArrayList;
@@ -28,7 +30,7 @@ import static android.app.Activity.RESULT_OK;
  * Created by Administrator on 2017/12/26 0026.
  */
 
-public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayoutBinding> implements BaseView {
+public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayoutBinding> implements IHomeView {
     private static final int REQUEST_CODE_SCAN = 2001;//二维码扫码参数
     private static final String DECODED_CONTENT_KEY = "codedContent";
     private static final String DECODED_BITMAP_KEY = "codedBitmap";
@@ -38,37 +40,35 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
         return R.layout.fragment_home_layout;
     }
 
-    private CommonAdapter<GoodsTypeModel> mGoodsTypeAdapter;//商品分类
-    private CommonAdapter<String> mGoodsListAdapter;//商品列表
-    private List<GoodsTypeModel> mGoodsTypes = new ArrayList<>();
-    private List<String> mGoodsList = new ArrayList<>();
+
+    private CommonAdapter<ProuductTypeModel.ReturnDataBean> mGoodsTypeAdapter;//商品分类
+    private CommonAdapter<ProductListModel.ReturnDataBean> mGoodsListAdapter;//商品列表
+    private List<ProuductTypeModel.ReturnDataBean> mGoodsTypes = new ArrayList<>();
+    private List<ProductListModel.ReturnDataBean> mGoodsList = new ArrayList<>();
+
+    private int mCurPosition = 0;//记录当前分类的下标
+    private int mPage = 1;
+    private int mSize = 10;
+
     @Override
     protected HomePrestener createPresenter() {
         return new HomePrestener();
     }
+
     @Override
     protected void initData() {
         super.initData();
         mStateModel.setEmptyState(EmptyState.PROGRESS);
-
-        new Handler().postDelayed(new Runnable() {
+        mStateModel.setIOnClickListener(new StateModel.IOnClickListener() {
             @Override
-            public void run() {
-                mStateModel.setEmptyState(EmptyState.NORMAL);
+            public void click(View view) {
+                mStateModel.setEmptyState(EmptyState.PROGRESS);
+                mPresenter.getProductType();
             }
-        }, 2000);
-
-
-        mGoodsTypes.add(new GoodsTypeModel("全部", 10));
-        mGoodsTypes.add(new GoodsTypeModel("奶品水饮", 5));
-        mGoodsTypes.add(new GoodsTypeModel("休闲食品", 3));
-        mGoodsTypes.add(new GoodsTypeModel("母婴用品", 6));
-        mGoodsTypes.add(new GoodsTypeModel("零食", 8));
-        mGoodsTypes.get(0).setIs_select(true);
-        mGoodsList.addAll(mGoodsTypes.get(0).getList());
-
+        });
         initAdapter();
-
+        mPresenter.getShopInfo("18");
+        mPresenter.getProductType();
 
     }
 
@@ -83,19 +83,26 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
                 startActivityForResult(intent, REQUEST_CODE_SCAN);
             }
         });
+        mBinding.imgShopping.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showWaitDialog();
+            }
+        });
     }
 
-    private int mCurPosition = 0;//记录当前的下标
 
     private void initAdapter() {
-        mGoodsTypeAdapter = new CommonAdapter<GoodsTypeModel>(aty, R.layout.item_goods_type, mGoodsTypes) {
+        mGoodsTypeAdapter = new CommonAdapter<ProuductTypeModel.ReturnDataBean>(aty, R.layout.item_goods_type, mGoodsTypes) {
             @Override
-            protected void convert(ViewHolder holder, GoodsTypeModel item, int position) {
+            protected void convert(ViewHolder holder, ProuductTypeModel.ReturnDataBean item, int position) {
+
+
                 LinearLayout lly_item = holder.getView(R.id.lly_item);
                 TextView tv_type = holder.getView(R.id.tv_type);
-
-                tv_type.setText(item.getName());
-                if (item.is_select()) {
+                holder.setImageurl(R.id.img, item.getF_img(), 0);
+                tv_type.setText(item.getF_NAME());
+                if (mCurPosition == position) {
                     lly_item.setBackgroundColor(getResources().getColor(R.color.colorWhite));
                     tv_type.setSelected(true);
                 } else {
@@ -106,14 +113,9 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
                     @Override
                     public void onClick(View v) {
                         if (mCurPosition != position) {
-                            mGoodsTypes.get(mCurPosition).setIs_select(false);
                             mCurPosition = position;
-                            mGoodsTypes.get(position).setIs_select(true);
                             notifyDataSetChanged();
-
-                            mGoodsList.clear();
-                            mGoodsList.addAll(mGoodsTypes.get(position).getList());
-                            mGoodsListAdapter.notifyDataSetChanged();
+                            mPresenter.getProductList(item.getF_CODE(), "18", "", "1", "10");
                         }
 
                     }
@@ -123,9 +125,13 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
         mBinding.rcGoodsType.setLayoutManager(new LinearLayoutManager(aty));
         mBinding.rcGoodsType.setAdapter(mGoodsTypeAdapter);
 
-        mGoodsListAdapter = new CommonAdapter<String>(aty, R.layout.item_goods_list, mGoodsList) {
+        mGoodsListAdapter = new CommonAdapter<ProductListModel.ReturnDataBean>(aty, R.layout.item_goods_list, mGoodsList) {
             @Override
-            protected void convert(ViewHolder holder, String s, int position) {
+            protected void convert(ViewHolder holder, ProductListModel.ReturnDataBean item, int position) {
+                holder.setImageurl(R.id.img, item.getImg(), 0);
+                holder.setText(R.id.tv_title, item.getS_products());
+                holder.setText(R.id.tv_des, item.getJianjie());
+                holder.setText(R.id.tv_price, "¥" + item.getS_price());
 
             }
         };
@@ -152,4 +158,29 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
         }
     }
 
+    @Override
+    public void getProuductType(ProuductTypeModel typeModel) {
+        mGoodsTypes.clear();
+        if (typeModel.getReturnData().size() > 0) {
+            mGoodsTypes.addAll(typeModel.getReturnData());
+            mCurPosition = 0;
+            mPresenter.getProductList(mGoodsTypes.get(0).getF_CODE(), "18", "", "1", "10");
+        }
+        mGoodsTypeAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void getProuductList(ProductListModel typeModel) {
+        mStateModel.setEmptyState(EmptyState.NORMAL);
+        mGoodsList.clear();
+        if (typeModel.getReturnData().size() > 0) {
+            mGoodsList.addAll(typeModel.getReturnData());
+        }
+        mGoodsListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void getShopInfo(ShopInfoModel model) {
+        mBinding.tvScanResult.setText(model.getReturnData().get(0).getS_weizhi());
+    }
 }

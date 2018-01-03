@@ -23,8 +23,6 @@ import android.widget.TextView;
 import com.bumptech.glide.DrawableTypeRequest;
 import com.bumptech.glide.Glide;
 
-import ml.gsy.com.library.adapters.recyclerview.MultiItemTypeAdapter;
-
 public class ViewHolder extends RecyclerView.ViewHolder {
     private SparseArray<View> mViews;
     private View mConvertView;
@@ -97,6 +95,8 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         view.setImageBitmap(bitmap);
         return this;
     }
+
+
 
     public ViewHolder setImageurl(int viewId, String url, int defaultimg, float... parms) {
         ImageView view = getView(viewId);

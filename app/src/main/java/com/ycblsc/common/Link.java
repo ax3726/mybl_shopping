@@ -5,5 +5,8 @@ package com.ycblsc.common;
  */
 
 public class Link {
-    public static final String SEREVE = "http://maili168.com:8888/jingxian/maili/";
+    public static final String SEREVE = "http://yichao.gzqnkj.com/WebService/";
+
+
+
 }

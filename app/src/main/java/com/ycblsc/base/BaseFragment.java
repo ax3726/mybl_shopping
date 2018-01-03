@@ -16,8 +16,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.DrawableTypeRequest;
 import com.bumptech.glide.Glide;
-import com.trello.rxlifecycle.ActivityEvent;
-import com.trello.rxlifecycle.LifecycleTransformer;
 import com.ycblsc.R;
 import com.ycblsc.databinding.WidgetLayoutEmptyBinding;
 import com.ycblsc.net.RetryWithDelayFunc1;
@@ -43,6 +41,7 @@ import rx.schedulers.Schedulers;
  */
 
 public abstract class BaseFragment<P extends BasePresenter, B extends ViewDataBinding> extends Fragment implements BaseView {
+
 
     /**
      * Fragment根视图
@@ -175,6 +174,11 @@ public abstract class BaseFragment<P extends BasePresenter, B extends ViewDataBi
     }
 
     @Override
+    public int getLayoutId() {
+        return 0;
+    }
+
+    @Override
     public void showToast(final String s) {
         aty.runOnUiThread(new Runnable() {
             @Override
@@ -195,6 +199,8 @@ public abstract class BaseFragment<P extends BasePresenter, B extends ViewDataBi
         });
 
     }
+
+
 
 
     protected abstract P createPresenter();
@@ -319,23 +325,16 @@ public abstract class BaseFragment<P extends BasePresenter, B extends ViewDataBi
     }
 
     public <T> Observable.Transformer<T, T> callbackOnIOToMainThread() {
-        return tObservable -> (Observable<T>) tObservable.subscribeOn(Schedulers.io())
+        return tObservable -> tObservable.subscribeOn(Schedulers.io())
                 .retryWhen(RetryWithDelayFunc1.create())
-                .filter(t -> aty != null).observeOn(AndroidSchedulers.mainThread()).compose(bindToLifecycle());
+                .filter(t -> aty != null).observeOn(AndroidSchedulers.mainThread());
+
+                //.compose(BaseFragment.this.bindToLifecycle());
     }
 
     @Override
-    public Observable<ActivityEvent> lifecycle() {
-        return null;
+    public void setEmptyState(@EmptyState int emptyState) {
+        mStateModel.setEmptyState(emptyState);
     }
 
-    @Override
-    public <T> LifecycleTransformer<T> bindUntilEvent(ActivityEvent event) {
-        return null;
-    }
-
-    @Override
-    public <T> LifecycleTransformer<T> bindToLifecycle() {
-        return null;
-    }
 }

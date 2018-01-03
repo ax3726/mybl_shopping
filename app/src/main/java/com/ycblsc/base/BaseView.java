@@ -2,11 +2,7 @@ package com.ycblsc.base;
 
 import android.content.DialogInterface;
 
-import com.trello.rxlifecycle.ActivityEvent;
-import com.trello.rxlifecycle.LifecycleTransformer;
-
 import ml.gsy.com.library.common.LoadingDialog;
-import rx.Observable;
 
 /**
  * Created by lm on 2017/11/22.
@@ -17,15 +13,15 @@ public interface BaseView {
 
     int getLayoutId();
     void showToast(String s);
-
+    void setEmptyState(@EmptyState int emptyState);
     void showToast(int id);
 
-    Observable<ActivityEvent> lifecycle();
+
+  /*  Observable<ActivityEvent> lifecycle();
 
     <T> LifecycleTransformer<T> bindUntilEvent(ActivityEvent event);
 
-    <T> LifecycleTransformer<T> bindToLifecycle();
-
+    <T> LifecycleTransformer<T> bindToLifecycle();*/
 
     /**
      * 隐藏WaitDialog

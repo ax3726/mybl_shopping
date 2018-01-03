@@ -3,15 +3,16 @@ package ml.gsy.com.library.utils;
 
 import android.util.Log;
 
-
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import okhttp3.FormBody;
-import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 
 public class ParamsUtils {
 
@@ -101,5 +102,27 @@ public class ParamsUtils {
         }
         return sourceLink+sb.toString();
     }
+
+    public void  aa()
+    {
+         Map<String, String> map = new HashMap<String, String>();
+        map.put("bbb", "哈哈1");
+        map.put("aaa", "哈哈2");
+        map.put("_ccc", "哈哈3");
+        map.put("dd", "哈哈4");
+        map.put("cc", "哈哈5");
+        List<Map.Entry<String,String>> list =
+                new ArrayList<Map.Entry<String,String>>(map.entrySet());
+
+        Collections.sort(list, new Comparator<Map.Entry<String, String>>() {
+            public int compare(Map.Entry<String, String> o1,
+                               Map.Entry<String, String> o2) {
+                return (o1.getKey().compareTo(o2.getKey()));
+            }
+        });
+
+
+    }
+
 }
 

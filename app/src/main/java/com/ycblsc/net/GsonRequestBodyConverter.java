@@ -39,5 +39,6 @@ final class GsonRequestBodyConverter<T> implements Converter<T, RequestBody> {
         jsonWriter.close();
         return RequestBody.create(MEDIA_TYPE, buffer.readByteString());
     }
+
 }
 

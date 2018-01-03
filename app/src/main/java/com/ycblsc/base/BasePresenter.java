@@ -1,10 +1,5 @@
 package com.ycblsc.base;
 
-import android.support.annotation.NonNull;
-
-import com.trello.rxlifecycle.ActivityEvent;
-import com.trello.rxlifecycle.ActivityLifecycleProvider;
-import com.trello.rxlifecycle.LifecycleTransformer;
 import com.ycblsc.net.RetryWithDelayFunc1;
 import com.ycblsc.net.ex.ApiException;
 import com.ycblsc.net.ex.ResultException;
@@ -23,7 +18,7 @@ import rx.schedulers.Schedulers;
  * Description:
  */
 
-public class BasePresenter<V extends BaseView> implements IBasePresenter<V>, ActivityLifecycleProvider {
+public class BasePresenter<V extends BaseView> implements IBasePresenter<V> {
 
 
     protected V mView;
@@ -46,7 +41,7 @@ public class BasePresenter<V extends BaseView> implements IBasePresenter<V>, Act
      * @return
      */
     protected boolean isViewAttach() {
-        return mView != null ;
+        return mView != null;
     }
 
     /**
@@ -58,7 +53,7 @@ public class BasePresenter<V extends BaseView> implements IBasePresenter<V>, Act
         return mView;
     }
 
-    @NonNull
+  /*  @NonNull
     @Override
     public Observable<ActivityEvent> lifecycle() {
         return getView().lifecycle();
@@ -74,13 +69,21 @@ public class BasePresenter<V extends BaseView> implements IBasePresenter<V>, Act
     @Override
     public <T> LifecycleTransformer<T> bindToLifecycle() {
         return getView().bindToLifecycle();
-    }
+    }*/
 
 
     public <T> Observable.Transformer<T, T> callbackOnIOToMainThread() {
-        return tObservable -> (Observable<T>) tObservable.subscribeOn(Schedulers.io())
-                .retryWhen(RetryWithDelayFunc1.create())
-                .filter(t -> BasePresenter.this.isViewAttach()).observeOn(AndroidSchedulers.mainThread()).compose(BasePresenter.this.bindToLifecycle());
+        return new Observable.Transformer<T, T>() {
+            @Override
+            public Observable<T> call(Observable<T> observable) {
+                return observable.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .retryWhen(RetryWithDelayFunc1.create())
+                        .filter(t -> BasePresenter.this.isViewAttach());
+
+                //.compose(BasePresenter.this.bindToLifecycle());
+            }
+        };
     }
 
     public abstract class BaseNetSubscriber<T> extends Subscriber<T> {
