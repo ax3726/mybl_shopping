@@ -9,6 +9,7 @@ import com.ycblsc.base.BaseFragmentView;
 import com.ycblsc.base.EmptyState;
 import com.ycblsc.databinding.FragmentMineLayoutBinding;
 import com.ycblsc.prestener.mine.MinePrestener;
+import com.ycblsc.ui.main.RegisterActivity;
 
 /**
  * Created by Administrator on 2017/12/26 0026.
@@ -51,8 +52,11 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
     @Override
     public void onClick(View view) {
         switch (view.getId()){
+            //会员注册
             case R.id.img_register:
+                startActivity(RegisterActivity.class);
                 break;
+            //充值
             case R.id.img_recharge:
                 startActivity(RechargeActivity.class);
                 break;
