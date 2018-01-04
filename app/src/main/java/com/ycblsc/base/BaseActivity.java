@@ -34,7 +34,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import ml.gsy.com.library.common.LoadingDialog;
-import retrofit2.adapter.rxjava.HttpException;
+import retrofit2.HttpException;
 
 
 /**
