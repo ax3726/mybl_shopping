@@ -57,4 +57,8 @@ public class MyApplication extends Application {
             }
         });
     }
+
+    public static String getBase_Path() {
+        return Base_Path;
+    }
 }

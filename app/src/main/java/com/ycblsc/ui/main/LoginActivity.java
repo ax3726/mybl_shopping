@@ -8,8 +8,7 @@ import com.ycblsc.base.BasePresenter;
 import com.ycblsc.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends BaseActivity<BasePresenter, ActivityLoginBinding> implements View.OnClickListener {
-
-
+    
     @Override
     protected BasePresenter createPresenter() {
         return null;
@@ -26,6 +25,7 @@ public class LoginActivity extends BaseActivity<BasePresenter, ActivityLoginBind
     }
 
     @Override
+
     public int getLayoutId() {
         return R.layout.activity_login;
     }
