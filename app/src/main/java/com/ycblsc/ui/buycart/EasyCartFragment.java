@@ -4,7 +4,7 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import com.ycblsc.R;
 import com.ycblsc.base.BaseFragment;
-import com.ycblsc.base.BasePresenter;
+import com.ycblsc.base.BaseFragmentPresenter;
 import com.ycblsc.databinding.FragmentEasyCartBinding;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import ml.gsy.com.library.adapters.recyclerview.base.ViewHolder;
  * Created by LiMing on 2018/1/1.
  */
 
-public class EasyCartFragment extends BaseFragment<BasePresenter,FragmentEasyCartBinding> {
+public class EasyCartFragment extends BaseFragment<BaseFragmentPresenter,FragmentEasyCartBinding> {
 
    private CommonAdapter<String> mAdapter;
     private List<String> mDataList=new ArrayList<>();
@@ -37,7 +37,7 @@ public class EasyCartFragment extends BaseFragment<BasePresenter,FragmentEasyCar
     }
 
     @Override
-    protected BasePresenter createPresenter() {
+    protected BaseFragmentPresenter createPresenter() {
         return null;
     }
 

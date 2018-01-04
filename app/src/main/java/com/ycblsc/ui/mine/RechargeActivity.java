@@ -2,8 +2,6 @@ package com.ycblsc.ui.mine;
 
 import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -12,17 +10,13 @@ import com.ycblsc.R;
 import com.ycblsc.base.BaseActivity;
 import com.ycblsc.base.BasePresenter;
 import com.ycblsc.base.EmptyState;
-import com.ycblsc.databinding.ActivityLoginBinding;
 import com.ycblsc.databinding.ActivityRechargeLayoutBinding;
-import com.ycblsc.model.GoodsTypeModel;
 import com.ycblsc.model.RechargeModel;
-import com.ycblsc.prestener.mine.MinePrestener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import ml.gsy.com.library.adapters.recyclerview.CommonAdapter;
-import ml.gsy.com.library.adapters.recyclerview.MultiItemTypeAdapter;
 import ml.gsy.com.library.adapters.recyclerview.base.ViewHolder;
 
 /**
@@ -30,7 +24,7 @@ import ml.gsy.com.library.adapters.recyclerview.base.ViewHolder;
  * 充值有礼
  */
 
-public class RechargeActivity extends BaseActivity<MinePrestener, ActivityRechargeLayoutBinding> implements View.OnClickListener {
+public class RechargeActivity extends BaseActivity<BasePresenter, ActivityRechargeLayoutBinding> implements View.OnClickListener {
     private CommonAdapter<RechargeModel> mRechargeAdapter;//会员充值
     private List<RechargeModel> mRechargeTypes = new ArrayList<>();
 
@@ -46,8 +40,8 @@ public class RechargeActivity extends BaseActivity<MinePrestener, ActivityRechar
     }
 
     @Override
-    protected MinePrestener createPresenter() {
-        return new MinePrestener();
+    protected BasePresenter createPresenter() {
+        return new BasePresenter();
     }
 
     @Override

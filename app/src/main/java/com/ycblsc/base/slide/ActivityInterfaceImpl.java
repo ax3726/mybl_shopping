@@ -3,7 +3,8 @@ package com.ycblsc.base.slide;
 import android.app.Application;
 import android.os.Bundle;
 
-import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+
 
 /**
  * 这个类用来管理 activity 的栈

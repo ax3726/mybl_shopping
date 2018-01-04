@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +15,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.DrawableTypeRequest;
 import com.bumptech.glide.Glide;
+import com.trello.rxlifecycle2.components.support.RxFragment;
 import com.ycblsc.R;
 import com.ycblsc.databinding.WidgetLayoutEmptyBinding;
-import com.ycblsc.net.RetryWithDelayFunc1;
+import com.ycblsc.net.RetryWithDelayFunction;
 import com.ycblsc.net.ex.ApiException;
 import com.ycblsc.net.ex.ResultException;
 import com.ycblsc.widget.TitleBarLayout;
@@ -28,20 +28,22 @@ import com.zhy.autolayout.AutoLinearLayout;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 
+import io.reactivex.ObservableTransformer;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import ml.gsy.com.library.common.LoadingDialog;
 import retrofit2.adapter.rxjava.HttpException;
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+
 
 /**
  * Created by lm on 2017/11/22.
  * Description:
  */
 
-public abstract class BaseFragment<P extends BasePresenter, B extends ViewDataBinding> extends Fragment implements BaseView {
-
+public abstract class BaseFragment<P extends BaseFragmentPresenter, B extends ViewDataBinding> extends RxFragment implements BaseFragmentView {
 
     /**
      * Fragment根视图
@@ -202,7 +204,6 @@ public abstract class BaseFragment<P extends BasePresenter, B extends ViewDataBi
 
 
 
-
     protected abstract P createPresenter();
 
     /**
@@ -280,21 +281,23 @@ public abstract class BaseFragment<P extends BasePresenter, B extends ViewDataBi
     }
 
 
-    public abstract class BaseNetSubscriber<T> extends Subscriber<T> {
+    public abstract class BaseNetObserver<T> implements Observer<T> {
+
+
         @Override
-        public void onStart() {
-            super.onStart();
+        public void onSubscribe(@NonNull Disposable d) {
             if (aty != null) {
                 // getView().showProgress();
             }
         }
 
         @Override
-        public void onCompleted() {
+        public void onComplete() {
             if (aty != null) {
                 hideWaitDialog();
             }
         }
+
 
         @Override
         public void onError(Throwable e) {
@@ -324,12 +327,11 @@ public abstract class BaseFragment<P extends BasePresenter, B extends ViewDataBi
         }
     }
 
-    public <T> Observable.Transformer<T, T> callbackOnIOToMainThread() {
+    public <T> ObservableTransformer<T, T> callbackOnIOToMainThread() {
         return tObservable -> tObservable.subscribeOn(Schedulers.io())
-                .retryWhen(RetryWithDelayFunc1.create())
-                .filter(t -> aty != null).observeOn(AndroidSchedulers.mainThread());
-
-                //.compose(BaseFragment.this.bindToLifecycle());
+                  .retryWhen(RetryWithDelayFunction.create())
+                .filter(t -> aty != null).observeOn(AndroidSchedulers.mainThread())
+                .compose(bindToLifecycle());
     }
 
     @Override

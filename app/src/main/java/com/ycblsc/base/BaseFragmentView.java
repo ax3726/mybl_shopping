@@ -3,7 +3,6 @@ package com.ycblsc.base;
 import android.content.DialogInterface;
 
 import com.trello.rxlifecycle2.LifecycleTransformer;
-import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 
 import io.reactivex.Observable;
@@ -15,7 +14,7 @@ import ml.gsy.com.library.common.LoadingDialog;
  * Description:
  */
 
-public interface BaseView {
+public interface BaseFragmentView {
 
     int getLayoutId();
 
@@ -25,10 +24,8 @@ public interface BaseView {
 
     void showToast(int id);
 
-    Observable<ActivityEvent> lifecycle();
-
-    <T> LifecycleTransformer<T> bindUntilEvent(ActivityEvent event);
-
+    Observable<FragmentEvent> lifecycle();
+    <T> LifecycleTransformer<T> bindUntilEvent(FragmentEvent event);
     <T> LifecycleTransformer<T> bindToLifecycle();
 
     /**

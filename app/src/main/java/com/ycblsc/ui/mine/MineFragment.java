@@ -5,7 +5,7 @@ import android.view.View;
 
 import com.ycblsc.R;
 import com.ycblsc.base.BaseFragment;
-import com.ycblsc.base.BaseView;
+import com.ycblsc.base.BaseFragmentView;
 import com.ycblsc.base.EmptyState;
 import com.ycblsc.databinding.FragmentMineLayoutBinding;
 import com.ycblsc.prestener.mine.MinePrestener;
@@ -14,7 +14,7 @@ import com.ycblsc.prestener.mine.MinePrestener;
  * Created by Administrator on 2017/12/26 0026.
  */
 
-public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayoutBinding> implements BaseView ,View.OnClickListener{
+public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayoutBinding> implements BaseFragmentView,View.OnClickListener{
     @Override
     public int getLayoutId() {
         return R.layout.fragment_mine_layout;

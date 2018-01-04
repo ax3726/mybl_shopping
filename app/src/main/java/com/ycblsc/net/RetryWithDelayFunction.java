@@ -5,26 +5,28 @@ import com.ycblsc.model.ResponseCodeEnum;
 import com.ycblsc.net.ex.ApiException;
 import com.ycblsc.net.ex.ResultException;
 
-import rx.Observable;
-import rx.functions.Func1;
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 
 
 /**
  * Created by lm on 2017/11/22.
  * Description：
  */
-public class RetryWithDelayFunc1 implements Func1<Observable<? extends Throwable>, Observable<?>> {
-    private static final String TAG = "RetryWithDelayFunc1";
+public class RetryWithDelayFunction implements Function<Observable<? extends Throwable>, Observable<?>> {
+    private static final String TAG = "RetryWithDelayFunction";
 
-    public static RetryWithDelayFunc1 create() {
-        return new RetryWithDelayFunc1();
+    public static RetryWithDelayFunction create() {
+        return new RetryWithDelayFunction();
     }
 
     @Override
-    public Observable<?> call(Observable<? extends Throwable> error) {
-        return error.flatMap(new Func1<Throwable, Observable<?>>() {
+    public Observable<?> apply(@NonNull Observable<? extends Throwable> observable) throws Exception {
+        return observable.flatMap(new Function<Throwable, ObservableSource<?>>() {
             @Override
-            public Observable<?> call(Throwable throwable) {
+            public ObservableSource<?> apply(@NonNull Throwable throwable) throws Exception {
                 if (throwable instanceof ApiException) {
                     ResponseCodeEnum responseCode = ((ApiException) throwable).getResponseCode();
                     switch (responseCode) {
@@ -42,6 +44,4 @@ public class RetryWithDelayFunc1 implements Func1<Observable<? extends Throwable
             }
         });
     }
-
-
 }

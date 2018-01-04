@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.ycblsc.R;
 import com.ycblsc.base.BaseFragment;
-import com.ycblsc.base.BaseView;
+import com.ycblsc.base.BaseFragmentView;
 import com.ycblsc.base.EmptyState;
 import com.ycblsc.databinding.FragmentBuycartLayoutBinding;
 import com.ycblsc.prestener.buycart.BuyCartPrestener;
@@ -21,7 +21,7 @@ import java.util.List;
  * Created by Administrator on 2017/12/26 0026.
  */
 
-public class BuyCartFragment extends BaseFragment<BuyCartPrestener, FragmentBuycartLayoutBinding> implements BaseView {
+public class BuyCartFragment extends BaseFragment<BuyCartPrestener, FragmentBuycartLayoutBinding> implements BaseFragmentView {
 
     private List<String> title = new ArrayList<>();
     private List<Fragment> fragments = new ArrayList<>();

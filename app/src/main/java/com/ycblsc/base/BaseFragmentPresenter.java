@@ -3,7 +3,8 @@ package com.ycblsc.base;
 
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.LifecycleTransformer;
-import com.trello.rxlifecycle2.android.ActivityEvent;
+import com.trello.rxlifecycle2.android.FragmentEvent;
+import com.ycblsc.net.RetryWithDelayFunction;
 import com.ycblsc.net.ex.ApiException;
 import com.ycblsc.net.ex.ResultException;
 
@@ -11,7 +12,6 @@ import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -26,7 +26,7 @@ import retrofit2.adapter.rxjava.HttpException;
  * Description:
  */
 
-public class BasePresenter<V extends BaseView> implements IBasePresenter<V> , LifecycleProvider<ActivityEvent> {
+public class BaseFragmentPresenter<V extends BaseFragmentView> implements IBaseFragmentPresenter<V>, LifecycleProvider<FragmentEvent> {
 
 
     protected V mView;
@@ -62,32 +62,23 @@ public class BasePresenter<V extends BaseView> implements IBasePresenter<V> , Li
     }
 
 
-
-
     public <T> ObservableTransformer<T, T> callbackOnIOToMainThread() {
-        return new ObservableTransformer<T, T>() {
-            @Override
-            public ObservableSource<T> apply(@NonNull Observable<T> observable) {
-                return observable.subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                       // .retryWhen(RetryWithDelayFunction.create())
-                        .filter(t -> BasePresenter.this.isViewAttach())
-                        .compose(BasePresenter.this.bindToLifecycle());
-            }
-
-
-        };
+        return observable -> observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .retryWhen(RetryWithDelayFunction.create())
+                .filter(t -> BaseFragmentPresenter.this.isViewAttach())
+                .compose(BaseFragmentPresenter.this.bindToLifecycle());
     }
 
     @NonNull
     @Override
-    public Observable<ActivityEvent> lifecycle() {
-        return  getView().lifecycle();
+    public Observable<FragmentEvent> lifecycle() {
+        return getView().lifecycle();
     }
 
     @NonNull
     @Override
-    public <T> LifecycleTransformer<T> bindUntilEvent(ActivityEvent event) {
+    public <T> LifecycleTransformer<T> bindUntilEvent(FragmentEvent event) {
         return getView().bindUntilEvent(event);
     }
 
@@ -99,11 +90,18 @@ public class BasePresenter<V extends BaseView> implements IBasePresenter<V> , Li
 
     public abstract class BaseNetObserver<T> implements Observer<T> {
 
+        public BaseNetObserver() {
+
+        }
 
         @Override
         public void onSubscribe(@NonNull Disposable d) {
-            if (isViewAttach()) {
-                // getView().showProgress();
+
+        }
+
+        public BaseNetObserver(boolean bl) {
+            if (isViewAttach()&&bl) {
+                getView().showWaitDialog();
             }
         }
 
@@ -140,6 +138,9 @@ public class BasePresenter<V extends BaseView> implements IBasePresenter<V> , Li
         public void onNext(T t) {
 
         }
+
+
+
     }
 
 
