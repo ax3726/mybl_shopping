@@ -2,258 +2,267 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-
     <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
+        android:layout_height="match_parent"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:layout_height="match_parent">
-
-
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <com.zhy.autolayout.AutoLinearLayout
-        android:id="@+id/lly_boot"
-        android:layout_width="match_parent"
-        android:background="@color/colorWhite"
-        android:layout_height="match_parent"
         android:orientation="vertical">
 
-
-        <com.zhy.autolayout.AutoRelativeLayout
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/srl_goods_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <com.zhy.autolayout.AutoLinearLayout
+
+            <android.support.v4.widget.NestedScrollView
+                android:id="@+id/nsv_body"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="180px"
-                    android:background="@color/color4C4C4C" />
+                android:layout_height="match_parent">
 
                 <com.zhy.autolayout.AutoLinearLayout
+                    android:id="@+id/lly_boot"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:background="@color/colorWhite"
-                    android:orientation="vertical"
-                    android:paddingTop="120px">
+                    android:orientation="vertical">
 
-                    <TextView
+
+                    <com.zhy.autolayout.AutoRelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.zhy.autolayout.AutoLinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="180px"
+                                android:background="@color/color4C4C4C" />
+
+                            <com.zhy.autolayout.AutoLinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/colorWhite"
+                                android:orientation="vertical"
+                                android:paddingTop="120px">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:text="请扫描当前便利架上的二维码"
+                                    android:textColor="@color/color202020"
+                                    android:textSize="32px" />
+
+                                <com.zhy.autolayout.AutoLinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_marginTop="30px"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_horizontal"
+                                        android:text="当前便利架 :"
+                                        android:textColor="@color/color202020"
+                                        android:textSize="30px" />
+
+                                    <TextView
+                                        android:id="@+id/tv_scan_result"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_horizontal"
+                                        android:background="@color/colorFBE7EF"
+                                        android:text="长岭南路25号EFFEGJ25点"
+                                        android:textColor="@color/colorA50020"
+                                        android:textSize="30px" />
+
+
+                                </com.zhy.autolayout.AutoLinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_marginLeft="80px"
+                                    android:layout_marginTop="30px"
+                                    android:text="公司还没安装便利架？"
+                                    android:textColor="@color/color202020"
+                                    android:textSize="28px" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_marginBottom="30px"
+                                    android:layout_marginLeft="80px"
+                                    android:layout_marginTop="30px"
+                                    android:src="@drawable/home_mianfei_az_icon" />
+                            </com.zhy.autolayout.AutoLinearLayout>
+
+
+                        </com.zhy.autolayout.AutoLinearLayout>
+
+                        <ImageView
+                            android:id="@+id/img_saoyisao"
+                            android:layout_width="200px"
+                            android:layout_height="200px"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="90px"
+                            android:src="@drawable/home_saoyisao_icon" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="120px"
+                            android:layout_marginRight="-20px"
+                            android:layout_marginTop="60px"
+                            android:layout_toLeftOf="@+id/img_saoyisao"
+                            android:src="@drawable/home_yc_icon" />
+
+                    </com.zhy.autolayout.AutoRelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="10px"
+                        android:background="@color/colorE5E5E5" />
+
+                    <com.zhy.autolayout.AutoRelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/home_special_bg_icon"
+                        android:orientation="vertical">
+
+                        <com.zhy.autolayout.AutoLinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/home_special_icon" />
+
+                            <com.zhy.autolayout.AutoLinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="220px"
+                                android:layout_marginTop="5px"
+                                android:background="@color/colorDE98A8"
+                                android:orientation="horizontal"
+                                android:paddingLeft="60px"
+
+                                android:paddingRight="60px">
+
+                                <ImageView
+                                    android:layout_width="200px"
+                                    android:layout_height="200px"
+                                    android:src="@mipmap/ic_launcher"
+
+                                    />
+
+                                <com.zhy.autolayout.AutoRelativeLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="30px"
+                                    android:orientation="vertical"
+                                    android:paddingBottom="30px"
+                                    android:paddingTop="30px">
+
+                                    <TextView
+                                        android:id="@+id/tv_title"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+
+                                        android:text="妙芙欧式蛋糕"
+                                        android:textColor="@color/colorBlack"
+                                        android:textSize="34px" />
+
+                                    <TextView
+                                        android:id="@+id/tv_des"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/tv_title"
+                                        android:layout_marginTop="12px"
+                                        android:text="尽在丝滑口感"
+                                        android:textColor="@color/color999999"
+                                        android:textSize="28px" />
+
+                                    <TextView
+                                        android:id="@+id/tv_price"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentBottom="true"
+                                        android:layout_marginTop="12px"
+                                        android:text="¥15.8"
+                                        android:textColor="@color/colorD00852"
+                                        android:textSize="28px" />
+
+
+                                </com.zhy.autolayout.AutoRelativeLayout>
+
+                                <ImageView
+                                    android:id="@+id/img_shopping"
+                                    android:layout_width="70px"
+                                    android:layout_height="70px"
+                                    android:layout_gravity="bottom"
+                                    android:layout_marginBottom="30px"
+                                    android:layout_marginLeft="15px"
+                                    android:src="@drawable/home_buycart_icon" />
+
+                            </com.zhy.autolayout.AutoLinearLayout>
+                        </com.zhy.autolayout.AutoLinearLayout>
+
+                    </com.zhy.autolayout.AutoRelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="10px"
+                        android:background="@color/colorE5E5E5" />
+
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="请扫描当前便利架上的二维码"
-                        android:textColor="@color/color202020"
-                        android:textSize="32px" />
+                        android:layout_marginBottom="70px"
+                        android:layout_marginTop="35px"
+                        android:src="@drawable/home_all_goods_icon" />
 
                     <com.zhy.autolayout.AutoLinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="30px"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:text="当前便利架 :"
-                            android:textColor="@color/color202020"
-                            android:textSize="30px" />
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/rc_goods_type"
+                            android:layout_width="0dp"
 
-                        <TextView
-                            android:id="@+id/tv_scan_result"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:background="@color/colorFBE7EF"
-                            android:text="长岭南路25号EFFEGJ25点"
-                            android:textColor="@color/colorA50020"
-                            android:textSize="30px" />
+                            android:layout_height="match_parent"
+                            android:layout_weight="2">
+
+
+                        </android.support.v7.widget.RecyclerView>
+
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/rc_goods_list"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="7"
+                            android:overScrollMode="never">
+
+
+                        </android.support.v7.widget.RecyclerView>
 
 
                     </com.zhy.autolayout.AutoLinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginLeft="80px"
-                        android:layout_marginTop="30px"
-                        android:text="公司还没安装便利架？"
-                        android:textColor="@color/color202020"
-                        android:textSize="28px" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="30px"
-                        android:layout_marginLeft="80px"
-                        android:layout_marginTop="30px"
-                        android:src="@drawable/home_mianfei_az_icon" />
                 </com.zhy.autolayout.AutoLinearLayout>
-
-
-            </com.zhy.autolayout.AutoLinearLayout>
-
-            <ImageView
-                android:id="@+id/img_saoyisao"
-                android:layout_width="200px"
-                android:layout_height="200px"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="90px"
-                android:src="@drawable/home_saoyisao_icon" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="120px"
-                android:layout_marginRight="-20px"
-                android:layout_marginTop="60px"
-                android:layout_toLeftOf="@+id/img_saoyisao"
-                android:src="@drawable/home_yc_icon" />
-
-        </com.zhy.autolayout.AutoRelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="10px"
-            android:background="@color/colorE5E5E5" />
-
-        <com.zhy.autolayout.AutoRelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/home_special_bg_icon"
-            android:orientation="vertical">
-
-            <com.zhy.autolayout.AutoLinearLayout
-                android:layout_width="wrap_content"
-                android:orientation="vertical"
-                android:layout_centerInParent="true"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/home_special_icon"
-                    />
-                <com.zhy.autolayout.AutoLinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="220px"
-                    android:layout_marginTop="5px"
-                    android:paddingLeft="60px"
-                    android:paddingRight="60px"
-                    android:background="@color/colorDE98A8"
-
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="200px"
-                        android:layout_height="200px"
-                        android:src="@mipmap/ic_launcher"
-
-                        />
-
-                    <com.zhy.autolayout.AutoRelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="30px"
-                        android:orientation="vertical"
-                        android:paddingBottom="30px"
-                        android:paddingTop="30px">
-
-                        <TextView
-                            android:id="@+id/tv_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-
-                            android:text="妙芙欧式蛋糕"
-                            android:textColor="@color/colorBlack"
-                            android:textSize="34px" />
-
-                        <TextView
-                            android:id="@+id/tv_des"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/tv_title"
-                            android:layout_marginTop="12px"
-                            android:text="尽在丝滑口感"
-                            android:textColor="@color/color999999"
-                            android:textSize="28px" />
-
-                        <TextView
-                            android:id="@+id/tv_price"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginTop="12px"
-                            android:text="¥15.8"
-                            android:textColor="@color/colorD00852"
-                            android:textSize="28px" />
-
-
-                    </com.zhy.autolayout.AutoRelativeLayout>
-
-                    <ImageView
-                        android:id="@+id/img_shopping"
-                        android:layout_width="70px"
-                        android:layout_height="70px"
-                        android:layout_gravity="bottom"
-                        android:layout_marginBottom="30px"
-                        android:layout_marginLeft="15px"
-                        android:src="@drawable/home_buycart_icon" />
-
-                </com.zhy.autolayout.AutoLinearLayout>
-            </com.zhy.autolayout.AutoLinearLayout>
-
-        </com.zhy.autolayout.AutoRelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="10px"
-            android:background="@color/colorE5E5E5" />
-
-       <ImageView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_gravity="center_horizontal"
-           android:layout_marginTop="35px"
-           android:layout_marginBottom="70px"
-           android:src="@drawable/home_all_goods_icon"
-           />
-
-        <com.zhy.autolayout.AutoLinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rc_goods_type"
-                android:layout_width="0dp"
-
-                android:layout_height="wrap_content"
-                android:layout_weight="2">
-
-
-            </android.support.v7.widget.RecyclerView>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rc_goods_list"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="7"
-                android:overScrollMode="never">
-
-
-            </android.support.v7.widget.RecyclerView>
-        </com.zhy.autolayout.AutoLinearLayout>
-
-    </com.zhy.autolayout.AutoLinearLayout>
-    </android.support.v4.widget.NestedScrollView>
-
+            </android.support.v4.widget.NestedScrollView>
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
     </com.zhy.autolayout.AutoLinearLayout>
 </layout>

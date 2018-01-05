@@ -281,7 +281,7 @@ public abstract class BaseFragment<P extends BaseFragmentPresenter, B extends Vi
     }
 
     public abstract class BaseNetSubscriber<T> implements Subscriber<T> {
-
+        private Subscription subscription;
         public BaseNetSubscriber() {
 
         }
@@ -292,11 +292,13 @@ public abstract class BaseFragment<P extends BaseFragmentPresenter, B extends Vi
         }
         @Override
         public void onSubscribe(Subscription s) {
-
+            subscription = s;
+            s.request(1); //请求一个数据
         }
 
         @Override
         public void onComplete() {
+            subscription.cancel(); //取消订阅
             if (aty != null) {
                 hideWaitDialog();
             }
@@ -327,7 +329,8 @@ public abstract class BaseFragment<P extends BaseFragmentPresenter, B extends Vi
 
         @Override
         public void onNext(T t) {
-
+            //处理完后，再请求一个数据
+            subscription.request(1);
         }
     }
 

@@ -14,6 +14,7 @@ import org.reactivestreams.Subscription;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 
+import io.reactivex.Flowable;
 import io.reactivex.FlowableTransformer;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -64,16 +65,12 @@ public class BaseFragmentPresenter<V extends BaseFragmentView> implements IBaseF
 
 
     public <T> FlowableTransformer<T, T> callbackOnIOToMainThread() {
-        return observable -> observable.subscribeOn(Schedulers.io())
+        return (Flowable<T> upstream) -> upstream.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .retryWhen(RetryWithDelayFunction.create())
                 .filter(t -> BaseFragmentPresenter.this.isViewAttach())
                 .compose(BaseFragmentPresenter.this.bindToLifecycle());
     }
-
-
-
-
 
     @NonNull
     @Override
@@ -94,24 +91,24 @@ public class BaseFragmentPresenter<V extends BaseFragmentView> implements IBaseF
     }
 
     public abstract class BaseNetSubscriber<T> implements Subscriber<T> {
+        private Subscription subscription;
 
         public BaseNetSubscriber() {
-
         }
         public BaseNetSubscriber(boolean bl) {
-            if (isViewAttach()&&bl) {
+            if (isViewAttach() && bl) {
                 getView().showWaitDialog();
             }
         }
         @Override
         public void onSubscribe(Subscription s) {
-
+            subscription = s;
+            s.request(1); //请求一个数据
         }
-
-
 
         @Override
         public void onComplete() {
+            subscription.cancel(); //取消订阅
             if (isViewAttach()) {
                 getView().hideWaitDialog();
             }
@@ -141,9 +138,9 @@ public class BaseFragmentPresenter<V extends BaseFragmentView> implements IBaseF
 
         @Override
         public void onNext(T t) {
-
+            //处理完后，再请求一个数据
+            subscription.request(1);
         }
-
     }
 
 

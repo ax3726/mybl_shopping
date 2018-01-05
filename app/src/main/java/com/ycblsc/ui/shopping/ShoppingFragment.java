@@ -5,6 +5,9 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.ycblsc.R;
 import com.ycblsc.base.BaseFragment;
 import com.ycblsc.base.EmptyState;
@@ -93,7 +96,9 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
                         if (mCurPosition != position) {
                             mCurPosition = position;
                             notifyDataSetChanged();
-                            mPresenter.getProductList(item.getF_CODE(), "18", "", "1", "10");
+                            mPage = 1;
+                            mSize = 10;
+                            mPresenter.getProductList(item.getF_CODE(), "18", "", mPage + "", mSize + "");
                         }
 
                     }
@@ -118,6 +123,20 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
 
         mBinding.rcGoodsType.setNestedScrollingEnabled(false);
         mBinding.rcGoodsList.setNestedScrollingEnabled(false);
+
+        mBinding.srlShopping.setEnableRefresh(false);
+        mBinding.srlShopping.setRefreshFooter(new ClassicsFooter(aty));//设置 Footer 样式
+        mBinding.srlShopping.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                if (mCurPosition < mGoodsTypes.size()) {
+                    mPage++;
+                    mPresenter.getProductList(mGoodsTypes.get(mCurPosition).getF_CODE(), "18", "", mPage + "", mSize + "");
+                }
+
+            }
+        });
+
     }
 
     @Override
@@ -126,7 +145,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
         if (typeModel.getReturnData().size() > 0) {
             mGoodsTypes.addAll(typeModel.getReturnData());
             mCurPosition = 0;
-            mPresenter.getProductList(mGoodsTypes.get(0).getF_CODE(), "18", "", "1", "10");
+            mPresenter.getProductList(mGoodsTypes.get(0).getF_CODE(), "18", "", mPage + "", mSize + "");
         }
         mGoodsTypeAdapter.notifyDataSetChanged();
     }
@@ -134,11 +153,22 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
     @Override
     public void getProuductList(ProductListModel typeModel) {
         mStateModel.setEmptyState(EmptyState.NORMAL);
-        mGoodsList.clear();
+        if (mPage == 1) {
+            mGoodsList.clear();
+            mBinding.srlShopping.resetNoMoreData();
+        } else {
+            mBinding.srlShopping.finishLoadmore();
+        }
+
         if (typeModel.getReturnData().size() > 0) {
             mGoodsList.addAll(typeModel.getReturnData());
+            if (typeModel.getReturnData().size() < mSize) {
+                mBinding.srlShopping.finishLoadmoreWithNoMoreData();
+            }
         }
         mGoodsListAdapter.notifyDataSetChanged();
+
+
     }
 
     @Override

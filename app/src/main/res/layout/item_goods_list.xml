@@ -37,6 +37,7 @@
                 android:layout_height="wrap_content"
 
                 android:text="妙芙欧式蛋糕"
+                android:singleLine="true"
                 android:textColor="@color/colorBlack"
                 android:textSize="34px" />
 
@@ -45,6 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_title"
+                android:singleLine="true"
                 android:layout_marginTop="12px"
                 android:text="尽在丝滑口感"
                 android:textColor="@color/color999999"
