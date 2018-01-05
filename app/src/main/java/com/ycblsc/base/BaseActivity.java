@@ -24,14 +24,14 @@ import com.ycblsc.widget.TitleBarLayout;
 import com.zhy.autolayout.AutoFrameLayout;
 import com.zhy.autolayout.AutoLinearLayout;
 
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 
-import io.reactivex.ObservableTransformer;
-import io.reactivex.Observer;
+import io.reactivex.FlowableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import ml.gsy.com.library.common.LoadingDialog;
 import retrofit2.HttpException;
@@ -277,14 +277,19 @@ public abstract class BaseActivity<P extends BasePresenter, B extends ViewDataBi
         }
     }
 
-    public abstract class BaseNetObserver<T> implements Observer<T> {
+    public abstract class BaseNetSubscriber<T> implements Subscriber<T> {
 
+        public BaseNetSubscriber() {
 
-        @Override
-        public void onSubscribe(@NonNull Disposable d) {
-            if (aty != null) {
-                // getView().showProgress();
+        }
+        public BaseNetSubscriber(boolean bl) {
+            if (aty!=null&&bl) {
+              showWaitDialog();
             }
+        }
+        @Override
+        public void onSubscribe(Subscription s) {
+
         }
 
         @Override
@@ -324,13 +329,15 @@ public abstract class BaseActivity<P extends BasePresenter, B extends ViewDataBi
     }
 
 
-    public <T> ObservableTransformer<T, T> callbackOnIOToMainThread() {
+
+    public <T> FlowableTransformer<T, T> callbackOnIOToMainThread() {
         return observable -> observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .retryWhen(RetryWithDelayFunction.create())
-                .filter(t -> aty != null)
+                .filter(t -> aty!=null)
                 .compose(bindToLifecycle());
     }
+
 
 
     @Override

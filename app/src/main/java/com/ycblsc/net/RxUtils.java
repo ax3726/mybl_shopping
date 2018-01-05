@@ -19,7 +19,9 @@ public class RxUtils {
      */
     public static <T> FlowableTransformer<T, T> rxSchedulerHelper() {
         return upstream -> upstream.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .observeOn(AndroidSchedulers.mainThread())
+
+                ;
     }
 
     /**
