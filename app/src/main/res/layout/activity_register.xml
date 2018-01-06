@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite">
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:orientation="vertical">
+
+            <!--手机号-->
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:orientation="horizontal"
+                android:padding="30px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="*"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="42px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20px"
+                    android:gravity="center"
+                    android:text="手机号" />
+
+                <EditText
+                    android:id="@+id/et_phone"
+                    android:layout_width="400px"
+                    android:layout_height="60px"
+                    android:layout_marginLeft="20px"
+                    android:background="@drawable/shape_recharge_bg"
+                    android:hint="请输入手机号"
+                    android:inputType="phone"
+                    android:maxLength="11"
+                    android:paddingLeft="20px"
+                    android:textColor="@color/color202020"
+                    android:textSize="30px" />
+            </com.zhy.autolayout.AutoLinearLayout>
+            <!--验证码-->
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:orientation="horizontal"
+                android:padding="30px">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20px"
+                    android:gravity="center"
+                    android:text="验证码" />
+
+                <EditText
+                    android:id="@+id/ed_verification"
+                    android:layout_width="170px"
+                    android:layout_height="60px"
+                    android:layout_marginLeft="20px"
+                    android:background="@drawable/shape_recharge_bg"
+                    android:inputType="number"
+                    android:paddingLeft="20px"
+                    android:textColor="@color/color202020"
+                    android:textSize="30px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20px"
+                    android:gravity="center"
+                    android:text="获取验证码"
+                    android:textColor="@color/colorPrimary" />
+            </com.zhy.autolayout.AutoLinearLayout>
+            <!--昵称-->
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="55px"
+                android:orientation="horizontal"
+                android:padding="30px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="昵  称" />
+
+                <com.zhy.autolayout.AutoLinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <EditText
+                        android:id="@+id/niceName"
+                        android:layout_width="300px"
+                        android:layout_height="60px"
+                        android:layout_marginLeft="20px"
+                        android:background="@drawable/shape_recharge_bg"
+                        android:hint="展示你酷酷的个性吧"
+                        android:paddingLeft="20px"
+                        android:textColor="@color/color202020"
+                        android:textSize="30px" />
+                </com.zhy.autolayout.AutoLinearLayout>
+            </com.zhy.autolayout.AutoLinearLayout>
+
+            <!--密码-->
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="55px"
+                android:orientation="horizontal"
+                android:padding="30px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="密  码" />
+
+                <com.zhy.autolayout.AutoLinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <EditText
+                        android:id="@+id/ed_pwd"
+                        android:layout_width="300px"
+                        android:layout_height="60px"
+                        android:layout_marginLeft="20px"
+                        android:background="@drawable/shape_recharge_bg"
+                        android:hint="请输入密码"
+                        android:paddingLeft="20px"
+                        android:textColor="@color/color202020"
+                        android:textSize="30px" />
+                </com.zhy.autolayout.AutoLinearLayout>
+            </com.zhy.autolayout.AutoLinearLayout>
+
+            <!--确认密码-->
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="55px"
+                android:orientation="horizontal"
+                android:padding="30px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="确认密码" />
+
+                <com.zhy.autolayout.AutoLinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <EditText
+                        android:id="@+id/ed_confirmpwd"
+                        android:layout_width="300px"
+                        android:layout_height="60px"
+                        android:layout_marginLeft="20px"
+                        android:background="@drawable/shape_recharge_bg"
+                        android:hint="请再次输入密码"
+                        android:paddingLeft="20px"
+                        android:textColor="@color/color202020"
+                        android:textSize="30px" />
+                </com.zhy.autolayout.AutoLinearLayout>
+            </com.zhy.autolayout.AutoLinearLayout>
+
+            <!--性别-->
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60px"
+                android:orientation="horizontal"
+                android:padding="30px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="性别" />
+
+                <RadioButton
+                    android:id="@+id/male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="帅哥" />
+
+                <RadioButton
+                    android:id="@+id/femle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="美女" />
+
+            </com.zhy.autolayout.AutoLinearLayout>
+            <!--头像-->
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60px"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/img_head"
+                    android:layout_width="160px"
+                    android:layout_height="160px"
+                    android:src="@drawable/ic_woman" />
+
+                <com.zhy.autolayout.AutoLinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10px"
+                        android:text="头像" />
+
+                    <com.zhy.autolayout.AutoLinearLayout
+                        android:id="@+id/lin_dropdow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30px"
+
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/img_dropdown"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ic_drop_down"></ImageView>
+
+
+                    </com.zhy.autolayout.AutoLinearLayout>
+
+                </com.zhy.autolayout.AutoLinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_phonegraph"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30px"
+                    android:layout_marginTop="15px"
+                    android:layout_gravity="center"
+                    android:drawableLeft="@drawable/ic_photograph"
+                    android:drawablePadding="10px"
+                    android:gravity="center"
+                    android:text="拍照上传" />
+            </com.zhy.autolayout.AutoLinearLayout>
+
+            <!--收货地址-->
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40px"
+                android:orientation="horizontal"
+                android:padding="30px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="*"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="42px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20px"
+                    android:gravity="center"
+                    android:text="收货地址" />
+
+                <EditText
+                    android:id="@+id/et_address"
+                    android:layout_width="400px"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20px"
+                    android:background="@drawable/shape_recharge_bg"
+                    android:hint="蚁巢客户感恩礼品、线上商城消费商品，将邮寄至您的收货地址"
+                    android:padding="20px"
+                    android:paddingLeft="20px"
+                    android:textColor="@color/color202020"
+                    android:textSize="30px" />
+            </com.zhy.autolayout.AutoLinearLayout>
+            <!--底部-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20px"
+                android:background="@color/colorcccccc"></View>
+
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60px"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_cancel"
+                    android:layout_width="200px"
+                    android:layout_height="80px"
+                    android:layout_marginRight="30px"
+                    android:background="@drawable/shape_register_bg"
+                    android:text="取消"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="34px" />
+
+                <Button
+                    android:id="@+id/btn_determine"
+                    android:layout_width="200px"
+                    android:layout_height="80px"
+                    android:layout_marginLeft="30px"
+                    android:background="@drawable/shape_login2_bg"
+                    android:text="确定"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="34px" />
+            </com.zhy.autolayout.AutoLinearLayout>
+            <!--注册说明-->
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60px"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="100px"
+                    android:text="注册说明:"
+                    android:textSize="36px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="100px"
+                    android:layout_marginTop="20px"
+                    android:text="赠送礼金将在您完成注册直接汇入您的会员账户"
+                    android:textSize="36px" />
+            </com.zhy.autolayout.AutoLinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</layout>
