@@ -18,6 +18,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Streaming;
@@ -61,10 +62,10 @@ public interface ApiService {
                                   @Part MultipartBody.Part file, @QueryMap HashMap<String, String> params);
 
 
-    //上传文件
+    //上传文件2
     @Multipart
     @POST("upload")
-    Flowable<ResponseBody> upload11(@Part @QueryMap HashMap<String, RequestBody> params);
+    Flowable<ResponseBody> upload11(@PartMap HashMap<String, RequestBody> params);
 
 
     //下载文件
