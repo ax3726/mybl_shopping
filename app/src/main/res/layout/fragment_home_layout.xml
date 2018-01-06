@@ -2,12 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
 
+
     <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="match_parent"
+        android:orientation="vertical"
         android:layout_height="match_parent"
         android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:orientation="vertical">
+        android:focusableInTouchMode="true">
 
         <com.scwang.smartrefresh.layout.SmartRefreshLayout
             android:id="@+id/srl_goods_list"
@@ -83,7 +84,7 @@
                                         android:textSize="30px" />
 
 
-                                </com.zhy.autolayout.AutoLinearLayout>
+                    </com.zhy.autolayout.AutoLinearLayout>
 
                                 <TextView
                                     android:layout_width="wrap_content"
