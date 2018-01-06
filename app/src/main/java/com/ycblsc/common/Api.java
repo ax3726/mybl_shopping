@@ -114,6 +114,7 @@ public class Api {
                     // 新的请求+请求头部
                     Request newRequest = originalRequest.newBuilder()
                             //  .header("Authorization", "token")
+
                             .method(originalRequest.method(), originalRequest.body())
                             .url(authorizedUrlBuilder.build())
                             .build();

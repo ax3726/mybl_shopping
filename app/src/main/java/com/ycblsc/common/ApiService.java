@@ -7,6 +7,8 @@ import com.ycblsc.model.home.ProuductTypeModel;
 import com.ycblsc.model.home.ShopInfoModel;
 import com.ycblsc.model.shopping.ImageDataModel;
 
+import java.util.HashMap;
+
 import io.reactivex.Flowable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -16,6 +18,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 import retrofit2.http.Streaming;
 import retrofit2.http.Url;
 
@@ -54,7 +57,10 @@ public interface ApiService {
     @Multipart
     @POST("upload")
     Flowable<ResponseBody> upload(@Part("description") RequestBody description,
-                                  @Part MultipartBody.Part file);
+                                  @Part MultipartBody.Part file,@QueryMap HashMap<String, String> params);
+
+
+
 
     //下载文件
     @Streaming
