@@ -36,4 +36,9 @@
         <item name="textAllCaps">true</item>
     </style>
 
+    <style name="AnimationPreview">
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+    </style>
+
 </resources>

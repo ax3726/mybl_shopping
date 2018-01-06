@@ -1,6 +1,7 @@
 package com.ycblsc.common;
 
 
+import com.ycblsc.model.BaseBean;
 import com.ycblsc.model.home.HeadListModel;
 import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.model.home.ProuductTypeModel;
@@ -64,4 +65,12 @@ public interface ApiService {
     @GET("AppService.aspx?CMD=LoadHeaderList")
     Flowable<HeadListModel> getHeadList();
 
+    //注册会员
+    @POST("AppServicePost.aspx?CMD=Register")
+    Flowable<BaseBean> LoginRegister(@Query("name") String name,
+                                     @Query("gender") String gender,
+                                     @Query("telphone") String telphone,
+                                     @Query("address") String address,
+                                     @Query("icon") String icon,
+                                     @Query("password") String password);
 }
