@@ -4,19 +4,20 @@ package com.ycblsc.base;
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.android.ActivityEvent;
+import com.ycblsc.net.RetryWithDelayFunction;
 import com.ycblsc.net.ex.ApiException;
 import com.ycblsc.net.ex.ResultException;
+
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 
+import io.reactivex.FlowableTransformer;
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.ObservableTransformer;
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.HttpException;
 
@@ -62,22 +63,15 @@ public class BasePresenter<V extends BaseView> implements IBasePresenter<V> , Li
     }
 
 
+    public <T> FlowableTransformer<T, T> callbackOnIOToMainThread() {
+        return tObservable -> tObservable.subscribeOn(Schedulers.io())
+                .retryWhen(RetryWithDelayFunction.create())
+                .observeOn(AndroidSchedulers.mainThread())
+                .filter(t -> BasePresenter.this.isViewAttach())
+                .compose(BasePresenter.this.bindToLifecycle());
 
-
-    public <T> ObservableTransformer<T, T> callbackOnIOToMainThread() {
-        return new ObservableTransformer<T, T>() {
-            @Override
-            public ObservableSource<T> apply(@NonNull Observable<T> observable) {
-                return observable.subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                       // .retryWhen(RetryWithDelayFunction.create())
-                        .filter(t -> BasePresenter.this.isViewAttach())
-                        .compose(BasePresenter.this.bindToLifecycle());
-            }
-
-
-        };
     }
+
 
     @NonNull
     @Override
@@ -97,18 +91,25 @@ public class BasePresenter<V extends BaseView> implements IBasePresenter<V> , Li
         return getView().bindToLifecycle();
     }
 
-    public abstract class BaseNetObserver<T> implements Observer<T> {
+    public abstract class BaseNetSubscriber<T> implements Subscriber<T> {
+        private Subscription subscription;
 
-
-        @Override
-        public void onSubscribe(@NonNull Disposable d) {
-            if (isViewAttach()) {
-                // getView().showProgress();
+        public BaseNetSubscriber() {
+        }
+        public BaseNetSubscriber(boolean bl) {
+            if (isViewAttach() && bl) {
+                getView().showWaitDialog();
             }
+        }
+        @Override
+        public void onSubscribe(Subscription s) {
+            subscription = s;
+            s.request(1); //请求一个数据
         }
 
         @Override
         public void onComplete() {
+            subscription.cancel(); //取消订阅
             if (isViewAttach()) {
                 getView().hideWaitDialog();
             }
@@ -138,9 +139,9 @@ public class BasePresenter<V extends BaseView> implements IBasePresenter<V> , Li
 
         @Override
         public void onNext(T t) {
-
+            //处理完后，再请求一个数据
+            subscription.request(1);
         }
     }
-
 
 }

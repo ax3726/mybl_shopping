@@ -24,14 +24,14 @@ import com.ycblsc.widget.TitleBarLayout;
 import com.zhy.autolayout.AutoFrameLayout;
 import com.zhy.autolayout.AutoLinearLayout;
 
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 
-import io.reactivex.ObservableTransformer;
-import io.reactivex.Observer;
+import io.reactivex.FlowableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import ml.gsy.com.library.common.LoadingDialog;
 import retrofit2.HttpException;
@@ -277,18 +277,25 @@ public abstract class BaseActivity<P extends BasePresenter, B extends ViewDataBi
         }
     }
 
-    public abstract class BaseNetObserver<T> implements Observer<T> {
+    public abstract class BaseNetSubscriber<T> implements Subscriber<T> {
+       private Subscription subscription;
+        public BaseNetSubscriber() {
 
-
-        @Override
-        public void onSubscribe(@NonNull Disposable d) {
-            if (aty != null) {
-                // getView().showProgress();
+        }
+        public BaseNetSubscriber(boolean bl) {
+            if (aty!=null&&bl) {
+              showWaitDialog();
             }
+        }
+        @Override
+        public void onSubscribe(Subscription s) {
+            subscription = s;
+            s.request(1); //请求一个数据
         }
 
         @Override
         public void onComplete() {
+            subscription.cancel(); //取消订阅
             if (aty != null) {
                 hideWaitDialog();
             }
@@ -319,18 +326,21 @@ public abstract class BaseActivity<P extends BasePresenter, B extends ViewDataBi
 
         @Override
         public void onNext(T t) {
-
+            //处理完后，再请求一个数据
+            subscription.request(1);
         }
     }
 
 
-    public <T> ObservableTransformer<T, T> callbackOnIOToMainThread() {
+
+    public <T> FlowableTransformer<T, T> callbackOnIOToMainThread() {
         return observable -> observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .retryWhen(RetryWithDelayFunction.create())
-                .filter(t -> aty != null)
+                .filter(t -> aty!=null)
                 .compose(bindToLifecycle());
     }
+
 
 
     @Override

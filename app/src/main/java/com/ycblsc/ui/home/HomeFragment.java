@@ -6,6 +6,9 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.ycblsc.R;
 import com.ycblsc.base.BaseFragment;
 import com.ycblsc.base.EmptyState;
@@ -48,7 +51,7 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
 
     private int mCurPosition = 0;//记录当前分类的下标
     private int mPage = 1;
-    private int mSize = 10;
+    private int mSize = 4;
 
     @Override
     protected HomePrestener createPresenter() {
@@ -115,7 +118,9 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
                         if (mCurPosition != position) {
                             mCurPosition = position;
                             notifyDataSetChanged();
-                            mPresenter.getProductList(item.getF_CODE(), "18", "", "1", "10");
+                            mPage = 1;
+                            mSize = 10;
+                            mPresenter.getProductList(item.getF_CODE(), "18", "", mPage + "", mSize + "");
                         }
 
                     }
@@ -140,6 +145,22 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
 
         mBinding.rcGoodsType.setNestedScrollingEnabled(false);
         mBinding.rcGoodsList.setNestedScrollingEnabled(false);
+
+        mBinding.srlGoodsList.setEnableRefresh(false);
+        mBinding.srlGoodsList.setRefreshFooter(new ClassicsFooter(aty));//设置 Footer 样式
+
+        mBinding.srlGoodsList.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                if (mCurPosition < mGoodsTypes.size()) {
+                    mPage++;
+                    mPresenter.getProductList(mGoodsTypes.get(mCurPosition).getF_CODE(), "18", "", mPage + "", mSize + "");
+                }
+
+            }
+        });
+
+
     }
 
     @Override
@@ -164,7 +185,7 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
         if (typeModel.getReturnData().size() > 0) {
             mGoodsTypes.addAll(typeModel.getReturnData());
             mCurPosition = 0;
-            mPresenter.getProductList(mGoodsTypes.get(0).getF_CODE(), "18", "", "1", "10");
+            mPresenter.getProductList(mGoodsTypes.get(0).getF_CODE(), "18", "", mPage + "", mSize + "");
         }
         mGoodsTypeAdapter.notifyDataSetChanged();
     }
@@ -172,11 +193,22 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
     @Override
     public void getProuductList(ProductListModel typeModel) {
         mStateModel.setEmptyState(EmptyState.NORMAL);
-        mGoodsList.clear();
+        if (mPage == 1) {
+            mGoodsList.clear();
+            mBinding.srlGoodsList.resetNoMoreData();
+        } else {
+            mBinding.srlGoodsList.finishLoadmore();
+        }
+
         if (typeModel.getReturnData().size() > 0) {
             mGoodsList.addAll(typeModel.getReturnData());
+            if (typeModel.getReturnData().size() < mSize) {
+                mBinding.srlGoodsList.finishLoadmoreWithNoMoreData();
+            }
         }
         mGoodsListAdapter.notifyDataSetChanged();
+
+
     }
 
     @Override

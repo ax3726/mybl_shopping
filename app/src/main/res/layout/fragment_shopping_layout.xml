@@ -7,7 +7,10 @@
         android:focusableInTouchMode="true"
         android:layout_height="match_parent">
 
-
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/srl_shopping"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
 
@@ -162,6 +165,6 @@
 
     </com.zhy.autolayout.AutoLinearLayout>
     </android.support.v4.widget.NestedScrollView>
-
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>
     </com.zhy.autolayout.AutoLinearLayout>
 </layout>

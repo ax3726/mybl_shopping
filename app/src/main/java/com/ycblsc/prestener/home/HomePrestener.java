@@ -16,7 +16,7 @@ public class HomePrestener extends BaseFragmentPresenter<IHomeView> {
     public void getProductType() {
         Api.getApi().getProductType()
                 .compose(callbackOnIOToMainThread())
-                .subscribe(new BaseNetObserver<ProuductTypeModel>() {
+                .subscribe(new BaseNetSubscriber<ProuductTypeModel>() {
                     @Override
                     public void onNext(ProuductTypeModel baseBean) {
                         super.onNext(baseBean);
@@ -37,7 +37,7 @@ public class HomePrestener extends BaseFragmentPresenter<IHomeView> {
             , String rows) {
         Api.getApi().getProductList(fenLei, id, isTuiJian, page, rows)
                 .compose(callbackOnIOToMainThread())
-                .subscribe(new BaseNetObserver<ProductListModel>() {
+                .subscribe(new BaseNetSubscriber<ProductListModel>() {
                     @Override
                     public void onNext(ProductListModel baseBean) {
                         super.onNext(baseBean);
@@ -49,7 +49,7 @@ public class HomePrestener extends BaseFragmentPresenter<IHomeView> {
     public void getShopInfo(String id) {
         Api.getApi().getShopInfo(id)
                 .compose(callbackOnIOToMainThread())
-                .subscribe(new BaseNetObserver<ShopInfoModel>() {
+                .subscribe(new BaseNetSubscriber<ShopInfoModel>() {
                     @Override
                     public void onNext(ShopInfoModel shopInfoModel) {
                         super.onNext(shopInfoModel);

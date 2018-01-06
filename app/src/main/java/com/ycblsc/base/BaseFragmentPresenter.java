@@ -8,15 +8,17 @@ import com.ycblsc.net.RetryWithDelayFunction;
 import com.ycblsc.net.ex.ApiException;
 import com.ycblsc.net.ex.ResultException;
 
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 
+import io.reactivex.Flowable;
+import io.reactivex.FlowableTransformer;
 import io.reactivex.Observable;
-import io.reactivex.ObservableTransformer;
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.HttpException;
 
@@ -62,8 +64,8 @@ public class BaseFragmentPresenter<V extends BaseFragmentView> implements IBaseF
     }
 
 
-    public <T> ObservableTransformer<T, T> callbackOnIOToMainThread() {
-        return observable -> observable.subscribeOn(Schedulers.io())
+    public <T> FlowableTransformer<T, T> callbackOnIOToMainThread() {
+        return (Flowable<T> upstream) -> upstream.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .retryWhen(RetryWithDelayFunction.create())
                 .filter(t -> BaseFragmentPresenter.this.isViewAttach())
@@ -88,25 +90,25 @@ public class BaseFragmentPresenter<V extends BaseFragmentView> implements IBaseF
         return getView().bindToLifecycle();
     }
 
-    public abstract class BaseNetObserver<T> implements Observer<T> {
+    public abstract class BaseNetSubscriber<T> implements Subscriber<T> {
+        private Subscription subscription;
 
-        public BaseNetObserver() {
-
+        public BaseNetSubscriber() {
         }
-
-        @Override
-        public void onSubscribe(@NonNull Disposable d) {
-
-        }
-
-        public BaseNetObserver(boolean bl) {
-            if (isViewAttach()&&bl) {
+        public BaseNetSubscriber(boolean bl) {
+            if (isViewAttach() && bl) {
                 getView().showWaitDialog();
             }
+        }
+        @Override
+        public void onSubscribe(Subscription s) {
+            subscription = s;
+            s.request(1); //请求一个数据
         }
 
         @Override
         public void onComplete() {
+            subscription.cancel(); //取消订阅
             if (isViewAttach()) {
                 getView().hideWaitDialog();
             }
@@ -136,11 +138,9 @@ public class BaseFragmentPresenter<V extends BaseFragmentView> implements IBaseF
 
         @Override
         public void onNext(T t) {
-
+            //处理完后，再请求一个数据
+            subscription.request(1);
         }
-
-
-
     }
 
 

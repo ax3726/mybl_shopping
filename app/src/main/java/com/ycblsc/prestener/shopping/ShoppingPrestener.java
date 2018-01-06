@@ -16,7 +16,7 @@ public class ShoppingPrestener extends BaseFragmentPresenter<IShoppingView> {
     public void getProductType() {
         Api.getApi().getProductType()
                 .compose(callbackOnIOToMainThread())
-                .subscribe(new BaseNetObserver<ProuductTypeModel>() {
+                .subscribe(new BaseNetSubscriber<ProuductTypeModel>() {
                     @Override
                     public void onNext(ProuductTypeModel baseBean) {
                         super.onNext(baseBean);
@@ -38,7 +38,7 @@ public class ShoppingPrestener extends BaseFragmentPresenter<IShoppingView> {
             , String rows) {
         Api.getApi().getProductList(fenLei, id, isTuiJian, page, rows)
                 .compose(callbackOnIOToMainThread())
-                .subscribe(new BaseNetObserver<ProductListModel>() {
+                .subscribe(new BaseNetSubscriber<ProductListModel>() {
                     @Override
                     public void onNext(ProductListModel baseBean) {
                         super.onNext(baseBean);
@@ -48,7 +48,7 @@ public class ShoppingPrestener extends BaseFragmentPresenter<IShoppingView> {
     }
 
     public void getImageData() {
-        Api.getApi().getImageData("49").compose(callbackOnIOToMainThread()).subscribe(new BaseNetObserver<ImageDataModel>() {
+        Api.getApi().getImageData("49").compose(callbackOnIOToMainThread()).subscribe(new BaseNetSubscriber<ImageDataModel>() {
             @Override
             public void onNext(ImageDataModel baseBean) {
                 super.onNext(baseBean);

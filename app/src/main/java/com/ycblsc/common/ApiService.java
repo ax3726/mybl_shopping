@@ -7,7 +7,7 @@ import com.ycblsc.model.home.ProuductTypeModel;
 import com.ycblsc.model.home.ShopInfoModel;
 import com.ycblsc.model.shopping.ImageDataModel;
 
-import io.reactivex.Observable;
+import io.reactivex.Flowable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -27,35 +27,41 @@ import retrofit2.http.Url;
 
 public interface ApiService {
 
-  @GET("AppService.aspx?CMD=LoadProductType") //获取商品分类信息
-  Observable<ProuductTypeModel> getProductType();
+    @GET("AppService.aspx?CMD=LoadProductType")
+        //获取商品分类信息
+    Flowable<ProuductTypeModel> getProductType();
 
 
-  @GET("AppService.aspx?CMD=LoadProductList") //获取商品列表信息
-  Observable<ProductListModel> getProductList(@Query("fenLei") String fenLei
-          , @Query("id") String id   //便利架id
-          , @Query("isTuiJian") String isTuiJian//是否推荐（1是）
-          , @Query("page") String page
-          , @Query("rows") String rows
-                                      );
+    @GET("AppService.aspx?CMD=LoadProductList")
+        //获取商品列表信息
+    Flowable<ProductListModel> getProductList(@Query("fenLei") String fenLei
+            , @Query("id") String id   //便利架id
+            , @Query("isTuiJian") String isTuiJian//是否推荐（1是）
+            , @Query("page") String page
+            , @Query("rows") String rows
+    );
 
-  @GET("AppService.aspx?CMD=LoadShopInfo") //获取便利架信息
-  Observable<ShopInfoModel> getShopInfo(@Query("id") String id);
+    @GET("AppService.aspx?CMD=LoadShopInfo")
+        //获取便利架信息
+    Flowable<ShopInfoModel> getShopInfo(@Query("id") String id);
 
-  @GET("AppService.aspx?CMD=LoadData") //获取广告位
-  Observable<ImageDataModel> getImageData(@Query("id") String id);//便利架广告(49)、个人中心广告（48）、充值协议（50）、充值说明（51）
+    @GET("AppService.aspx?CMD=LoadData")
+        //获取广告位
+    Flowable<ImageDataModel> getImageData(@Query("id") String id);//便利架广告(49)、个人中心广告（48）、充值协议（50）、充值说明（51）
 
 
     //上传文件
     @Multipart
     @POST("upload")
-    Observable<ResponseBody> upload(@Part("description") RequestBody description,
-                                    @Part MultipartBody.Part file);
+    Flowable<ResponseBody> upload(@Part("description") RequestBody description,
+                                  @Part MultipartBody.Part file);
+
     //下载文件
     @Streaming
     @GET
-    Observable<ResponseBody> download(@Url String url);
-  @GET("AppService.aspx?CMD=LoadHeaderList")
-  Observable<HeadListModel> getHeadList();
+    Flowable<ResponseBody> download(@Url String url);
+
+    @GET("AppService.aspx?CMD=LoadHeaderList")
+    Flowable<HeadListModel> getHeadList();
 
 }

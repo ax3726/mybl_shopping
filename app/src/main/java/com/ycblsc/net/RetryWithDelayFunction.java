@@ -5,8 +5,9 @@ import com.ycblsc.model.ResponseCodeEnum;
 import com.ycblsc.net.ex.ApiException;
 import com.ycblsc.net.ex.ResultException;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
+import org.reactivestreams.Publisher;
+
+import io.reactivex.Flowable;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
@@ -15,7 +16,7 @@ import io.reactivex.functions.Function;
  * Created by lm on 2017/11/22.
  * Description：
  */
-public class RetryWithDelayFunction implements Function<Observable<? extends Throwable>, Observable<?>> {
+public class RetryWithDelayFunction implements Function<Flowable<Throwable>, Publisher<?>> {
     private static final String TAG = "RetryWithDelayFunction";
 
     public static RetryWithDelayFunction create() {
@@ -23,24 +24,23 @@ public class RetryWithDelayFunction implements Function<Observable<? extends Thr
     }
 
     @Override
-    public Observable<?> apply(@NonNull Observable<? extends Throwable> observable) throws Exception {
-        return observable.flatMap(new Function<Throwable, ObservableSource<?>>() {
+    public Publisher<?> apply(@NonNull Flowable<Throwable> throwableFlowable) throws Exception {
+        return throwableFlowable.flatMap(new Function<Throwable, Publisher<?>>() {
             @Override
-            public ObservableSource<?> apply(@NonNull Throwable throwable) throws Exception {
+            public Publisher<?> apply(@NonNull Throwable throwable) throws Exception {
                 if (throwable instanceof ApiException) {
                     ResponseCodeEnum responseCode = ((ApiException) throwable).getResponseCode();
                     switch (responseCode) {
                         case NODATA:
-                            return Observable.error(throwable);
+                            return Flowable.error(throwable);
                         default:
-                            return Observable.error(throwable);
+                            return Flowable.error(throwable);
                     }
                 }
-
                 if (throwable instanceof ResultException) {
-                    return Observable.error(throwable);
+                    return Flowable.error(throwable);
                 }
-                return Observable.error(throwable);
+                return Flowable.error(throwable);
             }
         });
     }
