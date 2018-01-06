@@ -1,19 +1,24 @@
 package com.ycblsc.ui.main;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.CompoundButton;
 import android.widget.PopupWindow;
+import android.widget.RadioGroup;
 
 import com.bumptech.glide.Glide;
 import com.ycblsc.R;
@@ -22,13 +27,19 @@ import com.ycblsc.base.BasePresenter;
 import com.ycblsc.base.EmptyState;
 import com.ycblsc.databinding.ActivityRechargeLayoutBinding;
 import com.ycblsc.databinding.ActivityRegisterBinding;
+import com.ycblsc.model.BaseBean;
 import com.ycblsc.model.home.HeadListModel;
 import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.model.home.ProuductTypeModel;
 import com.ycblsc.prestener.main.MainPrestener;
 import com.ycblsc.prestener.mine.MinePrestener;
+import com.ycblsc.utils.UIUtil;
+import com.ycblsc.utils.URLEncoderURI;
 import com.ycblsc.view.IMainView;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +57,14 @@ public class RegisterActivity extends BaseActivity<MainPrestener, ActivityRegist
     private CommonAdapter<HeadListModel.ReturnDataBean> mHeadsAdapter;//头像列表
     private int height = 0;
     private boolean hasMeasured = false;
+    private String phone;//手机号码
+    private String code;//验证码
+    private String niceName;//昵称
+    private String ed_pwd;//密码
+    private String aginPwd;//再次输入密码
+    private String address;
+    private String iconUrl;
+    String temp = "1";
 
     @Override
     protected void initTitleBar() {
@@ -76,6 +95,25 @@ public class RegisterActivity extends BaseActivity<MainPrestener, ActivityRegist
         super.initEvent();
         mBinding.linDropdow.setOnClickListener(this);
         mBinding.btnCancel.setOnClickListener(this);
+        mBinding.tvCode.setOnClickListener(this);
+        mBinding.btnDetermine.setOnClickListener(this);
+        //性别
+        mBinding.sex.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int position) {
+
+                if (mBinding.male.getId() == position) {
+                    temp = "1";
+                }
+                if (mBinding.femle.getId() == position) {
+                    temp = "2";
+                }
+            }
+        });
+        ;
+
+        mBinding.tvCode.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG); //下划线
+        mBinding.tvCode.getPaint().setAntiAlias(true);//抗锯齿
     }
 
 //    private void initAdapter(){
@@ -87,16 +125,62 @@ public class RegisterActivity extends BaseActivity<MainPrestener, ActivityRegist
         switch (view.getId()) {
             //弹出列表
             case R.id.lin_dropdow:
-//                setMyPop();
                 initValue();
                 break;
             case R.id.btn_cancel:
                 finish();
                 break;
+            //验证码
+            case R.id.tv_code:
+                phone = mBinding.etPhone.getText().toString().trim();
+                if (TextUtils.isEmpty(phone)) {
+                    showToast("请输入手机号码");
+                    return;
+                }
+                mPresenter.getSendCode(phone, "Register");
+                UIUtil.setCodeTextView(this, mBinding.tvCode);
+                break;
             //确定注册
             case R.id.btn_determine:
+                phone = mBinding.etPhone.getText().toString().trim();
+                code = mBinding.tvCode.getText().toString().trim();
+                try {
+                    niceName = URLDecoder.decode(mBinding.niceName.getText().toString().trim(), "UTF-8");
+                    address = URLDecoder.decode(mBinding.etAddress.getText().toString().trim(), "UTF-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                ed_pwd = mBinding.edPwd.getText().toString().trim();
+                aginPwd = mBinding.edConfirmpwd.getText().toString().trim();
+
+                if (TextUtils.isEmpty(phone)) {
+                    showToast("请输入手机号码");
+                    return;
+                }
+                if (TextUtils.isEmpty(code)) {
+                    showToast("请输入验证码");
+                    return;
+                }
+                if (TextUtils.isEmpty(niceName)) {
+                    showToast("请输入昵称");
+                    return;
+                }
+                if (TextUtils.isEmpty(ed_pwd)) {
+                    showToast("请输入密码");
+                    return;
+                }
+                if (TextUtils.isEmpty(aginPwd)) {
+                    showToast("请再次输入密码");
+                    return;
+                }
+                if (!ed_pwd.equals(aginPwd)) {
+                    showToast("两次密码输入不一致");
+                    return;
+                }
+                mPresenter.getLoginRegiter(niceName, temp, phone, address, iconUrl, ed_pwd);
                 break;
         }
+
     }
 
     //头像列表接口返回数据
@@ -107,7 +191,17 @@ public class RegisterActivity extends BaseActivity<MainPrestener, ActivityRegist
         if (headListModel.getReturnData().size() > 0) {
             mHeadsList.addAll(headListModel.getReturnData());
         }
-//        mHeadsAdapter.notifyDataSetChanged();
+    }
+
+    //会员注册
+    @Override
+    public void getLoginRegister(BaseBean baseBean) {
+        showToast("" + baseBean.getReturnMessage());
+    }
+
+    @Override
+    public void getSendCode(BaseBean baseBean) {
+        showToast("验证码" + baseBean.getReturnData());
     }
 
     private void initValue() {
@@ -153,7 +247,10 @@ public class RegisterActivity extends BaseActivity<MainPrestener, ActivityRegist
         mHeadsAdapter = new CommonAdapter<HeadListModel.ReturnDataBean>(aty, R.layout.item_pop_imagelist, mHeadsList) {
             @Override
             protected void convert(ViewHolder holder, HeadListModel.ReturnDataBean item, int position) {
-                holder.setImageurl(R.id.img, item.getUrl(), 0);
+                iconUrl = item.getUrl();
+                if (!TextUtils.isEmpty(iconUrl)) {
+                    holder.setImageurl(R.id.img, iconUrl, 0);
+                }
             }
         };
         recyclerView.setLayoutManager(new GridLayoutManager(aty, 3));
@@ -162,10 +259,11 @@ public class RegisterActivity extends BaseActivity<MainPrestener, ActivityRegist
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
                 HeadListModel.ReturnDataBean headListModel = mHeadsList.get(position);
-               // mBinding.imgHead.setImageURI(Uri.parse(headListModel.getUrl()));
+                // mBinding.imgHead.setImageURI(Uri.parse(headListModel.getUrl()));
                 Glide.with(RegisterActivity.this).load(headListModel.getUrl()).into(mBinding.imgHead);
                 mPopTop.dismiss();
             }
+
             @Override
             public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
                 return false;

@@ -68,10 +68,7 @@ public class HomePrestener extends BaseFragmentPresenter<IHomeView> {
                 });
     }
 
-
-
     public void upImage() {
-
         File flie = new File("imgPath");
         HashMap<String, RequestBody> maps = new HashMap<>();
         maps.put("parm1", toRequestBody("zhi1"));

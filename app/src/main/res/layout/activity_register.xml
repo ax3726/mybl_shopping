@@ -76,6 +76,7 @@
                     android:textSize="30px" />
 
                 <TextView
+                    android:id="@+id/tv_code"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20px"
@@ -195,19 +196,27 @@
                     android:layout_height="wrap_content"
                     android:text="性别" />
 
-                <RadioButton
-                    android:id="@+id/male"
-                    android:layout_width="wrap_content"
+                <RadioGroup
+                    android:id="@+id/sex"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="帅哥" />
+                    android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/femle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    <RadioButton
+                        android:id="@+id/male"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="帅哥" />
 
-                    android:text="美女" />
+                    <RadioButton
+                        android:id="@+id/femle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="美女" />
+
+                </RadioGroup>
+
 
             </com.zhy.autolayout.AutoLinearLayout>
             <!--头像-->
@@ -258,9 +267,9 @@
                     android:id="@+id/tv_phonegraph"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginLeft="30px"
                     android:layout_marginTop="15px"
-                    android:layout_gravity="center"
                     android:drawableLeft="@drawable/ic_photograph"
                     android:drawablePadding="10px"
                     android:gravity="center"

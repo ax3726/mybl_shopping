@@ -13,5 +13,7 @@ public interface IMainView extends BaseView {
     //头像列表
     void getHeadList(HeadListModel headListModel);
     //注册会员
-//    void
+    void getLoginRegister(BaseBean baseBean);
+    //发送验证码
+    void getSendCode(BaseBean baseBean);
 }

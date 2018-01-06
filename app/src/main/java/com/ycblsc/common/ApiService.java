@@ -78,10 +78,15 @@ public interface ApiService {
 
     //注册会员
     @POST("AppServicePost.aspx?CMD=Register")
-    Flowable<BaseBean> LoginRegister(@Query("name") String name,
+    Flowable<BaseBean> getLoginRegister(@Query("name") String name,
                                      @Query("gender") String gender,
                                      @Query("telphone") String telphone,
                                      @Query("address") String address,
                                      @Query("icon") String icon,
                                      @Query("password") String password);
+
+    //发送验证码
+    @GET("AppServicePost.aspx?CMD=SendCode")
+    Flowable<BaseBean> getSendCode(@Query("telphone") String telphone,
+                                   @Query("validName") String validName);
 }
