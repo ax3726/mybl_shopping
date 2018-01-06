@@ -33,10 +33,12 @@ import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.model.home.ProuductTypeModel;
 import com.ycblsc.prestener.main.MainPrestener;
 import com.ycblsc.prestener.mine.MinePrestener;
+import com.ycblsc.ui.common.PhotoActivity;
 import com.ycblsc.utils.UIUtil;
 import com.ycblsc.utils.URLEncoderURI;
 import com.ycblsc.view.IMainView;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -97,6 +99,7 @@ public class RegisterActivity extends BaseActivity<MainPrestener, ActivityRegist
         mBinding.btnCancel.setOnClickListener(this);
         mBinding.tvCode.setOnClickListener(this);
         mBinding.btnDetermine.setOnClickListener(this);
+        mBinding.tvPhonegraph.setOnClickListener(this);
         //性别
         mBinding.sex.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -110,8 +113,6 @@ public class RegisterActivity extends BaseActivity<MainPrestener, ActivityRegist
                 }
             }
         });
-        ;
-
         mBinding.tvCode.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG); //下划线
         mBinding.tvCode.getPaint().setAntiAlias(true);//抗锯齿
     }
@@ -129,6 +130,10 @@ public class RegisterActivity extends BaseActivity<MainPrestener, ActivityRegist
                 break;
             case R.id.btn_cancel:
                 finish();
+                break;
+            //拍照上传
+            case R.id.tv_phonegraph:
+
                 break;
             //验证码
             case R.id.tv_code:
@@ -270,4 +275,6 @@ public class RegisterActivity extends BaseActivity<MainPrestener, ActivityRegist
             }
         });
     }
+
+
 }
