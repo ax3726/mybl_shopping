@@ -58,9 +58,13 @@ public interface ApiService {
     @Multipart
     @POST("upload")
     Flowable<ResponseBody> upload(@Part("description") RequestBody description,
-                                  @Part MultipartBody.Part file,@QueryMap HashMap<String, String> params);
+                                  @Part MultipartBody.Part file, @QueryMap HashMap<String, String> params);
 
 
+    //上传文件
+    @Multipart
+    @POST("upload")
+    Flowable<ResponseBody> upload11(@Part @QueryMap HashMap<String, RequestBody> params);
 
 
     //下载文件

@@ -12,7 +12,9 @@ import com.ycblsc.view.IHomeView;
 import java.io.File;
 import java.util.HashMap;
 
+import okhttp3.MediaType;
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 
 /**
@@ -67,6 +69,38 @@ public class HomePrestener extends BaseFragmentPresenter<IHomeView> {
     }
 
 
+
+    public void upImage() {
+
+        File flie = new File("imgPath");
+        HashMap<String, RequestBody> maps = new HashMap<>();
+        maps.put("parm1", toRequestBody("zhi1"));
+        maps.put("parm2", toRequestBody("zhi2"));
+        RequestBody requestBody = RequestBody.create(MediaType.parse("image/png"), flie);
+        maps.put("imgparm", requestBody);
+
+        //监听上传进度  也可以不加
+        UploadFileRequestBody fileRequestBody = new UploadFileRequestBody(requestBody, new UploadFileRequestBody.ProgressListener() {
+            @Override
+            public void onProgress(long hasWrittenLen, long totalLen, boolean hasFinish) {
+
+            }
+        });
+
+        Api.getApi().upload11(maps).compose(callbackOnIOToMainThread()).subscribe(new BaseNetSubscriber<ResponseBody>() {
+            @Override
+            public void onNext(ResponseBody responseBody) {
+                super.onNext(responseBody);
+            }
+        });
+
+    }
+
+    public RequestBody toRequestBody(String value) {
+        return RequestBody.create(MediaType.parse("text/plain"), value);
+    }
+
+
     /**
      * 文件上传
      */
@@ -80,13 +114,11 @@ public class HomePrestener extends BaseFragmentPresenter<IHomeView> {
         });
 
 
-
-
         // MultipartBody.Part  和后端约定好Key，这里的partName是用image
         MultipartBody.Part body =
                 MultipartBody.Part.createFormData("image", file.getName(), fileRequestBody);
         HashMap<String, String> params = new HashMap<>();
-        params.put("img","img");
+        params.put("img", "img");
 
         Api.getApi().upload(fileRequestBody, body, params)
                 .compose(callbackOnIOToMainThread()).subscribe(new BaseNetSubscriber<ResponseBody>() {
