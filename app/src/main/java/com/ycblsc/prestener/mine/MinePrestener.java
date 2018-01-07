@@ -5,6 +5,7 @@ import com.ycblsc.base.BaseFragmentView;
 import com.ycblsc.base.EmptyState;
 import com.ycblsc.common.Api;
 import com.ycblsc.model.BaseBean;
+import com.ycblsc.model.mine.NotificationModel;
 import com.ycblsc.model.mine.PersonInfoModel;
 import com.ycblsc.model.shopping.ImageDataModel;
 import com.ycblsc.view.IMineView;
@@ -15,7 +16,7 @@ import com.ycblsc.view.IMineView;
 
 public class MinePrestener extends BaseFragmentPresenter<IMineView> {
     //个人信息
-    public void getPersonInfo(String id) {
+    public void getPersonInfo(int id) {
         Api.getApi().getPersonInfo(id)
                 .compose(callbackOnIOToMainThread())
                 .subscribe(new BaseNetSubscriber<PersonInfoModel>() {
@@ -32,7 +33,7 @@ public class MinePrestener extends BaseFragmentPresenter<IMineView> {
                     }
                 });
     }
-
+   //广告位
     public void getImageData() {
         Api.getApi().getImageData("48").compose(callbackOnIOToMainThread()).subscribe(new BaseNetSubscriber<ImageDataModel>() {
             @Override
@@ -41,6 +42,23 @@ public class MinePrestener extends BaseFragmentPresenter<IMineView> {
                 getView().getImageData(baseBean);
             }
         });
+    }
+    //个人通知信息
+    public void getPersonMessage(int id,int page,int rows) {
+        Api.getApi().getPersonMessage(id,page,rows)
+                .compose(callbackOnIOToMainThread())
+                .subscribe(new BaseNetSubscriber<NotificationModel>() {
+                    @Override
+                    public void onNext(NotificationModel baseBean) {
+                        super.onNext(baseBean);
+                        getView().getPersonMessage(baseBean);
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        getView().setEmptyState(EmptyState.EMPTY);
+                    }
+                });
     }
     //个人登录
 //    public void getLogin(String loginName, String password) {

@@ -199,15 +199,22 @@
 
                 </ml.gsy.com.library.widget.flybanner.FlyBanner>
             </com.zhy.autolayout.AutoLinearLayout>
-            <!--底部列表数据-->
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycview"
-                android:layout_width="match_parent"
-                android:layout_height="320px"
-                android:background="@color/colorWhite"
-                android:paddingTop="40px">
 
-            </android.support.v7.widget.RecyclerView>
+            <!--<com.scwang.smartrefresh.layout.SmartRefreshLayout-->
+                <!--android:id="@+id/srl_personinfo"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:background="@color/colorWhite">-->
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycview"
+                    android:layout_width="match_parent"
+                    android:layout_height="420px"
+                    android:background="@color/colorWhite"
+                    android:paddingTop="40px">
+
+                </android.support.v7.widget.RecyclerView>
+            <!--</com.scwang.smartrefresh.layout.SmartRefreshLayout>-->
             <!--便利架消费记录-->
             <com.zhy.autolayout.AutoRelativeLayout
                 android:layout_width="match_parent"

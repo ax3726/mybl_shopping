@@ -1,16 +1,22 @@
 package com.ycblsc.ui.mine;
 
 import android.os.Handler;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.ycblsc.R;
 import com.ycblsc.base.BaseFragment;
 import com.ycblsc.base.BaseFragmentView;
 import com.ycblsc.base.EmptyState;
 import com.ycblsc.databinding.FragmentMineLayoutBinding;
 import com.ycblsc.model.BaseBean;
+import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.model.home.ProuductTypeModel;
+import com.ycblsc.model.mine.NotificationModel;
 import com.ycblsc.model.mine.PersonInfoModel;
 import com.ycblsc.model.shopping.ImageDataModel;
 import com.ycblsc.prestener.mine.MinePrestener;
@@ -20,11 +26,20 @@ import com.ycblsc.view.IMineView;
 import java.util.ArrayList;
 import java.util.List;
 
+import ml.gsy.com.library.adapters.recyclerview.CommonAdapter;
+import ml.gsy.com.library.adapters.recyclerview.base.ViewHolder;
+
 /**
  * Created by Administrator on 2017/12/26 0026.
  */
 
 public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayoutBinding> implements IMineView, View.OnClickListener {
+    private CommonAdapter<NotificationModel.ReturnDataBean> mNoticfitionAdapter;//通知信息
+    private List<NotificationModel.ReturnDataBean> mMessageList = new ArrayList<>();
+    private int mPage = 1;//页码
+    private int mRows = 10;//每页条数
+    private int mCurPosition = 0;//记录当前分类的下标
+
     @Override
     public int getLayoutId() {
         return R.layout.fragment_mine_layout;
@@ -46,9 +61,11 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
                 mStateModel.setEmptyState(EmptyState.NORMAL);
             }
         }, 2000);
+        initAdapter();
         //   mPresenter.getLogin("13433607807", "123456cjs");//id=4
-        mPresenter.getPersonInfo("4");
+        mPresenter.getPersonInfo(4);
         mPresenter.getImageData();//个人中心广告位
+        mPresenter.getPersonMessage(4, 1, 10);//个人通知信息
     }
 
     @Override
@@ -75,11 +92,33 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
         }
     }
 
+    private void initAdapter() {
+        mNoticfitionAdapter = new CommonAdapter<NotificationModel.ReturnDataBean>(aty, R.layout.item_notification_list, mMessageList) {
+            @Override
+            protected void convert(ViewHolder holder, NotificationModel.ReturnDataBean item, int position) {
+                holder.setText(R.id.tv_content, item.getTf_nvcContent());
+                holder.setText(R.id.tv_data, item.getCreateTime());
+            }
+        };
+        mBinding.recycview.setLayoutManager(new LinearLayoutManager(aty));
+        mBinding.recycview.setAdapter(mNoticfitionAdapter);
+//        mBinding.srlPersoninfo.setNestedScrollingEnabled(false);
+//        mBinding.srlPersoninfo.setEnableRefresh(false);
+//        mBinding.srlPersoninfo.setRefreshFooter(new ClassicsFooter(aty));//设置 Footer 样式
+//        mBinding.srlPersoninfo.setOnLoadmoreListener(new OnLoadmoreListener() {
+//            @Override
+//            public void onLoadmore(RefreshLayout refreshlayout) {
+//                    mPage++;
+//                    mPresenter.getPersonMessage(4,mPage,mRows);
+//            }
+//        });
+    }
+
     //个人信息
     @Override
     public void getPersonInfo(PersonInfoModel personInfoList) {
         if (personInfoList.getReturnData().size() > 0) {
-         //   mPersonInfos.addAll(personInfoList.getReturnData());
+            //   mPersonInfos.addAll(personInfoList.getReturnData());
             Glide.with(getActivity()).load(personInfoList.getReturnData().get(0).getIcon()).into(mBinding.headPortrait);
             mBinding.tvName.setText(personInfoList.getReturnData().get(0).getName());
             mBinding.tvPhone.setText(personInfoList.getReturnData().get(0).getTelphone());
@@ -96,5 +135,15 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
             }
             mBinding.fbRoll.setImagesUrl(urls);
         }
+    }
+
+    @Override
+    public void getPersonMessage(NotificationModel model) {
+        mMessageList.clear();
+        if (model.getReturnData().size() > 0) {
+            mMessageList.addAll(model.getReturnData());
+           // mPresenter.getPersonMessage(4,mPage,mRows);
+        }
+        mNoticfitionAdapter.notifyDataSetChanged();
     }
 }
