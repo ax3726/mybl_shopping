@@ -26,9 +26,9 @@
                     android:id="@+id/head_portrait"
                     android:layout_width="160px"
                     android:layout_height="160px"
-                    android:padding="20px"
                     android:layout_marginLeft="20px"
                     android:layout_marginTop="20px"
+                    android:padding="20px"
                     android:src="@drawable/ic_woman" />
 
                 <com.zhy.autolayout.AutoLinearLayout
@@ -101,9 +101,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="40px"
+                            android:layout_marginTop="20px"
                             android:drawablePadding="10px"
                             android:text="123.00"
-                            android:layout_marginTop="20px"
                             android:textColor="#000000"
                             android:textSize="36px" />
 
@@ -189,32 +189,15 @@
             <com.zhy.autolayout.AutoLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_bg_red"
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="注册就送5元红包"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="32px" />
+                <ml.gsy.com.library.widget.flybanner.FlyBanner
+                    android:id="@+id/fb_roll"
+                    android:layout_width="match_parent"
+                    android:layout_height="245px">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10px"
-                    android:text="充60送11,充100送28!"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="32px" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10px"
-                    android:text="充200送62,充500送128!"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="32px" />
+                </ml.gsy.com.library.widget.flybanner.FlyBanner>
             </com.zhy.autolayout.AutoLinearLayout>
             <!--底部列表数据-->
             <android.support.v7.widget.RecyclerView
@@ -232,8 +215,8 @@
                 android:layout_marginTop="10px"
                 android:background="@color/colorWhite"
                 android:orientation="vertical"
-                android:paddingBottom="10px"
-                android:paddingTop="20px">
+                android:paddingBottom="20px"
+                android:paddingTop="30px">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -260,8 +243,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorWhite"
                 android:orientation="vertical"
-                android:paddingBottom="10px"
-                android:paddingTop="20px">
+                android:paddingBottom="20px"
+                android:paddingTop="30px">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -288,8 +271,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorWhite"
                 android:orientation="vertical"
-                android:paddingBottom="20px"
-                android:paddingTop="20px">
+                android:paddingBottom="30px"
+                android:paddingTop="30px">
 
                 <TextView
                     android:layout_width="wrap_content"

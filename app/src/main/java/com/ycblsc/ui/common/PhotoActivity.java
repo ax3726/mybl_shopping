@@ -7,6 +7,7 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.databinding.ViewDataBinding;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -19,6 +20,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.ycblsc.base.BaseActivity;
+import com.ycblsc.base.BasePresenter;
 import com.ycblsc.common.MyApplication;
 
 import java.io.BufferedOutputStream;
@@ -613,7 +615,9 @@ public abstract class PhotoActivity extends BaseActivity {
     }
 
 
-    /**The Uri to check.
+    /**
+     * The Uri to check.
+     *
      * @param uri
      * @return Whether the Uri authority is Google Photos.
      */

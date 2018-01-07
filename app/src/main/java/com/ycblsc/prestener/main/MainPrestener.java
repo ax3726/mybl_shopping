@@ -50,7 +50,6 @@ public class MainPrestener extends BasePresenter<IMainView> {
                         super.onNext(headListModel);
                         getView().getSendCode(headListModel);
                     }
-
                     @Override
                     public void onError(Throwable e) {
                         super.onError(e);

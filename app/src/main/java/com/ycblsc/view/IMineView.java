@@ -2,11 +2,15 @@ package com.ycblsc.view;
 
 import com.ycblsc.base.BaseFragmentView;
 import com.ycblsc.model.BaseBean;
+import com.ycblsc.model.mine.PersonInfoModel;
+import com.ycblsc.model.shopping.ImageDataModel;
 
 /**
  * Created by Administrator on 2018/1/4.
  */
 
 public interface IMineView extends BaseFragmentView {
-    void getPersonInfo(BaseBean baseBean);
+    void getPersonInfo(PersonInfoModel personInfoModel);
+    void getImageData(ImageDataModel model);
+    //void getLogin(BaseBean baseBean);
 }

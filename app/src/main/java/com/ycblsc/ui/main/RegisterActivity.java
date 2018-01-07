@@ -66,6 +66,7 @@ public class RegisterActivity extends BaseActivity<MainPrestener, ActivityRegist
     private String aginPwd;//再次输入密码
     private String address;
     private String iconUrl;
+    private String iconId;
     String temp = "1";
 
     @Override
@@ -182,7 +183,7 @@ public class RegisterActivity extends BaseActivity<MainPrestener, ActivityRegist
                     showToast("两次密码输入不一致");
                     return;
                 }
-                mPresenter.getLoginRegiter(niceName, temp, phone, address, iconUrl, ed_pwd);
+                mPresenter.getLoginRegiter(niceName, temp, phone, address, iconId, ed_pwd);
                 break;
         }
 
@@ -266,6 +267,7 @@ public class RegisterActivity extends BaseActivity<MainPrestener, ActivityRegist
                 HeadListModel.ReturnDataBean headListModel = mHeadsList.get(position);
                 // mBinding.imgHead.setImageURI(Uri.parse(headListModel.getUrl()));
                 Glide.with(RegisterActivity.this).load(headListModel.getUrl()).into(mBinding.imgHead);
+                iconId=headListModel.getId();
                 mPopTop.dismiss();
             }
 

@@ -6,6 +6,7 @@ import com.ycblsc.model.home.HeadListModel;
 import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.model.home.ProuductTypeModel;
 import com.ycblsc.model.home.ShopInfoModel;
+import com.ycblsc.model.mine.PersonInfoModel;
 import com.ycblsc.model.shopping.ImageDataModel;
 
 import java.util.HashMap;
@@ -79,14 +80,23 @@ public interface ApiService {
     //注册会员
     @POST("AppServicePost.aspx?CMD=Register")
     Flowable<BaseBean> getLoginRegister(@Query("name") String name,
-                                     @Query("gender") String gender,
-                                     @Query("telphone") String telphone,
-                                     @Query("address") String address,
-                                     @Query("icon") String icon,
-                                     @Query("password") String password);
+                                        @Query("gender") String gender,
+                                        @Query("telphone") String telphone,
+                                        @Query("address") String address,
+                                        @Query("icon") String icon,
+                                        @Query("password") String password);
 
     //发送验证码
     @GET("AppServicePost.aspx?CMD=SendCode")
     Flowable<BaseBean> getSendCode(@Query("telphone") String telphone,
                                    @Query("validName") String validName);
+
+    //个人信息
+    @GET("AppService.aspx?CMD=LoadInfo")
+    Flowable<PersonInfoModel> getPersonInfo(@Query("id") String id);
+
+    //用户登录
+    @GET("AppService.aspx?CMD=Login")
+    Flowable<BaseBean> getLogin(@Query("loginName") String loginName,
+                                @Query("password") String password);
 }

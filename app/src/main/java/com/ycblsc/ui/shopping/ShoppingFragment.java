@@ -77,8 +77,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
         mGoodsTypeAdapter = new CommonAdapter<ProuductTypeModel.ReturnDataBean>(aty, R.layout.item_goods_type, mGoodsTypes) {
             @Override
             protected void convert(ViewHolder holder, ProuductTypeModel.ReturnDataBean item, int position) {
-
-
                 LinearLayout lly_item = holder.getView(R.id.lly_item);
                 TextView tv_type = holder.getView(R.id.tv_type);
                 holder.setImageurl(R.id.img, item.getF_img(), 0);
@@ -181,6 +179,5 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
             mBinding.fbRoll.setImagesUrl(urls);
         }
     }
-
 
 }
