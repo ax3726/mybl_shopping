@@ -6,6 +6,7 @@ import com.ycblsc.model.home.HeadListModel;
 import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.model.home.ProuductTypeModel;
 import com.ycblsc.model.home.ShopInfoModel;
+import com.ycblsc.model.mine.MineRechargeModel;
 import com.ycblsc.model.mine.NotificationModel;
 import com.ycblsc.model.mine.PersonInfoModel;
 import com.ycblsc.model.shopping.ImageDataModel;
@@ -106,4 +107,7 @@ public interface ApiService {
     Flowable<NotificationModel> getPersonMessage(@Query("id") int id,
                                                  @Query("page") int page,
                                                  @Query("rows") int rows);
+    //充值规则
+    @GET("AppService.aspx?CMD=LoadMoneyOrder")
+    Flowable<MineRechargeModel> getMoneyOrder();
 }
