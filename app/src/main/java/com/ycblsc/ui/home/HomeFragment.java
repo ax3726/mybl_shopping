@@ -92,6 +92,12 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
                 showWaitDialog();
             }
         });
+        mBinding.imgMianfeianzhuang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(InstallEasyActivity.class);
+            }
+        });
     }
 
 

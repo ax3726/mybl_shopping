@@ -308,7 +308,7 @@ public abstract class BaseFragment<P extends BaseFragmentPresenter, B extends Vi
         @Override
         public void onError(Throwable e) {
             e.printStackTrace();
-            if (aty != null) {
+            if (aty == null) {
                 return;
             }
             hideWaitDialog();

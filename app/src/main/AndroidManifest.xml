@@ -29,7 +29,7 @@
 
         <activity
             android:name=".ui.main.MainActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.main.LoginActivity"
             android:screenOrientation="portrait">
@@ -46,7 +46,10 @@
         <activity
             android:name=".ui.mine.RechargeActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.main.RegisterActivity"></activity>
+        <activity android:name=".ui.main.RegisterActivity" />
+        <activity android:name=".ui.home.InstallEasyActivity"
+
+            ></activity>
     </application>
 
 </manifest>

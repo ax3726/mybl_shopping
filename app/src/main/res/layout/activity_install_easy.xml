@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/lly_boot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
+
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="100px"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="6px"
+                android:text="你可以直接打电话联系我们的工作人员，\n或填报希望安装便利架相关信息，\n蚁巢评估后会尽快为你服务！"
+                android:textColor="@color/color666666"
+                android:textSize="28px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6px"
+                android:text="便利架安装完全免费"
+                android:textColor="@color/colorA9092B"
+                android:textSize="32px" />
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+
+
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            android:layout_marginTop="80px"
+            android:background="@drawable/shape_layout_bg"
+            android:orientation="horizontal"
+            android:padding="20px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:padding="30px"
+                android:text="联\t系\n蚁\t巢"
+                android:textColor="@color/colorWhite"
+                android:textSize="40px"
+
+                />
+
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="客服电话"
+                    android:textColor="@color/color202020"
+                    android:textSize="30px" />
+
+                <TextView
+                    android:id="@+id/tv_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16px"
+                    android:text="xxxx"
+                    android:textColor="@color/color666666"
+                    android:textSize="30px" />
+
+
+            </com.zhy.autolayout.AutoLinearLayout>
+
+
+            <ImageView
+                android:id="@+id/img_phone"
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/install_phone" />
+        </com.zhy.autolayout.AutoLinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="40px"
+            android:text="或"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40px"
+            android:layout_marginBottom="40px"
+            />
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+
+            android:background="@drawable/shape_layout_bg"
+            android:orientation="horizontal"
+            android:padding="20px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:padding="30px"
+                android:text="信\t系\n填\t报"
+                android:textColor="@color/colorWhite"
+                android:textSize="40px"
+
+                />
+
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingLeft="10px"
+                android:paddingRight="10px">
+
+                <EditText
+                    android:id="@+id/et_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="4px"
+                    android:background="@drawable/shape_border_et"
+                    android:hint="希望安装便利架的详细地址"
+                    android:textSize="28px" />
+
+                <EditText
+                    android:id="@+id/et_name"
+                    android:layout_marginTop="10px"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_border_et"
+                    android:hint="你的姓名"
+                    android:paddingBottom="4px"
+                    android:textSize="28px" />
+
+                <EditText
+                    android:id="@+id/et_phont"
+                    android:layout_marginTop="10px"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_border_et"
+                    android:hint="你的联系电话"
+                    android:inputType="phone"
+                    android:paddingBottom="4px"
+                    android:textSize="28px" />
+
+            </com.zhy.autolayout.AutoLinearLayout>
+
+
+            <ImageView
+                android:id="@+id/img_submit"
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/install_submit" />
+        </com.zhy.autolayout.AutoLinearLayout>
+
+    </com.zhy.autolayout.AutoLinearLayout>
+</layout>

@@ -36,6 +36,14 @@ android {
     dataBinding {
         enabled = true
     }
+    lintOptions {
+        abortOnError false
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+        preDexLibraries = false
+    }
 }
 
 
@@ -46,6 +54,7 @@ dependencies {
     })
     //没有使用特殊Header，可以不加这行
     compile project(':library')
+    compile files('libs/core-3.0.0.jar')
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -61,5 +70,4 @@ dependencies {
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-alpha-12'
     compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4-alpha-12'
     testCompile 'junit:junit:4.12'
-    compile files('libs/core-3.0.0.jar')
 }

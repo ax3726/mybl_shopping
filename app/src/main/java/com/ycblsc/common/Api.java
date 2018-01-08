@@ -2,6 +2,7 @@ package com.ycblsc.common;
 
 
 import com.ycblsc.net.DownloadResponseBody;
+import com.ycblsc.net.GsonConverterFactory;
 import com.ycblsc.net.LoggerInterceptor;
 import com.ycblsc.utils.MD5;
 
@@ -15,7 +16,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -25,7 +25,7 @@ import retrofit2.CallAdapter;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
+
 
 /**
  * Created by Administrator on 2017/9/21.
@@ -78,7 +78,17 @@ public class Api {
                 .addInterceptor(chain -> {//添加公共信息
                     Request originalRequest = chain.request();
                     HashMap<String, String> rootMap = new HashMap<>();
-                    //get请求的封装
+                    //获取到请求地址api
+                    HttpUrl httpUrlurl = originalRequest.url();
+                    //通过请求地址(最初始的请求地址)获取到参数列表
+                    Set<String> parameterNames = httpUrlurl.queryParameterNames();
+                    for (String key : parameterNames) {  //循环参数列表
+                        if (!"CMD".equals(key))
+                            rootMap.put(key, httpUrlurl.queryParameter(key));
+
+                    }
+
+                    /*//get请求的封装
                     if (originalRequest.method().equals("GET")) {
                         //获取到请求地址api
                         HttpUrl httpUrlurl = originalRequest.url();
@@ -96,7 +106,7 @@ public class Api {
                                 rootMap.put(body.encodedName(i), body.encodedValue(i));
                             }
                         }
-                    }
+                    }*/
                     String timestamp = String.valueOf(System.currentTimeMillis() / 1000);
                     rootMap.put("appKey", "gzqnkj");
                     rootMap.put("_timestamp", timestamp);

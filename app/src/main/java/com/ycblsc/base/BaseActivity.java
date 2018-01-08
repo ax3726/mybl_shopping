@@ -305,7 +305,7 @@ public abstract class BaseActivity<P extends BasePresenter, B extends ViewDataBi
         @Override
         public void onError(Throwable e) {
             e.printStackTrace();
-            if (aty != null) {
+            if (aty == null) {
                 return;
             }
             hideWaitDialog();

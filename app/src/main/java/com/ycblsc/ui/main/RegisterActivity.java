@@ -1,46 +1,26 @@
 package com.ycblsc.ui.main;
 
-import android.content.Context;
 import android.graphics.Paint;
-import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.support.annotation.IdRes;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.widget.CompoundButton;
 import android.widget.PopupWindow;
 import android.widget.RadioGroup;
 
 import com.bumptech.glide.Glide;
 import com.ycblsc.R;
 import com.ycblsc.base.BaseActivity;
-import com.ycblsc.base.BasePresenter;
 import com.ycblsc.base.EmptyState;
-import com.ycblsc.databinding.ActivityRechargeLayoutBinding;
 import com.ycblsc.databinding.ActivityRegisterBinding;
 import com.ycblsc.model.BaseBean;
 import com.ycblsc.model.home.HeadListModel;
-import com.ycblsc.model.home.ProductListModel;
-import com.ycblsc.model.home.ProuductTypeModel;
 import com.ycblsc.prestener.main.MainPrestener;
-import com.ycblsc.prestener.mine.MinePrestener;
-import com.ycblsc.ui.common.PhotoActivity;
 import com.ycblsc.utils.UIUtil;
-import com.ycblsc.utils.URLEncoderURI;
 import com.ycblsc.view.IMainView;
 
-import java.io.File;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +28,6 @@ import java.util.List;
 import ml.gsy.com.library.adapters.recyclerview.CommonAdapter;
 import ml.gsy.com.library.adapters.recyclerview.MultiItemTypeAdapter;
 import ml.gsy.com.library.adapters.recyclerview.base.ViewHolder;
-import ml.gsy.com.library.utils.ScreenUtils;
 
 /*
 * 会员注册/登陆注册
@@ -153,14 +132,10 @@ public class RegisterActivity extends BaseActivity<MainPrestener, ActivityRegist
                 break;
             //确定注册
             case R.id.btn_determine:
+                niceName = mBinding.niceName.getText().toString().trim();
+                address = mBinding.etAddress.getText().toString().trim();
                 phone = mBinding.etPhone.getText().toString().trim();
                 code = mBinding.tvCode.getText().toString().trim();
-                try {
-                    niceName = URLDecoder.decode(mBinding.niceName.getText().toString().trim(), "UTF-8");
-                    address = URLDecoder.decode(mBinding.etAddress.getText().toString().trim(), "UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
                 ed_pwd = mBinding.edPwd.getText().toString().trim();
                 aginPwd = mBinding.edConfirmpwd.getText().toString().trim();
 
@@ -188,6 +163,16 @@ public class RegisterActivity extends BaseActivity<MainPrestener, ActivityRegist
                     showToast("两次密码输入不一致");
                     return;
                 }
+                try {
+
+                    niceName = URLEncoder.encode(niceName, "UTF-8");
+                    address = URLEncoder.encode(address, "UTF-8");
+
+
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+
                 mPresenter.getLoginRegiter(niceName, temp, phone, address, iconId, ed_pwd);
                 break;
         }
@@ -207,7 +192,20 @@ public class RegisterActivity extends BaseActivity<MainPrestener, ActivityRegist
     //会员注册
     @Override
     public void getLoginRegister(BaseBean baseBean) {
-        showToast("" + baseBean.getReturnMessage());
+        showToast("注册成功!");
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                try {
+                    sleep(1500);
+                    finish();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
     }
 
     @Override
@@ -234,7 +232,7 @@ public class RegisterActivity extends BaseActivity<MainPrestener, ActivityRegist
                 HeadListModel.ReturnDataBean headListModel = mHeadsList.get(position);
                 // mBinding.imgHead.setImageURI(Uri.parse(headListModel.getUrl()));
                 Glide.with(RegisterActivity.this).load(headListModel.getUrl()).into(mBinding.imgHead);
-                iconId = headListModel.getId();
+                iconId = headListModel.getUrl();
             }
 
             @Override
