@@ -70,7 +70,7 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
             }
         });
         initAdapter();
-        mPresenter.getShopInfo("18");
+      //  mPresenter.getShopInfo("18");
         mPresenter.getProductType();
 
     }

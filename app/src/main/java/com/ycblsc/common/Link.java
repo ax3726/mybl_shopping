@@ -6,7 +6,7 @@ package com.ycblsc.common;
 
 public class Link {
     public static final String SEREVE = "http://yichao.gzqnkj.com/WebService/";
-
-
+    //图片地址
+    public static final String DVLURL= "http://yichao.gzqnkj.com";
 
 }
