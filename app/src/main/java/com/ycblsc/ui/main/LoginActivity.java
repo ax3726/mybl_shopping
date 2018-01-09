@@ -1,11 +1,16 @@
 package com.ycblsc.ui.main;
 
+import android.text.TextUtils;
 import android.view.View;
 
 import com.ycblsc.R;
 import com.ycblsc.base.BaseActivity;
 import com.ycblsc.base.BasePresenter;
+import com.ycblsc.common.Api;
+import com.ycblsc.common.CacheService;
 import com.ycblsc.databinding.ActivityLoginBinding;
+import com.ycblsc.model.BaseBean;
+import com.ycblsc.model.UserModel;
 
 public class LoginActivity extends BaseActivity<BasePresenter, ActivityLoginBinding> implements View.OnClickListener {
 
@@ -49,13 +54,50 @@ public class LoginActivity extends BaseActivity<BasePresenter, ActivityLoginBind
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_login_in:
-                startActivity(MainActivity.class);
-                finish();
+                login();
                 break;
             case R.id.btn_login_youke:
                 startActivity(MainActivity.class);
                 finish();
                 break;
         }
+    }
+
+    private void login() {
+        String phone = mBinding.etPhone.getText().toString().trim();
+        String pwd = mBinding.etPassword.getText().toString().trim();
+        if (TextUtils.isEmpty(phone)) {
+            showToast("请输入手机号!");
+            return;
+        }
+        if (TextUtils.isEmpty(pwd)) {
+            showToast("请输入密码!");
+            return;
+        }
+
+        Api.getApi().getLogin(phone, pwd)
+                .compose(callbackOnIOToMainThread())
+                .subscribe(new BaseNetSubscriber<BaseBean>(true) {
+                    @Override
+                    public void onNext(BaseBean baseBean) {
+                        super.onNext(baseBean);
+                        CacheService.getIntance().setUser(new UserModel(String.valueOf(baseBean.getReturnData()), phone));//保存用户信息
+                        showToast("登录成功！");
+                        new Thread() {
+                            @Override
+                            public void run() {
+                                super.run();
+                                try {
+                                    sleep(1500);
+                                } catch (InterruptedException e) {
+                                }
+                                startActivity(MainActivity.class);
+                                finish();
+                            }
+                        }.start();
+
+                    }
+                });
+
     }
 }

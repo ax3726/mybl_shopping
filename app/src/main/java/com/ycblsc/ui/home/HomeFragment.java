@@ -219,6 +219,8 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
 
     @Override
     public void getShopInfo(ShopInfoModel model) {
-        mBinding.tvScanResult.setText(model.getReturnData().get(0).getS_weizhi());
+        if (model.getReturnData()!=null&&model.getReturnData().size()>0) {
+            mBinding.tvScanResult.setText(model.getReturnData().get(0).getS_weizhi());
+        }
     }
 }

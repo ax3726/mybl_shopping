@@ -232,7 +232,7 @@ public class RegisterActivity extends BaseActivity<MainPrestener, ActivityRegist
                 HeadListModel.ReturnDataBean headListModel = mHeadsList.get(position);
                 // mBinding.imgHead.setImageURI(Uri.parse(headListModel.getUrl()));
                 Glide.with(RegisterActivity.this).load(headListModel.getUrl()).into(mBinding.imgHead);
-                iconId = headListModel.getUrl();
+                iconId = headListModel.getId();
             }
 
             @Override

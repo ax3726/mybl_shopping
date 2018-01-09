@@ -1,21 +1,13 @@
 package com.ycblsc.ui.mine;
 
-import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
-import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.ycblsc.R;
 import com.ycblsc.base.BaseFragment;
-import com.ycblsc.base.BaseFragmentView;
-import com.ycblsc.base.EmptyState;
+import com.ycblsc.common.CacheService;
 import com.ycblsc.databinding.FragmentMineLayoutBinding;
-import com.ycblsc.model.BaseBean;
-import com.ycblsc.model.home.ProductListModel;
-import com.ycblsc.model.home.ProuductTypeModel;
 import com.ycblsc.model.mine.NotificationModel;
 import com.ycblsc.model.mine.PersonInfoModel;
 import com.ycblsc.model.shopping.ImageDataModel;
@@ -53,19 +45,12 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
     @Override
     protected void initData() {
         super.initData();
-        mStateModel.setEmptyState(EmptyState.PROGRESS);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mStateModel.setEmptyState(EmptyState.NORMAL);
-            }
-        }, 2000);
         initAdapter();
-        //   mPresenter.getLogin("13433607807", "123456cjs");//id=4
-        mPresenter.getPersonInfo(4);
         mPresenter.getImageData();//个人中心广告位
-        mPresenter.getPersonMessage(4, 1, 10);//个人通知信息
+        if (CacheService.getIntance().isLogin()) {
+            mPresenter.getPersonInfo(CacheService.getIntance().getUserId());
+            mPresenter.getPersonMessage(CacheService.getIntance().getUserId(), 1, 10);//个人通知信息
+        }
     }
 
     @Override
@@ -142,7 +127,7 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
         mMessageList.clear();
         if (model.getReturnData().size() > 0) {
             mMessageList.addAll(model.getReturnData());
-           // mPresenter.getPersonMessage(4,mPage,mRows);
+            // mPresenter.getPersonMessage(4,mPage,mRows);
         }
         mNoticfitionAdapter.notifyDataSetChanged();
     }
