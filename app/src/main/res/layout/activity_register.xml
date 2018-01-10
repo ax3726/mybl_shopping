@@ -18,6 +18,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20px"
                 android:orientation="horizontal"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:padding="30px">
 
                 <TextView
@@ -26,13 +28,14 @@
                     android:gravity="center_vertical"
                     android:text="*"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="42px" />
+                    android:textSize="36px" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20px"
                     android:gravity="center"
+                    android:textSize="36px"
                     android:text="手机号" />
 
                 <EditText
@@ -53,6 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20px"
+
                 android:orientation="horizontal"
                 android:padding="30px">
 
@@ -60,8 +64,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20px"
+                    android:layout_marginLeft="30px"
                     android:gravity="center"
+                    android:textSize="36px"
                     android:text="验证码" />
 
                 <EditText
@@ -81,6 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20px"
                     android:gravity="center"
+                    android:textSize="36px"
                     android:text="获取验证码"
                     android:textColor="@color/colorPrimary" />
             </com.zhy.autolayout.AutoLinearLayout>
@@ -96,7 +102,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="昵  称" />
+                    android:textSize="36px"
+                    android:text="昵   称" />
 
                 <com.zhy.autolayout.AutoLinearLayout
                     android:layout_width="wrap_content"
@@ -129,7 +136,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="密  码" />
+                    android:textSize="36px"
+                    android:text="密   码" />
 
                 <com.zhy.autolayout.AutoLinearLayout
                     android:layout_width="wrap_content"
@@ -162,6 +170,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:textSize="36px"
                     android:text="确认密码" />
 
                 <com.zhy.autolayout.AutoLinearLayout
@@ -195,6 +204,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="36px"
+                    android:layout_marginLeft="10px"
                     android:text="性别" />
 
                 <RadioGroup
@@ -208,12 +219,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
+                        android:textSize="36px"
                         android:text="帅哥" />
 
                     <RadioButton
                         android:id="@+id/femle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="36px"
                         android:text="美女" />
 
                 </RadioGroup>
@@ -231,6 +244,8 @@
                     android:id="@+id/img_head"
                     android:layout_width="160px"
                     android:layout_height="160px"
+                    android:layout_marginRight="10px"
+                    android:background="@drawable/shape_round_bg"
                     android:src="@drawable/ic_woman" />
 
                 <com.zhy.autolayout.AutoLinearLayout
@@ -243,6 +258,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10px"
+                        android:textSize="36px"
                         android:text="头像" />
 
                     <com.zhy.autolayout.AutoLinearLayout
@@ -256,8 +272,8 @@
                             android:id="@+id/img_dropdown"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="20px"
-                            android:background="@drawable/ic_drop_down"></ImageView>
+                            android:background="@drawable/ic_drop_down"
+                            android:padding="20px"></ImageView>
 
 
                     </com.zhy.autolayout.AutoLinearLayout>
@@ -273,6 +289,7 @@
                     android:layout_marginTop="30px"
                     android:drawableLeft="@drawable/ic_photograph"
                     android:drawablePadding="10px"
+                    android:textSize="36px"
                     android:gravity="center"
                     android:text="拍照上传" />
             </com.zhy.autolayout.AutoLinearLayout>
@@ -313,6 +330,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20px"
                     android:gravity="center"
+                    android:textSize="36px"
                     android:text="收货地址" />
 
                 <EditText
@@ -348,7 +366,7 @@
                     android:background="@drawable/shape_register_bg"
                     android:text="取消"
                     android:textColor="@color/colorWhite"
-                    android:textSize="34px" />
+                    android:textSize="36px" />
 
                 <Button
                     android:id="@+id/btn_determine"
@@ -358,7 +376,7 @@
                     android:background="@drawable/shape_login2_bg"
                     android:text="确定"
                     android:textColor="@color/colorWhite"
-                    android:textSize="34px" />
+                    android:textSize="36px" />
             </com.zhy.autolayout.AutoLinearLayout>
             <!--注册说明-->
             <com.zhy.autolayout.AutoLinearLayout
@@ -372,7 +390,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="100px"
                     android:text="注册说明:"
-                    android:textSize="36px" />
+                    android:textSize="30px" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -380,7 +398,7 @@
                     android:layout_marginLeft="100px"
                     android:layout_marginTop="20px"
                     android:text="赠送礼金将在您完成注册直接汇入您的会员账户"
-                    android:textSize="36px" />
+                    android:textSize="30px" />
             </com.zhy.autolayout.AutoLinearLayout>
         </com.zhy.autolayout.AutoLinearLayout>
     </android.support.v4.widget.NestedScrollView>

@@ -21,14 +21,13 @@
                 android:background="@color/colorWhite"
                 android:orientation="horizontal">
 
-                <!--ml.gsy.com.library.views.RoundImageView-->
-                <ml.gsy.com.library.views.RoundImageView
+                <ImageView
                     android:id="@+id/head_portrait"
                     android:layout_width="160px"
                     android:layout_height="160px"
                     android:layout_marginLeft="20px"
                     android:layout_marginTop="20px"
-                    android:padding="20px"
+                    android:background="@drawable/shape_round_bg"
                     android:src="@drawable/ic_woman" />
 
                 <com.zhy.autolayout.AutoLinearLayout
@@ -201,19 +200,19 @@
             </com.zhy.autolayout.AutoLinearLayout>
 
             <!--<com.scwang.smartrefresh.layout.SmartRefreshLayout-->
-                <!--android:id="@+id/srl_personinfo"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:background="@color/colorWhite">-->
+            <!--android:id="@+id/srl_personinfo"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@color/colorWhite">-->
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycview"
-                    android:layout_width="match_parent"
-                    android:layout_height="420px"
-                    android:background="@color/colorWhite"
-                    android:paddingTop="40px">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycview"
+                android:layout_width="match_parent"
+                android:layout_height="420px"
+                android:background="@color/colorWhite"
+                android:paddingTop="40px">
 
-                </android.support.v7.widget.RecyclerView>
+            </android.support.v7.widget.RecyclerView>
             <!--</com.scwang.smartrefresh.layout.SmartRefreshLayout>-->
             <!--便利架消费记录-->
             <com.zhy.autolayout.AutoRelativeLayout

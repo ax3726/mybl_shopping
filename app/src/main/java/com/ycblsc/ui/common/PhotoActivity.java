@@ -39,8 +39,6 @@ import ml.gsy.com.library.utils.runtimepermission.PermissionsResultAction;
  */
 public abstract class PhotoActivity extends BaseActivity {
 
-
-
     private int queue = -1;
 
     private int aspectX = 1, aspectY = 1;
