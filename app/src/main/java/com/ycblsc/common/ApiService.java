@@ -21,7 +21,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
-import retrofit2.http.PartMap;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Streaming;
@@ -76,10 +75,6 @@ public interface ApiService {
                                   @Part MultipartBody.Part file, @QueryMap HashMap<String, String> params);
 
 
-    //上传文件2
-    @Multipart
-    @POST("upload")
-    Flowable<ResponseBody> upload11(@PartMap HashMap<String, RequestBody> params);
 
 
     //下载文件
@@ -98,6 +93,25 @@ public interface ApiService {
                                         @Query("address") String address,
                                         @Query("icon") String icon,
                                         @Query("password") String password);
+
+
+  /*  //注册会员 上传图片
+    @Multipart
+    @POST("AppServicePost.aspx?CMD=Register")
+    Flowable<BaseBean> getLoginRegisterImage(@PartMap HashMap<String, RequestBody> params);*/
+ //注册会员 上传图片
+    @Multipart
+    @POST("AppServicePost.aspx?CMD=Register")
+    Flowable<BaseBean> getLoginRegisterImage(@Query("name") String name,
+                                             @Query("gender") String gender,
+                                             @Query("telphone") String telphone,
+                                             @Query("address") String address,
+                                             @Query("icon") String icon,
+                                             @Query("password") String password,
+                                             @Part MultipartBody.Part file);
+
+
+
 
     //发送验证码
     @GET("AppServicePost.aspx?CMD=SendCode")

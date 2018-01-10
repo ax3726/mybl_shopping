@@ -45,9 +45,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import ml.gsy.com.library.adapters.recyclerview.CommonAdapter;
@@ -76,6 +74,7 @@ public class RegisterActivity extends BaseActivity<MainPrestener, ActivityRegist
     private String iconUrl;
     private String iconId;
     String temp = "1";
+    private int mPhotoType = 1;//1 系统图片  2本地图片
 
     private int queue = -1;
 
@@ -229,7 +228,7 @@ public class RegisterActivity extends BaseActivity<MainPrestener, ActivityRegist
                     showToast("两次密码输入不一致");
                     return;
                 }
-                if (TextUtils.isEmpty(iconId)) {
+                if (TextUtils.isEmpty(iconId) && TextUtils.isEmpty(choosePicPath)) {
                     showToast("请选择要上传的头像");
                     return;
                 }
@@ -239,8 +238,12 @@ public class RegisterActivity extends BaseActivity<MainPrestener, ActivityRegist
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
+                if (mPhotoType == 2) {
+                    mPresenter.getLoginRegiterImage(niceName, temp, phone, address, choosePicPath, ed_pwd);
+                } else {
+                    mPresenter.getLoginRegiter(niceName, temp, phone, address, iconId, ed_pwd);
+                }
 
-                mPresenter.getLoginRegiter(niceName, temp, phone, address, iconId, ed_pwd);
                 break;
         }
 
@@ -254,7 +257,7 @@ public class RegisterActivity extends BaseActivity<MainPrestener, ActivityRegist
         if (headListModel.getReturnData().size() > 0) {
             mHeadsList.addAll(headListModel.getReturnData());
         }
-       //默认选择第一个
+        //默认选择第一个
         Glide.with(RegisterActivity.this).load(headListModel.getReturnData().get(0).getUrl()).into(mBinding.imgHead);
     }
 
@@ -476,6 +479,7 @@ public class RegisterActivity extends BaseActivity<MainPrestener, ActivityRegist
                                 //  photoSuccess(choosePicPath, myCaptureFile, queue);
                                 delTempPic(temppic + temppicname);
                                 delTempPic(returnpicpath);
+                                mPhotoType = 2;
                                 mBinding.imgHead.setImageURI(Uri.parse(choosePicPath));
                             } catch (FileNotFoundException e) {
                                 e.printStackTrace();
@@ -504,6 +508,7 @@ public class RegisterActivity extends BaseActivity<MainPrestener, ActivityRegist
             }
         }
     }
+
     /**
      * 存储的临时的图片 用完进行删除
      **/

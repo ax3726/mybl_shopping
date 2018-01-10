@@ -7,7 +7,6 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.databinding.ViewDataBinding;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -20,7 +19,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.ycblsc.base.BaseActivity;
-import com.ycblsc.base.BasePresenter;
 import com.ycblsc.common.MyApplication;
 
 import java.io.BufferedOutputStream;
@@ -40,6 +38,8 @@ import ml.gsy.com.library.utils.runtimepermission.PermissionsResultAction;
  * 内置拍照或者选择照片的Activity
  */
 public abstract class PhotoActivity extends BaseActivity {
+
+
 
     private int queue = -1;
 

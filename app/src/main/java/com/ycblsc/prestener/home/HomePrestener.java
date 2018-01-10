@@ -84,12 +84,12 @@ public class HomePrestener extends BaseFragmentPresenter<IHomeView> {
             }
         });
 
-        Api.getApi().upload11(maps).compose(callbackOnIOToMainThread()).subscribe(new BaseNetSubscriber<ResponseBody>() {
+      /*  Api.getApi().getLoginRegisterImage(maps).compose(callbackOnIOToMainThread()).subscribe(new BaseNetSubscriber<ResponseBody>() {
             @Override
             public void onNext(ResponseBody responseBody) {
                 super.onNext(responseBody);
             }
-        });
+        });*/
 
     }
 
@@ -109,8 +109,6 @@ public class HomePrestener extends BaseFragmentPresenter<IHomeView> {
 
             }
         });
-
-
         // MultipartBody.Part  和后端约定好Key，这里的partName是用image
         MultipartBody.Part body =
                 MultipartBody.Part.createFormData("image", file.getName(), fileRequestBody);
