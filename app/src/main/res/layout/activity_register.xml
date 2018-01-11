@@ -50,7 +50,7 @@
                     android:inputType="phone"
                     android:maxLength="11"
                     android:paddingLeft="20px"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorBlack"
                     android:textSize="30px" />
             </com.zhy.autolayout.AutoLinearLayout>
             <!--验证码-->
