@@ -140,14 +140,13 @@ public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegis
         mBinding.tvCode.getPaint().setAntiAlias(true);//抗锯齿
     }
 
-    boolean b = false;
+    boolean b = true;
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             //弹出列表
             case R.id.lin_dropdow:
-                //initValue();
                 if (b) {
                     mBinding.linSeclect.setVisibility(View.GONE);
                     b = false;
