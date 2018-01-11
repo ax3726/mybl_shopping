@@ -138,6 +138,7 @@ public class RoundImageView extends ImageView {
         Bitmap localBitmap = Bitmap.createBitmap(width, height, localConfig);
         Canvas localCanvas = new Canvas(localBitmap);
         Paint localPaint = new Paint();
+        localPaint.setAntiAlias(true);
         final int padding = mBorderWidth - 3;
         /**
          * 设置椭圆的大小(因为椭圆的最外边会和border的最外边重合的，如果图片最外边的颜色很深，有看出有棱边的效果，所以为了让体验更加好，
