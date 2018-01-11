@@ -7,6 +7,7 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.databinding.ViewDataBinding;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -19,6 +20,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.ycblsc.base.BaseActivity;
+import com.ycblsc.base.BasePresenter;
 import com.ycblsc.common.MyApplication;
 
 import java.io.BufferedOutputStream;
@@ -37,9 +39,7 @@ import ml.gsy.com.library.utils.runtimepermission.PermissionsResultAction;
  * Created by It_young on 15/4/8.
  * 内置拍照或者选择照片的Activity
  */
-public abstract class PhotoActivity extends BaseActivity {
-
-
+public abstract class PhotoActivity<P extends BasePresenter, B extends ViewDataBinding> extends BaseActivity<P, B> {
 
     private int queue = -1;
 
@@ -318,8 +318,11 @@ public abstract class PhotoActivity extends BaseActivity {
         intent.putExtra("aspectX", getAspectX());
         intent.putExtra("aspectY", getAspectY());
         // outputX outputY 是裁剪图片宽高
-        intent.putExtra("outputX", getOutputX());
-        intent.putExtra("outputY", getOutputY());
+     /*   intent.putExtra("outputX", getOutputX());
+        intent.putExtra("outputY", getOutputY());*/
+
+        intent.putExtra("scale",true);
+        intent.putExtra("scaleUpIfNeeded", true);
         File tempFile = new File(returnpicpath);
         intent.putExtra("output", Uri.fromFile(tempFile));// 保存到原文件
         intent.putExtra("outputFormat", "JPEG");// 返回格式
@@ -334,17 +337,14 @@ public abstract class PhotoActivity extends BaseActivity {
                 case 1://拍照
                     Log.e("onActivityResult", temppic + temppicname);
                     File temp = new File(temppic + temppicname);
-                    Uri uri = Uri.fromFile(temp);
                     startPhotoZoom(Uri.fromFile(temp));
                     break;
                 case 2://选择照片
-                    outputX = 200;
-                    outputY = 200;
+                 outputX = 400;
+                    outputY = 400;
                     startPhotoZoom(data.getData());
                     break;
                 case 3://裁剪过后
-
-
                     if (data != null) {
                         Bitmap image = BitmapFactory.decodeFile(returnpicpath);
                         if (image != null) {

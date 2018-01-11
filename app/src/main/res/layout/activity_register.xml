@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -227,11 +228,15 @@
                 android:layout_marginLeft="60px"
                 android:orientation="horizontal">
 
-                <ImageView
+                <ml.gsy.com.library.views.RoundImageView
                     android:id="@+id/img_head"
                     android:layout_width="160px"
                     android:layout_height="160px"
-                    android:src="@drawable/ic_woman" />
+
+                    android:scaleType="centerCrop" android:src="@drawable/ic_woman"
+                    app:border_color="@color/colorWhite"
+                    app:border_width="4px" />
+
 
                 <com.zhy.autolayout.AutoLinearLayout
                     android:layout_width="wrap_content"
