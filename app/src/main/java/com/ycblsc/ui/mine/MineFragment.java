@@ -60,6 +60,8 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
         mBinding.imgRegister.setOnClickListener(this);
         //充值有礼
         mBinding.imgRecharge.setOnClickListener(this);
+        //消费记录
+        mBinding.relarRecord.setOnClickListener(this);
 
     }
 
@@ -73,6 +75,10 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
             //充值
             case R.id.img_recharge:
                 startActivity(RechargeActivity.class);
+                break;
+            //消费记录
+            case R.id.relar_Record:
+                startActivity(ConsumptionActivity.class);
                 break;
         }
     }

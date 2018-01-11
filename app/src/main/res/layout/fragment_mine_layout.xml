@@ -216,6 +216,7 @@
             <!--</com.scwang.smartrefresh.layout.SmartRefreshLayout>-->
             <!--便利架消费记录-->
             <com.zhy.autolayout.AutoRelativeLayout
+                android:id="@+id/relar_Record"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10px"
