@@ -59,9 +59,8 @@
             android:name=".ui.mine.RechargeActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".ui.main.RegisterActivity" />
-        <activity android:name=".ui.home.InstallEasyActivity"
-
-            ></activity>
+        <activity android:name=".ui.home.InstallEasyActivity"></activity>
+        <activity android:name=".ui.mine.ConsumptionActivity"></activity>
     </application>
 
 </manifest>

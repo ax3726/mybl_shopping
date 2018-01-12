@@ -18,9 +18,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20px"
-                android:orientation="horizontal"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
+                android:orientation="horizontal"
                 android:padding="30px">
 
                 <TextView
@@ -28,28 +28,29 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:text="*"
+                    android:layout_marginLeft="20px"
                     android:textColor="@color/colorPrimary"
                     android:textSize="36px" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20px"
+                    android:layout_marginLeft="10px"
                     android:gravity="center"
-                    android:textSize="36px"
-                    android:text="手机号" />
+                    android:text="手机号 "
+                    android:textSize="36px" />
 
                 <EditText
                     android:id="@+id/et_phone"
                     android:layout_width="400px"
                     android:layout_height="60px"
-                    android:layout_marginLeft="20px"
-                    android:background="@drawable/shape_recharge_bg"
+                    android:layout_marginLeft="40px"
+                    android:background="@drawable/shape_register_btn"
                     android:hint="请输入手机号"
                     android:inputType="phone"
                     android:maxLength="11"
                     android:paddingLeft="20px"
-                    android:textColor="@color/color202020"
+                    android:textColor="@color/colorBlack"
                     android:textSize="30px" />
             </com.zhy.autolayout.AutoLinearLayout>
             <!--验证码-->
@@ -57,28 +58,37 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20px"
-
                 android:orientation="horizontal"
                 android:padding="30px">
-
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30px"
+                    android:gravity="center_vertical"
+                    android:text="*"
+                    android:layout_marginLeft="15px"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="42px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10px"
                     android:gravity="center"
-                    android:textSize="36px"
-                    android:text="验证码" />
+                    android:text="验证码 "
+                    android:textSize="36px" />
 
                 <EditText
                     android:id="@+id/ed_verification"
                     android:layout_width="170px"
                     android:layout_height="60px"
-                    android:layout_marginLeft="20px"
-                    android:background="@drawable/shape_recharge_bg"
+                    android:layout_marginLeft="40px"
+                    android:background="@drawable/shape_register_btn"
                     android:inputType="number"
+                    android:hint="验证码"
+                    android:maxLength="11"
                     android:paddingLeft="20px"
-                    android:textColor="@color/color202020"
+                    android:textColor="@color/colorBlack"
                     android:textSize="30px" />
 
                 <TextView
@@ -87,24 +97,33 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20px"
                     android:gravity="center"
-                    android:textSize="36px"
                     android:text="获取验证码"
-                    android:textColor="@color/colorPrimary" />
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="36px" />
             </com.zhy.autolayout.AutoLinearLayout>
             <!--昵称-->
             <com.zhy.autolayout.AutoLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="55px"
+                android:layout_marginLeft="35px"
                 android:orientation="horizontal"
                 android:padding="30px">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="*"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="42px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textSize="36px"
-                    android:text="昵   称" />
+                    android:layout_marginLeft="10px"
+                    android:text="昵     称"
+                    android:textSize="36px" />
 
                 <com.zhy.autolayout.AutoLinearLayout
                     android:layout_width="wrap_content"
@@ -116,11 +135,11 @@
                         android:id="@+id/niceName"
                         android:layout_width="300px"
                         android:layout_height="60px"
-                        android:layout_marginLeft="20px"
-                        android:background="@drawable/shape_recharge_bg"
+                        android:layout_marginLeft="40px"
+                        android:background="@drawable/shape_register_btn"
                         android:hint="展示你酷酷的个性吧"
                         android:paddingLeft="20px"
-                        android:textColor="@color/color202020"
+                        android:textColor="@color/colorBlack"
                         android:textSize="30px" />
                 </com.zhy.autolayout.AutoLinearLayout>
             </com.zhy.autolayout.AutoLinearLayout>
@@ -129,32 +148,40 @@
             <com.zhy.autolayout.AutoLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="55px"
+                android:layout_marginLeft="35px"
                 android:orientation="horizontal"
                 android:padding="30px">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="*"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="42px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textSize="36px"
-                    android:text="密   码" />
+                    android:text="密     码"
+                    android:layout_marginLeft="10px"
+                    android:textSize="36px" />
 
                 <com.zhy.autolayout.AutoLinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-
                     <EditText
                         android:id="@+id/ed_pwd"
                         android:layout_width="300px"
                         android:layout_height="60px"
-                        android:layout_marginLeft="20px"
-                        android:background="@drawable/shape_recharge_bg"
+                        android:layout_marginLeft="40px"
+                        android:background="@drawable/shape_register_btn"
                         android:hint="请输入密码"
                         android:paddingLeft="20px"
-                        android:textColor="@color/color202020"
+                        android:textColor="@color/colorBlack"
                         android:textSize="30px" />
                 </com.zhy.autolayout.AutoLinearLayout>
             </com.zhy.autolayout.AutoLinearLayout>
@@ -163,16 +190,25 @@
             <com.zhy.autolayout.AutoLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="55px"
+                android:layout_marginLeft="33px"
                 android:orientation="horizontal"
                 android:padding="30px">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="*"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="42px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textSize="36px"
-                    android:text="确认密码" />
+                    android:text="确认密码"
+                    android:layout_marginLeft="10px"
+                    android:textSize="36px" />
 
                 <com.zhy.autolayout.AutoLinearLayout
                     android:layout_width="wrap_content"
@@ -184,11 +220,11 @@
                         android:id="@+id/ed_confirmpwd"
                         android:layout_width="300px"
                         android:layout_height="60px"
-                        android:layout_marginLeft="20px"
-                        android:background="@drawable/shape_recharge_bg"
+                        android:layout_marginLeft="15px"
+                        android:background="@drawable/shape_register_btn"
                         android:hint="请再次输入密码"
                         android:paddingLeft="20px"
-                        android:textColor="@color/color202020"
+                        android:textColor="@color/colorBlack"
                         android:textSize="30px" />
                 </com.zhy.autolayout.AutoLinearLayout>
             </com.zhy.autolayout.AutoLinearLayout>
@@ -205,9 +241,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="36px"
                     android:layout_marginLeft="10px"
-                    android:text="性别" />
+                    android:text="性别"
+                    android:textSize="36px" />
 
                 <RadioGroup
                     android:id="@+id/sex"
@@ -220,15 +256,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
-                        android:textSize="36px"
-                        android:text="帅哥" />
+                        android:text="帅哥"
+                        android:textSize="36px" />
 
                     <RadioButton
                         android:id="@+id/femle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="36px"
-                        android:text="美女" />
+                        android:text="美女"
+                        android:textSize="36px" />
 
                 </RadioGroup>
 
@@ -245,6 +281,9 @@
                     android:id="@+id/img_head"
                     android:layout_width="160px"
                     android:layout_height="160px"
+                    android:layout_marginLeft="20px"
+                    android:layout_marginRight="20px"
+                    android:layout_marginTop="20px"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_woman"
                     app:border_color="@color/colorPrimary"
@@ -262,8 +301,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10px"
-                        android:textSize="36px"
-                        android:text="头像" />
+                        android:text="头像"
+                        android:textSize="36px" />
 
                     <com.zhy.autolayout.AutoLinearLayout
                         android:id="@+id/lin_dropdow"
@@ -293,9 +332,9 @@
                     android:layout_marginTop="30px"
                     android:drawableLeft="@drawable/ic_photograph"
                     android:drawablePadding="10px"
-                    android:textSize="36px"
                     android:gravity="center"
-                    android:text="拍照上传" />
+                    android:text="拍照上传"
+                    android:textSize="36px" />
             </com.zhy.autolayout.AutoLinearLayout>
 
             <com.zhy.autolayout.AutoLinearLayout
@@ -321,21 +360,14 @@
                 android:orientation="horizontal"
                 android:padding="30px">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:text="*"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="42px" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20px"
                     android:gravity="center"
-                    android:textSize="36px"
-                    android:text="收货地址" />
+                    android:text="收货地址"
+                    android:textSize="36px" />
 
                 <EditText
                     android:id="@+id/et_address"
