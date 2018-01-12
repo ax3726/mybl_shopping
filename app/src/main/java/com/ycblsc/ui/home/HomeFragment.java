@@ -3,6 +3,7 @@ package com.ycblsc.ui.home;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.model.home.ProuductTypeModel;
 import com.ycblsc.model.home.ShopInfoModel;
 import com.ycblsc.prestener.home.HomePrestener;
+import com.ycblsc.ui.main.MainActivity;
 import com.ycblsc.view.IHomeView;
 import com.ycblsc.widget.zxing.android.CaptureActivity;
 
@@ -144,6 +146,16 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
                 holder.setText(R.id.tv_des, item.getJianjie());
                 holder.setText(R.id.tv_price, "¥" + item.getS_price());
 
+                ImageView img_shopping = holder.getView(R.id.img_shopping);
+                img_shopping.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (aty!=null) {
+                            ((MainActivity)aty).addCart(img_shopping);
+                        }
+
+                    }
+                });
             }
         };
         mBinding.rcGoodsList.setLayoutManager(new LinearLayoutManager(aty));
@@ -223,4 +235,5 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
             mBinding.tvScanResult.setText(model.getReturnData().get(0).getS_weizhi());
         }
     }
+
 }

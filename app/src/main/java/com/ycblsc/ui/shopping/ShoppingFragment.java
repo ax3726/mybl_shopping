@@ -2,6 +2,7 @@ package com.ycblsc.ui.shopping;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.model.home.ProuductTypeModel;
 import com.ycblsc.model.shopping.ImageDataModel;
 import com.ycblsc.prestener.shopping.ShoppingPrestener;
+import com.ycblsc.ui.main.MainActivity;
 import com.ycblsc.view.IShoppingView;
 
 import java.util.ArrayList;
@@ -113,7 +115,16 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
                 holder.setText(R.id.tv_title, item.getS_products());
                 holder.setText(R.id.tv_des, item.getJianjie());
                 holder.setText(R.id.tv_price, "¥" + item.getS_price());
+                ImageView img_shopping = holder.getView(R.id.img_shopping);
+                img_shopping.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (aty!=null) {
+                            ((MainActivity)aty).addCart(img_shopping);
+                        }
 
+                    }
+                });
             }
         };
         mBinding.rcGoodsList.setLayoutManager(new LinearLayoutManager(aty));

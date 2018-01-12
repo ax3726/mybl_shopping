@@ -247,6 +247,8 @@
                     android:layout_height="160px"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_woman"
+                    app:border_color="@color/colorPrimary"
+                    app:border_width="3px"
                    />
 
 

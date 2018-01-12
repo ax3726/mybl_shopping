@@ -54,42 +54,7 @@ public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegis
     String temp = "1";
     private int mPhotoType = 1;//1 系统图片  2本地图片
     private String mPhotoPath = "";//本地图片路径
-    private int queue = -1;
 
-    private int aspectX = 1, aspectY = 1;
-    private int outputX = 800, outputY = 800;
-
-    public int getAspectX() {
-        return aspectX;
-    }
-
-    public void setAspectX(int aspectX) {
-        this.aspectX = aspectX;
-    }
-
-    public int getAspectY() {
-        return aspectY;
-    }
-
-    public void setAspectY(int aspectY) {
-        this.aspectY = aspectY;
-    }
-
-    public int getOutputX() {
-        return outputX;
-    }
-
-    public void setOutputX(int outputX) {
-        this.outputX = outputX;
-    }
-
-    public int getOutputY() {
-        return outputY;
-    }
-
-    public void setOutputY(int outputY) {
-        this.outputY = outputY;
-    }
 
     @Override
     protected void initTitleBar() {

@@ -21,14 +21,17 @@
                 android:background="@color/colorWhite"
                 android:orientation="horizontal">
 
-                <ImageView
+                <ml.gsy.com.library.views.RoundImageView
                     android:id="@+id/head_portrait"
                     android:layout_width="160px"
                     android:layout_height="160px"
                     android:layout_marginLeft="20px"
                     android:layout_marginTop="20px"
-                    android:background="@drawable/shape_round_bg"
+                    app:border_color="@color/colorPrimary"
+                    app:border_width="3px"
                     android:src="@drawable/ic_woman" />
+                <!--   android:background="@drawable/shape_round_bg"-->
+
 
                 <com.zhy.autolayout.AutoLinearLayout
                     android:layout_width="wrap_content"

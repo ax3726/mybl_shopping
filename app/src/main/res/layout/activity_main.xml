@@ -3,89 +3,94 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <com.zhy.autolayout.AutoLinearLayout
-        android:id="@+id/lly_main"
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:id="@+id/rly_boot"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-
-        <com.zhy.autolayout.AutoFrameLayout
-            android:id="@+id/fly_contain"
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/lly_main"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/colorcccccc" />
+            <com.zhy.autolayout.AutoFrameLayout
+                android:id="@+id/fly_contain"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/colorcccccc" />
 
-        <RadioGroup
-            android:id="@+id/rg_buttom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorA9092B"
-            android:orientation="horizontal"
-            android:paddingBottom="10px"
-            android:paddingTop="10px">
-
-            <RadioButton
-                android:id="@+id/rb_home"
-                android:layout_width="0dp"
+            <RadioGroup
+                android:id="@+id/rg_buttom"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:button="@null"
-                android:checked="true"
-                android:drawablePadding="4dp"
-                android:drawableTop="@drawable/selector_home"
-                android:gravity="center"
-                android:text="便利架"
-                android:textColor="@color/selector_foot_color"
-                android:textSize="28px" />
+                android:background="@color/colorA9092B"
+                android:orientation="horizontal"
+                android:paddingBottom="10px"
+                android:paddingTop="10px">
+
+                <RadioButton
+                    android:id="@+id/rb_home"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:checked="true"
+                    android:drawablePadding="4dp"
+                    android:drawableTop="@drawable/selector_home"
+                    android:gravity="center"
+                    android:text="便利架"
+                    android:textColor="@color/selector_foot_color"
+                    android:textSize="28px" />
 
 
-            <RadioButton
-                android:id="@+id/rb_shopping"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:button="@null"
-                android:drawablePadding="4dp"
-                android:drawableTop="@drawable/selector_shopping"
-                android:gravity="center"
-                android:text="商城"
-                android:textColor="@color/selector_foot_color"
-                android:textSize="28px" />
+                <RadioButton
+                    android:id="@+id/rb_shopping"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawablePadding="4dp"
+                    android:drawableTop="@drawable/selector_shopping"
+                    android:gravity="center"
+                    android:text="商城"
+                    android:textColor="@color/selector_foot_color"
+                    android:textSize="28px" />
 
-            <RadioButton
-                android:id="@+id/rb_buy_cart"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:button="@null"
-                android:drawablePadding="4dp"
-                android:drawableTop="@drawable/selector_buy_cart"
-                android:gravity="center"
-                android:text="购物车"
-                android:textColor="@color/selector_foot_color"
-                android:textSize="28px" />
+                <RadioButton
+                    android:id="@+id/rb_buy_cart"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawablePadding="4dp"
+                    android:drawableTop="@drawable/selector_buy_cart"
+                    android:gravity="center"
+                    android:text="购物车"
+                    android:textColor="@color/selector_foot_color"
+                    android:textSize="28px" />
 
-            <RadioButton
-                android:id="@+id/rb_mine"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:button="@null"
-                android:drawablePadding="4dp"
-                android:drawableTop="@drawable/selector_mine"
-                android:gravity="center"
-                android:text="我的"
-                android:textColor="@color/selector_foot_color"
-                android:textSize="28px" />
+                <RadioButton
+                    android:id="@+id/rb_mine"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawablePadding="4dp"
+                    android:drawableTop="@drawable/selector_mine"
+                    android:gravity="center"
+                    android:text="我的"
+                    android:textColor="@color/selector_foot_color"
+                    android:textSize="28px" />
 
-        </RadioGroup>
+            </RadioGroup>
 
-    </com.zhy.autolayout.AutoLinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
+
+    </com.zhy.autolayout.AutoRelativeLayout>
 </layout>
