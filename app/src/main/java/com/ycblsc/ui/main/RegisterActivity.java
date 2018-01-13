@@ -296,6 +296,7 @@ public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegis
         };
         mBinding.imgRecycview.setLayoutManager(new GridLayoutManager(aty, 3));
         mBinding.imgRecycview.setAdapter(mHeadsAdapter);
+        mBinding.imgRecycview.setNestedScrollingEnabled(false);
         mHeadsAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {

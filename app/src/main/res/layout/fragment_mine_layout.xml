@@ -21,17 +21,14 @@
                 android:background="@color/colorWhite"
                 android:orientation="horizontal">
 
-                <ml.gsy.com.library.views.RoundImageView
+                <ImageView
                     android:id="@+id/head_portrait"
                     android:layout_width="160px"
                     android:layout_height="160px"
                     android:layout_marginLeft="20px"
                     android:layout_marginTop="20px"
-                    app:border_color="@color/colorPrimary"
-                    app:border_width="3px"
+                    android:background="@drawable/shape_round_bg"
                     android:src="@drawable/ic_woman" />
-                <!--   android:background="@drawable/shape_round_bg"-->
-
 
                 <com.zhy.autolayout.AutoLinearLayout
                     android:layout_width="wrap_content"
@@ -149,6 +146,7 @@
                         android:textSize="30px" />
 
                     <TextView
+                        android:id="@+id/tv_address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="40px"
@@ -161,17 +159,18 @@
             </com.zhy.autolayout.AutoLinearLayout>
             <!--个人设置-->
             <com.zhy.autolayout.AutoRelativeLayout
+                android:id="@+id/lin_setting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorWhite"
                 android:orientation="vertical"
-                android:paddingBottom="40px"
+                android:paddingBottom="20px"
                 android:paddingTop="20px">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40px"
+                    android:layout_marginLeft="30px"
                     android:drawableLeft="@drawable/ic_set_up"
                     android:drawablePadding="10px"
                     android:gravity="center"

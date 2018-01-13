@@ -60,8 +60,7 @@ public interface ApiService {
 
     @POST("AppServicePost.aspx?CMD=Message")
         //获取信息填报
-    Flowable<BaseBean> addMessage(@Query("n_Contact") String n_Contact,@Query("n_Name") String n_Name,@Query("n_Note") String n_Note);
-
+    Flowable<BaseBean> addMessage(@Query("n_Contact") String n_Contact, @Query("n_Name") String n_Name, @Query("n_Note") String n_Note);
 
 
     @GET("AppService.aspx?CMD=LoadData")
@@ -74,8 +73,6 @@ public interface ApiService {
     @POST("upload")
     Flowable<ResponseBody> upload(@Part("description") RequestBody description,
                                   @Part MultipartBody.Part file, @QueryMap HashMap<String, String> params);
-
-
 
 
     //下载文件
@@ -96,11 +93,11 @@ public interface ApiService {
                                         @Query("password") String password);
 
 
-  /*  //注册会员 上传图片
-    @Multipart
-    @POST("AppServicePost.aspx?CMD=Register")
-    Flowable<BaseBean> getLoginRegisterImage(@PartMap HashMap<String, RequestBody> params);*/
- //注册会员 上传图片
+    /*  //注册会员 上传图片
+      @Multipart
+      @POST("AppServicePost.aspx?CMD=Register")
+      Flowable<BaseBean> getLoginRegisterImage(@PartMap HashMap<String, RequestBody> params);*/
+    //注册会员 上传图片
     @Multipart
     @POST("AppServicePost.aspx?CMD=Register")
     Flowable<BaseBean> getLoginRegisterImage(@Query("name") String name,
@@ -110,8 +107,6 @@ public interface ApiService {
                                              @Query("icon") String icon,
                                              @Query("password") String password,
                                              @Part MultipartBody.Part file);
-
-
 
 
     //发送验证码
@@ -133,9 +128,11 @@ public interface ApiService {
     Flowable<NotificationModel> getPersonMessage(@Query("id") String id,
                                                  @Query("page") int page,
                                                  @Query("rows") int rows);
+
     //充值规则
     @GET("AppService.aspx?CMD=LoadMoneyOrder")
     Flowable<MineRechargeModel> getMoneyOrder();
+
     //消费记录
     @GET("AppService.aspx?CMD=LoadOrderList")
     Flowable<ConsumptionModel> getConsumptionOrderList(@Query("id") String id,

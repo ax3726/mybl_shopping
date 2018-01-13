@@ -1,8 +1,10 @@
 package com.ycblsc.ui.mine;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -12,7 +14,9 @@ import com.ycblsc.base.BaseActivity;
 import com.ycblsc.base.EmptyState;
 import com.ycblsc.databinding.ActivityRechargeLayoutBinding;
 import com.ycblsc.model.mine.MineRechargeModel;
+import com.ycblsc.model.shopping.ImageDataModel;
 import com.ycblsc.prestener.main.RechargePrestener;
+import com.ycblsc.ui.common.WebViewActivity;
 import com.ycblsc.view.IRechargeView;
 
 import java.util.ArrayList;
@@ -30,6 +34,7 @@ import ml.gsy.com.library.adapters.recyclerview.base.ViewHolder;
 public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRechargeLayoutBinding> implements IRechargeView, View.OnClickListener {
     private CommonAdapter<MineRechargeModel.ReturnDataBean> mRechargeAdapter;//会员充值
     private List<MineRechargeModel.ReturnDataBean> mRechargeTypes = new ArrayList<>();
+    private String url;
 
     @Override
     protected void initTitleBar() {
@@ -50,12 +55,18 @@ public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRe
     @Override
     protected void initEvent() {
         super.initEvent();
+        mBinding.tvRecharge.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View view) {
-
+        switch (view.getId()) {
+            //充值协议
+            case R.id.tv_Recharge:
+                startActivity(new Intent(this, RechargeProtocolActivity.class));
+                break;
+        }
     }
 
     @Override
@@ -69,8 +80,10 @@ public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRe
                 mStateModel.setEmptyState(EmptyState.NORMAL);
             }
         }, 2000);
+        //充值规则
         mPresenter.getMoneyOrder();
-
+        //充值协议/说明
+        mPresenter.getImageData("51");
         initAdapter();
     }
 
@@ -83,7 +96,7 @@ public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRe
                 TextView tv_mony = holder.getView(R.id.tv_moeny);
                 TextView tv_coupon = holder.getView(R.id.tv_coupon);
                 tv_mony.setText(item.getTf_Money() + "元");
-                tv_coupon.setText("送"+item.getZengsong()+"元劵");
+                tv_coupon.setText("送" + item.getZengsong() + "元劵");
                 if (!item.isState()) {
                     lly_item.setBackgroundResource(R.drawable.shape_recharge_bg);
                 } else {
@@ -97,7 +110,7 @@ public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRe
         mRechargeAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
-                for (int i = 0;i<mRechargeTypes.size();i++){
+                for (int i = 0; i < mRechargeTypes.size(); i++) {
                     mRechargeTypes.get(i).setState(position == i);
                 }
                 mRechargeAdapter.notifyDataSetChanged();
@@ -117,5 +130,12 @@ public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRe
             mRechargeTypes.addAll(typeModel.getReturnData());
         }
         mRechargeAdapter.notifyDataSetChanged();
+    }
+
+    //充值协议
+    @Override
+    public void getImageData(ImageDataModel headListModel) {
+        url = headListModel.getReturnData().get(0).getI_Content();
+        mBinding.tvContent.setText(Html.fromHtml(url));
     }
 }

@@ -62,7 +62,8 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
         mBinding.imgRecharge.setOnClickListener(this);
         //消费记录
         mBinding.relarRecord.setOnClickListener(this);
-
+       //个人设置
+        mBinding.linSetting.setOnClickListener(this);
     }
 
     @Override
@@ -80,6 +81,10 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
             case R.id.relar_Record:
                 startActivity(ConsumptionActivity.class);
                 break;
+            //个人设置
+            case R.id.lin_setting:
+                startActivity(PersonalSettingActivity.class);
+                break;
         }
     }
 
@@ -93,6 +98,7 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
         };
         mBinding.recycview.setLayoutManager(new LinearLayoutManager(aty));
         mBinding.recycview.setAdapter(mNoticfitionAdapter);
+        mBinding.recycview.setNestedScrollingEnabled(false);
 //        mBinding.srlPersoninfo.setNestedScrollingEnabled(false);
 //        mBinding.srlPersoninfo.setEnableRefresh(false);
 //        mBinding.srlPersoninfo.setRefreshFooter(new ClassicsFooter(aty));//设置 Footer 样式

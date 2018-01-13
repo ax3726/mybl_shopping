@@ -5,6 +5,7 @@ import com.ycblsc.common.Api;
 import com.ycblsc.model.BaseBean;
 import com.ycblsc.model.home.HeadListModel;
 import com.ycblsc.model.mine.MineRechargeModel;
+import com.ycblsc.model.shopping.ImageDataModel;
 import com.ycblsc.view.IMainView;
 import com.ycblsc.view.IRechargeView;
 
@@ -26,6 +27,17 @@ public class RechargePrestener extends BasePresenter<IRechargeView> {
                     }
          });
     }
-
+    //充值协议50 /说明 51
+    public void getImageData(String id) {
+        Api.getApi().getImageData(id)
+                .compose(callbackOnIOToMainThread())
+                .subscribe(new BaseNetSubscriber<ImageDataModel>() {
+                    @Override
+                    public void onNext(ImageDataModel imageDataModel) {
+                        super.onNext(imageDataModel);
+                        getView().getImageData(imageDataModel);
+                    }
+                });
+    }
 
 }

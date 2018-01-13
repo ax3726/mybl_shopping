@@ -277,18 +277,15 @@
                 android:layout_marginLeft="60px"
                 android:orientation="horizontal">
 
-                <ml.gsy.com.library.views.RoundImageView
+                <ImageView
                     android:id="@+id/img_head"
                     android:layout_width="160px"
                     android:layout_height="160px"
                     android:layout_marginLeft="20px"
                     android:layout_marginRight="20px"
                     android:layout_marginTop="20px"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_woman"
-                    app:border_color="@color/colorPrimary"
-                    app:border_width="3px"
-                   />
+                    android:background="@drawable/shape_round_bg"
+                    android:src="@drawable/ic_woman" />
 
 
                 <com.zhy.autolayout.AutoLinearLayout
