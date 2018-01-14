@@ -67,7 +67,11 @@
         <activity
             android:name=".ui.mine.RechargeProtocolActivity"
             android:screenOrientation="portrait"></activity>
-        <activity android:name=".ui.mine.PersonalSettingActivity"
+        <activity
+            android:name=".ui.mine.PersonalSettingActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.mine.ModifyPwdActivity"
             android:screenOrientation="portrait"></activity>
     </application>
 

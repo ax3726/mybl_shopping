@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:padding="20px"
+            android:text="旧密码"
+            android:textColor="@color/colorBlack"
+            android:textSize="36px" />
+
+        <EditText
+            android:id="@+id/ed_oldpwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:background="@null"
+            android:hint="请输入旧密码"
+            android:inputType="textPassword"
+            android:padding="20px"
+            android:textSize="36px" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/colorcccccc" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:padding="20px"
+            android:text="新密码"
+            android:textColor="@color/colorBlack"
+            android:textSize="36px" />
+
+        <EditText
+            android:id="@+id/ed_newpwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:background="@null"
+            android:inputType="textPassword"
+            android:hint="请输入新密码"
+            android:padding="20px"
+            android:textSize="36px" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/colorcccccc" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:padding="20px"
+            android:text="旧密码"
+            android:textColor="@color/colorBlack"
+            android:textSize="36px" />
+
+        <EditText
+            android:id="@+id/ed_againpwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:background="@null"
+            android:hint="请再次输入新密码"
+            android:padding="20px"
+            android:inputType="textPassword"
+            android:textSize="36px" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/colorcccccc" />
+    </com.zhy.autolayout.AutoLinearLayout>
+
+</layout>

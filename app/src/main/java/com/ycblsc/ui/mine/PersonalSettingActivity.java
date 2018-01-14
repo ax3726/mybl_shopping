@@ -1,5 +1,6 @@
 package com.ycblsc.ui.mine;
 
+import android.content.Intent;
 import android.view.View;
 
 import com.ycblsc.R;
@@ -31,6 +32,7 @@ public class PersonalSettingActivity extends BaseActivity<BasePresenter, Activit
     @Override
     protected void initEvent() {
         super.initEvent();
+        mBinding.linModifyPwd.setOnClickListener(this);
     }
 
     @Override
@@ -40,7 +42,11 @@ public class PersonalSettingActivity extends BaseActivity<BasePresenter, Activit
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()) {
+            //修改密码
+            case R.id.lin_modifyPwd:
+                startActivity(new Intent(PersonalSettingActivity.this, ModifyPwdActivity.class));
+                break;
+        }
     }
-
 }

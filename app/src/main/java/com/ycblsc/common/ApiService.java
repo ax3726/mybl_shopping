@@ -138,4 +138,9 @@ public interface ApiService {
     Flowable<ConsumptionModel> getConsumptionOrderList(@Query("id") String id,
                                                        @Query("page") int page,
                                                        @Query("rows") int rows);
+    //修改密码
+    @POST("AppServicePost.aspx?CMD=UpdatePassword")
+    Flowable<BaseBean> getUpdatePassword(@Query("id") String id,
+                                                       @Query("passwordNew") String passwordNew,
+                                                       @Query("passwordOld") String passwordOld);
 }
