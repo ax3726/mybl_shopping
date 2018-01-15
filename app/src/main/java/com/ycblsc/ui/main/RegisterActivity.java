@@ -147,6 +147,7 @@ public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegis
                 aginPwd = mBinding.edConfirmpwd.getText().toString().trim();
 
                 if (TextUtils.isEmpty(phone)) {
+                    showToast("请输入手机号");
                      return;
                 }
                 if (TextUtils.isEmpty(code)) {

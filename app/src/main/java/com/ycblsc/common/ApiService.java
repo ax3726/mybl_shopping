@@ -108,7 +108,6 @@ public interface ApiService {
                                              @Query("password") String password,
                                              @Part MultipartBody.Part file);
 
-
     //发送验证码
     @GET("AppServicePost.aspx?CMD=SendCode")
     Flowable<BaseBean> getSendCode(@Query("telphone") String telphone,
@@ -141,6 +140,23 @@ public interface ApiService {
     //修改密码
     @POST("AppServicePost.aspx?CMD=UpdatePassword")
     Flowable<BaseBean> getUpdatePassword(@Query("id") String id,
-                                                       @Query("passwordNew") String passwordNew,
-                                                       @Query("passwordOld") String passwordOld);
+                                         @Query("passwordNew") String passwordNew,
+                                         @Query("passwordOld") String passwordOld);
+    //修改手机号
+    @POST("AppServicePost.aspx?CMD=UpdateTelphone")
+    Flowable<BaseBean> getUpdatePhone(@Query("id") String id,
+                                      @Query("telphone") String passwordNew);
+    //修改昵称
+    @POST("AppServicePost.aspx?CMD=UpdateName")
+    Flowable<BaseBean> getUpdateNiceName(@Query("id") String id,
+                                         @Query("name") String passwordNew);
+    //修改收货地址
+    @POST("AppServicePost.aspx?CMD=UpdateAddress")
+    Flowable<BaseBean> getUpdateAddress(@Query("id") String id,
+                                        @Query("address") String passwordNew);
+    //修改头像
+    @Multipart
+    @POST("AppServicePost.aspx?CMD=UpdateIcon")
+    Flowable<BaseBean> getUpdateImage(@Query("id") String id,
+                                      @Part MultipartBody.Part file);
 }

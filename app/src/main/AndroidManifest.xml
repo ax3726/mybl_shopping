@@ -73,6 +73,15 @@
         <activity
             android:name=".ui.mine.ModifyPwdActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.mine.ModifyPhoneActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.mine.ModifyNickNameActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.mine.ModifyAddressActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

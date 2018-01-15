@@ -14,5 +14,5 @@ public interface IMineView extends BaseFragmentView {
     void getPersonInfo(PersonInfoModel personInfoModel);
     void getImageData(ImageDataModel model);
     void getPersonMessage(NotificationModel model);
-    //void getLogin(BaseBean baseBean);
+    void getUpdateImage(BaseBean baseBean);
 }
