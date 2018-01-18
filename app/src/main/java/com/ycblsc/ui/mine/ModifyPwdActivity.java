@@ -94,7 +94,6 @@ public class ModifyPwdActivity extends BaseActivity<BasePresenter, ActivityModif
                                     sleep(1000);
                                 } catch (InterruptedException e) {
                                 }
-                                startActivity(LoginActivity.class);
                                 finish();
                             }
                         }.start();

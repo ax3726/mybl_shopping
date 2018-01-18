@@ -85,7 +85,6 @@ public class ModifyNickNameActivity extends BaseActivity<BasePresenter, Activity
                                     sleep(1000);
                                 } catch (InterruptedException e) {
                                 }
-                                startActivity(LoginActivity.class);
                                 finish();
                             }
                         }.start();

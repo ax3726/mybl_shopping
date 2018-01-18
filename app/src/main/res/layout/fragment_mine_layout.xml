@@ -14,7 +14,8 @@
             android:background="@color/colorcccccc"
             android:orientation="vertical">
 
-
+            <!--app:civ_border_color="@color/colorD00852"-->
+            <!--app:civ_border_width="1dp"-->
             <com.zhy.autolayout.AutoRelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -22,8 +23,7 @@
                 android:orientation="horizontal">
 
                 <ml.gsy.com.library.views.CircleImageView
-                    app:civ_border_width="1dp"
-                    app:civ_border_color="@color/colorD00852"
+
                     android:id="@+id/head_portrait"
                     android:layout_width="160px"
                     android:layout_height="160px"

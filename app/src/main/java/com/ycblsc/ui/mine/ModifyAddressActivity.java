@@ -85,7 +85,6 @@ public class ModifyAddressActivity extends BaseActivity<BasePresenter, ActivityM
                                     sleep(1000);
                                 } catch (InterruptedException e) {
                                 }
-                                startActivity(LoginActivity.class);
                                 finish();
                             }
                         }.start();

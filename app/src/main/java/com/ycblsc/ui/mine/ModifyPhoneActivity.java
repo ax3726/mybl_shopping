@@ -77,7 +77,6 @@ public class ModifyPhoneActivity extends BaseActivity<BasePresenter, ActivityMod
                                     sleep(1000);
                                 } catch (InterruptedException e) {
                                 }
-                                startActivity(LoginActivity.class);
                                 finish();
                             }
                         }.start();
