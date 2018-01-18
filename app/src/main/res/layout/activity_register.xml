@@ -26,9 +26,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="20px"
                     android:gravity="center_vertical"
                     android:text="*"
-                    android:layout_marginLeft="20px"
                     android:textColor="@color/colorPrimary"
                     android:textSize="36px" />
 
@@ -64,9 +64,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="15px"
                     android:gravity="center_vertical"
                     android:text="*"
-                    android:layout_marginLeft="15px"
                     android:textColor="@color/colorPrimary"
                     android:textSize="42px" />
 
@@ -84,8 +84,8 @@
                     android:layout_height="60px"
                     android:layout_marginLeft="40px"
                     android:background="@drawable/shape_register_btn"
-                    android:inputType="number"
                     android:hint="验证码"
+                    android:inputType="number"
                     android:maxLength="11"
                     android:paddingLeft="20px"
                     android:textColor="@color/colorBlack"
@@ -120,8 +120,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginLeft="10px"
+                    android:gravity="center"
                     android:text="昵     称"
                     android:textSize="36px" />
 
@@ -163,9 +163,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10px"
                     android:gravity="center"
                     android:text="密     码"
-                    android:layout_marginLeft="10px"
                     android:textSize="36px" />
 
                 <com.zhy.autolayout.AutoLinearLayout
@@ -205,9 +205,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10px"
                     android:gravity="center"
                     android:text="确认密码"
-                    android:layout_marginLeft="10px"
                     android:textSize="36px" />
 
                 <com.zhy.autolayout.AutoLinearLayout
@@ -277,15 +277,18 @@
                 android:layout_marginLeft="60px"
                 android:orientation="horizontal">
 
-                <ImageView
+                <ml.gsy.com.library.views.CircleImageView
+                    app:civ_border_width="1dp"
+                    app:civ_border_color="@color/colorD00852"
                     android:id="@+id/img_head"
                     android:layout_width="160px"
                     android:layout_height="160px"
                     android:layout_marginLeft="20px"
                     android:layout_marginRight="20px"
                     android:layout_marginTop="20px"
-                    android:background="@drawable/shape_round_bg"
-                    android:src="@drawable/ic_woman" />
+                    android:src="@drawable/ic_woman"
+
+                    />
 
 
                 <com.zhy.autolayout.AutoLinearLayout

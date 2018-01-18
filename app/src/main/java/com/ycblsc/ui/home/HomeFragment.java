@@ -91,7 +91,7 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
         mBinding.imgShopping.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showWaitDialog();
+               // showWaitDialog();
             }
         });
         mBinding.imgMianfeianzhuang.setOnClickListener(new View.OnClickListener() {

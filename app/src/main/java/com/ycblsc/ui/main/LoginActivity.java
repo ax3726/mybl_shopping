@@ -48,6 +48,7 @@ public class LoginActivity extends BaseActivity<BasePresenter, ActivityLoginBind
 
         mBinding.btnLoginIn.setOnClickListener(this);
         mBinding.btnLoginYouke.setOnClickListener(this);
+        mBinding.tvRegister.setOnClickListener(this);
     }
 
     @Override
@@ -59,6 +60,9 @@ public class LoginActivity extends BaseActivity<BasePresenter, ActivityLoginBind
             case R.id.btn_login_youke:
                 startActivity(MainActivity.class);
                 finish();
+                break;
+            case R.id.tv_register:
+                startActivity(RegisterActivity.class);
                 break;
         }
     }

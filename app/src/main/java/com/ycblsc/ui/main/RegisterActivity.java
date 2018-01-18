@@ -148,7 +148,7 @@ public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegis
 
                 if (TextUtils.isEmpty(phone)) {
                     showToast("请输入手机号");
-                     return;
+                    return;
                 }
                 if (TextUtils.isEmpty(code)) {
                     showToast("请输入验证码");
@@ -199,7 +199,8 @@ public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegis
         if (headListModel.getReturnData().size() > 0) {
             mHeadsList.addAll(headListModel.getReturnData());
             //默认选择第一个
-            Glide.with(RegisterActivity.this).load(headListModel.getReturnData().get(0).getUrl()).into(mBinding.imgHead);
+            Glide.with(RegisterActivity.this).load(headListModel.getReturnData().get(0).getUrl())
+                    .into(mBinding.imgHead);
         }
 
     }
@@ -303,7 +304,8 @@ public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegis
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
                 HeadListModel.ReturnDataBean headListModel = mHeadsList.get(position);
                 // mBinding.imgHead.setImageURI(Uri.parse(headListModel.getUrl()));
-                Glide.with(RegisterActivity.this).load(headListModel.getUrl()).into(mBinding.imgHead);
+                Glide.with(RegisterActivity.this).load(headListModel.getUrl())
+                        .into(mBinding.imgHead);
                 iconId = Link.DVLURL + headListModel.getId();
             }
 
@@ -318,7 +320,7 @@ public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegis
     @Override
     public void photoSuccess(String path, File file, int... queue) {
         mPhotoPath = path;
-        Glide.with(aty).load(path).asBitmap().centerCrop().into(mBinding.imgHead);
+        Glide.with(aty).load(path).into(mBinding.imgHead);
     }
 
     @Override

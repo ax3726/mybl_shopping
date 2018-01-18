@@ -21,12 +21,15 @@
                 android:background="@color/colorWhite"
                 android:orientation="horizontal">
 
-                <ImageView
+                <ml.gsy.com.library.views.CircleImageView
+                    app:civ_border_width="1dp"
+                    app:civ_border_color="@color/colorD00852"
                     android:id="@+id/head_portrait"
                     android:layout_width="160px"
                     android:layout_height="160px"
                     android:layout_marginLeft="20px"
                     android:layout_marginTop="20px"
+                    android:scaleType="fitCenter"
                     android:background="@drawable/shape_round_bg"
                     android:src="@drawable/ic_woman" />
 

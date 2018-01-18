@@ -84,6 +84,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="60px"
+
             android:textColor="@color/colorED1E6A"
             android:textStyle="bold"
             android:background="@color/colorE7E7E7"
@@ -104,9 +105,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="60px"
+            android:textSize="40px"
             android:textColor="@color/colorED1E6A"
             android:textStyle="bold"
+           android:paddingTop="10px"
+           android:paddingBottom="10px"
+           android:paddingLeft="5px"
+           android:paddingRight="5px"
             android:background="@color/colorE7E7E7"
             android:text=" + "
             />

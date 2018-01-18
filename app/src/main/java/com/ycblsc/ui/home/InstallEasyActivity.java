@@ -39,6 +39,8 @@ public class InstallEasyActivity extends BaseActivity<BasePresenter, ActivityIns
         mTitleBarLayout.setTitle("便利架安装申请");
     }
 
+
+
     @Override
     protected void initEvent() {
         super.initEvent();
