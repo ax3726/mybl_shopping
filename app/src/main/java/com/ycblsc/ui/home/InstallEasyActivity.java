@@ -44,6 +44,9 @@ public class InstallEasyActivity extends BaseActivity<BasePresenter, ActivityIns
     @Override
     protected void initEvent() {
         super.initEvent();
+
+       // AndroidBug5497Workaround.assistActivity(findViewById(android.R.id.content));
+
         mBinding.imgSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

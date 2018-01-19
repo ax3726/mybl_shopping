@@ -17,8 +17,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.nineoldandroids.view.ViewHelper;
-
 import ml.gsy.com.library.R;
 
 
@@ -80,7 +78,7 @@ public class LoadingView extends LinearLayout {
         mShapeLoadingView = (ShapeLoadingView) findViewById(R.id.shapeLoadingView);
         mIndicationIm = (ImageView) findViewById(R.id.indication);
         mLoadTextView = (TextView) findViewById(R.id.promptTV);
-        ViewHelper.setScaleX(mIndicationIm, 0.2f);
+       // ViewHelper.setScaleX(mIndicationIm, 0.2f);
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.LoadingView);
         String loadText = typedArray.getString(R.styleable.LoadingView_loadingText);
@@ -115,9 +113,9 @@ public class LoadingView extends LinearLayout {
     private Runnable mFreeFallRunnable = new Runnable() {
         @Override
         public void run() {
-            ViewHelper.setRotation(mShapeLoadingView, 180f);
+            /*ViewHelper.setRotation(mShapeLoadingView, 180f);
             ViewHelper.setTranslationY(mShapeLoadingView, 0f);
-            ViewHelper.setScaleX(mIndicationIm, 0.2f);
+            ViewHelper.setScaleX(mIndicationIm, 0.2f);*/
             mStopped = false;
             freeFall();
         }
