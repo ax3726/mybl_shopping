@@ -14,6 +14,7 @@ import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.ycblsc.R;
 
+import cn.jpush.android.api.JPushInterface;
 import ml.gsy.com.library.utils.CacheUtils;
 import ml.gsy.com.library.utils.Utils;
 
@@ -23,7 +24,8 @@ import ml.gsy.com.library.utils.Utils;
 
 public class MyApplication extends Application {
     private static MyApplication instance;
-    public static  String Base_Path="";
+    public static String Base_Path = "";
+
     public static MyApplication getInstance() {
         return instance;
     }
@@ -31,13 +33,24 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        instance=this;
+        instance = this;
         Base_Path = Utils.getCacheDirectory(this, Environment.DIRECTORY_DOCUMENTS).getAbsolutePath();
 
         //缓存初始化
         CacheUtils.getInstance().init(CacheUtils.CacheMode.CACHE_MAX,
                 Utils.getCacheDirectory(this, Environment.DIRECTORY_DOCUMENTS).getAbsolutePath());
+        initJpush();//初始化极光
+
     }
+
+    public void initJpush() {
+        JPushInterface.setDebugMode(false);    // 设置开启日志,发布时请关闭日志
+        JPushInterface.init(this);            // 初始化 JPush
+        // 通过极光推送，推送了很多通知到客户端时，如果用户不去处理，就会有很多保留在那里。
+//        新版本 SDK (v1.3.0) 增加此功能，限制保留的通知条数。默认为保留最近 5 条通知。
+        JPushInterface.setLatestNotificationNumber(this, 5);
+    }
+
     //static 代码段可以防止内存泄露
     static {
         //设置全局的Header构建器

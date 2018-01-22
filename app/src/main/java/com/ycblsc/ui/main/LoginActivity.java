@@ -12,6 +12,8 @@ import com.ycblsc.databinding.ActivityLoginBinding;
 import com.ycblsc.model.BaseBean;
 import com.ycblsc.model.UserModel;
 
+import cn.jpush.android.api.JPushInterface;
+
 public class LoginActivity extends BaseActivity<BasePresenter, ActivityLoginBinding> implements View.OnClickListener {
 
     @Override
@@ -85,6 +87,8 @@ public class LoginActivity extends BaseActivity<BasePresenter, ActivityLoginBind
                     @Override
                     public void onNext(BaseBean baseBean) {
                         super.onNext(baseBean);
+                        JPushInterface.setAlias(aty, 1, String.valueOf(baseBean.getReturnData()));
+
                         CacheService.getIntance().setUser(new UserModel(String.valueOf(baseBean.getReturnData()), phone));//保存用户信息
                         showToast("登录成功！");
                         new Thread() {
