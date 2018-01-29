@@ -13,6 +13,9 @@ import android.widget.PopupWindow;
 import android.widget.RadioGroup;
 
 import com.bumptech.glide.Glide;
+import com.lm.base.library.adapters.recyclerview.CommonAdapter;
+import com.lm.base.library.adapters.recyclerview.MultiItemTypeAdapter;
+import com.lm.base.library.adapters.recyclerview.base.ViewHolder;
 import com.ycblsc.R;
 import com.ycblsc.base.EmptyState;
 import com.ycblsc.common.Link;
@@ -30,9 +33,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.lm.base.library.adapters.recyclerview.CommonAdapter;
-import com.lm.base.library.adapters.recyclerview.MultiItemTypeAdapter;
-import com.lm.base.library.adapters.recyclerview.base.ViewHolder;
+
 
 /*
 * 会员注册/登陆注册
@@ -150,6 +151,10 @@ public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegis
                     showToast("请输入手机号");
                     return;
                 }
+                if (phone.length() < 11) {
+                    showToast("请输入正确手机号");
+                    return;
+                }
                 if (TextUtils.isEmpty(code)) {
                     showToast("请输入验证码");
                     return;
@@ -214,7 +219,7 @@ public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegis
             public void run() {
                 super.run();
                 try {
-                    sleep(1500);
+                    sleep(1000);
                     startActivity(LoginActivity.class);
                     finish();
                 } catch (InterruptedException e) {
