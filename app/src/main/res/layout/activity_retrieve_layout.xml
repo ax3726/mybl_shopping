@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
+
+
+        <EditText
+            android:id="@+id/ed_retrieve"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="50px"
+            android:layout_marginTop="120px"
+            android:hint="请输入注册手机号"
+            android:inputType="phone"
+            android:maxLength="11"
+            android:padding="20px"
+            android:textSize="32px" />
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30px"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/ed_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="请输入验证码"
+                android:padding="20px"
+                android:inputType="number"
+                android:textSize="32px" />
+
+            <Button
+                android:id="@+id/btn_code"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:background="@color/possible_result_points"
+                android:text="获取验证码"
+                android:textColor="@color/colorWhite"
+                android:textSize="24px" />
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_getPwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50px"
+            android:padding="30px"
+            android:text="尝试获取新密码"
+            android:textColor="@color/colorPrimary_one"
+            android:textSize="32px" />
+
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+</layout>
