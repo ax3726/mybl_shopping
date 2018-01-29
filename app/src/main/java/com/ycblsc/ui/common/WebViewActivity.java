@@ -6,7 +6,6 @@ import android.os.Message;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.webkit.JavascriptInterface;
@@ -14,13 +13,12 @@ import android.webkit.WebChromeClient;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.lm.base.library.widget.webview.AppProgressWebView;
 import com.ycblsc.R;
 import com.ycblsc.base.BaseActivity;
 import com.ycblsc.base.BasePresenter;
 import com.ycblsc.common.MyApplication;
 import com.ycblsc.databinding.ActivityWebviewLayoutBinding;
-
-import ml.gsy.com.library.widget.webview.AppProgressWebView;
 
 
 /**

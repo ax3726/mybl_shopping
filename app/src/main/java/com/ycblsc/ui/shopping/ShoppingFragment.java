@@ -24,8 +24,8 @@ import com.ycblsc.view.IShoppingView;
 import java.util.ArrayList;
 import java.util.List;
 
-import ml.gsy.com.library.adapters.recyclerview.CommonAdapter;
-import ml.gsy.com.library.adapters.recyclerview.base.ViewHolder;
+import com.lm.base.library.adapters.recyclerview.CommonAdapter;
+import com.lm.base.library.adapters.recyclerview.base.ViewHolder;
 
 /**
  * Created by Administrator on 2017/12/26 0026.

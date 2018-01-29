@@ -37,6 +37,7 @@ public class ModifyAddressActivity extends BaseActivity<BasePresenter, ActivityM
     @Override
     protected void initTitleBar() {
         super.initTitleBar();
+
         mTitleBarLayout.setTitle("修改地址");
         mTitleBarLayout.setRightShow(true);
         mTitleBarLayout.setRightTxt("确定");

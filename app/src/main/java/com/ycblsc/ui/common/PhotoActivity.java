@@ -31,9 +31,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import ml.gsy.com.library.utils.Utils;
-import ml.gsy.com.library.utils.runtimepermission.PermissionsManager;
-import ml.gsy.com.library.utils.runtimepermission.PermissionsResultAction;
+import com.lm.base.library.utils.Utils;
+import com.lm.base.library.utils.runtimepermission.PermissionsManager;
+import com.lm.base.library.utils.runtimepermission.PermissionsResultAction;
 
 /**
  * Created by It_young on 15/4/8.

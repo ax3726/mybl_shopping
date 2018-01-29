@@ -23,12 +23,12 @@
         android:orientation="vertical">
 
 
-        <ml.gsy.com.library.widget.flybanner.FlyBanner
+        <com.lm.base.library.widget.flybanner.FlyBanner
             android:id="@+id/fb_roll"
             android:layout_width="match_parent"
             android:layout_height="200px">
 
-        </ml.gsy.com.library.widget.flybanner.FlyBanner>
+        </com.lm.base.library.widget.flybanner.FlyBanner>
 
 
         <View

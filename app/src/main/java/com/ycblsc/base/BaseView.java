@@ -7,7 +7,7 @@ import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 
 import io.reactivex.Observable;
-import ml.gsy.com.library.common.LoadingDialog;
+import com.lm.base.library.common.LoadingDialog;
 
 
 /**

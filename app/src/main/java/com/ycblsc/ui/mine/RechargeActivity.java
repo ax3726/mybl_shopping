@@ -22,9 +22,9 @@ import com.ycblsc.view.IRechargeView;
 import java.util.ArrayList;
 import java.util.List;
 
-import ml.gsy.com.library.adapters.recyclerview.CommonAdapter;
-import ml.gsy.com.library.adapters.recyclerview.MultiItemTypeAdapter;
-import ml.gsy.com.library.adapters.recyclerview.base.ViewHolder;
+import com.lm.base.library.adapters.recyclerview.CommonAdapter;
+import com.lm.base.library.adapters.recyclerview.MultiItemTypeAdapter;
+import com.lm.base.library.adapters.recyclerview.base.ViewHolder;
 
 /**
  * Created by Administrator on 2018/1/1.

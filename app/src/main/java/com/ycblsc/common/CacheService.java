@@ -2,7 +2,7 @@ package com.ycblsc.common;
 
 import com.ycblsc.model.UserModel;
 
-import ml.gsy.com.library.utils.CacheUtils;
+import com.lm.base.library.utils.CacheUtils;
 
 /**
  * Created by Administrator on 2017/11/22 0022.

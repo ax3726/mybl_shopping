@@ -7,6 +7,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.lm.base.library.adapters.recyclerview.CommonAdapter;
+import com.lm.base.library.adapters.recyclerview.base.ViewHolder;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -25,9 +27,6 @@ import com.ycblsc.widget.zxing.android.CaptureActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import ml.gsy.com.library.adapters.recyclerview.CommonAdapter;
-import ml.gsy.com.library.adapters.recyclerview.base.ViewHolder;
 
 import static android.app.Activity.RESULT_OK;
 

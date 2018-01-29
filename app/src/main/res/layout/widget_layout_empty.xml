@@ -21,7 +21,7 @@
         android:focusableInTouchMode="true"
         android:visibility="@{stateModel.empty?View.VISIBLE:View.GONE}">
 
-        <!--   <ml.gsy.com.library.widget.loadingview.LoadingView
+        <!--   <com.lm.base.library.widget.loadingview.LoadingView
                android:id="@+id/loadView"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"

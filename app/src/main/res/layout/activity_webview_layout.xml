@@ -13,12 +13,12 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ml.gsy.com.library.widget.webview.AppProgressWebView
+            <com.lm.base.library.widget.webview.AppProgressWebView
                 android:id="@+id/app_progresswebview"
                 android:layout_width="match_parent"
 
                 android:layout_height="match_parent"
-                android:orientation="vertical"></ml.gsy.com.library.widget.webview.AppProgressWebView>
+                android:orientation="vertical"></com.lm.base.library.widget.webview.AppProgressWebView>
         </LinearLayout>
     </LinearLayout>
 

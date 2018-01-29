@@ -277,7 +277,7 @@
                 android:layout_marginLeft="60px"
                 android:orientation="horizontal">
 
-                <ml.gsy.com.library.views.CircleImageView
+                <com.ycblsc.widget.CircleImageView
                     app:civ_border_width="1dp"
                     app:civ_border_color="@color/colorD00852"
                     android:id="@+id/img_head"

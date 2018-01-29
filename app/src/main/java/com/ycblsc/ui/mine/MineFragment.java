@@ -38,10 +38,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ml.gsy.com.library.adapters.recyclerview.CommonAdapter;
-import ml.gsy.com.library.adapters.recyclerview.base.ViewHolder;
-import ml.gsy.com.library.utils.runtimepermission.PermissionsManager;
-import ml.gsy.com.library.utils.runtimepermission.PermissionsResultAction;
+import com.lm.base.library.adapters.recyclerview.CommonAdapter;
+import com.lm.base.library.adapters.recyclerview.base.ViewHolder;
+import com.lm.base.library.utils.runtimepermission.PermissionsManager;
+import com.lm.base.library.utils.runtimepermission.PermissionsResultAction;
 
 /**
  * Created by Administrator on 2017/12/26 0026.
