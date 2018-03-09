@@ -11,6 +11,7 @@ import com.ycblsc.common.CacheService;
 import com.ycblsc.databinding.ActivityLoginBinding;
 import com.ycblsc.model.BaseBean;
 import com.ycblsc.model.UserModel;
+import com.ycblsc.ui.mine.RetrievePwdActivity;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -51,6 +52,7 @@ public class LoginActivity extends BaseActivity<BasePresenter, ActivityLoginBind
         mBinding.btnLoginIn.setOnClickListener(this);
         mBinding.btnLoginYouke.setOnClickListener(this);
         mBinding.tvRegister.setOnClickListener(this);
+        mBinding.tvRetrievePwd.setOnClickListener(this);
     }
 
     @Override
@@ -65,6 +67,10 @@ public class LoginActivity extends BaseActivity<BasePresenter, ActivityLoginBind
                 break;
             case R.id.tv_register:
                 startActivity(RegisterActivity.class);
+                break;
+            //找回密码
+            case R.id.tv_retrievePwd:
+                startActivity(RetrievePwdActivity.class);
                 break;
         }
     }

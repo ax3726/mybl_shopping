@@ -137,26 +137,35 @@ public interface ApiService {
     Flowable<ConsumptionModel> getConsumptionOrderList(@Query("id") String id,
                                                        @Query("page") int page,
                                                        @Query("rows") int rows);
+
     //修改密码
     @POST("AppServicePost.aspx?CMD=UpdatePassword")
     Flowable<BaseBean> getUpdatePassword(@Query("id") String id,
                                          @Query("passwordNew") String passwordNew,
                                          @Query("passwordOld") String passwordOld);
+
     //修改手机号
     @POST("AppServicePost.aspx?CMD=UpdateTelphone")
     Flowable<BaseBean> getUpdatePhone(@Query("id") String id,
                                       @Query("telphone") String passwordNew);
+
     //修改昵称
     @POST("AppServicePost.aspx?CMD=UpdateName")
     Flowable<BaseBean> getUpdateNiceName(@Query("id") String id,
                                          @Query("name") String passwordNew);
+
     //修改收货地址
     @POST("AppServicePost.aspx?CMD=UpdateAddress")
     Flowable<BaseBean> getUpdateAddress(@Query("id") String id,
                                         @Query("address") String passwordNew);
+
     //修改头像
     @Multipart
     @POST("AppServicePost.aspx?CMD=UpdateIcon")
     Flowable<BaseBean> getUpdateImage(@Query("id") String id,
                                       @Part MultipartBody.Part file);
+
+    //找回密码
+    @GET("AppService.aspx?CMD=GetPassword")
+    Flowable<BaseBean> getGetPassword(@Query("telphone") String telphone);
 }
