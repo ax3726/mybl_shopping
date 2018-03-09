@@ -7,6 +7,8 @@ import com.ycblsc.net.ex.ResultException;
 
 import org.reactivestreams.Publisher;
 
+import java.util.concurrent.TimeUnit;
+
 import io.reactivex.Flowable;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
@@ -30,9 +32,12 @@ public class RetryWithDelayFunction implements Function<Flowable<Throwable>, Pub
             public Publisher<?> apply(@NonNull Throwable throwable) throws Exception {
                 if (throwable instanceof ApiException) {
                     ResponseCodeEnum responseCode = ((ApiException) throwable).getResponseCode();
+
                     switch (responseCode) {
                         case NODATA:
                             return Flowable.error(throwable);
+                       /* case SERVER_ERR:
+                            return count>1?Flowable.error(throwable):Flowable.timer(500, TimeUnit.MILLISECONDS);*/
                         default:
                             return Flowable.error(throwable);
                     }

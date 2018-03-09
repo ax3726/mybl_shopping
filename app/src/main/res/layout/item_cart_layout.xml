@@ -13,6 +13,7 @@
     android:paddingBottom="20px"
     android:layout_height="wrap_content">
     <ImageView
+        android:id="@+id/img_select"
         android:layout_width="50px"
         android:layout_height="50px"
         android:layout_marginLeft="30px"
@@ -81,10 +82,10 @@
             />
 
         <TextView
+            android:id="@+id/tv_jian"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="60px"
-
             android:textColor="@color/colorED1E6A"
             android:textStyle="bold"
             android:background="@color/colorE7E7E7"
@@ -92,6 +93,7 @@
             />
 
         <TextView
+            android:id="@+id/tv_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="35px"
@@ -103,6 +105,7 @@
             />
 
         <TextView
+            android:id="@+id/tv_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="40px"
@@ -133,6 +136,7 @@ android:layout_marginBottom="10px"
             android:text="合计："
             />
         <TextView
+            android:id="@+id/tv_total_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="32px"

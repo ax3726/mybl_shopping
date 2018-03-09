@@ -20,6 +20,7 @@ import com.ycblsc.R;
 import com.ycblsc.base.BaseActivity;
 import com.ycblsc.base.BaseView;
 import com.ycblsc.databinding.ActivityMainBinding;
+import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.prestener.main.MainPrestener;
 import com.ycblsc.ui.buycart.BuyCartFragment;
 import com.ycblsc.ui.home.HomeFragment;
@@ -41,7 +42,8 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
     private FragmentManager mFm;
     private List<Fragment> mFragments = new ArrayList<>();
     private DoubleClickExitHelper mDoubleClickExit;
-
+    private List<ProductListModel.ReturnDataBean> mEasyCartList=new ArrayList<>();//便利架购物车列表
+    private List<ProductListModel.ReturnDataBean> mShoppingCartList=new ArrayList<>();//商城购物车列表
     @Override
     protected MainPrestener createPresenter() {
         return new MainPrestener();
@@ -63,6 +65,8 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
         mDoubleClickExit = new DoubleClickExitHelper(this);
         initFragment();
     }
+
+
 
 
    public ActivityMainBinding getViewBinding()
@@ -246,5 +250,166 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
 
             }
         });
+    }
+
+    /**
+     * 添加便利架购物车
+     */
+    public void AddEasyCart(ProductListModel.ReturnDataBean dataBean)
+    {
+        int index=-1;
+        for (int i = 0; i <mEasyCartList.size(); i++) {
+            if (dataBean.getId()==mEasyCartList.get(i).getId()) {
+                index=i;
+                break;
+            }
+        }
+        if (index != -1) {
+            mEasyCartList.get(index).setCount( mEasyCartList.get(index).getCount()+1);
+        } else {
+            mEasyCartList.add(dataBean);
+        }
+        mBuyCartFragment.updatemEasyCartData(mEasyCartList);
+    }
+    /**
+     * 添加商城购物车
+     */
+    public void AddShoppingCart(ProductListModel.ReturnDataBean dataBean)
+    {
+        int index=-1;
+        for (int i = 0; i <mShoppingCartList.size(); i++) {
+            if (dataBean.getId()==mShoppingCartList.get(i).getId()) {
+                index=i;
+            }
+        }
+        if (index != -1) {
+            mShoppingCartList.get(index).setCount( mShoppingCartList.get(index).getCount()+1);
+        } else {
+            mShoppingCartList.add(dataBean);
+        }
+        mBuyCartFragment.updatemShoppingCartData(mShoppingCartList);
+    }
+
+    /**
+     * 移除便利架购物车
+     */
+    public void RemoveEasyCart(ProductListModel.ReturnDataBean dataBean)
+    {
+        int index=-1;
+        for (int i = 0; i <mEasyCartList.size(); i++) {
+            if (dataBean.getId()==mEasyCartList.get(i).getId()) {
+                index=i;
+                break;
+            }
+        }
+        if (index != -1) {
+            int count = mEasyCartList.get(index).getCount();
+            if (count != 0) {
+                mEasyCartList.get(index).setCount( count-1);
+            } else {
+                mEasyCartList.remove(index);
+            }
+        }
+        mBuyCartFragment.updatemEasyCartData(mEasyCartList);
+    }
+    /**
+     * 移除商城购物车
+     */
+    public void RemoveShoppingCart(ProductListModel.ReturnDataBean dataBean)
+    {
+        int index=-1;
+        for (int i = 0; i <mShoppingCartList.size(); i++) {
+            if (dataBean.getId()==mShoppingCartList.get(i).getId()) {
+                index=i;
+                break;
+            }
+        }
+        if (index != -1) {
+            int count = mShoppingCartList.get(index).getCount();
+            if (count != 0) {
+                mShoppingCartList.get(index).setCount( count-1);
+            } else {
+                mShoppingCartList.remove(index);
+            }
+        }
+        mBuyCartFragment.updatemShoppingCartData(mShoppingCartList);
+    }
+
+    /**
+     * 更新便利架购物车选中状态
+     */
+    public void UpdateEasyCartSelect(ProductListModel.ReturnDataBean dataBean)
+    {
+        int index=-1;
+        for (int i = 0; i <mEasyCartList.size(); i++) {
+            if (dataBean.getId()==mEasyCartList.get(i).getId()) {
+                index=i;
+                break;
+            }
+        }
+        if (index != -1) {
+            if (mEasyCartList.get(index).isIs_select()) {
+                mEasyCartList.get(index).setIs_select(false);
+            } else {
+                mEasyCartList.get(index).setIs_select(true);
+            }
+        }
+        mBuyCartFragment.updatemEasyCartData(mEasyCartList);
+    }
+
+    /**
+     * 更新所有便利架购物车选中状态
+     */
+    public void UpdateAllEasyCartSelect(boolean bl)
+    {
+        for (int i = 0; i <mEasyCartList.size(); i++) {
+            mEasyCartList.get(i).setIs_select(bl);
+        }
+        mBuyCartFragment.updatemEasyCartData(mEasyCartList);
+    }
+
+    /**
+     * 更新所有商城购物车选中状态
+     */
+    public void UpdateAllShoppingCartSelect(boolean bl)
+    {
+        for (int i = 0; i <mEasyCartList.size(); i++) {
+            mEasyCartList.get(i).setIs_select(bl);
+        }
+        mBuyCartFragment.updatemEasyCartData(mEasyCartList);
+    }
+
+
+
+    /**
+     * 更新商城购物车选中状态
+     */
+    public void UpdateShoppingCartSelect(ProductListModel.ReturnDataBean dataBean)
+    {
+        int index=-1;
+        for (int i = 0; i <mShoppingCartList.size(); i++) {
+            if (dataBean.getId()==mShoppingCartList.get(i).getId()) {
+                index=i;
+                break;
+            }
+        }
+        if (index != -1) {
+            if (mShoppingCartList.get(index).isIs_select()) {
+                mShoppingCartList.get(index).setIs_select(false);
+            } else {
+                mShoppingCartList.get(index).setIs_select(true);
+            }
+        }
+        mBuyCartFragment.updatemShoppingCartData(mShoppingCartList);
+    }
+
+
+
+    public List<ProductListModel.ReturnDataBean> getmEasyCartList() {
+        return mEasyCartList;
+    }
+
+    public List<ProductListModel.ReturnDataBean> getmShoppingCartList() {
+        return mShoppingCartList;
     }
 }

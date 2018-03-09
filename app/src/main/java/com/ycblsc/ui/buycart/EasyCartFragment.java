@@ -1,6 +1,7 @@
 package com.ycblsc.ui.buycart;
 
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 
 import com.ycblsc.R;
 import com.ycblsc.base.BaseFragment;
@@ -12,15 +13,18 @@ import java.util.List;
 
 import com.lm.base.library.adapters.recyclerview.CommonAdapter;
 import com.lm.base.library.adapters.recyclerview.base.ViewHolder;
+import com.ycblsc.model.home.ProductListModel;
+import com.ycblsc.ui.main.MainActivity;
 
 /**
  * Created by LiMing on 2018/1/1.
  */
 
-public class EasyCartFragment extends BaseFragment<BaseFragmentPresenter,FragmentEasyCartBinding> {
+public class EasyCartFragment extends BaseFragment<BaseFragmentPresenter, FragmentEasyCartBinding> {
 
-   private CommonAdapter<String> mAdapter;
-    private List<String> mDataList=new ArrayList<>();
+    private CommonAdapter<ProductListModel.ReturnDataBean> mAdapter;
+    private List<ProductListModel.ReturnDataBean> mDataList = new ArrayList<>();
+
     @Override
     public int getLayoutId() {
         return R.layout.fragment_easy_cart;
@@ -44,16 +48,98 @@ public class EasyCartFragment extends BaseFragment<BaseFragmentPresenter,Fragmen
     @Override
     protected void initData() {
         super.initData();
-        mDataList.add("");
-        mDataList.add("");
-        mDataList.add("");
-        mAdapter=new CommonAdapter<String>(aty,R.layout.item_cart_layout,mDataList) {
+        mDataList.clear();
+        if (aty != null) {
+            mDataList.addAll(((MainActivity) aty).getmEasyCartList());
+        }
+        mAdapter = new CommonAdapter<ProductListModel.ReturnDataBean>(aty, R.layout.item_cart_layout, mDataList) {
             @Override
-            protected void convert(ViewHolder holder, String s, int position) {
+            protected void convert(ViewHolder holder, ProductListModel.ReturnDataBean item, int position) {
+                holder.setImageurl(R.id.img, item.getImg(), 0);
+                holder.setText(R.id.tv_title, item.getS_products());
+                holder.setText(R.id.tv_price, "¥" + item.getS_price());
+                holder.setText(R.id.tv_count, String.valueOf(item.getCount() + 1));
+                holder.setText(R.id.tv_total_price, String.valueOf(item.getS_price() * (item.getCount() + 1)));
+                    holder.setSelect(R.id.img_select,item.isIs_select());
 
+                holder.setOnClickListener(R.id.tv_add, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (aty != null) {
+                            ((MainActivity) aty).AddEasyCart(item);
+                        }
+                    }
+                });
+                holder.setOnClickListener(R.id.tv_jian, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (aty != null) {
+                            ((MainActivity) aty).RemoveEasyCart(item);
+                        }
+                    }
+                });
+                holder.setOnClickListener(R.id.img_select, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                            if (aty != null) {
+                                ((MainActivity) aty).UpdateEasyCartSelect(item);
+                            }
+                    }
+                });
             }
         };
         mBinding.rcBody.setLayoutManager(new LinearLayoutManager(aty));
         mBinding.rcBody.setAdapter(mAdapter);
     }
+
+    @Override
+    protected void initEvent() {
+        super.initEvent();
+        mBinding.imgAllSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mBinding.imgAllSelect.isSelected()) {
+                    mBinding.imgAllSelect.setSelected(false);
+                    if (aty != null) {
+                        ((MainActivity) aty).UpdateAllEasyCartSelect(false);
+                    }
+
+                } else {
+                    mBinding.imgAllSelect.setSelected(true);
+                    if (aty != null) {
+                        ((MainActivity) aty).UpdateAllEasyCartSelect(true);
+                    }
+                }
+            }
+        });
+    }
+
+    /**
+     * 更新数据
+     *
+     * @param list
+     */
+    public void updateData(List<ProductListModel.ReturnDataBean> list) {
+        mDataList.clear();
+        mDataList.addAll(list);
+        mAdapter.notifyDataSetChanged();
+        updateState();
+    }
+
+    public void updateState()
+    {
+        int count=0;//商品数量
+        double price=0;//商品价格
+        for (ProductListModel.ReturnDataBean bean:mDataList) {
+            if (bean.isIs_select()) {
+                count++;
+                price=price+(bean.getS_price() * (bean.getCount() + 1));
+            }
+
+        }
+        mBinding.tvTotalPrice.setText("￥"+price);
+        mBinding.tvCountHint.setText("结算("+count+")");
+
+    }
+
 }

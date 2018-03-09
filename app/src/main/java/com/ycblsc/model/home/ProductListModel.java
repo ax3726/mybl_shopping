@@ -76,8 +76,26 @@ public class ProductListModel {
         private String s_products;
         private int s_buque;
         private String img;
-        private String s_price;
+        private double s_price;
         private String jianjie;
+        private int count;//个数
+        private boolean is_select;//是否选中
+
+        public boolean isIs_select() {
+            return is_select;
+        }
+
+        public void setIs_select(boolean is_select) {
+            this.is_select = is_select;
+        }
+
+        public int getCount() {
+            return count;
+        }
+
+        public void setCount(int count) {
+            this.count = count;
+        }
 
         public int getTemp_row_number() {
             return temp_row_number;
@@ -191,11 +209,11 @@ public class ProductListModel {
             this.img = img;
         }
 
-        public String getS_price() {
+        public double getS_price() {
             return s_price;
         }
 
-        public void setS_price(String s_price) {
+        public void setS_price(double s_price) {
             this.s_price = s_price;
         }
 

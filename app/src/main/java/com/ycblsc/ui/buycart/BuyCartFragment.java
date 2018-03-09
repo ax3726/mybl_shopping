@@ -12,6 +12,7 @@ import com.ycblsc.base.BaseFragment;
 import com.ycblsc.base.BaseFragmentView;
 import com.ycblsc.base.EmptyState;
 import com.ycblsc.databinding.FragmentBuycartLayoutBinding;
+import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.prestener.buycart.BuyCartPrestener;
 
 import java.util.ArrayList;
@@ -61,6 +62,26 @@ public class BuyCartFragment extends BaseFragment<BuyCartPrestener, FragmentBuyc
         mBinding.tlyHead.setTabMode(TabLayout.MODE_SCROLLABLE);
 
 
+    }
+    /**
+     * 更新数据
+     * @param list
+     */
+    public void  updatemEasyCartData(List<ProductListModel.ReturnDataBean> list)
+    {
+        if (mEasyCartFragment!=null) {
+            mEasyCartFragment.updateData(list);
+        }
+
+    }
+
+    /**
+     * 更新数据
+     * @param list
+     */
+    public void  updatemShoppingCartData(List<ProductListModel.ReturnDataBean> list)
+    {
+      //  mEasyCartFragment.updateData(list);
     }
 
 

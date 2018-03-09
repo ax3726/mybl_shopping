@@ -150,6 +150,8 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
                     @Override
                     public void onClick(View v) {
                         if (aty!=null) {
+                            ((MainActivity)aty).AddEasyCart(item);
+
                             ((MainActivity)aty).addCart(img_shopping);
                         }
 
