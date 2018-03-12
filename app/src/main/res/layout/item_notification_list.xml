@@ -28,6 +28,7 @@
             android:layout_marginLeft="60px"
             android:gravity="center"
             android:text="2017-12-1"
+            android:textSize="24px"
             />
 
     </com.zhy.autolayout.AutoLinearLayout>
