@@ -343,7 +343,7 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
             temp.delete();
         }
     }
-
+     //测试提交
     private void initAdapter() {
         mNoticfitionAdapter = new CommonAdapter<NotificationModel.ReturnDataBean>(aty, R.layout.item_notification_list, mMessageList) {
             @Override
