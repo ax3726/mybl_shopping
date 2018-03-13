@@ -60,8 +60,7 @@ public class EasyCartFragment extends BaseFragment<BaseFragmentPresenter, Fragme
                 holder.setText(R.id.tv_price, "¥" + item.getS_price());
                 holder.setText(R.id.tv_count, String.valueOf(item.getCount() + 1));
                 holder.setText(R.id.tv_total_price, String.valueOf(item.getS_price() * (item.getCount() + 1)));
-                    holder.setSelect(R.id.img_select,item.isIs_select());
-
+                holder.setSelect(R.id.img_select, item.isIs_select());
                 holder.setOnClickListener(R.id.tv_add, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -81,9 +80,17 @@ public class EasyCartFragment extends BaseFragment<BaseFragmentPresenter, Fragme
                 holder.setOnClickListener(R.id.img_select, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                            if (aty != null) {
-                                ((MainActivity) aty).UpdateEasyCartSelect(item);
-                            }
+                        if (aty != null) {
+                            ((MainActivity) aty).UpdateEasyCartSelect(item);
+                        }
+                    }
+                });
+                holder.setOnClickListener(R.id.tv_del, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (aty != null) {
+                            ((MainActivity) aty).RemoveEasyCart(item,true);
+                        }
                     }
                 });
             }
@@ -103,7 +110,6 @@ public class EasyCartFragment extends BaseFragment<BaseFragmentPresenter, Fragme
                     if (aty != null) {
                         ((MainActivity) aty).UpdateAllEasyCartSelect(false);
                     }
-
                 } else {
                     mBinding.imgAllSelect.setSelected(true);
                     if (aty != null) {
@@ -126,19 +132,20 @@ public class EasyCartFragment extends BaseFragment<BaseFragmentPresenter, Fragme
         updateState();
     }
 
-    public void updateState()
-    {
-        int count=0;//商品数量
-        double price=0;//商品价格
-        for (ProductListModel.ReturnDataBean bean:mDataList) {
+    /**
+     * 更新总价格显示
+     */
+    public void updateState() {
+        int count = 0;//商品数量
+        double price = 0;//商品价格
+        for (ProductListModel.ReturnDataBean bean : mDataList) {
             if (bean.isIs_select()) {
                 count++;
-                price=price+(bean.getS_price() * (bean.getCount() + 1));
+                price = price + (bean.getS_price() * (bean.getCount() + 1));
             }
-
         }
-        mBinding.tvTotalPrice.setText("￥"+price);
-        mBinding.tvCountHint.setText("结算("+count+")");
+        mBinding.tvTotalPrice.setText("￥" + price);
+        mBinding.tvCountHint.setText("结算(" + count + ")");
 
     }
 

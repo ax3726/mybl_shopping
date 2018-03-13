@@ -1,11 +1,13 @@
 package com.ycblsc.prestener.home;
 
+import com.ycblsc.base.BaseFragment;
 import com.ycblsc.base.BaseFragmentPresenter;
 import com.ycblsc.base.EmptyState;
 import com.ycblsc.common.Api;
 import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.model.home.ProuductTypeModel;
 import com.ycblsc.model.home.ShopInfoModel;
+import com.ycblsc.model.shopping.ImageDataModel;
 import com.ycblsc.net.UploadFileRequestBody;
 import com.ycblsc.view.IHomeView;
 
@@ -55,7 +57,15 @@ public class HomePrestener extends BaseFragmentPresenter<IHomeView> {
                     }
                 });
     }
-
+    public void getImageData() {
+        Api.getApi().getImageData("49").compose(callbackOnIOToMainThread()).subscribe(new BaseNetSubscriber<ImageDataModel>() {
+            @Override
+            public void onNext(ImageDataModel baseBean) {
+                super.onNext(baseBean);
+                getView().getImageData(baseBean);
+            }
+        });
+    }
     public void getShopInfo(String id) {
         Api.getApi().getShopInfo(id)
                 .compose(callbackOnIOToMainThread())

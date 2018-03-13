@@ -16,10 +16,12 @@ import com.ycblsc.R;
 import com.ycblsc.base.BaseFragment;
 import com.ycblsc.base.EmptyState;
 import com.ycblsc.base.StateModel;
+import com.ycblsc.common.Api;
 import com.ycblsc.databinding.FragmentHomeLayoutBinding;
 import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.model.home.ProuductTypeModel;
 import com.ycblsc.model.home.ShopInfoModel;
+import com.ycblsc.model.shopping.ImageDataModel;
 import com.ycblsc.prestener.home.HomePrestener;
 import com.ycblsc.ui.main.MainActivity;
 import com.ycblsc.view.IHomeView;
@@ -71,8 +73,10 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
             }
         });
         initAdapter();
+
       //  mPresenter.getShopInfo("18");
         mPresenter.getProductType();
+        mPresenter.getImageData();
 
     }
 
@@ -234,6 +238,17 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
     public void getShopInfo(ShopInfoModel model) {
         if (model.getReturnData()!=null&&model.getReturnData().size()>0) {
             mBinding.tvScanResult.setText(model.getReturnData().get(0).getS_weizhi());
+        }
+    }
+
+    @Override
+    public void getImageData(ImageDataModel model) {
+        if (model.getReturnData().size() > 0) {
+            List<String> urls = new ArrayList<>();
+            for (ImageDataModel.ReturnDataBean bean : model.getReturnData()) {
+                urls.add(bean.getF_Img());
+            }
+            mBinding.fbRoll.setImagesUrl(urls);
         }
     }
 

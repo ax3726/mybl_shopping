@@ -42,6 +42,7 @@ public class LoginActivity extends BaseActivity<BasePresenter, ActivityLoginBind
     protected void initData() {
         super.initData();
 
+
     }
 
 
@@ -95,7 +96,7 @@ public class LoginActivity extends BaseActivity<BasePresenter, ActivityLoginBind
                         super.onNext(baseBean);
                         JPushInterface.setAlias(aty, 1, String.valueOf(baseBean.getReturnData()));
 
-                        CacheService.getIntance().setUser(new UserModel(String.valueOf(baseBean.getReturnData()), phone));//保存用户信息
+                        CacheService.getIntance().setUser(new UserModel(String.valueOf(baseBean.getReturnData()), phone,pwd));//保存用户信息
                         showToast("登录成功！");
                         new Thread() {
                             @Override

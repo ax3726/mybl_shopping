@@ -55,7 +55,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
     @Override
     protected void initData() {
         super.initData();
-        mStateModel.setEmptyState(EmptyState.PROGRESS);
+      /*  mStateModel.setEmptyState(EmptyState.PROGRESS);
         mStateModel.setIOnClickListener(new StateModel.IOnClickListener() {
             @Override
             public void click(View view) {
@@ -65,7 +65,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
         });
         initAdapter();
         mPresenter.getProductType();
-        mPresenter.getImageData();
+        mPresenter.getImageData();*/
     }
 
     @Override

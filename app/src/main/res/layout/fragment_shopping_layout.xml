@@ -7,9 +7,10 @@
         android:focusableInTouchMode="true"
         android:layout_height="match_parent">
 
-        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+  <com.scwang.smartrefresh.layout.SmartRefreshLayout
             android:id="@+id/srl_shopping"
             android:layout_width="match_parent"
+      android:visibility="gone"
             android:layout_height="match_parent">
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -166,5 +167,11 @@
     </com.zhy.autolayout.AutoLinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="暂未开放"
+            />
     </com.zhy.autolayout.AutoLinearLayout>
 </layout>

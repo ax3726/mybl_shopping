@@ -10,6 +10,11 @@ import java.io.Serializable;
 public class UserModel implements Serializable{
     private String id;
     private String phone;
+    private String pwd;
+
+    public String getPwd() {
+        return pwd;
+    }
 
     public String getId() {
         return id;
@@ -27,8 +32,9 @@ public class UserModel implements Serializable{
         this.phone = phone;
     }
     public UserModel(){}
-    public UserModel(String id, String phone) {
+    public UserModel(String id, String phone,String pwd) {
         this.id = id;
         this.phone = phone;
+        this.pwd = pwd;
     }
 }

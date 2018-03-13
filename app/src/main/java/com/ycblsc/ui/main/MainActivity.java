@@ -313,6 +313,23 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
         mBuyCartFragment.updatemEasyCartData(mEasyCartList);
     }
     /**
+     * 移除便利架购物车
+     */
+    public void RemoveEasyCart(ProductListModel.ReturnDataBean dataBean,boolean bl)
+    {
+        int index=-1;
+        for (int i = 0; i <mEasyCartList.size(); i++) {
+            if (dataBean.getId()==mEasyCartList.get(i).getId()) {
+                index=i;
+                break;
+            }
+        }
+        if (index != -1) {
+           mEasyCartList.remove(index);
+        }
+        mBuyCartFragment.updatemEasyCartData(mEasyCartList);
+    }
+    /**
      * 移除商城购物车
      */
     public void RemoveShoppingCart(ProductListModel.ReturnDataBean dataBean)

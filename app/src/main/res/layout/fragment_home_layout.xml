@@ -221,6 +221,12 @@
 
                     </com.zhy.autolayout.AutoRelativeLayout>
 
+                    <com.lm.base.library.widget.flybanner.FlyBanner
+                        android:id="@+id/fb_roll"
+                        android:layout_width="match_parent"
+                        android:layout_height="200px">
+
+                    </com.lm.base.library.widget.flybanner.FlyBanner>
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="10px"
