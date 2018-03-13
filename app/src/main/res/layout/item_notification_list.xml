@@ -4,33 +4,37 @@
     android:layout_height="wrap_content"
     android:background="@color/colorWhite">
 
-    <com.zhy.autolayout.AutoLinearLayout
+    <com.zhy.autolayout.AutoRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:background="@color/colorWhite"
-        android:orientation="horizontal"
-        android:padding="30px">
+        android:padding="20px">
 
         <TextView
             android:id="@+id/tv_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:drawableLeft="@drawable/ic_my_message"
+            android:drawablePadding="20px"
+            android:ellipsize="end"
+            android:maxEms="11"
+            android:singleLine="true"
             android:text="12-10充值100元"
-            android:textSize="36px"
-            android:textColor="@color/color4d4d4d" />
+            android:textColor="@color/color4d4d4d"
+            android:textSize="36px" />
 
         <TextView
             android:id="@+id/tv_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_marginLeft="60px"
-            android:gravity="center"
             android:text="2017-12-1"
-            android:textSize="24px"
-            />
+            android:layout_centerVertical="true"
+            android:textSize="24px" />
 
-    </com.zhy.autolayout.AutoLinearLayout>
+    </com.zhy.autolayout.AutoRelativeLayout>
 
 </com.zhy.autolayout.AutoRelativeLayout>
