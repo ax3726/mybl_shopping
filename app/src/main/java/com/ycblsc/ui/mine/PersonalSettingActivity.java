@@ -19,6 +19,7 @@ public class PersonalSettingActivity extends BaseActivity<BasePresenter, Activit
     @Override
     protected void initTitleBar() {
         super.initTitleBar();
+        //
         mTitleBarLayout.setTitle("个人设置");
     }
 
