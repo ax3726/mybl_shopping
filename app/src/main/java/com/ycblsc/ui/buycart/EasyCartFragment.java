@@ -1,5 +1,6 @@
 package com.ycblsc.ui.buycart;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
@@ -120,10 +121,11 @@ public class EasyCartFragment extends BaseFragment<BaseFragmentPresenter, Fragme
                 }
             }
         });
+
         mBinding.tvCountHint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(getActivity(),PaymentActivity.class));
             }
         });
     }

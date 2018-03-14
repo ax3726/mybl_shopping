@@ -48,7 +48,7 @@
                 </com.zhy.autolayout.AutoLinearLayout>
 
                 <Button
-                    android:id="@+id/btn_login_youke"
+                    android:id="@+id/btn_immediate_payment"
                     android:layout_width="400px"
                     android:layout_height="80px"
                     android:layout_gravity="center"

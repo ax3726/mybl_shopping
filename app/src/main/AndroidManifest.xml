@@ -97,6 +97,10 @@
         <activity
             android:name=".ui.mine.RetrievePwdActivity"
             android:screenOrientation="portrait" />
+        <!--支付方式-->
+        <activity
+            android:name=".ui.buycart.PaymentActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".ui.main.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

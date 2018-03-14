@@ -168,4 +168,14 @@ public interface ApiService {
     //找回密码
     @GET("AppService.aspx?CMD=GetPassword")
     Flowable<BaseBean> getGetPassword(@Query("telphone") String telphone);
+
+    //余额支付
+    @POST("AppServicePost.aspx?CMD=Order")
+    Flowable<BaseBean> getPay(@Query("id") String id,
+                              @Query("orderMoney") String orderMoney
+            , @Query("orderType") String orderType
+            , @Query("proCount") String proCount
+            , @Query("proId") String proId
+            , @Query("proPrice") String proPrice
+            , @Query("shopid") String shopid);
 }

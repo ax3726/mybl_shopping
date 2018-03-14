@@ -5,9 +5,14 @@ import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ycblsc.R;
 import com.ycblsc.base.BaseActivity;
@@ -35,6 +40,7 @@ public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRe
     private CommonAdapter<MineRechargeModel.ReturnDataBean> mRechargeAdapter;//会员充值
     private List<MineRechargeModel.ReturnDataBean> mRechargeTypes = new ArrayList<>();
     private String url;
+    private String payMoney;
 
     @Override
     protected void initTitleBar() {
@@ -56,7 +62,7 @@ public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRe
     protected void initEvent() {
         super.initEvent();
         mBinding.tvRecharge.setOnClickListener(this);
-
+        mBinding.btnImmediatePayment.setOnClickListener(this);
     }
 
     @Override
@@ -66,7 +72,65 @@ public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRe
             case R.id.tv_Recharge:
                 startActivity(new Intent(this, RechargeProtocolActivity.class));
                 break;
+            //立即支付
+            case R.id.btn_immediate_payment:
+                showPopueWindow();
+                showToast("金额=="+payMoney);
+                break;
         }
+    }
+
+
+    private void showPopueWindow() {
+        View popView = View.inflate(this, R.layout.item_pay_layout, null);
+        Button btn_pay_alipay = (Button) popView.findViewById(R.id.btn_pay_alipay);
+        Button btn_pay_weixin = (Button) popView.findViewById(R.id.btn_pay_weixin);
+        Button bt_cancle = (Button) popView.findViewById(R.id.btn_pay_cancel);
+        //获取屏幕宽高
+        int weight = getResources().getDisplayMetrics().widthPixels;
+        int height = getResources().getDisplayMetrics().heightPixels * 1 / 3;
+
+        final PopupWindow popupWindow = new PopupWindow(popView, weight, height);
+        popupWindow.setAnimationStyle(R.style.anim_popup_dir);
+        popupWindow.setFocusable(true);
+        //点击外部popueWindow消失
+        popupWindow.setOutsideTouchable(true);
+        //支付宝充值
+        btn_pay_alipay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+        //微信充值
+        btn_pay_weixin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+        //取消
+        bt_cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+        //popupWindow消失屏幕变为不透明
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                WindowManager.LayoutParams lp = getWindow().getAttributes();
+                lp.alpha = 1.0f;
+                getWindow().setAttributes(lp);
+            }
+        });
+        //popupWindow出现屏幕变为半透明
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.alpha = 0.5f;
+        getWindow().setAttributes(lp);
+        popupWindow.showAtLocation(popView, Gravity.BOTTOM, 0, 50);
+
     }
 
     @Override
@@ -97,11 +161,16 @@ public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRe
                 TextView tv_coupon = holder.getView(R.id.tv_coupon);
                 tv_mony.setText(item.getTf_Money() + "元");
                 tv_coupon.setText("送" + item.getZengsong() + "元劵");
+
                 if (!item.isState()) {
                     lly_item.setBackgroundResource(R.drawable.shape_recharge_bg);
                 } else {
                     lly_item.setBackgroundResource(R.drawable.ic_recharge_bg);
                 }
+//                if (position==0){
+//                    lly_item.setBackgroundResource(R.drawable.ic_recharge_bg);
+//                    payMoney=mRechargeTypes.get(0).getTf_Money();
+//                }
             }
         };
         mBinding.rcRecharge.setLayoutManager(new GridLayoutManager(aty, 2));
@@ -110,10 +179,13 @@ public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRe
         mRechargeAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
+                payMoney=mRechargeTypes.get(position).getTf_Money();
+
                 for (int i = 0; i < mRechargeTypes.size(); i++) {
                     mRechargeTypes.get(i).setState(position == i);
                 }
                 mRechargeAdapter.notifyDataSetChanged();
+
             }
 
             @Override

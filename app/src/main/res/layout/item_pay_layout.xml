@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:paddingBottom="10dp">
+
+        <Button
+            android:id="@+id/btn_pay_alipay"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="#ffff"
+            android:text="支付宝充值"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btn_pay_weixin"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="#ffff"
+            android:text="微信充值"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btn_pay_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
+            android:background="#ffff"
+            android:text="取消"
+            android:textSize="18sp" />
+    </com.zhy.autolayout.AutoLinearLayout>
+
+</com.zhy.autolayout.AutoRelativeLayout>
