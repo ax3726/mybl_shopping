@@ -85,19 +85,19 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
                             changeFragment(0);
                         }
                         break;
-                    case R.id.rb_shopping:
+                    /*case R.id.rb_shopping:
+                        if (currentFragmentPosition != 1) {
+                            changeFragment(1);
+                        }
+                        break;*/
+                    case R.id.rb_buy_cart:
                         if (currentFragmentPosition != 1) {
                             changeFragment(1);
                         }
                         break;
-                    case R.id.rb_buy_cart:
+                    case R.id.rb_mine:
                         if (currentFragmentPosition != 2) {
                             changeFragment(2);
-                        }
-                        break;
-                    case R.id.rb_mine:
-                        if (currentFragmentPosition != 3) {
-                            changeFragment(3);
                         }
                         break;
                 }
@@ -113,7 +113,7 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
 
 
         mFragments.add(mHomeFragment);
-        mFragments.add(mShoppingFragment);
+     //   mFragments.add(mShoppingFragment);
         mFragments.add(mBuyCartFragment);
         mFragments.add(mMineFragment);
         mFm = getSupportFragmentManager();

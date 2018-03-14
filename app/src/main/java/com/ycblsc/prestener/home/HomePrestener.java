@@ -27,18 +27,18 @@ public class HomePrestener extends BaseFragmentPresenter<IHomeView> {
     public void getProductType() {
         Api.getApi().getProductType()
                 .compose(callbackOnIOToMainThread())
-                .subscribe(new BaseNetSubscriber<ProuductTypeModel>() {
+                .subscribe(new BaseNetSubscriber<ProuductTypeModel>(true) {
                     @Override
                     public void onNext(ProuductTypeModel baseBean) {
                         super.onNext(baseBean);
                         getView().getProuductType(baseBean);
                     }
 
-                    @Override
+                   /* @Override
                     public void onError(Throwable e) {
                         super.onError(e);
                         getView().setEmptyState(EmptyState.EMPTY);
-                    }
+                    }*/
                 });
     }
 
@@ -57,6 +57,25 @@ public class HomePrestener extends BaseFragmentPresenter<IHomeView> {
                     }
                 });
     }
+
+    /**
+     * 获取推荐商品信息
+     * @param id
+     */
+    public void getRecommend(
+             String id   //便利架id
+             ) {
+        Api.getApi().getProductList("01", id, "1", "1", "10")
+                .compose(callbackOnIOToMainThread())
+                .subscribe(new BaseNetSubscriber<ProductListModel>() {
+                    @Override
+                    public void onNext(ProductListModel baseBean) {
+                        super.onNext(baseBean);
+                        getView().getRecommend(baseBean);
+                    }
+                });
+    }
+
     public void getImageData() {
         Api.getApi().getImageData("49").compose(callbackOnIOToMainThread()).subscribe(new BaseNetSubscriber<ImageDataModel>() {
             @Override

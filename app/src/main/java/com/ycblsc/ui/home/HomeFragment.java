@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.lm.base.library.adapters.recyclerview.CommonAdapter;
 import com.lm.base.library.adapters.recyclerview.base.ViewHolder;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -46,15 +47,16 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
         return R.layout.fragment_home_layout;
     }
 
+    private String mEasyId = "";//便利架id
 
     private CommonAdapter<ProuductTypeModel.ReturnDataBean> mGoodsTypeAdapter;//商品分类
     private CommonAdapter<ProductListModel.ReturnDataBean> mGoodsListAdapter;//商品列表
     private List<ProuductTypeModel.ReturnDataBean> mGoodsTypes = new ArrayList<>();
     private List<ProductListModel.ReturnDataBean> mGoodsList = new ArrayList<>();
-
+    private  ProductListModel.ReturnDataBean mTuijianData=null;//推荐商品信息
     private int mCurPosition = 0;//记录当前分类的下标
     private int mPage = 1;
-    private int mSize = 4;
+    private int mSize = 10;
 
     @Override
     protected HomePrestener createPresenter() {
@@ -64,20 +66,17 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
     @Override
     protected void initData() {
         super.initData();
-        mStateModel.setEmptyState(EmptyState.PROGRESS);
+       /* mStateModel.setEmptyState(EmptyState.PROGRESS);
         mStateModel.setIOnClickListener(new StateModel.IOnClickListener() {
             @Override
             public void click(View view) {
                 mStateModel.setEmptyState(EmptyState.PROGRESS);
                 mPresenter.getProductType();
             }
-        });
+        });*/
         initAdapter();
-
-      //  mPresenter.getShopInfo("18");
-        mPresenter.getProductType();
         mPresenter.getImageData();
-
+        mBinding.srlGoodsList.finishLoadmoreWithNoMoreData();
     }
 
     @Override
@@ -94,7 +93,12 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
         mBinding.imgShopping.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // showWaitDialog();
+
+                if (aty != null) {
+                    ((MainActivity) aty).AddEasyCart(mTuijianData);
+
+                    ((MainActivity) aty).addCart(mBinding.imgShopping);
+                }
             }
         });
         mBinding.imgMianfeianzhuang.setOnClickListener(new View.OnClickListener() {
@@ -103,6 +107,7 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
                 startActivity(InstallEasyActivity.class);
             }
         });
+
     }
 
 
@@ -131,7 +136,7 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
                             notifyDataSetChanged();
                             mPage = 1;
                             mSize = 10;
-                            mPresenter.getProductList(item.getF_CODE(), "18", "", mPage + "", mSize + "");
+                            mPresenter.getProductList(item.getF_CODE(), mEasyId, "", mPage + "", mSize + "");
                         }
 
                     }
@@ -153,10 +158,10 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
                 img_shopping.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (aty!=null) {
-                            ((MainActivity)aty).AddEasyCart(item);
+                        if (aty != null) {
+                            ((MainActivity) aty).AddEasyCart(item);
 
-                            ((MainActivity)aty).addCart(img_shopping);
+                            ((MainActivity) aty).addCart(img_shopping);
                         }
 
                     }
@@ -177,7 +182,7 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
             public void onLoadmore(RefreshLayout refreshlayout) {
                 if (mCurPosition < mGoodsTypes.size()) {
                     mPage++;
-                    mPresenter.getProductList(mGoodsTypes.get(mCurPosition).getF_CODE(), "18", "", mPage + "", mSize + "");
+                    mPresenter.getProductList(mGoodsTypes.get(mCurPosition).getF_CODE(), mEasyId, "", mPage + "", mSize + "");
                 }
 
             }
@@ -195,8 +200,8 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
 
                 String content = data.getStringExtra(DECODED_CONTENT_KEY);
                 //    Bitmap bitmap = data.getParcelableExtra(DECODED_BITMAP_KEY);
+                mPresenter.getShopInfo(content);
 
-                mBinding.tvScanResult.setText(content);
 
             }
         }
@@ -206,9 +211,10 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
     public void getProuductType(ProuductTypeModel typeModel) {
         mGoodsTypes.clear();
         if (typeModel.getReturnData().size() > 0) {
+            mBinding.imgAll.setVisibility(View.VISIBLE);
             mGoodsTypes.addAll(typeModel.getReturnData());
             mCurPosition = 0;
-            mPresenter.getProductList(mGoodsTypes.get(0).getF_CODE(), "18", "", mPage + "", mSize + "");
+            mPresenter.getProductList(mGoodsTypes.get(0).getF_CODE(), mEasyId, "", mPage + "", mSize + "");
         }
         mGoodsTypeAdapter.notifyDataSetChanged();
     }
@@ -236,8 +242,11 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
 
     @Override
     public void getShopInfo(ShopInfoModel model) {
-        if (model.getReturnData()!=null&&model.getReturnData().size()>0) {
+        if (model.getReturnData() != null && model.getReturnData().size() > 0) {
             mBinding.tvScanResult.setText(model.getReturnData().get(0).getS_weizhi());
+            mEasyId = model.getReturnData().get(0).getId() + "";
+            mPresenter.getProductType();
+            mPresenter.getRecommend(mEasyId);
         }
     }
 
@@ -249,6 +258,20 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
                 urls.add(bean.getF_Img());
             }
             mBinding.fbRoll.setImagesUrl(urls);
+        }
+    }
+
+    @Override
+    public void getRecommend(ProductListModel model) {
+        if (model != null && model.getReturnData().size() > 0) {
+            mBinding.rlyTuijian.setVisibility(View.VISIBLE);
+            mTuijianData = model.getReturnData().get(0);
+            Glide.with(aty).load(mTuijianData.getImg()).into(mBinding.imgTuijian);
+            mBinding.tvTitle.setText(mTuijianData.getS_products());
+            mBinding.tvDes.setText(mTuijianData.getJianjie());
+            mBinding.tvPrice.setText("¥" + mTuijianData.getS_price());
+        } else {
+            mBinding.rlyTuijian.setVisibility(View.GONE);
         }
     }
 

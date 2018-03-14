@@ -49,7 +49,7 @@
                     android:textSize="28px" />
 
 
-                <RadioButton
+             <!--   <RadioButton
                     android:id="@+id/rb_shopping"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
                     android:gravity="center"
                     android:text="商城"
                     android:textColor="@color/selector_foot_color"
-                    android:textSize="28px" />
+                    android:textSize="28px" />-->
 
                 <RadioButton
                     android:id="@+id/rb_buy_cart"

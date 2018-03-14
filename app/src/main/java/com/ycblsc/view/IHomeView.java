@@ -16,4 +16,5 @@ public interface IHomeView extends BaseFragmentView {
     void getProuductList(ProductListModel typeModel);
     void getShopInfo(ShopInfoModel model);
     void getImageData(ImageDataModel model);
+    void getRecommend(ProductListModel model);
 }

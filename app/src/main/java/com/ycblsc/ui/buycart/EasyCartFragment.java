@@ -8,6 +8,7 @@ import com.ycblsc.base.BaseFragment;
 import com.ycblsc.base.BaseFragmentPresenter;
 import com.ycblsc.databinding.FragmentEasyCartBinding;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import com.lm.base.library.adapters.recyclerview.CommonAdapter;
 import com.lm.base.library.adapters.recyclerview.base.ViewHolder;
 import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.ui.main.MainActivity;
+import com.ycblsc.utils.MyBigDecimal;
 
 /**
  * Created by LiMing on 2018/1/1.
@@ -59,7 +61,7 @@ public class EasyCartFragment extends BaseFragment<BaseFragmentPresenter, Fragme
                 holder.setText(R.id.tv_title, item.getS_products());
                 holder.setText(R.id.tv_price, "¥" + item.getS_price());
                 holder.setText(R.id.tv_count, String.valueOf(item.getCount() + 1));
-                holder.setText(R.id.tv_total_price, String.valueOf(item.getS_price() * (item.getCount() + 1)));
+                holder.setText(R.id.tv_total_price, String.valueOf(MyBigDecimal.mul(item.getS_price() , item.getCount() + 1)));
                 holder.setSelect(R.id.img_select, item.isIs_select());
                 holder.setOnClickListener(R.id.tv_add, new View.OnClickListener() {
                     @Override
@@ -118,6 +120,12 @@ public class EasyCartFragment extends BaseFragment<BaseFragmentPresenter, Fragme
                 }
             }
         });
+        mBinding.tvCountHint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     /**
@@ -141,10 +149,11 @@ public class EasyCartFragment extends BaseFragment<BaseFragmentPresenter, Fragme
         for (ProductListModel.ReturnDataBean bean : mDataList) {
             if (bean.isIs_select()) {
                 count++;
-                price = price + (bean.getS_price() * (bean.getCount() + 1));
+                price = MyBigDecimal.add(price,MyBigDecimal.mul(bean.getS_price(),bean.getCount() + 1));
             }
         }
-        mBinding.tvTotalPrice.setText("￥" + price);
+        DecimalFormat df = new DecimalFormat("0.00");
+        mBinding.tvTotalPrice.setText("￥" + df.format(price));
         mBinding.tvCountHint.setText("结算(" + count + ")");
 
     }

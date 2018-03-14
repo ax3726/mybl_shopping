@@ -42,14 +42,14 @@ public class BuyCartFragment extends BaseFragment<BuyCartPrestener, FragmentBuyc
     @Override
     protected void initData() {
         super.initData();
-        mStateModel.setEmptyState(EmptyState.PROGRESS);
+       /* mStateModel.setEmptyState(EmptyState.PROGRESS);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 mStateModel.setEmptyState(EmptyState.NORMAL);
             }
-        },2000);
+        },2000);*/
 
         title.add("便利架");
         title.add("商城");
