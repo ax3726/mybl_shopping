@@ -18,6 +18,8 @@ import io.reactivex.Flowable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -170,12 +172,13 @@ public interface ApiService {
     Flowable<BaseBean> getGetPassword(@Query("telphone") String telphone);
 
     //余额支付
+    @FormUrlEncoded
     @POST("AppServicePost.aspx?CMD=Order")
-    Flowable<BaseBean> getPay(@Query("id") String id,
-                              @Query("orderMoney") String orderMoney
-            , @Query("orderType") String orderType
-            , @Query("proCount") String proCount
-            , @Query("proId") String proId
-            , @Query("proPrice") String proPrice
-            , @Query("shopid") String shopid);
+    Flowable<BaseBean> getPay(@Field("id") String id,
+                              @Field("orderMoney") String orderMoney
+            , @Field("orderType") String orderType
+            , @Field("proCount") String proCount
+            , @Field("proId") String proId
+            , @Field("proPrice") String proPrice
+            , @Field("shopid") String shopid);
 }

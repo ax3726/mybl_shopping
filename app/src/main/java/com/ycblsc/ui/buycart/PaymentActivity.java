@@ -86,7 +86,7 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
             public void onClick(View v) {
                 if (mBinding.radBalance.isChecked()) {
                     initPayMethod();//余额支付接口
-                  //  return;
+                    //  return;
                 }
                 if (mBinding.radWeixin.isChecked()) {
                     showToast("暂未开通");
@@ -107,9 +107,9 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
     @Override
     protected void initData() {
         super.initData();
-        proCount=new StringBuilder();
-        proId=new StringBuilder();
-        proPrice=new StringBuilder();
+        proCount = new StringBuilder();
+        proId = new StringBuilder();
+        proPrice = new StringBuilder();
 
         mData = getIntent().getParcelableArrayListExtra("data");//获取购物车传过来的商品信息   其中count字段为商品的个数   并且count是从0开始的  即个数=count+1
         if (CacheService.getIntance().isLogin()) {
@@ -118,11 +118,11 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
 
         if (mData.size() > 0) {
             for (int i = 0; i < mData.size(); i++) {
-                proCount.append(mData.get(i).getCount()+ 1 + "|");
+                proCount.append(mData.get(i).getCount() + 1 + "|");
                 proId.append(mData.get(i).getId() + "|");
                 proPrice.append(mData.get(i).getS_price() + "|");
             }
-            shopCount = proCount.substring(0, proCount.length() - 1) ;
+            shopCount = proCount.substring(0, proCount.length() - 1);
             shopId = proId.substring(0, proId.length() - 1);
             shopPrice = proPrice.substring(0, proPrice.length() - 1);
 

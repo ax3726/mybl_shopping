@@ -148,6 +148,7 @@ public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRe
         mPresenter.getMoneyOrder();
         //充值协议/说明
         mPresenter.getImageData("51");
+
         initAdapter();
     }
 
@@ -167,10 +168,6 @@ public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRe
                 } else {
                     lly_item.setBackgroundResource(R.drawable.ic_recharge_bg);
                 }
-//                if (position==0){
-//                    lly_item.setBackgroundResource(R.drawable.ic_recharge_bg);
-//                    payMoney=mRechargeTypes.get(0).getTf_Money();
-//                }
             }
         };
         mBinding.rcRecharge.setLayoutManager(new GridLayoutManager(aty, 2));
@@ -180,7 +177,6 @@ public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRe
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
                 payMoney=mRechargeTypes.get(position).getTf_Money();
-
                 for (int i = 0; i < mRechargeTypes.size(); i++) {
                     mRechargeTypes.get(i).setState(position == i);
                 }
@@ -197,9 +193,12 @@ public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRe
 
     @Override
     public void getMoneyOrder(MineRechargeModel typeModel) {
+
         mRechargeTypes.clear();
         if (typeModel.getReturnData().size() > 0) {
             mRechargeTypes.addAll(typeModel.getReturnData());
+            mRechargeTypes.get(0).setState(true);
+            payMoney=mRechargeTypes.get(0).getTf_Money();
         }
         mRechargeAdapter.notifyDataSetChanged();
     }
