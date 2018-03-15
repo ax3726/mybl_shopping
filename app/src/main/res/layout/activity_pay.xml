@@ -7,7 +7,7 @@
         android:background="@color/colorWhite"
         android:orientation="vertical">
 
-        <RadioGroup
+        <com.ycblsc.utils.CustomNestRadioGroup
             android:id="@+id/rad_pay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,9 +25,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="蚁巢会员支付"
+                    android:checked="true"
                     android:textSize="32px" />
 
                 <TextView
+                    android:id="@+id/tv_payment_balance"
                     android:layout_width="300px"
                     android:layout_height="60px"
                     android:layout_alignParentRight="true"
@@ -77,6 +79,7 @@
                     android:textSize="32px" />
 
                 <TextView
+                    android:id="@+id/tv_payment_weixin"
                     android:layout_width="300px"
                     android:layout_height="60px"
                     android:layout_alignParentRight="true"
@@ -95,16 +98,16 @@
                 android:layout_marginTop="60px">
 
                 <RadioButton
-                    android:id="@+id/rad_Alipay"
+                    android:id="@+id/rad_alipay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:drawableLeft="@drawable/ic_cart_alipay"
                     android:drawablePadding="10px"
                     android:text="支付宝支付"
                     android:textSize="32px" />
 
                 <TextView
+                    android:id="@+id/tv_payment_zhifubao"
                     android:layout_width="300px"
                     android:layout_height="60px"
                     android:layout_alignParentRight="true"
@@ -116,7 +119,7 @@
                     android:textColor="@color/color202020" />
             </com.zhy.autolayout.AutoRelativeLayout>
 
-        </RadioGroup>
+        </com.ycblsc.utils.CustomNestRadioGroup>
 
         <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
@@ -126,7 +129,7 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/btn_Determine"
+                android:id="@+id/btn_determine"
                 android:layout_width="300px"
                 android:layout_height="70px"
                 android:layout_gravity="center"

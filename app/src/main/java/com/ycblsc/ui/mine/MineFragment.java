@@ -113,6 +113,7 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
         initAdapter();
         mPresenter.getImageData();//个人中心广告位
         if (CacheService.getIntance().isLogin()) {
+            mBinding.imgRegister.setVisibility(View.GONE);
             mPresenter.getPersonInfo(CacheService.getIntance().getUserId());
             mPresenter.getPersonMessage(CacheService.getIntance().getUserId(), 1, 10);//个人通知信息
         }

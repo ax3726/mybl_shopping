@@ -27,6 +27,7 @@ public class EasyCartFragment extends BaseFragment<BaseFragmentPresenter, Fragme
 
     private CommonAdapter<ProductListModel.ReturnDataBean> mAdapter;
     private List<ProductListModel.ReturnDataBean> mDataList = new ArrayList<>();
+    private String mTotal;//总价、订单金额
 
     @Override
     public int getLayoutId() {
@@ -62,7 +63,7 @@ public class EasyCartFragment extends BaseFragment<BaseFragmentPresenter, Fragme
                 holder.setText(R.id.tv_title, item.getS_products());
                 holder.setText(R.id.tv_price, "¥" + item.getS_price());
                 holder.setText(R.id.tv_count, String.valueOf(item.getCount() + 1));
-                holder.setText(R.id.tv_total_price, String.valueOf(MyBigDecimal.mul(item.getS_price() , item.getCount() + 1)));
+                holder.setText(R.id.tv_total_price, String.valueOf(MyBigDecimal.mul(item.getS_price(), item.getCount() + 1)));
                 holder.setSelect(R.id.img_select, item.isIs_select());
                 holder.setOnClickListener(R.id.tv_add, new View.OnClickListener() {
                     @Override
@@ -92,7 +93,7 @@ public class EasyCartFragment extends BaseFragment<BaseFragmentPresenter, Fragme
                     @Override
                     public void onClick(View v) {
                         if (aty != null) {
-                            ((MainActivity) aty).RemoveEasyCart(item,true);
+                            ((MainActivity) aty).RemoveEasyCart(item, true);
                         }
                     }
                 });
@@ -125,26 +126,25 @@ public class EasyCartFragment extends BaseFragment<BaseFragmentPresenter, Fragme
         mBinding.tvCountHint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (aty!=null) {
+                if (aty != null) {
                     List<ProductListModel.ReturnDataBean> returnDataBeans = ((MainActivity) aty).getmEasyCartList();
-                    ArrayList<ProductListModel.ReturnDataBean> beans=new ArrayList<>();
+                    ArrayList<ProductListModel.ReturnDataBean> beans = new ArrayList<>();
                     for (ProductListModel.ReturnDataBean bean : returnDataBeans) {
                         if (bean.isIs_select()) {
                             beans.add(bean);
                         }
                     }
-
                     if (beans.size() > 0) {
                         startActivity(
-                                new Intent(getActivity(),PaymentActivity.class)
-                                .putParcelableArrayListExtra("data",beans));
+                                new Intent(getActivity(), PaymentActivity.class)
+                                        .putExtra("mTotal", mTotal)
+                                        .putParcelableArrayListExtra("data", beans));
                     } else {
                         showToast("请至少选择一个商品！");
                     }
 
 
                 }
-
 
 
             }
@@ -172,11 +172,12 @@ public class EasyCartFragment extends BaseFragment<BaseFragmentPresenter, Fragme
         for (ProductListModel.ReturnDataBean bean : mDataList) {
             if (bean.isIs_select()) {
                 count++;
-                price = MyBigDecimal.add(price,MyBigDecimal.mul(bean.getS_price(),bean.getCount() + 1));
+                price = MyBigDecimal.add(price, MyBigDecimal.mul(bean.getS_price(), bean.getCount() + 1));
             }
         }
         DecimalFormat df = new DecimalFormat("0.00");
-        mBinding.tvTotalPrice.setText("￥" + df.format(price));
+        mTotal=df.format(price);
+        mBinding.tvTotalPrice.setText("￥" + mTotal);
         mBinding.tvCountHint.setText("结算(" + count + ")");
 
     }
