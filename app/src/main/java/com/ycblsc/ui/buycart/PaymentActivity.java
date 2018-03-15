@@ -10,8 +10,11 @@ import com.ycblsc.common.CacheService;
 import com.ycblsc.databinding.ActivityPayBinding;
 import com.ycblsc.databinding.ActivityRegisterBinding;
 import com.ycblsc.model.BaseBean;
+import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.model.mine.PersonInfoModel;
 import com.ycblsc.ui.main.LoginActivity;
+
+import java.util.ArrayList;
 
 /**
  * Created by Administrator on 2018/3/14.
@@ -20,6 +23,8 @@ import com.ycblsc.ui.main.LoginActivity;
 
 public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBinding> {
 
+
+     private ArrayList<ProductListModel.ReturnDataBean> mData=new ArrayList<>();//选择的商品
     @Override
     public int getLayoutId() {
         return R.layout.activity_pay;
@@ -44,6 +49,9 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
     @Override
     protected void initData() {
         super.initData();
+        mData=getIntent().getParcelableArrayListExtra("data");//获取购物车传过来的商品信息   其中count字段为商品的个数   并且count是从0开始的  即个数=count+1
+
+
         if (CacheService.getIntance().isLogin()) {
             initPersonData();
         }
