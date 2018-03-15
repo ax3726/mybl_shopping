@@ -125,7 +125,28 @@ public class EasyCartFragment extends BaseFragment<BaseFragmentPresenter, Fragme
         mBinding.tvCountHint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(),PaymentActivity.class));
+                if (aty!=null) {
+                    List<ProductListModel.ReturnDataBean> returnDataBeans = ((MainActivity) aty).getmEasyCartList();
+                    ArrayList<ProductListModel.ReturnDataBean> beans=new ArrayList<>();
+                    for (ProductListModel.ReturnDataBean bean : returnDataBeans) {
+                        if (bean.isIs_select()) {
+                            beans.add(bean);
+                        }
+                    }
+
+                    if (beans.size() > 0) {
+                        startActivity(
+                                new Intent(getActivity(),PaymentActivity.class)
+                                .putParcelableArrayListExtra("data",beans));
+                    } else {
+                        showToast("请至少选择一个商品！");
+                    }
+
+
+                }
+
+
+
             }
         });
     }

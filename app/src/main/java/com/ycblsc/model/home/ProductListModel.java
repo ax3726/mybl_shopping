@@ -1,5 +1,8 @@
 package com.ycblsc.model.home;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
@@ -42,7 +45,8 @@ public class ProductListModel {
         this.ReturnData = ReturnData;
     }
 
-    public static class ReturnDataBean {
+    public static class ReturnDataBean implements Parcelable {
+
         /**
          * temp_row_number : 1
          * temp_column : 0
@@ -224,5 +228,68 @@ public class ProductListModel {
         public void setJianjie(String jianjie) {
             this.jianjie = jianjie;
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeInt(this.temp_row_number);
+            dest.writeInt(this.temp_column);
+            dest.writeInt(this.id);
+            dest.writeInt(this.s_name);
+            dest.writeInt(this.s_product);
+            dest.writeInt(this.s_mangui);
+            dest.writeInt(this.s_kucunsj);
+            dest.writeInt(this.STATE);
+            dest.writeInt(this.s_kucun);
+            dest.writeString(this.isTuiJian);
+            dest.writeString(this.s_names);
+            dest.writeString(this.s_products);
+            dest.writeInt(this.s_buque);
+            dest.writeString(this.img);
+            dest.writeDouble(this.s_price);
+            dest.writeString(this.jianjie);
+            dest.writeInt(this.count);
+            dest.writeByte(this.is_select ? (byte) 1 : (byte) 0);
+        }
+
+        public ReturnDataBean() {
+        }
+
+        protected ReturnDataBean(Parcel in) {
+            this.temp_row_number = in.readInt();
+            this.temp_column = in.readInt();
+            this.id = in.readInt();
+            this.s_name = in.readInt();
+            this.s_product = in.readInt();
+            this.s_mangui = in.readInt();
+            this.s_kucunsj = in.readInt();
+            this.STATE = in.readInt();
+            this.s_kucun = in.readInt();
+            this.isTuiJian = in.readString();
+            this.s_names = in.readString();
+            this.s_products = in.readString();
+            this.s_buque = in.readInt();
+            this.img = in.readString();
+            this.s_price = in.readDouble();
+            this.jianjie = in.readString();
+            this.count = in.readInt();
+            this.is_select = in.readByte() != 0;
+        }
+
+        public static final Parcelable.Creator<ReturnDataBean> CREATOR = new Parcelable.Creator<ReturnDataBean>() {
+            @Override
+            public ReturnDataBean createFromParcel(Parcel source) {
+                return new ReturnDataBean(source);
+            }
+
+            @Override
+            public ReturnDataBean[] newArray(int size) {
+                return new ReturnDataBean[size];
+            }
+        };
     }
 }
