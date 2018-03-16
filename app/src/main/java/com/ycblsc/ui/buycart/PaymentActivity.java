@@ -1,29 +1,28 @@
 package com.ycblsc.ui.buycart;
 
-import android.util.Log;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.ycblsc.R;
 import com.ycblsc.base.BaseActivity;
-import com.ycblsc.base.BaseFragmentPresenter;
 import com.ycblsc.base.BasePresenter;
-import com.ycblsc.base.EmptyState;
 import com.ycblsc.common.Api;
 import com.ycblsc.common.CacheService;
 import com.ycblsc.databinding.ActivityPayBinding;
-import com.ycblsc.databinding.ActivityRegisterBinding;
 import com.ycblsc.model.BaseBean;
 import com.ycblsc.model.CartEventModel;
 import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.model.mine.PersonInfoModel;
-import com.ycblsc.ui.main.LoginActivity;
-import com.ycblsc.utils.CustomNestRadioGroup;
 import com.ycblsc.utils.PayHelper;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
+
 
 /**
  * Created by Administrator on 2018/3/14.
@@ -37,6 +36,7 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
     private String shopId;
     private String shopPrice;
     private String mTotal;//总价、订单金额
+    private String mPayMode;//支付方式
 
     @Override
     public int getLayoutId() {
@@ -65,44 +65,53 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
         mBinding.radBalance.setOnClickListener(this);
         mBinding.radWeixin.setOnClickListener(this);
         mBinding.radAlipay.setOnClickListener(this);
-        //单选监听
-//        mBinding.radPay.setOnCheckedChangeListener(new CustomNestRadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CustomNestRadioGroup group, int checkedId) {
-//                if (group.getId() == R.id.rad_pay) {
-//                    switch (checkedId){
-//                        case R.id.rad_balance:
-//                            showToast("余额支付");
-//                            break;
-//                        case R.id.rad_weixin:
-//                            showToast("微信支付");
-//                            break;
-//                        case R.id.rad_alipay:
-//                            showToast("支付宝支付");
-//                            break;
-//                    }
-//                }
-//            }
-//        });
+
 
         mBinding.btnDetermine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mBinding.radBalance.isChecked()) {
-                    initPayMethod();//余额支付接口
-
+                    mPayMode = "蚁巢会员支付";
+                } else if (mBinding.radWeixin.isChecked()) {
+                    mPayMode = "微信支付";
+                } else if (mBinding.radAlipay.isChecked()) {
+                    mPayMode = "支付宝支付";
                 }
-                if (mBinding.radWeixin.isChecked()) {
-                    showToast("暂未开通");
-                    return;
-                }
-                if (mBinding.radAlipay.isChecked()) {
-
-                    AliPay();//支付宝支付
-
-                }
+                showPayDialog(aty);
             }
         });
+    }
+
+
+    public void showPayDialog(Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, AlertDialog.THEME_HOLO_LIGHT);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View mView = inflater.inflate(R.layout.dialog_custom, null);
+        TextView tv_common_pay = (TextView) mView.findViewById(R.id.tv_common_pay);
+        TextView tv_common_mode = (TextView) mView.findViewById(R.id.tv_common_mode);
+        TextView submit = (TextView) mView.findViewById(R.id.btn_common_dialog_double_right);
+        TextView cancel = (TextView) mView.findViewById(R.id.btn_common_dialog_double_left);
+        tv_common_pay.setText("￥" + mTotal);
+        tv_common_mode.setText(mPayMode);
+        builder.setView(mView);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable());
+        submit.setOnClickListener(view -> {
+            dialog.dismiss();
+            if (mBinding.radBalance.isChecked()) {
+                initPayMethod();
+            }
+            if (mBinding.radWeixin.isChecked()) {
+                showToast("暂未开通");
+                return;
+            }
+            if (mBinding.radAlipay.isChecked()) {
+                AliPay();//支付宝支付
+                return;
+            }
+        });
+        cancel.setOnClickListener(v -> dialog.dismiss());
     }
 
     /**
@@ -177,13 +186,7 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
             shopCount = proCount.substring(0, proCount.length() - 1);
             shopId = proId.substring(0, proId.length() - 1);
             shopPrice = proPrice.substring(0, proPrice.length() - 1);
-
-//            Log.d("Tas", "商品数量===" + shopCount + "");
-//            Log.d("Tas", "商品id==" + shopId);
-//            Log.d("Tas", "单价===" + shopPrice);
         }
-
-
     }
 
     /*
@@ -210,7 +213,8 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
     }
 
     /*
-    * 支付方式（支付宝010202；微信010203；余额010207）
+    * 余额支付
+    * （支付宝010202；微信010203；余额010207）
     * */
     private void initPayMethod() {
         Api.getApi().getPay(CacheService.getIntance().getUserId(), "010207", shopCount, shopId, shopPrice, "18")

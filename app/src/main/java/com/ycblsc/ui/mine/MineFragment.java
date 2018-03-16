@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -17,6 +18,7 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.lm.base.library.adapters.recyclerview.MultiItemTypeAdapter;
 import com.ycblsc.R;
 import com.ycblsc.base.BaseFragment;
 import com.ycblsc.common.CacheService;
@@ -310,9 +312,9 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
                                 bos.flush();
                                 bos.close();
                                 choosePicPath = myCaptureFile.getPath();
-                                if (!TextUtils.isEmpty(choosePicPath)){
+                                if (!TextUtils.isEmpty(choosePicPath)) {
                                     //拍照、选择相册照片上传
-                                    mPresenter.getUpdateImage(CacheService.getIntance().getUserId(),choosePicPath);
+                                    mPresenter.getUpdateImage(CacheService.getIntance().getUserId(), choosePicPath);
                                     Glide.with(aty).load(choosePicPath).asBitmap().centerCrop().into(mBinding.headPortrait);
                                 }
                                 // photoSuccess(choosePicPath, myCaptureFile, queue);
@@ -356,6 +358,7 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
         mBinding.recycview.setLayoutManager(new LinearLayoutManager(aty));
         mBinding.recycview.setAdapter(mNoticfitionAdapter);
         mBinding.recycview.setNestedScrollingEnabled(false);
+
 //        mBinding.srlPersoninfo.setNestedScrollingEnabled(false);
 //        mBinding.srlPersoninfo.setEnableRefresh(false);
 //        mBinding.srlPersoninfo.setRefreshFooter(new ClassicsFooter(aty));//设置 Footer 样式
@@ -366,6 +369,20 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
 //                    mPresenter.getPersonMessage(4,mPage,mRows);
 //            }
 //        });
+
+        mNoticfitionAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
+                startActivity(new Intent(getActivity(), MessageDetailsActivity.class)
+                        .putExtra("time", mMessageList.get(position).getCreateTime())
+                        .putExtra("content", mMessageList.get(position).getTf_nvcContent()));
+            }
+
+            @Override
+            public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
+                return false;
+            }
+        });
     }
 
     //个人信息

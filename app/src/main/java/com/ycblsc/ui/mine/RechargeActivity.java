@@ -75,7 +75,7 @@ public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRe
             //立即支付
             case R.id.btn_immediate_payment:
                 showPopueWindow();
-                showToast("金额=="+payMoney);
+                showToast(payMoney);
                 break;
         }
     }

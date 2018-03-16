@@ -7,9 +7,13 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.ycblsc.R;
 import com.ycblsc.base.BaseActivity;
 import com.ycblsc.base.BasePresenter;
+import com.ycblsc.base.EmptyState;
 import com.ycblsc.common.CacheService;
 import com.ycblsc.databinding.ActivityConsumpationListBinding;
 import com.ycblsc.model.BaseBean;
@@ -33,6 +37,8 @@ import com.lm.base.library.adapters.recyclerview.base.ViewHolder;
 public class ConsumptionActivity extends BaseActivity<ConsumptionPrestener, ActivityConsumpationListBinding> implements IConsumptionView {
     private CommonAdapter<ConsumptionModel.ReturnDataBean> mConsumptiondapter;//消费记录
     private List<ConsumptionModel.ReturnDataBean> mConsumptionList = new ArrayList<>();
+    private int mPage = 2;
+    private int mSize = 10;
 
     @Override
     protected ConsumptionPrestener createPresenter() {
@@ -59,7 +65,7 @@ public class ConsumptionActivity extends BaseActivity<ConsumptionPrestener, Acti
     protected void initData() {
         super.initData();
         if (CacheService.getIntance().isLogin()) {
-            mPresenter.getConsumptionOrderList(CacheService.getIntance().getUserId(), 1, 10);
+            mPresenter.getConsumptionOrderList(CacheService.getIntance().getUserId(), mPage, mSize);
             initAdapter();
         }
     }
@@ -68,8 +74,7 @@ public class ConsumptionActivity extends BaseActivity<ConsumptionPrestener, Acti
         mConsumptiondapter = new CommonAdapter<ConsumptionModel.ReturnDataBean>(aty, R.layout.item_consumtion_list, mConsumptionList) {
             @Override
             protected void convert(ViewHolder holder, ConsumptionModel.ReturnDataBean item, int position) {
-                String url="https://img.alicdn.com/imgextra/i2/725677994/TB2BVfqc2jM8KJjSZFNXXbQjFXa_!!725677994.jpg_430x430q90.jpg";
-                holder.setImageurl(R.id.img, url, 0);
+                holder.setImageurl(R.id.img, item.getImg(), 0);
                 TextView tv_data = holder.getView(R.id.tv_data);
                 TextView tv_address = holder.getView(R.id.tv_address);
                 TextView tv_shopname = holder.getView(R.id.tv_shopname);
@@ -78,8 +83,7 @@ public class ConsumptionActivity extends BaseActivity<ConsumptionPrestener, Acti
                 TextView tv_total = holder.getView(R.id.tv_total);
                 tv_data.setText(item.getF_CreateDate());
                 tv_address.setText(item.getS_weizhi());
-//                tv_shopname.setText(item.getS_name());
-                tv_shopname.setText("妙芙欧式蛋糕");
+                tv_shopname.setText(item.getS_name());
                 tv_mony.setText("￥" + item.getProPrice());
                 tv_count.setText("x" + item.getProCount());
                 tv_total.setText("总计：￥" + item.getProSum());
@@ -88,14 +92,35 @@ public class ConsumptionActivity extends BaseActivity<ConsumptionPrestener, Acti
         mBinding.recycview.setLayoutManager(new LinearLayoutManager(aty));
         mBinding.recycview.setAdapter(mConsumptiondapter);
         mBinding.recycview.setNestedScrollingEnabled(false);
+
+        mBinding.srlConsumptionList.setEnableRefresh(false);
+        mBinding.srlConsumptionList.setRefreshFooter(new ClassicsFooter(aty));//设置 Footer 样式
+
+        mBinding.srlConsumptionList.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                mPage++;
+                mPresenter.getConsumptionOrderList(CacheService.getIntance().getUserId(), mPage, mSize);
+
+            }
+        });
     }
 
     //消费记录
     @Override
     public void getConsumptionOrderList(ConsumptionModel consumptionModel) {
-        mConsumptionList.clear();
+        mStateModel.setEmptyState(EmptyState.NORMAL);
+        if (mPage == 1) {
+            mConsumptionList.clear();
+            mBinding.srlConsumptionList.resetNoMoreData();
+        } else {
+            mBinding.srlConsumptionList.finishLoadmore();
+        }
         if (consumptionModel.getReturnData().size() > 0) {
             mConsumptionList.addAll(consumptionModel.getReturnData());
+            if (consumptionModel.getReturnData().size() < mSize) {
+                mBinding.srlConsumptionList.finishLoadmoreWithNoMoreData();
+            }
         }
         mConsumptiondapter.notifyDataSetChanged();
     }
