@@ -172,13 +172,11 @@ public interface ApiService {
     Flowable<BaseBean> getGetPassword(@Query("telphone") String telphone);
 
     //余额支付
-    @FormUrlEncoded
     @POST("AppServicePost.aspx?CMD=Order")
-    Flowable<BaseBean> getPay(@Field("id") String id,
-                              @Field("orderMoney") String orderMoney
-            , @Field("orderType") String orderType
-            , @Field("proCount") String proCount
-            , @Field("proId") String proId
-            , @Field("proPrice") String proPrice
-            , @Field("shopid") String shopid);
+    Flowable<BaseBean> getPay(@Query("id") String id
+            , @Query("orderType") String orderType
+            , @Query("proCount") String proCount
+            , @Query("proId") String proId
+            , @Query("proPrice") String proPrice
+            , @Query("shopid") String shopid);
 }

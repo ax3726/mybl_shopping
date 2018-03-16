@@ -161,7 +161,7 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
     * 支付方式（支付宝010202；微信010203；余额010207）
     * */
     private void initPayMethod() {
-        Api.getApi().getPay(CacheService.getIntance().getUserId(), mTotal, "010207", shopCount, shopId, shopPrice, "18")
+        Api.getApi().getPay(CacheService.getIntance().getUserId(), "010207", shopCount, shopId, shopPrice, "18")
                 .compose(callbackOnIOToMainThread())
                 .subscribe(new BaseNetSubscriber<BaseBean>(true) {
                     @Override
