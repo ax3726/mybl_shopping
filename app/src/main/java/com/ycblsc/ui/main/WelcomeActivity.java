@@ -45,7 +45,7 @@ public class WelcomeActivity extends BaseActivity<BasePresenter, ActivityWelcome
         if (user != null) {
             Api.getApi().getLogin(user.getPhone(), user.getPwd())
                     .compose(callbackOnIOToMainThread())
-                    .subscribe(new BaseNetSubscriber<BaseBean>(true) {
+                    .subscribe(new BaseNetSubscriber<BaseBean>() {
                         @Override
                         public void onNext(BaseBean baseBean) {
                             super.onNext(baseBean);
@@ -72,7 +72,7 @@ public class WelcomeActivity extends BaseActivity<BasePresenter, ActivityWelcome
                         public void onError(Throwable e) {
                             super.onError(e);
                             startActivity(LoginActivity.class);
-
+                            finish();
                         }
                     });
 

@@ -175,6 +175,11 @@ public class EasyCartFragment extends BaseFragment<BaseFragmentPresenter, Fragme
                 price = MyBigDecimal.add(price, MyBigDecimal.mul(bean.getS_price(), bean.getCount() + 1));
             }
         }
+        if (count != mDataList.size()||count==0) {
+            mBinding.imgAllSelect.setSelected(false);
+        } else {
+            mBinding.imgAllSelect.setSelected(true);
+        }
         DecimalFormat df = new DecimalFormat("0.00");
         mTotal=df.format(price);
         mBinding.tvTotalPrice.setText("￥" + mTotal);

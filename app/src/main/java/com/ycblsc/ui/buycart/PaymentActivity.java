@@ -14,10 +14,14 @@ import com.ycblsc.common.CacheService;
 import com.ycblsc.databinding.ActivityPayBinding;
 import com.ycblsc.databinding.ActivityRegisterBinding;
 import com.ycblsc.model.BaseBean;
+import com.ycblsc.model.CartEventModel;
 import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.model.mine.PersonInfoModel;
 import com.ycblsc.ui.main.LoginActivity;
 import com.ycblsc.utils.CustomNestRadioGroup;
+import com.ycblsc.utils.PayHelper;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 
@@ -86,18 +90,66 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
             public void onClick(View v) {
                 if (mBinding.radBalance.isChecked()) {
                     initPayMethod();//余额支付接口
-                    //  return;
+
                 }
                 if (mBinding.radWeixin.isChecked()) {
                     showToast("暂未开通");
                     return;
                 }
                 if (mBinding.radAlipay.isChecked()) {
-                    showToast("支付宝支付");
-                    return;
+
+                    AliPay();//支付宝支付
+
                 }
             }
         });
+    }
+
+    /**
+     * 支付宝支付
+     */
+    private void AliPay() {
+
+        Api.getApi().getPay(CacheService.getIntance().getUserId(), "010202", shopCount, shopId, shopPrice, "18")
+                .compose(callbackOnIOToMainThread())
+                .subscribe(new BaseNetSubscriber<BaseBean>(true) {
+                    @Override
+                    public void onNext(BaseBean baseBean) {
+                        super.onNext(baseBean);
+
+                        PayHelper.getInstance().AliPay(aty, String.valueOf(baseBean.getReturnData()));
+                        PayHelper.getInstance().setIPayListener(new PayHelper.IPayListener() {
+                            @Override
+                            public void onSuccess() {
+                                showToast("支付成功!");
+                                clearCart();//清除购物车
+                                new Thread() {
+                                    @Override
+                                    public void run() {
+                                        super.run();
+                                        try {
+                                            sleep(1000);
+                                        } catch (InterruptedException e) {
+                                        }
+                                        finish();
+                                    }
+                                }.start();
+                            }
+
+                            @Override
+                            public void onFail() {
+                                showToast("支付失败!");
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                    }
+                });
+
+
     }
 
     StringBuilder proCount;//数量
@@ -168,6 +220,7 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
                     public void onNext(BaseBean baseBean) {
                         super.onNext(baseBean);
                         showToast("支付成功！");
+                        clearCart();//清除购物车
                         new Thread() {
                             @Override
                             public void run() {
@@ -245,5 +298,12 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
                 mBinding.tvPaymentWeixin.setTextColor(getResources().getColor(R.color.color202020));
                 break;
         }
+    }
+
+    /**
+     * 购买成功成功， 清除购物车
+     */
+    private void clearCart() {
+        EventBus.getDefault().post(new CartEventModel(mData));
     }
 }

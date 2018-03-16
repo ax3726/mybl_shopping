@@ -20,6 +20,7 @@ import com.ycblsc.R;
 import com.ycblsc.base.BaseActivity;
 import com.ycblsc.base.BaseView;
 import com.ycblsc.databinding.ActivityMainBinding;
+import com.ycblsc.model.CartEventModel;
 import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.prestener.main.MainPrestener;
 import com.ycblsc.ui.buycart.BuyCartFragment;
@@ -28,6 +29,10 @@ import com.ycblsc.ui.mine.MineFragment;
 import com.ycblsc.ui.shopping.ShoppingFragment;
 import com.ycblsc.utils.DoubleClickExitHelper;
 import com.zhy.autolayout.AutoRelativeLayout;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +67,7 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
     @Override
     protected void initData() {
         super.initData();
+        EventBus.getDefault().register(aty);
         mDoubleClickExit = new DoubleClickExitHelper(this);
         initFragment();
     }
@@ -428,5 +434,21 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
 
     public List<ProductListModel.ReturnDataBean> getmShoppingCartList() {
         return mShoppingCartList;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void ClearCart(CartEventModel messageEvent) {
+        for (ProductListModel.ReturnDataBean bean:messageEvent.getDataBeans())
+        {
+            RemoveEasyCart(bean,true);
+        }
+        mBuyCartFragment.updatemEasyCartData(mEasyCartList);
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(aty);
     }
 }

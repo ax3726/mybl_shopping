@@ -79,5 +79,6 @@ dependencies {
     compile 'cn.jiguang.sdk:jcore:1.1.9'
     // 此处以JCore 1.1.9 版本为例。
     testCompile 'junit:junit:4.12'
-
+    compile files('libs/alipaySingle-20170510.jar')
+    compile files('libs/wechat-sdk-android-with-mta-1.0.2.jar')
 }
