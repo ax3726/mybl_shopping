@@ -17,7 +17,10 @@ import android.widget.Toast;
 import com.ycblsc.R;
 import com.ycblsc.base.BaseActivity;
 import com.ycblsc.base.EmptyState;
+import com.ycblsc.common.Api;
+import com.ycblsc.common.CacheService;
 import com.ycblsc.databinding.ActivityRechargeLayoutBinding;
+import com.ycblsc.model.BaseBean;
 import com.ycblsc.model.mine.MineRechargeModel;
 import com.ycblsc.model.shopping.ImageDataModel;
 import com.ycblsc.prestener.main.RechargePrestener;
@@ -75,9 +78,40 @@ public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRe
             //立即支付
             case R.id.btn_immediate_payment:
                 showPopueWindow();
-                showToast(payMoney);
+                // showToast(payMoney);
                 break;
         }
+    }
+
+    /*
+    * 充值
+    * */
+    private void initPayMethod(String type) {
+        Api.getApi().getRechargePay(CacheService.getIntance().getUserId(), payMoney, type)
+                .compose(callbackOnIOToMainThread())
+                .subscribe(new BaseNetSubscriber<BaseBean>(true) {
+                    @Override
+                    public void onNext(BaseBean baseBean) {
+                        super.onNext(baseBean);
+                        showToast("支付成功！");
+                        new Thread() {
+                            @Override
+                            public void run() {
+                                super.run();
+                                try {
+                                    sleep(1000);
+                                } catch (InterruptedException e) {
+                                }
+                                finish();
+                            }
+                        }.start();
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                    }
+                });
+
     }
 
 
@@ -100,6 +134,7 @@ public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRe
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
+                initPayMethod("010202");
             }
         });
         //微信充值
@@ -107,6 +142,7 @@ public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRe
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
+                initPayMethod("010203");
             }
         });
         //取消
@@ -176,7 +212,7 @@ public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRe
         mRechargeAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
-                payMoney=mRechargeTypes.get(position).getTf_Money();
+                payMoney = mRechargeTypes.get(position).getTf_Money();
                 for (int i = 0; i < mRechargeTypes.size(); i++) {
                     mRechargeTypes.get(i).setState(position == i);
                 }
@@ -198,7 +234,7 @@ public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRe
         if (typeModel.getReturnData().size() > 0) {
             mRechargeTypes.addAll(typeModel.getReturnData());
             mRechargeTypes.get(0).setState(true);
-            payMoney=mRechargeTypes.get(0).getTf_Money();
+            payMoney = mRechargeTypes.get(0).getTf_Money();
         }
         mRechargeAdapter.notifyDataSetChanged();
     }

@@ -3,6 +3,7 @@ package com.ycblsc.ui.buycart;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import com.ycblsc.model.CartEventModel;
 import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.model.mine.PersonInfoModel;
 import com.ycblsc.utils.PayHelper;
+import com.ycblsc.utils.SharedPreferencesUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -37,6 +39,7 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
     private String shopPrice;
     private String mTotal;//总价、订单金额
     private String mPayMode;//支付方式
+
 
     @Override
     public int getLayoutId() {
@@ -58,6 +61,34 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
     protected void initEvent() {
         super.initEvent();
         mTotal = getIntent().getStringExtra("mTotal");
+        String str = (String) SharedPreferencesUtils.getParam(PaymentActivity.this, "pay", "");
+        //蚁巢会员支付
+        if (!TextUtils.isEmpty(str) && str.equals("1")) {
+            mBinding.radBalance.setChecked(true);
+            //1.
+            setTextResource(mBinding.tvPaymentBalance, "默认支付方式", R.color.colorPrimaryDark, R.color.colorWhite);
+            //2.
+            setTextResource(mBinding.tvPaymentWeixin, "设置默认支付方式", R.color.shape_bg, R.color.color202020);
+            //3.
+            setTextResource(mBinding.tvPaymentZhifubao, "设置默认支付方式", R.color.shape_bg, R.color.color202020);
+        } else if (!TextUtils.isEmpty(str) && str.equals("2")) {
+            mBinding.radWeixin.setChecked(true);
+            //1.
+            setTextResource(mBinding.tvPaymentWeixin, "默认支付方式", R.color.colorPrimaryDark, R.color.colorWhite);
+            //2.
+            setTextResource(mBinding.tvPaymentBalance, "设置默认支付方式", R.color.shape_bg, R.color.color202020);
+            //3.
+            setTextResource(mBinding.tvPaymentZhifubao, "设置默认支付方式", R.color.shape_bg, R.color.color202020);
+        } else if (!TextUtils.isEmpty(str) && str.equals("3")) {
+            mBinding.radAlipay.setChecked(true);
+            //1.
+            setTextResource(mBinding.tvPaymentZhifubao, "默认支付方式", R.color.colorPrimaryDark, R.color.colorWhite);
+            //2.
+            setTextResource(mBinding.tvPaymentBalance, "设置默认支付方式", R.color.shape_bg, R.color.color202020);
+            //3.
+            setTextResource(mBinding.tvPaymentWeixin, "设置默认支付方式", R.color.shape_bg, R.color.color202020);
+        }
+
         mBinding.tvPaymentBalance.setOnClickListener(this);
         mBinding.tvPaymentWeixin.setOnClickListener(this);
         mBinding.tvPaymentZhifubao.setOnClickListener(this);
@@ -254,54 +285,54 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
                     showToast("请先选中会员支付");
                     return;
                 }
-                mBinding.tvPaymentBalance.setText("默认支付方式");
-                mBinding.tvPaymentBalance.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-                mBinding.tvPaymentBalance.setTextColor(getResources().getColor(R.color.colorWhite));
-                //
-                mBinding.tvPaymentWeixin.setText("设置默认支付方式");
-                mBinding.tvPaymentWeixin.setBackgroundColor(getResources().getColor(R.color.shape_bg));
-                mBinding.tvPaymentWeixin.setTextColor(getResources().getColor(R.color.color202020));
-                //
-                mBinding.tvPaymentZhifubao.setText("设置默认支付方式");
-                mBinding.tvPaymentZhifubao.setBackgroundColor(getResources().getColor(R.color.shape_bg));
-                mBinding.tvPaymentZhifubao.setTextColor(getResources().getColor(R.color.color202020));
+                //1.
+                setTextResource(mBinding.tvPaymentBalance, "默认支付方式", R.color.colorPrimaryDark, R.color.colorWhite);
+                //2.
+                setTextResource(mBinding.tvPaymentWeixin, "设置默认支付方式", R.color.shape_bg, R.color.color202020);
+                //3.
+                setTextResource(mBinding.tvPaymentZhifubao, "设置默认支付方式", R.color.shape_bg, R.color.color202020);
 
+                SharedPreferencesUtils.setParam(this, "pay", "1");
                 break;
             case R.id.tv_payment_weixin:
                 if (!mBinding.radWeixin.isChecked()) {
                     showToast("请先选中微信支付");
                     return;
                 }
-                mBinding.tvPaymentWeixin.setText("默认支付方式");
-                mBinding.tvPaymentWeixin.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-                mBinding.tvPaymentWeixin.setTextColor(getResources().getColor(R.color.colorWhite));
-                //
-                mBinding.tvPaymentBalance.setText("设置默认支付方式");
-                mBinding.tvPaymentBalance.setBackgroundColor(getResources().getColor(R.color.shape_bg));
-                mBinding.tvPaymentBalance.setTextColor(getResources().getColor(R.color.color202020));
-                //
-                mBinding.tvPaymentZhifubao.setText("设置默认支付方式");
-                mBinding.tvPaymentZhifubao.setBackgroundColor(getResources().getColor(R.color.shape_bg));
-                mBinding.tvPaymentZhifubao.setTextColor(getResources().getColor(R.color.color202020));
+                //1.
+                setTextResource(mBinding.tvPaymentWeixin, "默认支付方式", R.color.colorPrimaryDark, R.color.colorWhite);
+                //2.
+                setTextResource(mBinding.tvPaymentBalance, "设置默认支付方式", R.color.shape_bg, R.color.color202020);
+                //3.
+                setTextResource(mBinding.tvPaymentZhifubao, "设置默认支付方式", R.color.shape_bg, R.color.color202020);
+
+                SharedPreferencesUtils.setParam(this, "pay", "2");
+
                 break;
             case R.id.tv_payment_zhifubao:
                 if (!mBinding.radAlipay.isChecked()) {
                     showToast("请先选中支付宝支付");
                     return;
                 }
-                mBinding.tvPaymentZhifubao.setText("默认支付方式");
-                mBinding.tvPaymentZhifubao.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-                mBinding.tvPaymentZhifubao.setTextColor(getResources().getColor(R.color.colorWhite));
-                //
-                mBinding.tvPaymentBalance.setText("设置默认支付方式");
-                mBinding.tvPaymentBalance.setBackgroundColor(getResources().getColor(R.color.shape_bg));
-                mBinding.tvPaymentBalance.setTextColor(getResources().getColor(R.color.color202020));
-                //
-                mBinding.tvPaymentWeixin.setText("设置默认支付方式");
-                mBinding.tvPaymentWeixin.setBackgroundColor(getResources().getColor(R.color.shape_bg));
-                mBinding.tvPaymentWeixin.setTextColor(getResources().getColor(R.color.color202020));
+                //1.
+                setTextResource(mBinding.tvPaymentZhifubao, "默认支付方式", R.color.colorPrimaryDark, R.color.colorWhite);
+                //2.
+                setTextResource(mBinding.tvPaymentBalance, "设置默认支付方式", R.color.shape_bg, R.color.color202020);
+                //3.
+                setTextResource(mBinding.tvPaymentWeixin, "设置默认支付方式", R.color.shape_bg, R.color.color202020);
+
+                SharedPreferencesUtils.setParam(this, "pay", "3");
                 break;
         }
+    }
+
+    /*
+    * 通用设置背景颜色方法
+    * */
+    private void setTextResource(TextView tv, String text, int bgRes, int textColor) {
+        tv.setText(text);
+        tv.setBackgroundColor(getResources().getColor(bgRes));
+        tv.setTextColor(getResources().getColor(textColor));
     }
 
     /**

@@ -180,6 +180,10 @@ public interface ApiService {
             , @Query("proPrice") String proPrice
             , @Query("shopid") String shopid);
 
-
+    //在线充值
+    @POST("AppServicePost.aspx?CMD=InsertMoneyData")
+    Flowable<BaseBean> getRechargePay(@Query("id") String id
+            , @Query("tf_Money") String tf_Money
+            , @Query("orderType") String orderType);
 
 }
