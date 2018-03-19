@@ -18,6 +18,7 @@ import com.ycblsc.base.BaseFragment;
 import com.ycblsc.base.EmptyState;
 import com.ycblsc.base.StateModel;
 import com.ycblsc.common.Api;
+import com.ycblsc.common.MyApplication;
 import com.ycblsc.databinding.FragmentHomeLayoutBinding;
 import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.model.home.ProuductTypeModel;
@@ -245,6 +246,7 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
         if (model.getReturnData() != null && model.getReturnData().size() > 0) {
             mBinding.tvScanResult.setText(model.getReturnData().get(0).getS_weizhi());
             mEasyId = model.getReturnData().get(0).getId() + "";
+            MyApplication.getInstance().setEasyId(mEasyId);//保存便利架ID
             mPresenter.getProductType();
             mPresenter.getRecommend(mEasyId);
         }

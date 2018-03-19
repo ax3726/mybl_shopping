@@ -13,6 +13,7 @@ import com.ycblsc.base.BaseActivity;
 import com.ycblsc.base.BasePresenter;
 import com.ycblsc.common.Api;
 import com.ycblsc.common.CacheService;
+import com.ycblsc.common.MyApplication;
 import com.ycblsc.databinding.ActivityPayBinding;
 import com.ycblsc.model.BaseBean;
 import com.ycblsc.model.CartEventModel;
@@ -56,7 +57,6 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
     protected BasePresenter createPresenter() {
         return new BasePresenter();
     }
-
 
     @Override
     protected void initEvent() {
@@ -157,7 +157,7 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
         } else {
             userId = CacheService.getIntance().getUserId();
         }
-        Api.getApi().getPay(userId, "010202", shopCount, shopId, shopPrice, "18")
+        Api.getApi().getPay(userId, "010202", shopCount, shopId, shopPrice, MyApplication.getInstance().getEasyId())
                 .compose(callbackOnIOToMainThread())
                 .subscribe(new BaseNetSubscriber<BaseBean>(true) {
                     @Override
@@ -258,7 +258,7 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
     * （支付宝010202；微信010203；余额010207）
     * */
     private void initPayMethod() {
-        Api.getApi().getPay(CacheService.getIntance().getUserId(), "010207", shopCount, shopId, shopPrice, "18")
+        Api.getApi().getPay(CacheService.getIntance().getUserId(), "010207", shopCount, shopId, shopPrice, MyApplication.getInstance().getEasyId())
                 .compose(callbackOnIOToMainThread())
                 .subscribe(new BaseNetSubscriber<BaseBean>(true) {
                     @Override

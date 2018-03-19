@@ -50,9 +50,6 @@ public class WelcomeActivity extends BaseActivity<BasePresenter, ActivityWelcome
                         public void onNext(BaseBean baseBean) {
                             super.onNext(baseBean);
                             JPushInterface.setAlias(aty, 1, String.valueOf(baseBean.getReturnData()));
-
-
-                            showToast("登录成功！");
                             new Thread() {
                                 @Override
                                 public void run() {

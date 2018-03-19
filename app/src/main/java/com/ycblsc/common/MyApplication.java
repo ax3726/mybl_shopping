@@ -30,6 +30,16 @@ public class MyApplication extends Application {
         return instance;
     }
 
+    public String mEasyId="";//便利架ID
+
+    public String getEasyId() {
+        return mEasyId;
+    }
+
+    public void setEasyId(String mEasyId) {
+        this.mEasyId = mEasyId;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
