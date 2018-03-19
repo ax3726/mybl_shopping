@@ -57,6 +57,7 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
         return new BasePresenter();
     }
 
+
     @Override
     protected void initEvent() {
         super.initEvent();
@@ -150,7 +151,13 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
      */
     private void AliPay() {
 
-        Api.getApi().getPay(CacheService.getIntance().getUserId(), "010202", shopCount, shopId, shopPrice, "18")
+        String userId = CacheService.getIntance().getUserId();
+        if (TextUtils.isEmpty(userId)) {
+            userId = "0";
+        } else {
+            userId = CacheService.getIntance().getUserId();
+        }
+        Api.getApi().getPay(userId, "010202", shopCount, shopId, shopPrice, "18")
                 .compose(callbackOnIOToMainThread())
                 .subscribe(new BaseNetSubscriber<BaseBean>(true) {
                     @Override
@@ -206,6 +213,9 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
         mData = getIntent().getParcelableArrayListExtra("data");//获取购物车传过来的商品信息   其中count字段为商品的个数   并且count是从0开始的  即个数=count+1
         if (CacheService.getIntance().isLogin()) {
             initPersonData();
+        }else {
+            mBinding.relaPay.setVisibility(View.GONE);
+            mBinding.linBanele.setVisibility(View.GONE);
         }
 
         if (mData.size() > 0) {

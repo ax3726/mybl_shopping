@@ -16,6 +16,7 @@
             android:orientation="vertical">
 
             <com.zhy.autolayout.AutoRelativeLayout
+                android:id="@+id/rela_pay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20px">
@@ -43,6 +44,7 @@
 
 
             <com.zhy.autolayout.AutoLinearLayout
+                android:id="@+id/lin_banele"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="100px"
@@ -59,7 +61,7 @@
                     android:id="@+id/tv_balance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="￥24"
+                    android:text="￥0.0"
                     android:textColor="@color/colorPrimaryDark" />
             </com.zhy.autolayout.AutoLinearLayout>
 

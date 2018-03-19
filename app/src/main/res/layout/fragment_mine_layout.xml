@@ -6,7 +6,7 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorcccccc">
+        android:background="@color/colorWhite">
 
         <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
@@ -20,6 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorWhite"
+                android:paddingBottom="10px"
                 android:orientation="horizontal">
 
                 <com.ycblsc.widget.CircleImageView
@@ -45,7 +46,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10px"
-                        android:text="游客2014/蓝小雅"
+                        android:text="游客"
                         android:textColor="#d00852"
                         android:textSize="35px" />
 
@@ -73,6 +74,7 @@
 
             <!--账户余额-->
             <com.zhy.autolayout.AutoRelativeLayout
+                android:id="@+id/real_balance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorWhite">
@@ -127,6 +129,7 @@
             </com.zhy.autolayout.AutoRelativeLayout>
             <!--收货地址-->
             <com.zhy.autolayout.AutoLinearLayout
+                android:id="@+id/rela_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorWhite"
@@ -252,6 +255,7 @@
             </com.zhy.autolayout.AutoRelativeLayout>
             <!--商城消费记录-->
             <com.zhy.autolayout.AutoRelativeLayout
+                android:id="@+id/rela_shopreocde"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorWhite"
@@ -280,6 +284,7 @@
             </com.zhy.autolayout.AutoRelativeLayout>
             <!--我的订单-->
             <com.zhy.autolayout.AutoRelativeLayout
+                android:id="@+id/rela_older"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorWhite"

@@ -112,12 +112,22 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
     @Override
     protected void initData() {
         super.initData();
+
         initAdapter();
         mPresenter.getImageData();//个人中心广告位
         if (CacheService.getIntance().isLogin()) {
             mBinding.imgRegister.setVisibility(View.GONE);
             mPresenter.getPersonInfo(CacheService.getIntance().getUserId());
             mPresenter.getPersonMessage(CacheService.getIntance().getUserId(), 1, 10);//个人通知信息
+        }else {
+            mBinding.tvPhone.setVisibility(View.GONE);
+            mBinding.realBalance.setVisibility(View.GONE);
+            mBinding.relaAddress.setVisibility(View.GONE);
+            mBinding.linSetting.setVisibility(View.GONE);
+            mBinding.recycview.setVisibility(View.GONE);
+            mBinding.relarRecord.setVisibility(View.GONE);
+            mBinding.relaShopreocde.setVisibility(View.GONE);
+            mBinding.relaOlder.setVisibility(View.GONE);
         }
     }
 
@@ -415,6 +425,8 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
         if (model.getReturnData().size() > 0) {
             mMessageList.addAll(model.getReturnData());
             // mPresenter.getPersonMessage(4,mPage,mRows);
+        }else {
+            mBinding.recycview.setVisibility(View.GONE);
         }
         mNoticfitionAdapter.notifyDataSetChanged();
     }

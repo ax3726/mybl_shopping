@@ -37,7 +37,7 @@ import com.lm.base.library.adapters.recyclerview.base.ViewHolder;
 public class ConsumptionActivity extends BaseActivity<ConsumptionPrestener, ActivityConsumpationListBinding> implements IConsumptionView {
     private CommonAdapter<ConsumptionModel.ReturnDataBean> mConsumptiondapter;//消费记录
     private List<ConsumptionModel.ReturnDataBean> mConsumptionList = new ArrayList<>();
-    private int mPage = 2;
+    private int mPage = 1;
     private int mSize = 10;
 
     @Override
