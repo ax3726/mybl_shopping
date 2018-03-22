@@ -25,6 +25,8 @@ import com.ycblsc.model.mine.MineRechargeModel;
 import com.ycblsc.model.shopping.ImageDataModel;
 import com.ycblsc.prestener.main.RechargePrestener;
 import com.ycblsc.ui.common.WebViewActivity;
+import com.ycblsc.ui.main.MainActivity;
+import com.ycblsc.utils.PayHelper;
 import com.ycblsc.view.IRechargeView;
 
 import java.util.ArrayList;
@@ -93,19 +95,36 @@ public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRe
                     @Override
                     public void onNext(BaseBean baseBean) {
                         super.onNext(baseBean);
-                        showToast("支付成功！");
-                        new Thread() {
+                        PayHelper.getInstance().AliPay(aty, String.valueOf(baseBean.getReturnData()));
+                        PayHelper.getInstance().setIPayListener(new PayHelper.IPayListener() {
                             @Override
-                            public void run() {
-                                super.run();
-                                try {
-                                    sleep(1000);
-                                } catch (InterruptedException e) {
-                                }
-                                finish();
+                            public void onSuccess() {
+                                showToast("支付成功!");
+                                new Thread() {
+                                    @Override
+                                    public void run() {
+                                        super.run();
+                                        try {
+                                            sleep(1000);
+                                        } catch (InterruptedException e) {
+                                        }
+                                        startActivity(new Intent(RechargeActivity.this, MainActivity.class)
+                                                .putExtra("flag", "2"));
+                                        finish();
+                                    }
+                                }.start();
                             }
-                        }.start();
+
+                            @Override
+                            public void onFail() {
+                                showToast("支付失败!");
+//                                startActivity(new Intent(RechargeActivity.this, MainActivity.class)
+//                                        .putExtra("flag", "2"));
+//                                finish();
+                            }
+                        });
                     }
+
                     @Override
                     public void onError(Throwable e) {
                         super.onError(e);
@@ -142,7 +161,8 @@ public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRe
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
-                initPayMethod("010203");
+                showToast("暂不支持");
+                // initPayMethod("010203");
             }
         });
         //取消

@@ -214,19 +214,21 @@ public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegis
     @Override
     public void getLoginRegister(BaseBean baseBean) {
         showToast("注册成功!");
-        new Thread() {
-            @Override
-            public void run() {
-                super.run();
-                try {
-                    sleep(1000);
-                    startActivity(LoginActivity.class);
-                    finish();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
+        startActivity(LoginActivity.class);
+        finish();
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                super.run();
+//                try {
+//                    sleep(1000);
+//                    startActivity(LoginActivity.class);
+//                    finish();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        };
 
     }
 
@@ -287,7 +289,7 @@ public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegis
 
     @Override
     public void getSendCode(BaseBean baseBean) {
-        showToast("验证码" + baseBean.getReturnData());
+//        showToast("验证码" + baseBean.getReturnData());
     }
 
     private void initAdapter() {
@@ -312,6 +314,7 @@ public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegis
                 Glide.with(RegisterActivity.this).load(headListModel.getUrl())
                         .into(mBinding.imgHead);
                 iconId = Link.DVLURL + headListModel.getId();
+                mPhotoType=1;
             }
 
             @Override
@@ -325,6 +328,7 @@ public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegis
     @Override
     public void photoSuccess(String path, File file, int... queue) {
         mPhotoPath = path;
+        mPhotoType=2;
         Glide.with(aty).load(path).into(mBinding.imgHead);
     }
 

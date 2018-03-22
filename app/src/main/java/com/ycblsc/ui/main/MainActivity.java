@@ -9,6 +9,7 @@ import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
@@ -70,6 +71,14 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
         EventBus.getDefault().register(aty);
         mDoubleClickExit = new DoubleClickExitHelper(this);
         initFragment();
+
+        String flag=getIntent().getStringExtra("flag");
+        if (!TextUtils.isEmpty(flag)&&flag.equals("2")){
+            mBinding.rbMine.setChecked(true);
+            if (currentFragmentPosition != 2) {
+                changeFragment(2);
+            }
+        }
     }
 
 

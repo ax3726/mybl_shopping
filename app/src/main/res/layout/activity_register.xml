@@ -181,6 +181,7 @@
                         android:background="@drawable/shape_register_btn"
                         android:hint="请输入密码"
                         android:paddingLeft="20px"
+                        android:inputType="textPassword"
                         android:textColor="@color/colorBlack"
                         android:textSize="30px" />
                 </com.zhy.autolayout.AutoLinearLayout>
@@ -224,6 +225,7 @@
                         android:background="@drawable/shape_register_btn"
                         android:hint="请再次输入密码"
                         android:paddingLeft="20px"
+                        android:inputType="textPassword"
                         android:textColor="@color/colorBlack"
                         android:textSize="30px" />
                 </com.zhy.autolayout.AutoLinearLayout>

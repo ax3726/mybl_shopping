@@ -50,7 +50,7 @@ public class MainPrestener extends BasePresenter<IMainView> {
             @Override
             public void onProgress(long hasWrittenLen, long totalLen, boolean hasFinish) {
                 long l = hasWrittenLen * 100 / totalLen;
-                getView().showToast(l + "%");
+              //  getView().showToast(l + "%");
             }
         });
 
