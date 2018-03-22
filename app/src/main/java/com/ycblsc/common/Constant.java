@@ -8,5 +8,5 @@ package com.ycblsc.common;
 public class Constant {
     public static  final String USER_INFO="user_info";
 
-    public static final String WEXAPPID ="appid" ;
+    public static final String WEXAPPID ="wxfb354855bec653ed" ;
 }
