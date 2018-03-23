@@ -247,7 +247,7 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
             mBinding.tvScanResult.setText(model.getReturnData().get(0).getS_weizhi());
             mEasyId = model.getReturnData().get(0).getId() + "";
             MyApplication.getInstance().setEasyId(mEasyId);//保存便利架ID
-            mPresenter.getProductType();
+            mPresenter.getProductType(mEasyId);
             mPresenter.getRecommend(mEasyId);
         }
     }

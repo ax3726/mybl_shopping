@@ -38,8 +38,8 @@ import retrofit2.http.Url;
 public interface ApiService {
 
     @GET("AppService.aspx?CMD=LoadProductType")
-        //获取商品分类信息
-    Flowable<ProuductTypeModel> getProductType();
+        //获取商品分类信息 、新增参数hopId
+    Flowable<ProuductTypeModel> getProductType(@Query("shopId") String shopId); //便利架id;
 
 
     @GET("AppService.aspx?CMD=LoadProductList")

@@ -24,8 +24,8 @@ import okhttp3.ResponseBody;
  */
 
 public class HomePrestener extends BaseFragmentPresenter<IHomeView> {
-    public void getProductType() {
-        Api.getApi().getProductType()
+    public void getProductType(String shopId) {
+        Api.getApi().getProductType(shopId)
                 .compose(callbackOnIOToMainThread())
                 .subscribe(new BaseNetSubscriber<ProuductTypeModel>(true) {
                     @Override

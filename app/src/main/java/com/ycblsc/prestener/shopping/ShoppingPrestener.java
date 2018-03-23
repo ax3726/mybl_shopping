@@ -13,8 +13,8 @@ import com.ycblsc.view.IShoppingView;
  */
 
 public class ShoppingPrestener extends BaseFragmentPresenter<IShoppingView> {
-    public void getProductType() {
-        Api.getApi().getProductType()
+    public void getProductType(String shopId) {
+        Api.getApi().getProductType(shopId)
                 .compose(callbackOnIOToMainThread())
                 .subscribe(new BaseNetSubscriber<ProuductTypeModel>() {
                     @Override
