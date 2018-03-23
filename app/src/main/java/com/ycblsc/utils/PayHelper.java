@@ -41,19 +41,19 @@ public class PayHelper {
 
     IWXAPI msgApi = null;
 
-    public void WexPay(WEXModel info) {
+    public void WexPay(WEXModel.ReturnDataBean data) {
         if (msgApi == null) {
             msgApi = WXAPIFactory.createWXAPI(MyApplication.getInstance(), null);
             msgApi.registerApp(Constant.WEXAPPID);// 将该app注册到微信
         }
         PayReq req = new PayReq();
         if (!msgApi.isWXAppInstalled()) {
-            Toast.makeText(MyApplication.getInstance(),"手机中没有安装微信客户端!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MyApplication.getInstance(), "手机中没有安装微信客户端!", Toast.LENGTH_SHORT).show();
 
             return;
         }
-        if (info.getData() != null) {
-            WEXModel.DataBean data = info.getData();
+        if (data != null) {
+
             req.appId = data.getAppid();
             req.partnerId = data.getPartnerid();
             req.prepayId = data.getPrepayid();
@@ -61,7 +61,7 @@ public class PayHelper {
             req.timeStamp = data.getTimestamp() + "";
             req.packageValue = data.getPackageX();
             req.sign = data.getSign();
-           // req.extData = MaiLiApplication.getInstance().getUserInfo().getPhone();  微信拓展参数
+            // req.extData = MaiLiApplication.getInstance().getUserInfo().getPhone();  微信拓展参数
             msgApi.sendReq(req);
         }
     }

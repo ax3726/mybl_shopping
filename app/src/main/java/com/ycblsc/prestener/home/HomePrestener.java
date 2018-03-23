@@ -1,9 +1,14 @@
 package com.ycblsc.prestener.home;
 
+import com.ycblsc.base.BaseActivity;
 import com.ycblsc.base.BaseFragment;
 import com.ycblsc.base.BaseFragmentPresenter;
 import com.ycblsc.base.EmptyState;
 import com.ycblsc.common.Api;
+import com.ycblsc.common.MyApplication;
+import com.ycblsc.model.BaseBean;
+import com.ycblsc.model.UserModel;
+import com.ycblsc.model.WEXModel;
 import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.model.home.ProuductTypeModel;
 import com.ycblsc.model.home.ShopInfoModel;
@@ -84,6 +89,9 @@ public class HomePrestener extends BaseFragmentPresenter<IHomeView> {
                 getView().getImageData(baseBean);
             }
         });
+
+
+
     }
     public void getShopInfo(String id) {
         Api.getApi().getShopInfo(id)

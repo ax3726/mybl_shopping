@@ -2,6 +2,7 @@ package com.ycblsc.common;
 
 
 import com.ycblsc.model.BaseBean;
+import com.ycblsc.model.WEXModel;
 import com.ycblsc.model.home.HeadListModel;
 import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.model.home.ProuductTypeModel;
@@ -174,6 +175,15 @@ public interface ApiService {
     //余额支付
     @POST("AppServicePost.aspx?CMD=Order")
     Flowable<BaseBean> getPay(@Query("id") String id
+            , @Query("orderType") String orderType
+            , @Query("proCount") String proCount
+            , @Query("proId") String proId
+            , @Query("proPrice") String proPrice
+            , @Query("shopid") String shopid);
+
+    //余额支付
+    @POST("AppServicePost.aspx?CMD=Order")
+    Flowable<WEXModel> getWexPay(@Query("id") String id
             , @Query("orderType") String orderType
             , @Query("proCount") String proCount
             , @Query("proId") String proId

@@ -2,65 +2,69 @@ package com.ycblsc.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/5/23.
  */
 
-public class WEXModel {
+public class WEXModel  implements Serializable {
+
 
     /**
-     * data : {"appid":"wxb49050ad3515f101","noncestr":"a78c1705a9e94371b4a26cf0989211a0","package":"Sign=WXPay","partnerid":"1480189592","prepayid":"wx20170523161544052a24a4d20959674795","sign":"B86CE6A0BF32B4587B353499F112A181","timestamp":"1495527305"}
-     * status : 200
-     * info : 调用成功
+     * ReturnCode : 1
+     * ReturnMessage :
+     * ReturnData : [{"appid":"wxfb354855bec653ed","partnerid":"1500562681","prepayid":"wx2018032315150242cca37f1a0769067530","package":"Sign=WXPay","noncestr":"A01A0380CA3C61428C26A231F0E49A09","timestamp":"1521789303","sign":"B539D5DBE815FEDCEA620281D54311CD"}]
      */
 
-    private DataBean data;
-    private String status;
-    private String info;
+    private String ReturnCode;
+    private String ReturnMessage;
+    private List<ReturnDataBean> ReturnData;
 
-    public DataBean getData() {
-        return data;
+    public String getReturnCode() {
+        return ReturnCode;
     }
 
-    public void setData(DataBean data) {
-        this.data = data;
+    public void setReturnCode(String ReturnCode) {
+        this.ReturnCode = ReturnCode;
     }
 
-    public String getStatus() {
-        return status;
+    public String getReturnMessage() {
+        return ReturnMessage;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setReturnMessage(String ReturnMessage) {
+        this.ReturnMessage = ReturnMessage;
     }
 
-    public String getInfo() {
-        return info;
+    public List<ReturnDataBean> getReturnData() {
+        return ReturnData;
     }
 
-    public void setInfo(String info) {
-        this.info = info;
+    public void setReturnData(List<ReturnDataBean> ReturnData) {
+        this.ReturnData = ReturnData;
     }
 
-    public static class DataBean {
+    public static class ReturnDataBean {
         /**
-         * appid : wxb49050ad3515f101
-         * noncestr : a78c1705a9e94371b4a26cf0989211a0
+         * appid : wxfb354855bec653ed
+         * partnerid : 1500562681
+         * prepayid : wx2018032315150242cca37f1a0769067530
          * package : Sign=WXPay
-         * partnerid : 1480189592
-         * prepayid : wx20170523161544052a24a4d20959674795
-         * sign : B86CE6A0BF32B4587B353499F112A181
-         * timestamp : 1495527305
+         * noncestr : A01A0380CA3C61428C26A231F0E49A09
+         * timestamp : 1521789303
+         * sign : B539D5DBE815FEDCEA620281D54311CD
          */
 
         private String appid;
-        private String noncestr;
-        @SerializedName("package")
-        private String packageX;
         private String partnerid;
         private String prepayid;
-        private String sign;
+        @SerializedName("package")
+        private String packageX;
+        private String noncestr;
         private String timestamp;
+        private String sign;
 
         public String getAppid() {
             return appid;
@@ -68,22 +72,6 @@ public class WEXModel {
 
         public void setAppid(String appid) {
             this.appid = appid;
-        }
-
-        public String getNoncestr() {
-            return noncestr;
-        }
-
-        public void setNoncestr(String noncestr) {
-            this.noncestr = noncestr;
-        }
-
-        public String getPackageX() {
-            return packageX;
-        }
-
-        public void setPackageX(String packageX) {
-            this.packageX = packageX;
         }
 
         public String getPartnerid() {
@@ -102,12 +90,20 @@ public class WEXModel {
             this.prepayid = prepayid;
         }
 
-        public String getSign() {
-            return sign;
+        public String getPackageX() {
+            return packageX;
         }
 
-        public void setSign(String sign) {
-            this.sign = sign;
+        public void setPackageX(String packageX) {
+            this.packageX = packageX;
+        }
+
+        public String getNoncestr() {
+            return noncestr;
+        }
+
+        public void setNoncestr(String noncestr) {
+            this.noncestr = noncestr;
         }
 
         public String getTimestamp() {
@@ -116,6 +112,14 @@ public class WEXModel {
 
         public void setTimestamp(String timestamp) {
             this.timestamp = timestamp;
+        }
+
+        public String getSign() {
+            return sign;
+        }
+
+        public void setSign(String sign) {
+            this.sign = sign;
         }
     }
 }

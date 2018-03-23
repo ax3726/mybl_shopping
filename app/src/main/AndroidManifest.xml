@@ -136,7 +136,7 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
 
-                <data android:scheme="wxb49050ad3515f101" />
+                <data android:scheme="wxfb354855bec653ed" />
             </intent-filter>
         </activity>
 

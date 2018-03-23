@@ -73,7 +73,7 @@ public class WXPayEntryActivity extends BaseActivity<BasePresenter,ActivityPayRe
         if (code == 0) {
             mBinding.tvResult.setText("充值成功了!");
             //显示充值成功的页面和需要的操作
-            EventBus.getDefault().post("更新价格");//充值成功 更新价格
+            EventBus.getDefault().post("微信支付成功");//微信支付成功
             Toast.makeText(aty, "充值成功了!", Toast.LENGTH_SHORT).show();
         }
         if (code == -1) {

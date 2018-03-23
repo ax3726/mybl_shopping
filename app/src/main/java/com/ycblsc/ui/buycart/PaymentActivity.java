@@ -17,12 +17,16 @@ import com.ycblsc.common.MyApplication;
 import com.ycblsc.databinding.ActivityPayBinding;
 import com.ycblsc.model.BaseBean;
 import com.ycblsc.model.CartEventModel;
+import com.ycblsc.model.UserModel;
+import com.ycblsc.model.WEXModel;
 import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.model.mine.PersonInfoModel;
 import com.ycblsc.utils.PayHelper;
 import com.ycblsc.utils.SharedPreferencesUtils;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
@@ -134,13 +138,13 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
             if (mBinding.radBalance.isChecked()) {
                 initPayMethod();
             }
-            if (mBinding.radWeixin.isChecked()) {
-                showToast("暂未开通");
-                return;
+            else if (mBinding.radWeixin.isChecked()) {
+                WexPay();
+
             }
-            if (mBinding.radAlipay.isChecked()) {
+            else  if (mBinding.radAlipay.isChecked()) {
                 AliPay();//支付宝支付
-                return;
+
             }
         });
         cancel.setOnClickListener(v -> dialog.dismiss());
@@ -156,51 +160,48 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
         } else {
             userId = CacheService.getIntance().getUserId();
         }
-        Api.getApi().getPay(userId, "010203", shopCount, shopId, shopPrice, MyApplication.getInstance().getEasyId())
+      Api.getApi().getWexPay(userId, "010203", shopCount, shopId, shopPrice, MyApplication.getInstance().getEasyId())
                 .compose(callbackOnIOToMainThread())
-                .subscribe(new BaseNetSubscriber<BaseBean>(true) {
+                .subscribe(new BaseNetSubscriber<WEXModel>() {
                     @Override
-                    public void onNext(BaseBean baseBean) {
-                        super.onNext(baseBean);
-
-                        PayHelper.getInstance().AliPay(aty, String.valueOf(baseBean.getReturnData()));
-                        PayHelper.getInstance().setIPayListener(new PayHelper.IPayListener() {
-                            @Override
-                            public void onSuccess() {
-                                showToast("支付成功!");
-                                clearCart();//清除购物车
-                                new Thread() {
-                                    @Override
-                                    public void run() {
-                                        super.run();
-                                        try {
-                                            sleep(1000);
-                                        } catch (InterruptedException e) {
-                                        }
-                                        finish();
-                                    }
-                                }.start();
-                            }
-
-                            @Override
-                            public void onFail() {
-                                showToast("支付失败!");
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        super.onError(e);
+                    public void onNext(WEXModel wexModel) {
+                        super.onNext(wexModel);
+                        if (wexModel.getReturnData() != null && wexModel.getReturnData().size() > 0) {
+                            PayHelper.getInstance().WexPay(wexModel.getReturnData().get(0));
+                        } else {
+                            showToast("信息错误！");
+                        }
                     }
                 });
 
 
     }
-
+    /**
+     * 微信支付成功
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void UpdateNotice(String message) {
+        if ("微信支付成功".equals(message)) {
+            showToast("支付成功!");
+            clearCart();//清除购物车
+            new Thread() {
+                @Override
+                public void run() {
+                    super.run();
+                    try {
+                        sleep(1000);
+                    } catch (InterruptedException e) {
+                    }
+                    finish();
+                }
+            }.start();
+        }
+    }
 
     /**
      * 支付宝支付
+     *
+     *
      */
     private void AliPay() {
 
