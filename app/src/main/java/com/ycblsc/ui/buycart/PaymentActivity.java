@@ -145,6 +145,59 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
         });
         cancel.setOnClickListener(v -> dialog.dismiss());
     }
+    /**
+     * 微信支付
+     */
+    private void WexPay() {
+
+        String userId = CacheService.getIntance().getUserId();
+        if (TextUtils.isEmpty(userId)) {
+            userId = "0";
+        } else {
+            userId = CacheService.getIntance().getUserId();
+        }
+        Api.getApi().getPay(userId, "010203", shopCount, shopId, shopPrice, MyApplication.getInstance().getEasyId())
+                .compose(callbackOnIOToMainThread())
+                .subscribe(new BaseNetSubscriber<BaseBean>(true) {
+                    @Override
+                    public void onNext(BaseBean baseBean) {
+                        super.onNext(baseBean);
+
+                        PayHelper.getInstance().AliPay(aty, String.valueOf(baseBean.getReturnData()));
+                        PayHelper.getInstance().setIPayListener(new PayHelper.IPayListener() {
+                            @Override
+                            public void onSuccess() {
+                                showToast("支付成功!");
+                                clearCart();//清除购物车
+                                new Thread() {
+                                    @Override
+                                    public void run() {
+                                        super.run();
+                                        try {
+                                            sleep(1000);
+                                        } catch (InterruptedException e) {
+                                        }
+                                        finish();
+                                    }
+                                }.start();
+                            }
+
+                            @Override
+                            public void onFail() {
+                                showToast("支付失败!");
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                    }
+                });
+
+
+    }
+
 
     /**
      * 支付宝支付
