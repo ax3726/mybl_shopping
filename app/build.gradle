@@ -56,6 +56,39 @@ android {
         javaMaxHeapSize "4g"
         preDexLibraries = false
     }
+    signingConfigs {
+        xxconfig {
+            storeFile file("ycbl.jks")
+            keyAlias "ycbl"
+            keyPassword "111111"
+            storePassword "111111"
+        }
+    }
+
+    buildTypes {
+        release {
+            buildConfigField "boolean", "IS_DEBUG", "false"
+            //混淆
+            minifyEnabled false
+            //Zipalign优化
+            zipAlignEnabled false
+            // 移除无用的resource文件
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.xxconfig
+        }
+        debug {
+            buildConfigField "boolean", "IS_DEBUG", "true"
+            //混淆
+            minifyEnabled false
+            //Zipalign优化
+            zipAlignEnabled false
+            // 移除无用的resource文件
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.xxconfig
+        }
+    }
 }
 repositories {
     flatDir {

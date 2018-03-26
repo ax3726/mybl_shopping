@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
 import com.ycblsc.R;
 import com.ycblsc.base.BaseActivity;
 import com.ycblsc.base.BasePresenter;
@@ -93,26 +95,34 @@ public class ConsumptionActivity extends BaseActivity<ConsumptionPrestener, Acti
         mBinding.recycview.setAdapter(mConsumptiondapter);
         mBinding.recycview.setNestedScrollingEnabled(false);
 
-        mBinding.srlConsumptionList.setEnableRefresh(false);
-        mBinding.srlConsumptionList.setRefreshFooter(new ClassicsFooter(aty));//设置 Footer 样式
 
-        mBinding.srlConsumptionList.setOnLoadmoreListener(new OnLoadmoreListener() {
+        mBinding.srlConsumptionList.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
                 mPage++;
                 mPresenter.getConsumptionOrderList(CacheService.getIntance().getUserId(), mPage, mSize);
 
+
+            }
+
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+
+                mPage=1;
+                mPresenter.getConsumptionOrderList(CacheService.getIntance().getUserId(), mPage, mSize);
             }
         });
+
     }
 
     //消费记录
     @Override
     public void getConsumptionOrderList(ConsumptionModel consumptionModel) {
-        mStateModel.setEmptyState(EmptyState.NORMAL);
+
         if (mPage == 1) {
             mConsumptionList.clear();
             mBinding.srlConsumptionList.resetNoMoreData();
+            mBinding.srlConsumptionList.finishRefresh();
         } else {
             mBinding.srlConsumptionList.finishLoadmore();
         }

@@ -260,6 +260,7 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
     @Override
     protected void initData() {
         super.initData();
+        EventBus.getDefault().register(aty);
         proCount = new StringBuilder();
         proId = new StringBuilder();
         proPrice = new StringBuilder();
@@ -404,5 +405,11 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
      */
     private void clearCart() {
         EventBus.getDefault().post(new CartEventModel(mData));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(aty);
     }
 }
