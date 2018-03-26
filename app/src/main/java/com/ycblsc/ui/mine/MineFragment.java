@@ -25,6 +25,8 @@ import com.ycblsc.common.CacheService;
 import com.ycblsc.common.MyApplication;
 import com.ycblsc.databinding.FragmentMineLayoutBinding;
 import com.ycblsc.model.BaseBean;
+import com.ycblsc.model.MainEvent;
+import com.ycblsc.model.MineUpdateEvent;
 import com.ycblsc.model.mine.NotificationModel;
 import com.ycblsc.model.mine.PersonInfoModel;
 import com.ycblsc.model.shopping.ImageDataModel;
@@ -44,6 +46,10 @@ import com.lm.base.library.adapters.recyclerview.CommonAdapter;
 import com.lm.base.library.adapters.recyclerview.base.ViewHolder;
 import com.lm.base.library.utils.runtimepermission.PermissionsManager;
 import com.lm.base.library.utils.runtimepermission.PermissionsResultAction;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * Created by Administrator on 2017/12/26 0026.
@@ -112,14 +118,14 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
     @Override
     protected void initData() {
         super.initData();
-
+        EventBus.getDefault().register(this);
         initAdapter();
         mPresenter.getImageData();//个人中心广告位
         if (CacheService.getIntance().isLogin()) {
             mBinding.imgRegister.setVisibility(View.GONE);
             mPresenter.getPersonInfo(CacheService.getIntance().getUserId());
             mPresenter.getPersonMessage(CacheService.getIntance().getUserId(), 1, 10);//个人通知信息
-        }else {
+        } else {
             mBinding.tvPhone.setVisibility(View.GONE);
             mBinding.realBalance.setVisibility(View.GONE);
             mBinding.relaAddress.setVisibility(View.GONE);
@@ -425,7 +431,7 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
         if (model.getReturnData().size() > 0) {
             mMessageList.addAll(model.getReturnData());
             // mPresenter.getPersonMessage(4,mPage,mRows);
-        }else {
+        } else {
             mBinding.recycview.setVisibility(View.GONE);
         }
         mNoticfitionAdapter.notifyDataSetChanged();
@@ -435,5 +441,18 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
     @Override
     public void getUpdateImage(BaseBean baseBean) {
 //       showToast("提示==="+baseBean.getReturnMessage());
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void update(MineUpdateEvent mineUpdateEvent) {
+        if (CacheService.getIntance().isLogin()) {
+            mPresenter.getPersonInfo(CacheService.getIntance().getUserId());
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

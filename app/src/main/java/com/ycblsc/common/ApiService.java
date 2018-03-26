@@ -196,4 +196,10 @@ public interface ApiService {
             , @Query("tf_Money") String tf_Money
             , @Query("orderType") String orderType);
 
+    //在线充值（微信支付）
+    @POST("AppServicePost.aspx?CMD=InsertMoneyData")
+    Flowable<WEXModel> getRechargePay1(@Query("id") String id
+            , @Query("tf_Money") String tf_Money
+            , @Query("orderType") String orderType);
+
 }

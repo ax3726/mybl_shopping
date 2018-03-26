@@ -22,6 +22,7 @@ import com.ycblsc.base.BaseActivity;
 import com.ycblsc.base.BaseView;
 import com.ycblsc.databinding.ActivityMainBinding;
 import com.ycblsc.model.CartEventModel;
+import com.ycblsc.model.MainEvent;
 import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.prestener.main.MainPrestener;
 import com.ycblsc.ui.buycart.BuyCartFragment;
@@ -72,13 +73,7 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
         mDoubleClickExit = new DoubleClickExitHelper(this);
         initFragment();
 
-        String flag=getIntent().getStringExtra("flag");
-        if (!TextUtils.isEmpty(flag)&&flag.equals("2")){
-            mBinding.rbMine.setChecked(true);
-            if (currentFragmentPosition != 2) {
-                changeFragment(2);
-            }
-        }
+
     }
 
 
@@ -454,7 +449,21 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
         mBuyCartFragment.updatemEasyCartData(mEasyCartList);
 
     }
-
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void selectpotion(MainEvent mainEvent) {
+       switch (mainEvent.getPosition()){
+           case 0:
+               mBinding.rbHome.setChecked(true);
+               break;
+           case 1:
+               mBinding.rbBuyCart.setChecked(true);
+               break;
+           case 2:
+               mBinding.rbMine.setChecked(true);
+               break;
+       }
+        changeFragment(mainEvent.getPosition());
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();

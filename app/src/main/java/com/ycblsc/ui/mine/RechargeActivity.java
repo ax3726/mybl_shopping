@@ -21,6 +21,9 @@ import com.ycblsc.common.Api;
 import com.ycblsc.common.CacheService;
 import com.ycblsc.databinding.ActivityRechargeLayoutBinding;
 import com.ycblsc.model.BaseBean;
+import com.ycblsc.model.MainEvent;
+import com.ycblsc.model.MineUpdateEvent;
+import com.ycblsc.model.WEXModel;
 import com.ycblsc.model.mine.MineRechargeModel;
 import com.ycblsc.model.shopping.ImageDataModel;
 import com.ycblsc.prestener.main.RechargePrestener;
@@ -35,6 +38,10 @@ import java.util.List;
 import com.lm.base.library.adapters.recyclerview.CommonAdapter;
 import com.lm.base.library.adapters.recyclerview.MultiItemTypeAdapter;
 import com.lm.base.library.adapters.recyclerview.base.ViewHolder;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * Created by Administrator on 2018/1/1.
@@ -80,8 +87,52 @@ public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRe
             //立即支付
             case R.id.btn_immediate_payment:
                 showPopueWindow();
-                // showToast(payMoney);
                 break;
+        }
+    }
+    /*
+       * 微信充值
+       * */
+    private void initWexPay(String type) {
+        Api.getApi().getRechargePay1(CacheService.getIntance().getUserId(), payMoney, type)
+                .compose(callbackOnIOToMainThread())
+                .subscribe(new BaseNetSubscriber<WEXModel>(true) {
+                    @Override
+                    public void onNext(WEXModel wexModel) {
+                        super.onNext(wexModel);
+                        if (wexModel.getReturnData() != null && wexModel.getReturnData().size() > 0) {
+                            PayHelper.getInstance().WexPay(wexModel.getReturnData().get(0));
+                        } else {
+                            showToast("信息错误！");
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                    }
+                });
+
+    }
+    /**
+     * 微信支付成功
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void UpdateNotice(String message) {
+        if ("微信支付成功".equals(message)) {
+            showToast("支付成功!");
+            new Thread() {
+                @Override
+                public void run() {
+                    super.run();
+                    try {
+                        sleep(1000);
+                    } catch (InterruptedException e) {
+                    }
+                    EventBus.getDefault().post(new MineUpdateEvent());//更新价格
+                    finish();
+                }
+            }.start();
         }
     }
 
@@ -108,8 +159,7 @@ public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRe
                                             sleep(1000);
                                         } catch (InterruptedException e) {
                                         }
-                                        startActivity(new Intent(RechargeActivity.this, MainActivity.class)
-                                                .putExtra("flag", "2"));
+                                        EventBus.getDefault().post(new MineUpdateEvent());//更新价格
                                         finish();
                                     }
                                 }.start();
@@ -118,9 +168,6 @@ public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRe
                             @Override
                             public void onFail() {
                                 showToast("支付失败!");
-//                                startActivity(new Intent(RechargeActivity.this, MainActivity.class)
-//                                        .putExtra("flag", "2"));
-//                                finish();
                             }
                         });
                     }
@@ -161,8 +208,8 @@ public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRe
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
-                showToast("暂不支持");
-                // initPayMethod("010203");
+
+                initWexPay("010203");
             }
         });
         //取消
@@ -192,6 +239,7 @@ public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRe
     @Override
     protected void initData() {
         super.initData();
+        EventBus.getDefault().register(this);
         mStateModel.setEmptyState(EmptyState.PROGRESS);
 
         new Handler().postDelayed(new Runnable() {
@@ -254,7 +302,8 @@ public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRe
         if (typeModel.getReturnData().size() > 0) {
             mRechargeTypes.addAll(typeModel.getReturnData());
             mRechargeTypes.get(0).setState(true);
-            payMoney = mRechargeTypes.get(0).getTf_Money();
+           payMoney = mRechargeTypes.get(0).getTf_Money();
+
         }
         mRechargeAdapter.notifyDataSetChanged();
     }
@@ -264,5 +313,11 @@ public class RechargeActivity extends BaseActivity<RechargePrestener, ActivityRe
     public void getImageData(ImageDataModel headListModel) {
         url = headListModel.getReturnData().get(0).getI_Content();
         mBinding.tvContent.setText(Html.fromHtml(url));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }
