@@ -121,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:padding="30px"
-                android:text="信\t系\n填\t报"
+                android:text="信\t息\n填\t报"
                 android:textColor="@color/colorWhite"
                 android:textSize="40px"
 

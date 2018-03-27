@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusable="true"
+        android:background="@color/colorWhite"
         android:focusableInTouchMode="true"
         android:orientation="vertical">
 
@@ -233,6 +235,7 @@
 
                     <com.lm.base.library.widget.flybanner.FlyBanner
                         android:id="@+id/fb_roll"
+
                         android:layout_width="match_parent"
                         android:layout_height="200px">
 
@@ -251,7 +254,7 @@
                         android:layout_marginBottom="70px"
                         android:layout_marginTop="35px"
                         android:src="@drawable/home_all_goods_icon"
-                        android:visibility="gone" />
+                        />
 
                     <com.zhy.autolayout.AutoLinearLayout
                         android:layout_width="match_parent"
@@ -272,6 +275,7 @@
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/rc_goods_list"
                             android:layout_width="0dp"
+
                             android:layout_height="match_parent"
                             android:layout_weight="7"
                             android:overScrollMode="never">

@@ -144,6 +144,7 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
                 });
             }
         };
+
         mBinding.rcGoodsType.setLayoutManager(new LinearLayoutManager(aty));
         mBinding.rcGoodsType.setAdapter(mGoodsTypeAdapter);
 
@@ -212,7 +213,7 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
     public void getProuductType(ProuductTypeModel typeModel) {
         mGoodsTypes.clear();
         if (typeModel.getReturnData().size() > 0) {
-            mBinding.imgAll.setVisibility(View.VISIBLE);
+
             mGoodsTypes.addAll(typeModel.getReturnData());
             mCurPosition = 0;
             mPresenter.getProductList(mGoodsTypes.get(0).getF_CODE(), mEasyId, "", mPage + "", mSize + "");
@@ -258,6 +259,7 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
             List<String> urls = new ArrayList<>();
             for (ImageDataModel.ReturnDataBean bean : model.getReturnData()) {
                 urls.add(bean.getF_Img());
+
             }
             mBinding.fbRoll.setImagesUrl(urls);
         }
