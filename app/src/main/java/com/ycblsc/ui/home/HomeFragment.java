@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -52,9 +53,11 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
 
     private CommonAdapter<ProuductTypeModel.ReturnDataBean> mGoodsTypeAdapter;//商品分类
     private CommonAdapter<ProductListModel.ReturnDataBean> mGoodsListAdapter;//商品列表
+    private com.lm.base.library.adapters.abslistview.CommonAdapter<ProductListModel.ReturnDataBean> mTuijianGoodsAdapter;//推荐商品列表
     private List<ProuductTypeModel.ReturnDataBean> mGoodsTypes = new ArrayList<>();
     private List<ProductListModel.ReturnDataBean> mGoodsList = new ArrayList<>();
-    private  ProductListModel.ReturnDataBean mTuijianData=null;//推荐商品信息
+    private List<ProductListModel.ReturnDataBean> mTuijianGoodsList = new ArrayList<>();
+
     private int mCurPosition = 0;//记录当前分类的下标
     private int mPage = 1;
     private int mSize = 10;
@@ -76,6 +79,7 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
             }
         });*/
         initAdapter();
+
         mPresenter.getImageData();
         mBinding.srlGoodsList.finishLoadmoreWithNoMoreData();
     }
@@ -91,17 +95,6 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
                 startActivityForResult(intent, REQUEST_CODE_SCAN);
             }
         });
-        mBinding.imgShopping.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (aty != null) {
-                    ((MainActivity) aty).AddEasyCart(mTuijianData);
-
-                    ((MainActivity) aty).addCart(mBinding.imgShopping);
-                }
-            }
-        });
         mBinding.imgMianfeianzhuang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,6 +106,35 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
 
 
     private void initAdapter() {
+
+        mTuijianGoodsAdapter = new com.lm.base.library.adapters.abslistview.CommonAdapter<ProductListModel.ReturnDataBean>(aty, R.layout.item_tuijian_layout, mTuijianGoodsList) {
+            @Override
+            protected void convert(com.lm.base.library.adapters.abslistview.ViewHolder holder, ProductListModel.ReturnDataBean item, int position) {
+                ImageView img_tuijian = holder.getView(R.id.img_tuijian);
+                ImageView img_shopping = holder.getView(R.id.img_shopping);
+                TextView tv_title = holder.getView(R.id.tv_title);
+                TextView tv_des = holder.getView(R.id.tv_des);
+                TextView tv_price = holder.getView(R.id.tv_price);
+
+                Glide.with(aty).load(item.getImg()).into(img_tuijian);
+                tv_title.setText(item.getS_products());
+                tv_des.setText(item.getJianjie());
+                tv_price.setText("¥" + item.getS_price());
+                img_shopping.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (aty != null) {
+                            ((MainActivity) aty).AddEasyCart(item);
+
+                            ((MainActivity) aty).addCart(img_shopping);
+                        }
+                    }
+                });
+            }
+        };
+        mBinding.glGoods.setAdapter(mTuijianGoodsAdapter);
+
+
         mGoodsTypeAdapter = new CommonAdapter<ProuductTypeModel.ReturnDataBean>(aty, R.layout.item_goods_type, mGoodsTypes) {
             @Override
             protected void convert(ViewHolder holder, ProuductTypeModel.ReturnDataBean item, int position) {
@@ -267,16 +289,14 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
 
     @Override
     public void getRecommend(ProductListModel model) {
+        mTuijianGoodsList.clear();
         if (model != null && model.getReturnData().size() > 0) {
+            mTuijianGoodsList.addAll(model.getReturnData());
             mBinding.rlyTuijian.setVisibility(View.VISIBLE);
-            mTuijianData = model.getReturnData().get(0);
-            Glide.with(aty).load(mTuijianData.getImg()).into(mBinding.imgTuijian);
-            mBinding.tvTitle.setText(mTuijianData.getS_products());
-            mBinding.tvDes.setText(mTuijianData.getJianjie());
-            mBinding.tvPrice.setText("¥" + mTuijianData.getS_price());
         } else {
             mBinding.rlyTuijian.setVisibility(View.GONE);
         }
+        mTuijianGoodsAdapter.notifyDataSetChanged();
     }
 
 }
