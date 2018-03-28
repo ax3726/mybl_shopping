@@ -11,6 +11,7 @@ import com.ycblsc.common.CacheService;
 import com.ycblsc.databinding.ActivityModifyAddressBinding;
 import com.ycblsc.databinding.ActivityModifyNicknameBinding;
 import com.ycblsc.model.BaseBean;
+import com.ycblsc.model.mine.PersonInfoModel;
 import com.ycblsc.ui.main.LoginActivity;
 
 import java.io.UnsupportedEncodingException;
@@ -67,6 +68,7 @@ public class ModifyAddressActivity extends BaseActivity<BasePresenter, ActivityM
     @Override
     protected void initData() {
         super.initData();
+        getPersonInfo(CacheService.getIntance().getUserId());//个人信息
     }
 
     //修改地址
@@ -93,5 +95,24 @@ public class ModifyAddressActivity extends BaseActivity<BasePresenter, ActivityM
                     }
                 });
 
+    }
+
+    //获取个人信息
+    public void getPersonInfo(String id) {
+        Api.getApi().getPersonInfo(id)
+                .compose(callbackOnIOToMainThread())
+                .subscribe(new BaseNetSubscriber<PersonInfoModel>() {
+                    @Override
+                    public void onNext(PersonInfoModel baseBean) {
+                        super.onNext(baseBean);
+                        mBinding.etAddress.setHint(baseBean.getReturnData().get(0).getAddress());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+
+                    }
+                });
     }
 }

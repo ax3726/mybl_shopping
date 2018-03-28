@@ -4,6 +4,7 @@ import com.ycblsc.base.BasePresenter;
 import com.ycblsc.common.Api;
 import com.ycblsc.model.BaseBean;
 import com.ycblsc.model.home.HeadListModel;
+import com.ycblsc.model.shopping.ImageDataModel;
 import com.ycblsc.net.UploadFileRequestBody;
 import com.ycblsc.view.IMainView;
 
@@ -50,7 +51,7 @@ public class MainPrestener extends BasePresenter<IMainView> {
             @Override
             public void onProgress(long hasWrittenLen, long totalLen, boolean hasFinish) {
                 long l = hasWrittenLen * 100 / totalLen;
-              //  getView().showToast(l + "%");
+                //  getView().showToast(l + "%");
             }
         });
 
@@ -58,7 +59,7 @@ public class MainPrestener extends BasePresenter<IMainView> {
         MultipartBody.Part body =
                 MultipartBody.Part.createFormData("file", flie.getName(), fileRequestBody);
 
-        Api.getApi().getLoginRegisterImage(name, gender, telphone, address,"", password, body)
+        Api.getApi().getLoginRegisterImage(name, gender, telphone, address, "", password, body)
                 .compose(callbackOnIOToMainThread()).subscribe(new BaseNetSubscriber<BaseBean>() {
             @Override
             public void onNext(BaseBean headListModel) {
@@ -73,7 +74,7 @@ public class MainPrestener extends BasePresenter<IMainView> {
         return RequestBody.create(MediaType.parse("text/plain"), value);
     }
 
-
+    //发送验证码
     public void getSendCode(String telphone, String validName) {
         Api.getApi().getSendCode(telphone, validName)
                 .compose(callbackOnIOToMainThread())
@@ -87,6 +88,18 @@ public class MainPrestener extends BasePresenter<IMainView> {
                     @Override
                     public void onError(Throwable e) {
                         super.onError(e);
+                    }
+                });
+    }
+    //注册说明52
+    public void getImageData(String id) {
+        Api.getApi().getImageData(id)
+                .compose(callbackOnIOToMainThread())
+                .subscribe(new BaseNetSubscriber<ImageDataModel>() {
+                    @Override
+                    public void onNext(ImageDataModel imageDataModel) {
+                        super.onNext(imageDataModel);
+                        getView().getImageData(imageDataModel);
                     }
                 });
     }

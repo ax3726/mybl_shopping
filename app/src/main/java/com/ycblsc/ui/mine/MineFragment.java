@@ -153,6 +153,25 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (CacheService.getIntance().isLogin()) {
+            mBinding.imgRegister.setVisibility(View.GONE);
+            mPresenter.getPersonInfo(CacheService.getIntance().getUserId());
+            mPresenter.getPersonMessage(CacheService.getIntance().getUserId(), 1, 10);//个人通知信息
+        } else {
+            mBinding.tvPhone.setVisibility(View.GONE);
+            mBinding.realBalance.setVisibility(View.GONE);
+            mBinding.relaAddress.setVisibility(View.GONE);
+            mBinding.linSetting.setVisibility(View.GONE);
+            mBinding.recycview.setVisibility(View.GONE);
+            mBinding.relarRecord.setVisibility(View.GONE);
+            mBinding.relaShopreocde.setVisibility(View.GONE);
+            mBinding.relaOlder.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             //会员注册

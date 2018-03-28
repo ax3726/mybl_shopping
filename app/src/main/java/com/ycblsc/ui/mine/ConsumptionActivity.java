@@ -102,12 +102,9 @@ public class ConsumptionActivity extends BaseActivity<ConsumptionPrestener, Acti
                 mPage++;
                 mPresenter.getConsumptionOrderList(CacheService.getIntance().getUserId(), mPage, mSize);
 
-
             }
-
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-
                 mPage=1;
                 mPresenter.getConsumptionOrderList(CacheService.getIntance().getUserId(), mPage, mSize);
             }

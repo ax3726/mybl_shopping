@@ -73,7 +73,7 @@ public class MinePrestener extends BaseFragmentPresenter<IMineView> {
             @Override
             public void onProgress(long hasWrittenLen, long totalLen, boolean hasFinish) {
                 long l = hasWrittenLen * 100 / totalLen;
-                getView().showToast(l + "%");
+//                getView().showToast(l + "%");
             }
         });
         // MultipartBody.Part  和后端约定好Key，这里的partName是用image
