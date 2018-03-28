@@ -73,8 +73,6 @@ public class MinePrestener extends BaseFragmentPresenter<IMineView> {
     public void getUpdateImage(String id, String icon) {
         File flie = new File(icon);
 
-
-
        /* UploadFileRequestBody fileRequestBody = new UploadFileRequestBody(flie, new UploadFileRequestBody.ProgressListener() {
             @Override
             public void onProgress(long hasWrittenLen, long totalLen, boolean hasFinish) {

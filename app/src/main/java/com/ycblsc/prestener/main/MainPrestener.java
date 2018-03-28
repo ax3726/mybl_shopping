@@ -47,14 +47,15 @@ public class MainPrestener extends BasePresenter<IMainView> {
     public void getLoginRegiterImage(String name, String gender, String telphone, String address, String icon, String password) {
         File flie = new File(icon);
 
-        UploadFileRequestBody fileRequestBody = new UploadFileRequestBody(flie, new UploadFileRequestBody.ProgressListener() {
-            @Override
-            public void onProgress(long hasWrittenLen, long totalLen, boolean hasFinish) {
-                long l = hasWrittenLen * 100 / totalLen;
-                //  getView().showToast(l + "%");
-            }
-        });
-
+//        UploadFileRequestBody fileRequestBody = new UploadFileRequestBody(flie, new UploadFileRequestBody.ProgressListener() {
+//            @Override
+//            public void onProgress(long hasWrittenLen, long totalLen, boolean hasFinish) {
+//                long l = hasWrittenLen * 100 / totalLen;
+//                //  getView().showToast(l + "%");
+//            }
+//        });
+        RequestBody fileRequestBody =
+                RequestBody.create(MediaType.parse("multipart/form-data"), flie);
         // MultipartBody.Part  和后端约定好Key，这里的partName是用image
         MultipartBody.Part body =
                 MultipartBody.Part.createFormData("file", flie.getName(), fileRequestBody);
