@@ -331,7 +331,7 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
                                 if (!TextUtils.isEmpty(choosePicPath)) {
                                     //拍照、选择相册照片上传
                                     mPresenter.getUpdateImage(CacheService.getIntance().getUserId(), choosePicPath);
-                                    Glide.with(aty).load(choosePicPath).asBitmap().centerCrop().into(mBinding.headPortrait);
+
                                 }
                                 // photoSuccess(choosePicPath, myCaptureFile, queue);
                                 delTempPic(temppic + temppicname);
@@ -440,7 +440,10 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
     //修改头像
     @Override
     public void getUpdateImage(BaseBean baseBean) {
-//       showToast("提示==="+baseBean.getReturnMessage());
+        showToast("头像上传成功！");
+        if (CacheService.getIntance().isLogin()) {
+            mPresenter.getPersonInfo(CacheService.getIntance().getUserId());
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

@@ -1,5 +1,7 @@
 package com.ycblsc.prestener.mine;
 
+import android.util.Log;
+
 import com.ycblsc.base.BaseFragmentPresenter;
 import com.ycblsc.base.BasePresenter;
 import com.ycblsc.base.EmptyState;
@@ -13,7 +15,9 @@ import com.ycblsc.view.IMineView;
 
 import java.io.File;
 
+import okhttp3.MediaType;
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 /**
  * Created by Administrator on 2017/12/25 0025.
@@ -68,21 +72,27 @@ public class MinePrestener extends BaseFragmentPresenter<IMineView> {
     //修改头像
     public void getUpdateImage(String id, String icon) {
         File flie = new File(icon);
+        Log.e("哈哈哈",flie.length()+"");
 
-        UploadFileRequestBody fileRequestBody = new UploadFileRequestBody(flie, new UploadFileRequestBody.ProgressListener() {
+
+       /* UploadFileRequestBody fileRequestBody = new UploadFileRequestBody(flie, new UploadFileRequestBody.ProgressListener() {
             @Override
             public void onProgress(long hasWrittenLen, long totalLen, boolean hasFinish) {
                 long l = hasWrittenLen * 100 / totalLen;
-                getView().showToast(l + "%");
+               getView().showToast(l + "%");
             }
-        });
+        });*/
+
+        RequestBody fileRequestBody =
+                RequestBody.create(MediaType.parse("multipart/form-data"), flie);
+
         // MultipartBody.Part  和后端约定好Key，这里的partName是用image
         MultipartBody.Part body =
                 MultipartBody.Part.createFormData("file", flie.getName(), fileRequestBody);
 
         Api.getApi().getUpdateImage(id,body)
                 .compose(callbackOnIOToMainThread())
-                .subscribe(new BaseNetSubscriber<BaseBean>() {
+                .subscribe(new BaseNetSubscriber<BaseBean>(true) {
                     @Override
                     public void onNext(BaseBean baseBean) {
                         super.onNext(baseBean);
