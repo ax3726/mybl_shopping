@@ -4,6 +4,7 @@ import android.graphics.Paint;
 import android.support.annotation.IdRes;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
@@ -17,11 +18,14 @@ import com.lm.base.library.adapters.recyclerview.CommonAdapter;
 import com.lm.base.library.adapters.recyclerview.MultiItemTypeAdapter;
 import com.lm.base.library.adapters.recyclerview.base.ViewHolder;
 import com.ycblsc.R;
+import com.ycblsc.base.BasePresenter;
 import com.ycblsc.base.EmptyState;
+import com.ycblsc.common.Api;
 import com.ycblsc.common.Link;
 import com.ycblsc.databinding.ActivityRegisterBinding;
 import com.ycblsc.model.BaseBean;
 import com.ycblsc.model.home.HeadListModel;
+import com.ycblsc.model.shopping.ImageDataModel;
 import com.ycblsc.prestener.main.MainPrestener;
 import com.ycblsc.ui.common.PhotoActivity;
 import com.ycblsc.utils.UIUtil;
@@ -78,6 +82,7 @@ public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegis
         super.initData();
         mStateModel.setEmptyState(EmptyState.PROGRESS);
         mPresenter.getHeadList();//获取头像列表
+        mPresenter.getImageData("52");//注册说明
         initAdapter();
     }
 
@@ -232,6 +237,7 @@ public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegis
 
     }
 
+
     private void showPopueWindow() {
         View popView = View.inflate(this, R.layout.item_photo_layout, null);
         Button bt_album = (Button) popView.findViewById(R.id.btn_pop_album);
@@ -290,6 +296,14 @@ public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegis
     @Override
     public void getSendCode(BaseBean baseBean) {
 //        showToast("验证码" + baseBean.getReturnData());
+    }
+   //注册说明
+    @Override
+    public void getImageData(ImageDataModel baseBean) {
+        if (baseBean.getReturnData().size()>0){
+            mBinding.tvTitle.setText(Html.fromHtml(baseBean.getReturnData().get(0).getI_Title()+":"));
+            mBinding.tvExplain.setText(Html.fromHtml(baseBean.getReturnData().get(0).getF_Abstract()));
+        }
     }
 
     private void initAdapter() {

@@ -39,7 +39,7 @@ import retrofit2.http.Url;
 public interface ApiService {
 
     @GET("AppService.aspx?CMD=LoadProductType")
-        //获取商品分类信息 、新增参数hopId
+        //获取商品分类信息 、新增参数shopId
     Flowable<ProuductTypeModel> getProductType(@Query("shopId") String shopId); //便利架id;
 
 
@@ -68,7 +68,7 @@ public interface ApiService {
 
     @GET("AppService.aspx?CMD=LoadData")
         //获取广告位
-    Flowable<ImageDataModel> getImageData(@Query("id") String id);//便利架广告(49)、个人中心广告（48）、充值协议（50）、充值说明（51）
+    Flowable<ImageDataModel> getImageData(@Query("id") String id);//便利架广告(49)、个人中心广告（48）、充值协议（50）、充值说明（51）、注册说明（52）
 
 
     //上传文件

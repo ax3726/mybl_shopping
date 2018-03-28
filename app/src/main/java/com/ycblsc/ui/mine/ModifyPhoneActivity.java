@@ -11,6 +11,7 @@ import com.ycblsc.common.CacheService;
 import com.ycblsc.databinding.ActivityModifyLayoutBinding;
 import com.ycblsc.databinding.ActivityModifyPhoneBinding;
 import com.ycblsc.model.BaseBean;
+import com.ycblsc.model.mine.PersonInfoModel;
 import com.ycblsc.ui.main.LoginActivity;
 
 /**
@@ -58,6 +59,7 @@ public class ModifyPhoneActivity extends BaseActivity<BasePresenter, ActivityMod
     @Override
     protected void initData() {
         super.initData();
+        getPersonInfo(CacheService.getIntance().getUserId());//获取个人信息
     }
 
     //修改手机号码
@@ -84,5 +86,23 @@ public class ModifyPhoneActivity extends BaseActivity<BasePresenter, ActivityMod
                     }
                 });
 
+    }
+    //获取个人信息
+    public void getPersonInfo(String id) {
+        Api.getApi().getPersonInfo(id)
+                .compose(callbackOnIOToMainThread())
+                .subscribe(new BaseNetSubscriber<PersonInfoModel>() {
+                    @Override
+                    public void onNext(PersonInfoModel baseBean) {
+                        super.onNext(baseBean);
+                        mBinding.etPhone.setHint(baseBean.getReturnData().get(0).getTelphone());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+
+                    }
+                });
     }
 }

@@ -5,12 +5,15 @@ import android.view.View;
 
 import com.ycblsc.R;
 import com.ycblsc.base.BaseActivity;
+import com.ycblsc.base.BaseFragmentPresenter;
 import com.ycblsc.base.BasePresenter;
+import com.ycblsc.base.EmptyState;
 import com.ycblsc.common.Api;
 import com.ycblsc.common.CacheService;
 import com.ycblsc.databinding.ActivityModifyNicknameBinding;
 import com.ycblsc.databinding.ActivityModifyPhoneBinding;
 import com.ycblsc.model.BaseBean;
+import com.ycblsc.model.mine.PersonInfoModel;
 import com.ycblsc.ui.main.LoginActivity;
 
 import java.io.UnsupportedEncodingException;
@@ -66,6 +69,7 @@ public class ModifyNickNameActivity extends BaseActivity<BasePresenter, Activity
     @Override
     protected void initData() {
         super.initData();
+        getPersonInfo(CacheService.getIntance().getUserId());//获取个人信息
     }
 
     //修改昵称
@@ -92,5 +96,23 @@ public class ModifyNickNameActivity extends BaseActivity<BasePresenter, Activity
                     }
                 });
 
+    }
+    //获取个人信息
+    public void getPersonInfo(String id) {
+        Api.getApi().getPersonInfo(id)
+                .compose(callbackOnIOToMainThread())
+                .subscribe(new BaseNetSubscriber<PersonInfoModel>() {
+                    @Override
+                    public void onNext(PersonInfoModel baseBean) {
+                        super.onNext(baseBean);
+                        mBinding.etNickname.setHint(baseBean.getReturnData().get(0).getName());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+
+                    }
+                });
     }
 }

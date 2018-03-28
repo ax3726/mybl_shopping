@@ -4,6 +4,7 @@ import com.ycblsc.base.BaseFragmentView;
 import com.ycblsc.base.BaseView;
 import com.ycblsc.model.BaseBean;
 import com.ycblsc.model.home.HeadListModel;
+import com.ycblsc.model.shopping.ImageDataModel;
 
 /**
  * Created by Administrator on 2018/1/4.
@@ -16,4 +17,6 @@ public interface IMainView extends BaseView {
     void getLoginRegister(BaseBean baseBean);
     //发送验证码
     void getSendCode(BaseBean baseBean);
+    //注册说明
+    void getImageData(ImageDataModel baseBean);
 }
