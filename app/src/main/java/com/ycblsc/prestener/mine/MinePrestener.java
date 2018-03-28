@@ -72,7 +72,7 @@ public class MinePrestener extends BaseFragmentPresenter<IMineView> {
     //修改头像
     public void getUpdateImage(String id, String icon) {
         File flie = new File(icon);
-        Log.e("哈哈哈",flie.length()+"");
+
 
 
        /* UploadFileRequestBody fileRequestBody = new UploadFileRequestBody(flie, new UploadFileRequestBody.ProgressListener() {
