@@ -108,7 +108,7 @@
                             android:layout_marginLeft="40px"
                             android:layout_marginTop="20px"
                             android:drawablePadding="10px"
-                            android:text="123.00"
+                            android:text="0.00"
                             android:textColor="#000000"
                             android:textSize="36px" />
 
@@ -159,7 +159,6 @@
                         android:layout_marginLeft="40px"
                         android:layout_marginTop="10px"
                         android:drawablePadding="10px"
-                        android:text="-/ 贵阳市观山湖区长岭南路25号会展A区12-3"
                         android:textColor="#958f91"
                         android:textSize="28px" />
                 </com.zhy.autolayout.AutoLinearLayout>
