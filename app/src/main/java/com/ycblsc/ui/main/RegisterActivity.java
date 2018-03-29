@@ -330,7 +330,8 @@ public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegis
                 // mBinding.imgHead.setImageURI(Uri.parse(headListModel.getUrl()));
                 Glide.with(RegisterActivity.this).load(headListModel.getUrl())
                         .into(mBinding.imgHead);
-                iconId = Link.DVLURL + headListModel.getId();
+                //Link.DVLURL
+                iconId = headListModel.getId();
                 mPhotoType = 1;
             }
 
