@@ -82,9 +82,10 @@ public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegis
     protected void initData() {
         super.initData();
         mStateModel.setEmptyState(EmptyState.PROGRESS);
+        initAdapter();
         mPresenter.getHeadList();//获取头像列表
         mPresenter.getImageData("52");//注册说明
-        initAdapter();
+
     }
 
     @Override
@@ -211,8 +212,10 @@ public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegis
             //默认选择第一个
             Glide.with(RegisterActivity.this).load(headListModel.getReturnData().get(0).getUrl())
                     .into(mBinding.imgHead);
+        } else {
+            mBinding.linSeclect.setVisibility(View.GONE);
         }
-
+        mHeadsAdapter.notifyDataSetChanged();
     }
 
     //会员注册
@@ -309,12 +312,11 @@ public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegis
 
     //头像列表适配器
     private void initAdapter() {
-        //imageList  mHeadsList
         mHeadsAdapter = new CommonAdapter<HeadListModel.ReturnDataBean>(aty, R.layout.item_pop_imagelist, mHeadsList) {
             @Override
             protected void convert(ViewHolder holder, HeadListModel.ReturnDataBean item, int position) {
                 if (!TextUtils.isEmpty(item.getUrl())) {
-                    holder.setImageurl(R.id.img,  item.getUrl(), 0);
+                    holder.setImageurl(R.id.img, item.getUrl(), R.drawable.home_yc_icon);
                 }
             }
         };
