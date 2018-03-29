@@ -17,5 +17,5 @@
         android:layout_width="150px"
         android:layout_height="165px"
         android:padding="30px"
-        android:scaleType="fitXY" />
+        android:scaleType="center" />
 </com.zhy.autolayout.AutoLinearLayout>
