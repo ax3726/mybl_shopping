@@ -52,16 +52,15 @@ public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegis
     private String ed_pwd;//密码
     private String aginPwd;//再次输入密码
     private String address;
-    private String iconUrl;
     private String iconId;
     String temp = "1";
     private int mPhotoType = 1;//1 系统图片  2本地图片
     private String mPhotoPath = "";//本地图片路径
 
-    int[] imageList = new int[]{R.drawable.ic_woman, R.drawable.ic_oldman,
-            R.drawable.ic_mans, R.drawable.ic_girl, R.drawable.ic_be_girl,
-            R.drawable.ic_glasses_girl, R.drawable.ic_young_girl, R.drawable.ic_boy,
-            R.drawable.ic_glasses_boy, R.drawable.ic_boy_store, R.drawable.ic_man};
+//    int[] imageList = new int[]{R.drawable.ic_woman, R.drawable.ic_oldman,
+//            R.drawable.ic_mans, R.drawable.ic_girl, R.drawable.ic_be_girl,
+//            R.drawable.ic_glasses_girl, R.drawable.ic_young_girl, R.drawable.ic_boy,
+//            R.drawable.ic_glasses_boy, R.drawable.ic_boy_store, R.drawable.ic_man};
 
     @Override
     protected void initTitleBar() {
@@ -212,7 +211,6 @@ public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegis
             //默认选择第一个
             Glide.with(RegisterActivity.this).load(headListModel.getReturnData().get(0).getUrl())
                     .into(mBinding.imgHead);
-            //mBinding.imgHead.setImageResource(R.drawable.ic_woman);
         }
 
     }
@@ -309,14 +307,14 @@ public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegis
         }
     }
 
+    //头像列表适配器
     private void initAdapter() {
         //imageList  mHeadsList
         mHeadsAdapter = new CommonAdapter<HeadListModel.ReturnDataBean>(aty, R.layout.item_pop_imagelist, mHeadsList) {
             @Override
             protected void convert(ViewHolder holder, HeadListModel.ReturnDataBean item, int position) {
-                iconUrl = item.getUrl();
-                if (!TextUtils.isEmpty(iconUrl)) {
-                    holder.setImageurl(R.id.img, iconUrl, 0);
+                if (!TextUtils.isEmpty(item.getUrl())) {
+                    holder.setImageurl(R.id.img,  item.getUrl(), 0);
                 }
             }
         };
