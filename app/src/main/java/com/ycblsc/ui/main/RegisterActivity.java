@@ -38,16 +38,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 /*
 * 会员注册/登陆注册
 * */
 public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegisterBinding> implements IMainView, View.OnClickListener {
-    private PopupWindow mPopTop;
     private List<HeadListModel.ReturnDataBean> mHeadsList = new ArrayList<>();
     private CommonAdapter<HeadListModel.ReturnDataBean> mHeadsAdapter;//头像列表
     private int height = 0;
-    private boolean hasMeasured = false;
+    //    private boolean hasMeasured = false;
     private String phone;//手机号码
     private String code;//验证码
     private String niceName;//昵称
@@ -60,10 +58,10 @@ public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegis
     private int mPhotoType = 1;//1 系统图片  2本地图片
     private String mPhotoPath = "";//本地图片路径
 
-//    int[] imageList = new int[] { R.drawable.ic_woman, R.drawable.ic_oldman,
-//            R.drawable.ic_mans,R.drawable.ic_girl,R.drawable.ic_be_girl,
-//            R.drawable.ic_glasses_girl,R.drawable.ic_young_girl,R.drawable.ic_boy,
-//            R.drawable.ic_glasses_boy,R.drawable.ic_boy_store,R.drawable.ic_man };
+    int[] imageList = new int[]{R.drawable.ic_woman, R.drawable.ic_oldman,
+            R.drawable.ic_mans, R.drawable.ic_girl, R.drawable.ic_be_girl,
+            R.drawable.ic_glasses_girl, R.drawable.ic_young_girl, R.drawable.ic_boy,
+            R.drawable.ic_glasses_boy, R.drawable.ic_boy_store, R.drawable.ic_man};
 
     @Override
     protected void initTitleBar() {
@@ -88,7 +86,6 @@ public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegis
         mPresenter.getHeadList();//获取头像列表
         mPresenter.getImageData("52");//注册说明
         initAdapter();
-
     }
 
     @Override
@@ -302,17 +299,18 @@ public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegis
     public void getSendCode(BaseBean baseBean) {
 //        showToast("验证码" + baseBean.getReturnData());
     }
-   //注册说明
+
+    //注册说明
     @Override
     public void getImageData(ImageDataModel baseBean) {
-        if (baseBean.getReturnData().size()>0){
-            mBinding.tvTitle.setText(Html.fromHtml(baseBean.getReturnData().get(0).getI_Title()+":"));
+        if (baseBean.getReturnData().size() > 0) {
+            mBinding.tvTitle.setText(Html.fromHtml(baseBean.getReturnData().get(0).getI_Title() + ":"));
             mBinding.tvExplain.setText(Html.fromHtml(baseBean.getReturnData().get(0).getF_Abstract()));
         }
     }
 
     private void initAdapter() {
-      //imageList  mHeadsList
+        //imageList  mHeadsList
         mHeadsAdapter = new CommonAdapter<HeadListModel.ReturnDataBean>(aty, R.layout.item_pop_imagelist, mHeadsList) {
             @Override
             protected void convert(ViewHolder holder, HeadListModel.ReturnDataBean item, int position) {
@@ -333,7 +331,7 @@ public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegis
                 Glide.with(RegisterActivity.this).load(headListModel.getUrl())
                         .into(mBinding.imgHead);
                 iconId = Link.DVLURL + headListModel.getId();
-                mPhotoType=1;
+                mPhotoType = 1;
             }
 
             @Override
@@ -347,7 +345,7 @@ public class RegisterActivity extends PhotoActivity<MainPrestener, ActivityRegis
     @Override
     public void photoSuccess(String path, File file, int... queue) {
         mPhotoPath = path;
-        mPhotoType=2;
+        mPhotoType = 2;
         Glide.with(aty).load(path).into(mBinding.imgHead);
     }
 
