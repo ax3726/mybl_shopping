@@ -9,8 +9,8 @@
     <ImageView
         android:id="@+id/img"
         android:layout_width="150px"
-        android:layout_height="150px"
+        android:layout_height="165px"
         android:padding="30px"
-        android:scaleType="center" />
+        android:scaleType="centerInside" />
 
 </com.zhy.autolayout.AutoLinearLayout>
