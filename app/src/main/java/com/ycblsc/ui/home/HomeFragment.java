@@ -79,7 +79,7 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
             }
         });*/
         initAdapter();
-
+        mPresenter.getShopInfo("18");//默认给18数据
         mPresenter.getImageData();
         mBinding.srlGoodsList.finishLoadmoreWithNoMoreData();
     }

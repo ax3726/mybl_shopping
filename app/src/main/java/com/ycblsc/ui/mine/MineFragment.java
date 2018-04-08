@@ -150,6 +150,10 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
         mBinding.linSetting.setOnClickListener(this);
         //修改头像
         mBinding.headPortrait.setOnClickListener(this);
+
+        mBinding.relaShopreocde.setOnClickListener(this);
+
+        mBinding.relaOlder.setOnClickListener(this);
     }
 
     @Override
@@ -193,6 +197,14 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
             //修改头像
             case R.id.head_portrait:
                 showPopueWindow();
+                break;
+            //我的订单
+            case R.id.rela_older:
+               showToast("暂未开放");
+                break;
+            //商城消费记录
+            case R.id.rela_shopreocde:
+                showToast("暂未开放");
                 break;
         }
     }
