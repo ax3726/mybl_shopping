@@ -74,17 +74,17 @@ public class Api {
 
     }
     /**
-     * 从 {@link Request#header(String)} 中取出 DomainName
+     * 从 {@link Request#header(String)} 中取出 NoSign
      *
      * @param request {@link Request}
-     * @return DomainName
+     * @return NoSign
      */
-    private static String obtainDomainNameFromHeaders(Request request) {
+    private static String obtainNoSignNameFromHeaders(Request request) {
         List<String> headers = request.headers(NO_SIGN);
         if (headers == null || headers.size() == 0)
             return null;
         if (headers.size() > 1)
-            throw new IllegalArgumentException("Only one Domain-Name in the headers");
+            throw new IllegalArgumentException("Only one NoSign-Name in the headers");
         return request.header(NO_SIGN);
     }
 
@@ -95,7 +95,7 @@ public class Api {
                 .readTimeout(10000L, TimeUnit.MILLISECONDS)
                 .addInterceptor(chain -> {//添加公共信息
                     Request originalRequest = chain.request();
-                    String canshu = obtainDomainNameFromHeaders(originalRequest);
+                    String canshu = obtainNoSignNameFromHeaders(originalRequest);
                     Log.e("eeee","不加密的参数有"+canshu);
 
                     HashMap<String, String> rootMap = new HashMap<>();
