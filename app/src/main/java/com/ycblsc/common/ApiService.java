@@ -22,6 +22,7 @@ import okhttp3.ResponseBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -29,6 +30,9 @@ import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Streaming;
 import retrofit2.http.Url;
+
+import static com.ycblsc.common.Constant.API_NO_SIGN;
+import static com.ycblsc.common.Constant.NO_SIGN;
 
 
 /**
@@ -66,6 +70,7 @@ public interface ApiService {
     Flowable<BaseBean> addMessage(@Query("n_Contact") String n_Contact, @Query("n_Name") String n_Name, @Query("n_Note") String n_Note);
 
 
+    @Headers({API_NO_SIGN+"no_sign_parm"})
     @GET("AppService.aspx?CMD=LoadData")
         //获取广告位
     Flowable<ImageDataModel> getImageData(@Query("id") String id);//便利架广告(49)、个人中心广告（48）、充值协议（50）、充值说明（51）、注册说明（52）

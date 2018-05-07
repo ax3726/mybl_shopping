@@ -1,6 +1,8 @@
 package com.ycblsc.common;
 
 
+import android.util.Log;
+
 import com.ycblsc.net.DownloadResponseBody;
 import com.ycblsc.net.GsonConverterFactory;
 import com.ycblsc.net.LoggerInterceptor;
@@ -16,6 +18,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Headers;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -25,6 +28,8 @@ import retrofit2.CallAdapter;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+
+import static com.ycblsc.common.Constant.NO_SIGN;
 
 
 /**
@@ -68,7 +73,20 @@ public class Api {
         return MD5.toMD5Sign(signStr);
 
     }
-
+    /**
+     * 从 {@link Request#header(String)} 中取出 DomainName
+     *
+     * @param request {@link Request}
+     * @return DomainName
+     */
+    private static String obtainDomainNameFromHeaders(Request request) {
+        List<String> headers = request.headers(NO_SIGN);
+        if (headers == null || headers.size() == 0)
+            return null;
+        if (headers.size() > 1)
+            throw new IllegalArgumentException("Only one Domain-Name in the headers");
+        return request.header(NO_SIGN);
+    }
 
     public static OkHttpClient getOkHttpClient(DownloadResponseBody.DownLoadListener... downLoadListener) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
@@ -77,6 +95,9 @@ public class Api {
                 .readTimeout(10000L, TimeUnit.MILLISECONDS)
                 .addInterceptor(chain -> {//添加公共信息
                     Request originalRequest = chain.request();
+                    String canshu = obtainDomainNameFromHeaders(originalRequest);
+                    Log.e("eeee","不加密的参数有"+canshu);
+
                     HashMap<String, String> rootMap = new HashMap<>();
                     //获取到请求地址api
                     HttpUrl httpUrlurl = originalRequest.url();
