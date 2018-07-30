@@ -55,17 +55,17 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
     @Override
     protected void initData() {
         super.initData();
-      /*  mStateModel.setEmptyState(EmptyState.PROGRESS);
+    /* mStateModel.setEmptyState(EmptyState.PROGRESS);
         mStateModel.setIOnClickListener(new StateModel.IOnClickListener() {
             @Override
             public void click(View view) {
                 mStateModel.setEmptyState(EmptyState.PROGRESS);
                 mPresenter.getProductType();
             }
-        });
+        });*/
         initAdapter();
-        mPresenter.getProductType();
-        mPresenter.getImageData();*/
+      //  mPresenter.getProductType();
+        mPresenter.getImageData();
     }
 
     @Override
