@@ -41,6 +41,7 @@ public class Api {
     private static Converter.Factory gsonConverterFactory = GsonConverterFactory.create();
     private static CallAdapter.Factory rxJavaCallAdapterFactory = RxJava2CallAdapterFactory.create();
     private static ApiService apiService;
+    private static ApiService apiService2;
 
 
     public static ApiService getApi() {
@@ -55,6 +56,19 @@ public class Api {
         }
         return apiService;
     }
+    public static ApiService getApi2() {
+        if (apiService2 == null) {
+            Retrofit retrofit = new Retrofit.Builder()
+                    .client(getOkHttpClient())
+                    .baseUrl(Link.SEREVE2)
+                    .addConverterFactory(gsonConverterFactory)
+                    .addCallAdapterFactory(rxJavaCallAdapterFactory)
+                    .build();
+            apiService2 = retrofit.create(ApiService.class);
+        }
+        return apiService2;
+    }
+
 
     public static String getKeyStr(Map<String, String> params) {
         List<Map.Entry<String, String>> list =

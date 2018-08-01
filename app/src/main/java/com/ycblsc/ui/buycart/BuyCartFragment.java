@@ -52,24 +52,25 @@ public class BuyCartFragment extends BaseFragment<BuyCartPrestener, FragmentBuyc
         },2000);*/
 
         title.add("便利架");
-        title.add("商城");
-        mEasyCartFragment=new EasyCartFragment();
-        mShoppingCartFragment=new ShoppingCartFragment();
+        title.add("限时达");
+        mEasyCartFragment = new EasyCartFragment();
+        mShoppingCartFragment = new ShoppingCartFragment();
         fragments.add(mEasyCartFragment);
         fragments.add(mShoppingCartFragment);
         mBinding.vpContent.setAdapter(new MyPagerAdapter(getActivity().getSupportFragmentManager()));
-        mBinding.tlyHead.setupWithViewPager( mBinding.vpContent);
+        mBinding.tlyHead.setupWithViewPager(mBinding.vpContent);
         mBinding.tlyHead.setTabMode(TabLayout.MODE_SCROLLABLE);
 
 
     }
+
     /**
      * 更新数据
+     *
      * @param list
      */
-    public void  updatemEasyCartData(List<ProductListModel.ReturnDataBean> list)
-    {
-        if (mEasyCartFragment!=null) {
+    public void updatemEasyCartData(List<ProductListModel.ReturnDataBean> list) {
+        if (mEasyCartFragment != null) {
             mEasyCartFragment.updateData(list);
         }
 
@@ -77,14 +78,12 @@ public class BuyCartFragment extends BaseFragment<BuyCartPrestener, FragmentBuyc
 
     /**
      * 更新数据
+     *
      * @param list
      */
-    public void  updatemShoppingCartData(List<ProductListModel.ReturnDataBean> list)
-    {
-      //  mEasyCartFragment.updateData(list);
+    public void updatemShoppingCartData(List<ProductListModel.ReturnDataBean> list) {
+        //  mEasyCartFragment.updateData(list);
     }
-
-
 
 
     class MyPagerAdapter extends FragmentPagerAdapter {

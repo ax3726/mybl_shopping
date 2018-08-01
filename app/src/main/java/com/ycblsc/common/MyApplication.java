@@ -31,6 +31,7 @@ public class MyApplication extends Application {
     }
 
     public String mEasyId="";//便利架ID
+    public String mShoppingId="";//体验店ID
 
     public String getEasyId() {
         return mEasyId;
@@ -38,6 +39,14 @@ public class MyApplication extends Application {
 
     public void setEasyId(String mEasyId) {
         this.mEasyId = mEasyId;
+    }
+
+    public String getmShoppingId() {
+        return mShoppingId;
+    }
+
+    public void setmShoppingId(String mShoppingId) {
+        this.mShoppingId = mShoppingId;
     }
 
     @Override

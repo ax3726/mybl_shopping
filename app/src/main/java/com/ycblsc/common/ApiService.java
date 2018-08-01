@@ -47,6 +47,10 @@ public interface ApiService {
     Flowable<ProuductTypeModel> getProductType(@Query("shopId") String shopId); //便利架id;
 
 
+    @GET("AppService2.aspx?CMD=LoadProductType")
+        //获取商品分类信息 、新增参数shopId
+    Flowable<ProuductTypeModel> getProductType2(@Query("shopId") String shopId); //便利架id;
+
     @GET("AppService.aspx?CMD=LoadProductList")
         //获取商品列表信息
     Flowable<ProductListModel> getProductList(@Query("fenLei") String fenLei
@@ -56,9 +60,24 @@ public interface ApiService {
             , @Query("rows") String rows
     );
 
-    @GET("AppService.aspx?CMD=LoadShopInfo")
+
+    @GET("AppService2.aspx?CMD=LoadProductList")
+        //获取商品列表信息
+    Flowable<ProductListModel> getProductList2(@Query("fenLei") String fenLei
+            , @Query("id") String id   //便利架id
+            , @Query("isTuiJian") String isTuiJian//是否推荐（1是）
+            , @Query("page") String page
+            , @Query("rows") String rows
+    );
+
+  @GET("AppService.aspx?CMD=LoadShopInfo")
         //获取便利架信息
     Flowable<ShopInfoModel> getShopInfo(@Query("id") String id);
+
+    @GET("AppService2.aspx?CMD=LoadShopInfo")
+        //获取商城信息
+    Flowable<ShopInfoModel> getShopInfo2(@Query("id") String id);
+
 
 
     @GET("AppService.aspx?CMD=LoadDict")
@@ -73,7 +92,7 @@ public interface ApiService {
     @Headers({API_NO_SIGN+"no_sign_parm"})
     @GET("AppService.aspx?CMD=LoadData")
         //获取广告位
-    Flowable<ImageDataModel> getImageData(@Query("id") String id);//便利架广告(49)、个人中心广告（48）、充值协议（50）、充值说明（51）、注册说明（52）
+    Flowable<ImageDataModel> getImageData(@Query("id") String id);//便利架广告(49)、个人中心广告（48）、充值协议（50）、充值说明（51）、注册说明（52）  体验店广告（54）
 
 
     //上传文件

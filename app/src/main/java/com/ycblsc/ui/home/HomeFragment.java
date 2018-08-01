@@ -53,10 +53,11 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
 
     private CommonAdapter<ProuductTypeModel.ReturnDataBean> mGoodsTypeAdapter;//商品分类
     private CommonAdapter<ProductListModel.ReturnDataBean> mGoodsListAdapter;//商品列表
-    private com.lm.base.library.adapters.abslistview.CommonAdapter<ProductListModel.ReturnDataBean> mTuijianGoodsAdapter;//推荐商品列表
+
     private List<ProuductTypeModel.ReturnDataBean> mGoodsTypes = new ArrayList<>();
     private List<ProductListModel.ReturnDataBean> mGoodsList = new ArrayList<>();
     private List<ProductListModel.ReturnDataBean> mTuijianGoodsList = new ArrayList<>();
+    private com.lm.base.library.adapters.abslistview.CommonAdapter<ProductListModel.ReturnDataBean> mTuijianGoodsAdapter;//推荐商品列表
 
     private int mCurPosition = 0;//记录当前分类的下标
     private int mPage = 1;

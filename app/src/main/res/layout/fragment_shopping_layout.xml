@@ -1,172 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
+
     <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
+        android:layout_height="match_parent"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:layout_height="match_parent">
+        android:orientation="vertical">
 
-  <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
             android:id="@+id/srl_shopping"
             android:layout_width="match_parent"
 
             android:layout_height="match_parent">
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
 
-        android:layout_height="match_parent">
-    <com.zhy.autolayout.AutoLinearLayout
-        android:id="@+id/lly_boot"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorWhite"
-        android:orientation="vertical">
+            <android.support.v4.widget.NestedScrollView
+                android:layout_width="match_parent"
 
-
-        <com.lm.base.library.widget.flybanner.FlyBanner
-            android:id="@+id/fb_roll"
-            android:layout_width="match_parent"
-            android:layout_height="200px">
-
-        </com.lm.base.library.widget.flybanner.FlyBanner>
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="10px"
-            android:background="@color/colorE5E5E5" />
-
-        <com.zhy.autolayout.AutoRelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/home_special_bg_icon"
-            android:orientation="vertical">
-
-            <com.zhy.autolayout.AutoLinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/home_special_icon" />
+                android:layout_height="match_parent">
 
                 <com.zhy.autolayout.AutoLinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="220px"
-                    android:layout_marginTop="5px"
-                    android:background="@color/colorDE98A8"
-                    android:orientation="horizontal"
-                    android:paddingLeft="60px"
+                    android:id="@+id/lly_boot"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorWhite"
+                    android:orientation="vertical">
 
-                    android:paddingRight="60px">
 
-                    <ImageView
-                        android:layout_width="200px"
-                        android:layout_height="200px"
-                        android:src="@mipmap/ic_launcher"
+                    <com.lm.base.library.widget.flybanner.FlyBanner
+                        android:id="@+id/fb_roll"
+                        android:layout_width="match_parent"
+                        android:layout_height="200px">
 
-                        />
+                    </com.lm.base.library.widget.flybanner.FlyBanner>
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="10px"
+                        android:background="@color/colorE5E5E5" />
 
                     <com.zhy.autolayout.AutoRelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="30px"
-                        android:orientation="vertical"
-                        android:paddingBottom="30px"
-                        android:paddingTop="30px">
+                        android:id="@+id/rly_tuijian"
+                        android:layout_width="match_parent"
+                        android:layout_height="360px"
+                        android:background="@drawable/home_special_bg_icon"
+                        android:visibility="gone">
 
-                        <TextView
-                            android:id="@+id/tv_title"
-                            android:layout_width="wrap_content"
+                        <com.zhy.autolayout.AutoLinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_marginLeft="80px"
+                            android:layout_marginRight="80px"
+                            android:orientation="vertical">
 
-                            android:text="妙芙欧式蛋糕"
-                            android:textColor="@color/colorBlack"
-                            android:textSize="34px" />
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/home_special_icon" />
 
-                        <TextView
-                            android:id="@+id/tv_des"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/tv_title"
-                            android:layout_marginTop="12px"
-                            android:text="尽在丝滑口感"
-                            android:textColor="@color/color999999"
-                            android:textSize="28px" />
+                            <Gallery
+                                android:id="@+id/gl_goods"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"></Gallery>
 
-                        <TextView
-                            android:id="@+id/tv_price"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginTop="12px"
-                            android:text="¥15.8"
-                            android:textColor="@color/colorD00852"
-                            android:textSize="28px" />
-
+                        </com.zhy.autolayout.AutoLinearLayout>
 
                     </com.zhy.autolayout.AutoRelativeLayout>
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="10px"
+                        android:background="@color/colorE5E5E5" />
+
                     <ImageView
-                        android:id="@+id/img_shopping"
-                        android:layout_width="70px"
-                        android:layout_height="70px"
-                        android:layout_gravity="bottom"
-                        android:layout_marginBottom="30px"
-                        android:layout_marginLeft="15px"
-                        android:src="@drawable/home_buycart_icon" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="70px"
+                        android:layout_marginTop="35px"
+                        android:src="@drawable/home_all_goods_icon" />
+
+                    <com.zhy.autolayout.AutoLinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/rc_goods_type"
+                            android:layout_width="0dp"
+
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2">
+
+
+                        </android.support.v7.widget.RecyclerView>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/rc_goods_list"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="7"
+                            android:overScrollMode="never">
+
+
+                        </android.support.v7.widget.RecyclerView>
+                    </com.zhy.autolayout.AutoLinearLayout>
 
                 </com.zhy.autolayout.AutoLinearLayout>
-            </com.zhy.autolayout.AutoLinearLayout>
-
-        </com.zhy.autolayout.AutoRelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="10px"
-            android:background="@color/colorE5E5E5" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="70px"
-            android:layout_marginTop="35px"
-            android:src="@drawable/home_all_goods_icon" />
-
-        <com.zhy.autolayout.AutoLinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rc_goods_type"
-                android:layout_width="0dp"
-
-                android:layout_height="wrap_content"
-                android:layout_weight="2">
-
-
-            </android.support.v7.widget.RecyclerView>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rc_goods_list"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="7"
-                android:overScrollMode="never">
-
-
-            </android.support.v7.widget.RecyclerView>
-        </com.zhy.autolayout.AutoLinearLayout>
-
-    </com.zhy.autolayout.AutoLinearLayout>
-    </android.support.v4.widget.NestedScrollView>
-</com.scwang.smartrefresh.layout.SmartRefreshLayout>
+            </android.support.v4.widget.NestedScrollView>
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
     </com.zhy.autolayout.AutoLinearLayout>
 </layout>
