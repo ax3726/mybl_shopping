@@ -14,6 +14,7 @@ import com.ycblsc.model.mine.PersonInfoModel;
 import com.ycblsc.model.shopping.GoodsInfoModel;
 import com.ycblsc.model.shopping.ImageDataModel;
 import com.ycblsc.model.shopping.ShoppingInfoModel;
+import com.ycblsc.model.shopping.TimeAddressModel;
 
 import java.util.HashMap;
 
@@ -61,7 +62,6 @@ public interface ApiService {
             , @Query("page") String page
             , @Query("rows") String rows
     );
-
 
     @GET("AppService2.aspx?CMD=LoadProductList")
         //获取商品列表信息
@@ -231,4 +231,7 @@ public interface ApiService {
     @POST("AppService2.aspx?CMD=LoadProductInfo")
     Flowable<GoodsInfoModel> getLoadProductInfo(@Query("id") String id, @Query("shopId") String shopId);
 
+    //限时达服务说明
+    @GET("AppService2.aspx?CMD=GetNote")
+    Flowable<TimeAddressModel> getGetNote(@Query("d_Code") String d_Code); //serviceNote;
 }

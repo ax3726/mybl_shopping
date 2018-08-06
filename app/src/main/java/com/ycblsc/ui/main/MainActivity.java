@@ -27,6 +27,7 @@ import com.ycblsc.model.MainEvent;
 import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.prestener.main.MainPrestener;
 import com.ycblsc.ui.buycart.BuyCartFragment;
+import com.ycblsc.ui.buycart.TimeLimitAddressFragment;
 import com.ycblsc.ui.home.HomeFragment;
 import com.ycblsc.ui.mine.MineFragment;
 import com.ycblsc.ui.shopping.ShoppingFragment;
@@ -44,14 +45,16 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
 
     private HomeFragment mHomeFragment;
     private ShoppingFragment mShoppingFragment;
+    private TimeLimitAddressFragment mTimeLimitAddressFragment;//限时达地址
     private BuyCartFragment mBuyCartFragment;
     private MineFragment mMineFragment;
     private FragmentTransaction mTransaction;
     private FragmentManager mFm;
     private List<Fragment> mFragments = new ArrayList<>();
     private DoubleClickExitHelper mDoubleClickExit;
-    private List<ProductListModel.ReturnDataBean> mEasyCartList=new ArrayList<>();//便利架购物车列表
-    private List<ProductListModel.ReturnDataBean> mShoppingCartList=new ArrayList<>();//商城购物车列表
+    private List<ProductListModel.ReturnDataBean> mEasyCartList = new ArrayList<>();//便利架购物车列表
+    private List<ProductListModel.ReturnDataBean> mShoppingCartList = new ArrayList<>();//商城购物车列表
+
     @Override
     protected MainPrestener createPresenter() {
         return new MainPrestener();
@@ -78,12 +81,10 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
     }
 
 
+    public ActivityMainBinding getViewBinding() {
+        return mBinding;
+    }
 
-
-   public ActivityMainBinding getViewBinding()
-   {
-       return mBinding;
-   }
     @Override
     protected void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
@@ -118,13 +119,15 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
 
     private void initFragment() {
         mHomeFragment = new HomeFragment();
-        mShoppingFragment = new ShoppingFragment();
+     //   mShoppingFragment = new ShoppingFragment();
+        mTimeLimitAddressFragment=new TimeLimitAddressFragment();
         mBuyCartFragment = new BuyCartFragment();
         mMineFragment = new MineFragment();
 
 
         mFragments.add(mHomeFragment);
-      mFragments.add(mShoppingFragment);
+     //   mFragments.add(mShoppingFragment);
+        mFragments.add(mTimeLimitAddressFragment);
         mFragments.add(mBuyCartFragment);
         mFragments.add(mMineFragment);
         mFm = getSupportFragmentManager();
@@ -157,18 +160,21 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
         }
         return super.onKeyDown(keyCode, event);
     }
+
     private PathMeasure mPathMeasure;
     /**
      * 贝塞尔曲线中间过程的点的坐标
      */
     private float[] mCurrentPosition = new float[2];
+
     /**
      * ★★★★★把商品添加到购物车的动画效果★★★★★
+     *
      * @param iv
      */
-    public void addCart( ImageView iv) {
+    public void addCart(ImageView iv) {
         AutoRelativeLayout rlyBoot = mBinding.rlyBoot;
-        RadioButton rbBuyCart =  mBinding.rbBuyCart;
+        RadioButton rbBuyCart = mBinding.rbBuyCart;
 //      一、创造出执行动画的主题---imageview
         //代码new一个imageview，图片资源是上面的imageview的图片
         // (这个图片就是执行动画的图片，从开始位置出发，经过一个抛物线（贝塞尔曲线），移动到购物车里)
@@ -266,35 +272,34 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
     /**
      * 添加便利架购物车
      */
-    public void AddEasyCart(ProductListModel.ReturnDataBean dataBean)
-    {
-        int index=-1;
-        for (int i = 0; i <mEasyCartList.size(); i++) {
-            if (dataBean.getId()==mEasyCartList.get(i).getId()) {
-                index=i;
+    public void AddEasyCart(ProductListModel.ReturnDataBean dataBean) {
+        int index = -1;
+        for (int i = 0; i < mEasyCartList.size(); i++) {
+            if (dataBean.getId() == mEasyCartList.get(i).getId()) {
+                index = i;
                 break;
             }
         }
         if (index != -1) {
-            mEasyCartList.get(index).setCount( mEasyCartList.get(index).getCount()+1);
+            mEasyCartList.get(index).setCount(mEasyCartList.get(index).getCount() + 1);
         } else {
             mEasyCartList.add(dataBean);
         }
         mBuyCartFragment.updatemEasyCartData(mEasyCartList);
     }
+
     /**
      * 添加商城购物车
      */
-    public void AddShoppingCart(ProductListModel.ReturnDataBean dataBean)
-    {
-        int index=-1;
-        for (int i = 0; i <mShoppingCartList.size(); i++) {
-            if (dataBean.getId()==mShoppingCartList.get(i).getId()) {
-                index=i;
+    public void AddShoppingCart(ProductListModel.ReturnDataBean dataBean) {
+        int index = -1;
+        for (int i = 0; i < mShoppingCartList.size(); i++) {
+            if (dataBean.getId() == mShoppingCartList.get(i).getId()) {
+                index = i;
             }
         }
         if (index != -1) {
-            mShoppingCartList.get(index).setCount( mShoppingCartList.get(index).getCount()+1);
+            mShoppingCartList.get(index).setCount(mShoppingCartList.get(index).getCount() + 1);
         } else {
             mShoppingCartList.add(dataBean);
         }
@@ -304,39 +309,38 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
     /**
      * 移除便利架购物车
      */
-    public void RemoveEasyCart(ProductListModel.ReturnDataBean dataBean)
-    {
-        int index=-1;
-        for (int i = 0; i <mEasyCartList.size(); i++) {
-            if (dataBean.getId()==mEasyCartList.get(i).getId()) {
-                index=i;
+    public void RemoveEasyCart(ProductListModel.ReturnDataBean dataBean) {
+        int index = -1;
+        for (int i = 0; i < mEasyCartList.size(); i++) {
+            if (dataBean.getId() == mEasyCartList.get(i).getId()) {
+                index = i;
                 break;
             }
         }
         if (index != -1) {
             int count = mEasyCartList.get(index).getCount();
             if (count != 0) {
-                mEasyCartList.get(index).setCount( count-1);
+                mEasyCartList.get(index).setCount(count - 1);
             } else {
                 mEasyCartList.remove(index);
             }
         }
         mBuyCartFragment.updatemEasyCartData(mEasyCartList);
     }
+
     /**
      * 移除便利架购物车
      */
-    public void RemoveEasyCart(ProductListModel.ReturnDataBean dataBean,boolean bl)
-    {
-        int index=-1;
-        for (int i = 0; i <mEasyCartList.size(); i++) {
-            if (dataBean.getId()==mEasyCartList.get(i).getId()) {
-                index=i;
+    public void RemoveEasyCart(ProductListModel.ReturnDataBean dataBean, boolean bl) {
+        int index = -1;
+        for (int i = 0; i < mEasyCartList.size(); i++) {
+            if (dataBean.getId() == mEasyCartList.get(i).getId()) {
+                index = i;
                 break;
             }
         }
         if (index != -1) {
-           mEasyCartList.remove(index);
+            mEasyCartList.remove(index);
         }
         mBuyCartFragment.updatemEasyCartData(mEasyCartList);
     }
@@ -345,19 +349,18 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
     /**
      * 移除商城购物车
      */
-    public void RemoveShoppingCart(ProductListModel.ReturnDataBean dataBean)
-    {
-        int index=-1;
-        for (int i = 0; i <mShoppingCartList.size(); i++) {
-            if (dataBean.getId()==mShoppingCartList.get(i).getId()) {
-                index=i;
+    public void RemoveShoppingCart(ProductListModel.ReturnDataBean dataBean) {
+        int index = -1;
+        for (int i = 0; i < mShoppingCartList.size(); i++) {
+            if (dataBean.getId() == mShoppingCartList.get(i).getId()) {
+                index = i;
                 break;
             }
         }
         if (index != -1) {
             int count = mShoppingCartList.get(index).getCount();
             if (count != 0) {
-                mShoppingCartList.get(index).setCount( count-1);
+                mShoppingCartList.get(index).setCount(count - 1);
             } else {
                 mShoppingCartList.remove(index);
             }
@@ -368,12 +371,11 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
     /**
      * 更新便利架购物车选中状态
      */
-    public void UpdateEasyCartSelect(ProductListModel.ReturnDataBean dataBean)
-    {
-        int index=-1;
-        for (int i = 0; i <mEasyCartList.size(); i++) {
-            if (dataBean.getId()==mEasyCartList.get(i).getId()) {
-                index=i;
+    public void UpdateEasyCartSelect(ProductListModel.ReturnDataBean dataBean) {
+        int index = -1;
+        for (int i = 0; i < mEasyCartList.size(); i++) {
+            if (dataBean.getId() == mEasyCartList.get(i).getId()) {
+                index = i;
                 break;
             }
         }
@@ -390,9 +392,8 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
     /**
      * 更新所有便利架购物车选中状态
      */
-    public void UpdateAllEasyCartSelect(boolean bl)
-    {
-        for (int i = 0; i <mEasyCartList.size(); i++) {
+    public void UpdateAllEasyCartSelect(boolean bl) {
+        for (int i = 0; i < mEasyCartList.size(); i++) {
             mEasyCartList.get(i).setIs_select(bl);
         }
         mBuyCartFragment.updatemEasyCartData(mEasyCartList);
@@ -401,25 +402,22 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
     /**
      * 更新所有商城购物车选中状态
      */
-    public void UpdateAllShoppingCartSelect(boolean bl)
-    {
-        for (int i = 0; i <mShoppingCartList.size(); i++) {
+    public void UpdateAllShoppingCartSelect(boolean bl) {
+        for (int i = 0; i < mShoppingCartList.size(); i++) {
             mShoppingCartList.get(i).setIs_select(bl);
         }
         mBuyCartFragment.updatemShoppingCartData(mShoppingCartList);
     }
 
 
-
     /**
      * 更新商城购物车选中状态
      */
-    public void UpdateShoppingCartSelect(ProductListModel.ReturnDataBean dataBean)
-    {
-        int index=-1;
-        for (int i = 0; i <mShoppingCartList.size(); i++) {
-            if (dataBean.getId()==mShoppingCartList.get(i).getId()) {
-                index=i;
+    public void UpdateShoppingCartSelect(ProductListModel.ReturnDataBean dataBean) {
+        int index = -1;
+        for (int i = 0; i < mShoppingCartList.size(); i++) {
+            if (dataBean.getId() == mShoppingCartList.get(i).getId()) {
+                index = i;
                 break;
             }
         }
@@ -434,7 +432,6 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
     }
 
 
-
     public List<ProductListModel.ReturnDataBean> getmEasyCartList() {
         return mEasyCartList;
     }
@@ -445,31 +442,30 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void ClearCart(CartEventModel messageEvent) {
-        for (ProductListModel.ReturnDataBean bean:messageEvent.getDataBeans())
-        {
-            RemoveEasyCart(bean,true);
+        for (ProductListModel.ReturnDataBean bean : messageEvent.getDataBeans()) {
+            RemoveEasyCart(bean, true);
         }
         mBuyCartFragment.updatemEasyCartData(mEasyCartList);
 
     }
 
 
-
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void selectpotion(MainEvent mainEvent) {
-       switch (mainEvent.getPosition()){
-           case 0:
-               mBinding.rbHome.setChecked(true);
-               break;
-           case 1:
-               mBinding.rbBuyCart.setChecked(true);
-               break;
-           case 2:
-               mBinding.rbMine.setChecked(true);
-               break;
-       }
+        switch (mainEvent.getPosition()) {
+            case 0:
+                mBinding.rbHome.setChecked(true);
+                break;
+            case 1:
+                mBinding.rbBuyCart.setChecked(true);
+                break;
+            case 2:
+                mBinding.rbMine.setChecked(true);
+                break;
+        }
         changeFragment(mainEvent.getPosition());
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
