@@ -60,9 +60,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.main.LoginActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".widget.zxing.android.CaptureActivity"
             android:screenOrientation="portrait"
@@ -100,11 +98,12 @@
         <activity
             android:name=".ui.mine.MessageDetailsActivity"
             android:screenOrientation="portrait" />
-        <!--支付方式-->
+        <!-- 支付方式 -->
         <activity
             android:name=".ui.buycart.PaymentActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.main.WelcomeActivity"
+        <activity
+            android:name=".ui.main.WelcomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -139,7 +138,7 @@
                 <data android:scheme="wxfb354855bec653ed" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".ui.shopping.GoodsInfoActivity"></activity>
     </application>
 
 </manifest>

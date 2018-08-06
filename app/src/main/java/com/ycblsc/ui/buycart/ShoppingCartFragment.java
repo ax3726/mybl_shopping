@@ -54,7 +54,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingPrestener, Fragme
         super.initData();
         mDataList.clear();
         if (aty != null) {
-            mDataList.addAll(((MainActivity) aty).getmEasyCartList());
+            mDataList.addAll(((MainActivity) aty).getmShoppingCartList());
         }
         mAdapter = new CommonAdapter<ProductListModel.ReturnDataBean>(aty, R.layout.item_cart_layout, mDataList) {
             @Override
@@ -69,7 +69,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingPrestener, Fragme
                     @Override
                     public void onClick(View v) {
                         if (aty != null) {
-                            ((MainActivity) aty).AddEasyCart(item);
+                            ((MainActivity) aty).AddShoppingCart(item);
                         }
                     }
                 });
@@ -77,7 +77,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingPrestener, Fragme
                     @Override
                     public void onClick(View v) {
                         if (aty != null) {
-                            ((MainActivity) aty).RemoveEasyCart(item);
+                            ((MainActivity) aty).RemoveShoppingCart(item);
                         }
                     }
                 });
@@ -85,7 +85,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingPrestener, Fragme
                     @Override
                     public void onClick(View v) {
                         if (aty != null) {
-                            ((MainActivity) aty).UpdateEasyCartSelect(item);
+                            ((MainActivity) aty).UpdateShoppingCartSelect(item);
                         }
                     }
                 });
@@ -93,7 +93,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingPrestener, Fragme
                     @Override
                     public void onClick(View v) {
                         if (aty != null) {
-                            ((MainActivity) aty).RemoveEasyCart(item, true);
+                            ((MainActivity) aty).RemoveShoppingCart(item);
                         }
                     }
                 });
@@ -112,12 +112,12 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingPrestener, Fragme
                 if (mBinding.imgAllSelect.isSelected()) {
                     mBinding.imgAllSelect.setSelected(false);
                     if (aty != null) {
-                        ((MainActivity) aty).UpdateAllEasyCartSelect(false);
+                        ((MainActivity) aty).UpdateAllShoppingCartSelect(false);
                     }
                 } else {
                     mBinding.imgAllSelect.setSelected(true);
                     if (aty != null) {
-                        ((MainActivity) aty).UpdateAllEasyCartSelect(true);
+                        ((MainActivity) aty).UpdateAllShoppingCartSelect(true);
                     }
                 }
             }
@@ -127,7 +127,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingPrestener, Fragme
             @Override
             public void onClick(View v) {
                 if (aty != null) {
-                    List<ProductListModel.ReturnDataBean> returnDataBeans = ((MainActivity) aty).getmEasyCartList();
+                    List<ProductListModel.ReturnDataBean> returnDataBeans = ((MainActivity) aty).getmShoppingCartList();
                     ArrayList<ProductListModel.ReturnDataBean> beans = new ArrayList<>();
                     for (ProductListModel.ReturnDataBean bean : returnDataBeans) {
                         if (bean.isIs_select()) {

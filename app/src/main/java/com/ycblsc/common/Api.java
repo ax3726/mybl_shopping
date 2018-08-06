@@ -110,7 +110,7 @@ public class Api {
                 .addInterceptor(chain -> {//添加公共信息
                     Request originalRequest = chain.request();
                     String canshu = obtainNoSignNameFromHeaders(originalRequest);
-                    Log.e("eeee","不加密的参数有"+canshu);
+                  //  Log.e("eeee","不加密的参数有"+canshu);
 
                     HashMap<String, String> rootMap = new HashMap<>();
                     //获取到请求地址api

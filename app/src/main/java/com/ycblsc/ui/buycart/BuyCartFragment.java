@@ -82,7 +82,10 @@ public class BuyCartFragment extends BaseFragment<BuyCartPrestener, FragmentBuyc
      * @param list
      */
     public void updatemShoppingCartData(List<ProductListModel.ReturnDataBean> list) {
-        //  mEasyCartFragment.updateData(list);
+
+        if (mShoppingCartFragment != null) {
+            mShoppingCartFragment.updateData(list);
+        }
     }
 
 

@@ -11,7 +11,9 @@ import com.ycblsc.model.mine.ConsumptionModel;
 import com.ycblsc.model.mine.MineRechargeModel;
 import com.ycblsc.model.mine.NotificationModel;
 import com.ycblsc.model.mine.PersonInfoModel;
+import com.ycblsc.model.shopping.GoodsInfoModel;
 import com.ycblsc.model.shopping.ImageDataModel;
+import com.ycblsc.model.shopping.ShoppingInfoModel;
 
 import java.util.HashMap;
 
@@ -66,19 +68,18 @@ public interface ApiService {
     Flowable<ProductListModel> getProductList2(@Query("fenLei") String fenLei
             , @Query("id") String id   //便利架id
             , @Query("isTuiJian") String isTuiJian//是否推荐（1是）
+            , @Query("name") String name//
             , @Query("page") String page
             , @Query("rows") String rows
     );
 
-  @GET("AppService.aspx?CMD=LoadShopInfo")
+    @GET("AppService.aspx?CMD=LoadShopInfo")
         //获取便利架信息
     Flowable<ShopInfoModel> getShopInfo(@Query("id") String id);
 
     @GET("AppService2.aspx?CMD=LoadShopInfo")
         //获取商城信息
-    Flowable<ShopInfoModel> getShopInfo2(@Query("id") String id);
-
-
+    Flowable<ShoppingInfoModel> getShopInfo2(@Query("id") String id);
 
     @GET("AppService.aspx?CMD=LoadDict")
         //获取信息填报电话
@@ -89,7 +90,7 @@ public interface ApiService {
     Flowable<BaseBean> addMessage(@Query("n_Contact") String n_Contact, @Query("n_Name") String n_Name, @Query("n_Note") String n_Note);
 
 
-    @Headers({API_NO_SIGN+"no_sign_parm"})
+    @Headers({API_NO_SIGN + "no_sign_parm"})
     @GET("AppService.aspx?CMD=LoadData")
         //获取广告位
     Flowable<ImageDataModel> getImageData(@Query("id") String id);//便利架广告(49)、个人中心广告（48）、充值协议（50）、充值说明（51）、注册说明（52）  体验店广告（54）
@@ -225,5 +226,9 @@ public interface ApiService {
     Flowable<WEXModel> getRechargePay1(@Query("id") String id
             , @Query("tf_Money") String tf_Money
             , @Query("orderType") String orderType);
+
+    //获取商品详细信息
+    @POST("AppService2.aspx?CMD=LoadProductInfo")
+    Flowable<GoodsInfoModel> getLoadProductInfo(@Query("id") String id, @Query("shopId") String shopId);
 
 }

@@ -1,5 +1,6 @@
 package com.ycblsc.ui.shopping;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,10 +17,12 @@ import com.ycblsc.base.EmptyState;
 import com.ycblsc.base.StateModel;
 import com.ycblsc.common.MyApplication;
 import com.ycblsc.databinding.FragmentShoppingLayoutBinding;
+import com.ycblsc.model.AddCartEvent;
 import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.model.home.ProuductTypeModel;
 import com.ycblsc.model.home.ShopInfoModel;
 import com.ycblsc.model.shopping.ImageDataModel;
+import com.ycblsc.model.shopping.ShoppingInfoModel;
 import com.ycblsc.prestener.shopping.ShoppingPrestener;
 import com.ycblsc.ui.main.MainActivity;
 import com.ycblsc.view.IShoppingView;
@@ -29,6 +32,10 @@ import java.util.List;
 
 import com.lm.base.library.adapters.recyclerview.CommonAdapter;
 import com.lm.base.library.adapters.recyclerview.base.ViewHolder;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * Created by Administrator on 2017/12/26 0026.
@@ -57,13 +64,15 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
     private int mPage = 1;
     private int mSize = 10;
     private String mShoppingId = "";//体验店id
-
+    private String mMaxTime="";//配送时间
+    private String mAddress="";//配送范围
     @Override
     protected void initData() {
         super.initData();
-
+        EventBus.getDefault().register(this);
         initAdapter();
-        mPresenter.getShopInfo2("16");//默认给18数据
+        mPresenter.getShopInfo2("51");//默认给18数据
+
         mPresenter.getImageData();
     }
 
@@ -93,7 +102,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
                     @Override
                     public void onClick(View v) {
                         if (aty != null) {
-                            ((MainActivity) aty).AddEasyCart(item);
+                            ((MainActivity) aty).AddShoppingCart(item);
 
                             ((MainActivity) aty).addCart(img_shopping);
                         }
@@ -125,7 +134,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
                             notifyDataSetChanged();
                             mPage = 1;
                             mSize = 10;
-                            mPresenter.getProductList2(item.getF_CODE(), "18", "", mPage + "", mSize + "");
+                            mPresenter.getProductList2(item.getF_CODE(), mShoppingId, "", "", mPage + "", mSize + "");
                         }
 
                     }
@@ -148,8 +157,20 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
                     public void onClick(View v) {
                         if (aty != null) {
                             ((MainActivity) aty).addCart(img_shopping);
+                            ((MainActivity) aty).AddShoppingCart(item);
                         }
 
+                    }
+                });
+                holder.setOnClickListener(R.id.rly_item, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(aty, GoodsInfoActivity.class);
+                        intent.putExtra("id", item.getId() + "");
+                        intent.putExtra("shoppingId", mShoppingId);
+                        intent.putExtra("time", mMaxTime);
+                        intent.putExtra("address", mAddress);
+                        startActivity(intent);
                     }
                 });
             }
@@ -167,7 +188,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
             public void onLoadmore(RefreshLayout refreshlayout) {
                 if (mCurPosition < mGoodsTypes.size()) {
                     mPage++;
-                    mPresenter.getProductList2(mGoodsTypes.get(mCurPosition).getF_CODE(), "18", "", mPage + "", mSize + "");
+                    mPresenter.getProductList2(mGoodsTypes.get(mCurPosition).getF_CODE(), mShoppingId, "", "", mPage + "", mSize + "");
                 }
 
             }
@@ -181,7 +202,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
         if (typeModel.getReturnData().size() > 0) {
             mGoodsTypes.addAll(typeModel.getReturnData());
             mCurPosition = 0;
-            mPresenter.getProductList2(mGoodsTypes.get(0).getF_CODE(), "18", "", mPage + "", mSize + "");
+            mPresenter.getProductList2(mGoodsTypes.get(0).getF_CODE(), mShoppingId, "", "", mPage + "", mSize + "");
         }
         mGoodsTypeAdapter.notifyDataSetChanged();
     }
@@ -229,14 +250,32 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
     }
 
     @Override
-    public void getShopInfo(ShopInfoModel model) {
+    public void getShopInfo(ShoppingInfoModel model) {
         if (model.getReturnData() != null && model.getReturnData().size() > 0) {
             //  mBinding.tvScanResult.setText(model.getReturnData().get(0).getS_weizhi());
             mShoppingId = model.getReturnData().get(0).getId() + "";
+            mBinding.tvShoppingName.setText(model.getReturnData().get(0).getS_name());//体验店
+            mBinding.tvSendFanwei.setText(model.getReturnData().get(0).getSendAddress());//配送范围
+            mMaxTime=model.getReturnData().get(0).getMaxTime()+"";
+            mAddress=model.getReturnData().get(0).getSendAddress();
             MyApplication.getInstance().setEasyId(mShoppingId);//保存便利架ID
             mPresenter.getProductType(mShoppingId);
             mPresenter.getRecommend(mShoppingId);
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void AddCartEvent(AddCartEvent event) {
+        for (ProductListModel.ReturnDataBean dataBean :mGoodsList) {
+            if (event.getId().equals(dataBean.getId()+"")) {
+                ((MainActivity) aty).AddShoppingCart(dataBean);
+            }
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 }

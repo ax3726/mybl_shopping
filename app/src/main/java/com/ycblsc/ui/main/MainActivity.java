@@ -21,6 +21,7 @@ import com.ycblsc.R;
 import com.ycblsc.base.BaseActivity;
 import com.ycblsc.base.BaseView;
 import com.ycblsc.databinding.ActivityMainBinding;
+import com.ycblsc.model.AddCartEvent;
 import com.ycblsc.model.CartEventModel;
 import com.ycblsc.model.MainEvent;
 import com.ycblsc.model.home.ProductListModel;
@@ -339,6 +340,8 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
         }
         mBuyCartFragment.updatemEasyCartData(mEasyCartList);
     }
+
+
     /**
      * 移除商城购物车
      */
@@ -400,10 +403,10 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
      */
     public void UpdateAllShoppingCartSelect(boolean bl)
     {
-        for (int i = 0; i <mEasyCartList.size(); i++) {
-            mEasyCartList.get(i).setIs_select(bl);
+        for (int i = 0; i <mShoppingCartList.size(); i++) {
+            mShoppingCartList.get(i).setIs_select(bl);
         }
-        mBuyCartFragment.updatemEasyCartData(mEasyCartList);
+        mBuyCartFragment.updatemShoppingCartData(mShoppingCartList);
     }
 
 
@@ -449,6 +452,9 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
         mBuyCartFragment.updatemEasyCartData(mEasyCartList);
 
     }
+
+
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void selectpotion(MainEvent mainEvent) {
        switch (mainEvent.getPosition()){
