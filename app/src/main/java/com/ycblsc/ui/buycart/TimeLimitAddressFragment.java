@@ -43,7 +43,7 @@ public class TimeLimitAddressFragment extends BaseFragment<AddressPrestener, Fra
     @Override
     protected void initData() {
         super.initData();
-        mPresenter.getGetNote("serviceNote");//限时达说明11
+        mPresenter.getGetNote("serviceNote");//限时达说明111111
     }
 
     @Override
