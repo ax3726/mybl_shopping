@@ -1,5 +1,6 @@
 package com.ycblsc.ui.shopping;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -14,6 +15,7 @@ import com.ycblsc.databinding.ActivityGoodsInfoBinding;
 import com.ycblsc.model.AddCartEvent;
 import com.ycblsc.model.BaseBean;
 import com.ycblsc.model.shopping.GoodsInfoModel;
+import com.ycblsc.ui.buycart.PaymentActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -23,7 +25,7 @@ public class GoodsInfoActivity extends BaseActivity<BasePresenter, ActivityGoods
     private String mShopping = "";
     private String mMaxTime = "";//配送时间
     private String mAddress = "";//配送范围
-
+    private GoodsInfoModel.ReturnDataBean mDataBean=null;//商品信息
     @Override
     public int getLayoutId() {
         return R.layout.activity_goods_info;
@@ -90,11 +92,11 @@ public class GoodsInfoActivity extends BaseActivity<BasePresenter, ActivityGoods
         if (baseBean.getReturnData() == null || baseBean.getReturnData().size() == 0) {
             return;
         }
-        GoodsInfoModel.ReturnDataBean returnDataBean = baseBean.getReturnData().get(0);
-        loadImag(returnDataBean.getImg(), mBinding.img);
-        mBinding.tvTitle.setText(returnDataBean.getS_products());
-        mBinding.tvPrice.setText(returnDataBean.getS_price() + "");
-        mBinding.tvGoodsInfo.setText(Html.fromHtml(returnDataBean.getJianjie()));
+        mDataBean = baseBean.getReturnData().get(0);
+        loadImag(mDataBean.getImg(), mBinding.img);
+        mBinding.tvTitle.setText(mDataBean.getS_products());
+        mBinding.tvPrice.setText(mDataBean.getS_price() + "");
+        mBinding.tvGoodsInfo.setText(Html.fromHtml(mDataBean.getNote() + ""));
     }
 
     @Override
@@ -105,6 +107,20 @@ public class GoodsInfoActivity extends BaseActivity<BasePresenter, ActivityGoods
             public void onClick(View v) {
                 EventBus.getDefault().post(new AddCartEvent(mId));
                 showToast("添加购物车成功!");
+            }
+        });
+        mBinding.imgBuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mDataBean != null) {
+                    startActivity(
+                            new Intent(aty, PaymentActivity.class)
+                                    .putExtra("mTotal", mDataBean.getS_price()+"")
+                                    .putExtra("goods_data", mDataBean));
+                } else {
+                    showToast("商品信息有误!");
+                }
+
             }
         });
     }

@@ -21,6 +21,7 @@ import com.ycblsc.model.UserModel;
 import com.ycblsc.model.WEXModel;
 import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.model.mine.PersonInfoModel;
+import com.ycblsc.model.shopping.GoodsInfoModel;
 import com.ycblsc.utils.PayHelper;
 import com.ycblsc.utils.SharedPreferencesUtils;
 
@@ -44,7 +45,7 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
     private String shopPrice;
     private String mTotal;//总价、订单金额
     private String mPayMode;//支付方式
-
+    private GoodsInfoModel.ReturnDataBean mDataBean=null;//单个商品信息
 
     @Override
     public int getLayoutId() {
@@ -266,6 +267,13 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
         proPrice = new StringBuilder();
 
         mData = getIntent().getParcelableArrayListExtra("data");//获取购物车传过来的商品信息   其中count字段为商品的个数   并且count是从0开始的  即个数=count+1
+
+        mDataBean= (GoodsInfoModel.ReturnDataBean) getIntent().getSerializableExtra("goods_data");//单个商品信息
+
+        if (mDataBean!=null) {//
+
+        }
+
         if (CacheService.getIntance().isLogin()) {
             initPersonData();
         }else {

@@ -1,12 +1,13 @@
 package com.ycblsc.model.shopping;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Administrator on 2018/8/6.
  */
 
-public class GoodsInfoModel {
+public class GoodsInfoModel implements Serializable {
 
     /**
      * ReturnCode : 1
@@ -42,7 +43,7 @@ public class GoodsInfoModel {
         this.ReturnData = ReturnData;
     }
 
-    public static class ReturnDataBean {
+    public static class ReturnDataBean implements Serializable{
         /**
          * id : 7
          * s_products : 溜溜梅
