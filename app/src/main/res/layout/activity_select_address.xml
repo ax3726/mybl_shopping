@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60px"
+            android:layout_marginTop="20px"
+            android:src="@drawable/ic_logo_address" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60px"
+            android:layout_marginTop="20px"
+            android:text="从已有的收货地址中选择：" />
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycviewAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60px"
+            android:layout_marginRight="60px"
+            android:layout_marginTop="100px">
+
+        </android.support.v7.widget.RecyclerView>
+
+
+        <ImageView
+            android:id="@+id/imgConfierm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="100px"
+            android:src="@drawable/ic_confirm_ok" />
+
+    </com.zhy.autolayout.AutoLinearLayout>
+</layout>

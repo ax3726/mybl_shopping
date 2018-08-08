@@ -45,6 +45,7 @@ import retrofit2.HttpException;
 
 public abstract class BaseFragment<P extends BaseFragmentPresenter, B extends ViewDataBinding> extends RxFragment implements BaseFragmentView {
 
+
     /**
      * Fragment根视图
      */

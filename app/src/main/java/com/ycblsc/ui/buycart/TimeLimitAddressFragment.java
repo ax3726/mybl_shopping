@@ -53,6 +53,17 @@ public class TimeLimitAddressFragment extends BaseFragment<AddressPrestener, Fra
             mBinding.linOne.setVisibility(View.GONE);
             mBinding.linTwo.setVisibility(View.VISIBLE);
         });
+        //选择现有的收货地址
+        mBinding.imgSelectAddress.setOnClickListener(v -> startActivity(new Intent(getActivity(),SelectAddressActivity.class)));
+        //新建收货地址
+        mBinding.imgNewAddress.setOnClickListener(v -> startActivity(new Intent(getActivity(),NewAddressActivity.class)));
+        //搜索附近体验店
+        mBinding.imgSeach.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override

@@ -234,4 +234,18 @@ public interface ApiService {
     //限时达服务说明
     @GET("AppService2.aspx?CMD=GetNote")
     Flowable<TimeAddressModel> getGetNote(@Query("d_Code") String d_Code); //serviceNote;
+
+    //获取个人收货地址
+    @GET("AppService2.aspx?CMD=LoadMemberAddressData")
+    Flowable<BaseBean> getLoadMemberAddressData(@Query("id") String id);
+
+    //新增地址
+    @POST("AppServicePost2.aspx?CMD=InsertMemberAddressData")
+    Flowable<BaseBean> getInsertMemberAddressData(@Query("b_addr_qu") String b_addr_qu
+            , @Query("b_addr_sheng") String b_addr_sheng
+            , @Query("b_addr_shi") String b_addr_shi
+            , @Query("id") String id
+            , @Query("s_name") String s_name
+            , @Query("s_weizhi") String s_weizhi
+            , @Query("telphone") String telphone);
 }

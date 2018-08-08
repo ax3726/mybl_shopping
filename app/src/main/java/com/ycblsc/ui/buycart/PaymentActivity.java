@@ -267,11 +267,13 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
         proPrice = new StringBuilder();
 
         mData = getIntent().getParcelableArrayListExtra("data");//获取购物车传过来的商品信息   其中count字段为商品的个数   并且count是从0开始的  即个数=count+1
-
         mDataBean= (GoodsInfoModel.ReturnDataBean) getIntent().getSerializableExtra("goods_data");//单个商品信息
 
-        if (mDataBean!=null) {//
-
+        if (mDataBean!=null) {//单个商品进来的
+            shopCount ="1";
+            shopId = String.valueOf(mDataBean.getId());
+            shopPrice =String.valueOf(mDataBean.getS_price());
+            return;
         }
 
         if (CacheService.getIntance().isLogin()) {
