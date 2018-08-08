@@ -4,8 +4,8 @@
 
     <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="match_parent"
-        android:background="@color/colorWhite"
         android:layout_height="match_parent"
+        android:background="@color/colorWhite"
         android:orientation="vertical">
 
         <ScrollView
@@ -21,9 +21,9 @@
 
                 <ImageView
                     android:id="@+id/img"
-                    android:scaleType="fitCenter"
                     android:layout_width="match_parent"
-                    android:layout_height="500px" />
+                    android:layout_height="500px"
+                    android:scaleType="fitCenter" />
 
                 <com.zhy.autolayout.AutoRelativeLayout
                     android:layout_width="match_parent"
@@ -174,36 +174,35 @@
                     android:textColor="@color/colorBAB2B3"
                     android:textSize="26px" />
 
-                <TextView
-                    android:id="@+id/tv_goods_info"
+                <WebView
+                    android:id="@+id/wv_goods_info"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:padding="20px"
-                    android:textColor="@color/color2E2B2B"
-                    android:textSize="24px"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:padding="20px" />
             </com.zhy.autolayout.AutoLinearLayout>
         </ScrollView>
 
         <com.zhy.autolayout.AutoRelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="10px"
-            android:paddingRight="20px"
+            android:background="#F6E5E8"
             android:paddingBottom="10px"
-            android:background="#F6E5E8">
+            android:paddingRight="20px"
+            android:paddingTop="10px">
 
             <ImageView
                 android:id="@+id/img_buy"
                 android:layout_width="140px"
-                android:layout_alignParentRight="true"
                 android:layout_height="60px"
+                android:layout_alignParentRight="true"
                 android:src="@drawable/goos_to_buy_icon" />
+
             <ImageView
                 android:id="@+id/img_cart"
                 android:layout_width="140px"
-                android:layout_toLeftOf="@+id/img_buy"
                 android:layout_height="60px"
+                android:layout_toLeftOf="@+id/img_buy"
                 android:src="@drawable/goods_to_cart_icon" />
 
         </com.zhy.autolayout.AutoRelativeLayout>
