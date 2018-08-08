@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -94,7 +95,7 @@ public abstract class BaseActivity<P extends BasePresenter, B extends ViewDataBi
             WidgetLayoutEmptyBinding emptyBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.widget_layout_empty, null, false);
             emptyBinding.setStateModel(mStateModel);
             fly.addView(emptyBinding.getRoot());
-            lly.addView(fly);
+            lly.addView(fly, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             setContentView(lly);
             mTitleBarLayout.setLeftListener(new View.OnClickListener() {
                 @Override

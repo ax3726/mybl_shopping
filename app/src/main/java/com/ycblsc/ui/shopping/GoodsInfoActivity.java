@@ -2,6 +2,7 @@ package com.ycblsc.ui.shopping;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 
 import com.ycblsc.R;
@@ -30,7 +31,22 @@ public class GoodsInfoActivity extends BaseActivity<BasePresenter, ActivityGoods
 
     @Override
     protected boolean isTitleBar() {
-        return false;
+        return true;
+    }
+
+    @Override
+    protected void initTitleBar() {
+        super.initTitleBar();
+        mTitleBarLayout.setLeftImg(R.drawable.back);
+        mTitleBarLayout.setTitle("");
+        mTitleBarLayout.setRightShow(true);
+        mTitleBarLayout.setRightImg(R.drawable.close);
+        mTitleBarLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override
@@ -78,6 +94,7 @@ public class GoodsInfoActivity extends BaseActivity<BasePresenter, ActivityGoods
         loadImag(returnDataBean.getImg(), mBinding.img);
         mBinding.tvTitle.setText(returnDataBean.getS_products());
         mBinding.tvPrice.setText(returnDataBean.getS_price() + "");
+        mBinding.tvGoodsInfo.setText(Html.fromHtml(returnDataBean.getJianjie()));
     }
 
     @Override

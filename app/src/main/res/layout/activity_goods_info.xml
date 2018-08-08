@@ -178,6 +178,9 @@
                     android:id="@+id/tv_goods_info"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:padding="20px"
+                    android:textColor="@color/color2E2B2B"
+                    android:textSize="24px"
                     android:layout_weight="1" />
             </com.zhy.autolayout.AutoLinearLayout>
         </ScrollView>
