@@ -13,6 +13,7 @@ import com.ycblsc.model.mine.NotificationModel;
 import com.ycblsc.model.mine.PersonInfoModel;
 import com.ycblsc.model.shopping.GoodsInfoModel;
 import com.ycblsc.model.shopping.ImageDataModel;
+import com.ycblsc.model.shopping.NewAddressModel;
 import com.ycblsc.model.shopping.ShoppingInfoModel;
 import com.ycblsc.model.shopping.TimeAddressModel;
 
@@ -248,4 +249,16 @@ public interface ApiService {
             , @Query("s_name") String s_name
             , @Query("s_weizhi") String s_weizhi
             , @Query("telphone") String telphone);
+    //获取省
+    @GET("AppService2.aspx?CMD=LoadDict")
+    Flowable<NewAddressModel> getLoadDict(@Query("d_Code") String d_Code
+            , @Query("isTrue") String isTrue);
+    //获取市
+    @GET("AppService2.aspx?CMD=LoadDict")
+    Flowable<NewAddressModel> getLoadDictCity(@Query("d_Code") String d_Code
+            , @Query("isTrue") String isTrue);
+    //获取县
+    @GET("AppService2.aspx?CMD=LoadDict")
+    Flowable<NewAddressModel> getLoadDictCounty(@Query("d_Code") String d_Code
+            , @Query("isTrue") String isTrue);
 }
