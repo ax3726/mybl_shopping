@@ -63,7 +63,8 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingPrestener, Fragme
                 holder.setText(R.id.tv_title, item.getS_products());
                 holder.setText(R.id.tv_price, "¥" + item.getS_price());
                 holder.setText(R.id.tv_count, String.valueOf(item.getCount() + 1));
-                holder.setText(R.id.tv_total_price, String.valueOf(MyBigDecimal.mul(item.getS_price(), item.getCount() + 1)));
+
+                holder.setText(R.id.tv_total_price,  df.format(MyBigDecimal.mul(item.getS_price(), item.getCount() + 1)));
                 holder.setSelect(R.id.img_select, item.isIs_select());
                 holder.setOnClickListener(R.id.tv_add, new View.OnClickListener() {
                     @Override
@@ -162,7 +163,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingPrestener, Fragme
         mAdapter.notifyDataSetChanged();
         updateState();
     }
-
+    DecimalFormat df = new DecimalFormat("0.00");
     /**
      * 更新总价格显示
      */
@@ -180,7 +181,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingPrestener, Fragme
         } else {
             mBinding.imgAllSelect.setSelected(true);
         }
-        DecimalFormat df = new DecimalFormat("0.00");
+
         mTotal = df.format(price);
         mBinding.tvTotalPrice.setText("￥" + mTotal);
         mBinding.tvCountHint.setText("结算(" + count + ")");

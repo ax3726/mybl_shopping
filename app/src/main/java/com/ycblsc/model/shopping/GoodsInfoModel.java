@@ -117,7 +117,7 @@ public class GoodsInfoModel implements Serializable {
         public void setSd(List<SdBean> sd) {
             this.sd = sd;
         }
-        public static class SdBean {
+        public static class SdBean implements Serializable {
             private String title;
             private String F_Value;
 

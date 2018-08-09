@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <com.zhy.autolayout.AutoLinearLayout
+    <com.zhy.autolayout.AutoFrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusable="true"
@@ -160,13 +160,13 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="3.5"
-                                android:singleLine="true"
                                 android:background="#F2F2F2"
                                 android:hint="请输入商品名称进行搜索"
                                 android:paddingBottom="10px"
                                 android:paddingLeft="20px"
                                 android:paddingRight="20px"
                                 android:paddingTop="10px"
+                                android:singleLine="true"
                                 android:textColor="@color/color999999"
                                 android:textSize="26px" />
 
@@ -211,5 +211,10 @@
             </android.support.v4.widget.NestedScrollView>
         </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
-    </com.zhy.autolayout.AutoLinearLayout>
+        <com.zhy.autolayout.AutoFrameLayout
+            android:id="@+id/fly_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></com.zhy.autolayout.AutoFrameLayout>
+
+    </com.zhy.autolayout.AutoFrameLayout>
 </layout>

@@ -193,15 +193,17 @@
 
             <ImageView
                 android:id="@+id/img_buy"
-                android:layout_width="140px"
-                android:layout_height="60px"
+                android:layout_width="180px"
+                android:layout_height="70px"
+                android:scaleType="fitXY"
                 android:layout_alignParentRight="true"
                 android:src="@drawable/goos_to_buy_icon" />
 
             <ImageView
                 android:id="@+id/img_cart"
-                android:layout_width="140px"
-                android:layout_height="60px"
+                android:layout_width="180px"
+                android:layout_height="70px"
+                android:scaleType="fitXY"
                 android:layout_toLeftOf="@+id/img_buy"
                 android:src="@drawable/goods_to_cart_icon" />
 

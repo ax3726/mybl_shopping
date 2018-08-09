@@ -17,6 +17,7 @@ import com.ycblsc.base.BasePresenter;
 import com.ycblsc.common.Api;
 import com.ycblsc.databinding.ActivityGoodsInfoBinding;
 import com.ycblsc.model.AddCartEvent;
+import com.ycblsc.model.AddSearchCartEvent;
 import com.ycblsc.model.BaseBean;
 import com.ycblsc.model.shopping.GoodsInfoModel;
 import com.ycblsc.ui.buycart.PaymentActivity;
@@ -33,7 +34,7 @@ public class GoodsInfoActivity extends BaseActivity<BasePresenter, ActivityGoods
     private String mMaxTime = "";//配送时间
     private String mAddress = "";//配送范围
     private GoodsInfoModel.ReturnDataBean mDataBean = null;//商品信息
-
+    private int mType=0;
     @Override
     public int getLayoutId() {
         return R.layout.activity_goods_info;
@@ -76,6 +77,7 @@ public class GoodsInfoActivity extends BaseActivity<BasePresenter, ActivityGoods
         mShopping = getIntent().getStringExtra("shoppingId");
         mMaxTime = getIntent().getStringExtra("time");
         mAddress = getIntent().getStringExtra("address");
+        mType = getIntent().getIntExtra("type",0);
 
         mBinding.tvTime.setText(mMaxTime + "分钟");
         mBinding.tvAddress.setText(mAddress);
@@ -126,7 +128,11 @@ public class GoodsInfoActivity extends BaseActivity<BasePresenter, ActivityGoods
         mBinding.imgCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EventBus.getDefault().post(new AddCartEvent(mId));
+                if (mType == 1) {
+                    EventBus.getDefault().post(new AddSearchCartEvent(mId));
+                } else {
+                    EventBus.getDefault().post(new AddCartEvent(mId));
+                }
                 showToast("添加购物车成功!");
             }
         });

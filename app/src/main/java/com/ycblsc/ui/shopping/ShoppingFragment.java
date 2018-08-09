@@ -1,8 +1,14 @@
 package com.ycblsc.ui.shopping;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,6 +24,7 @@ import com.ycblsc.base.StateModel;
 import com.ycblsc.common.MyApplication;
 import com.ycblsc.databinding.FragmentShoppingLayoutBinding;
 import com.ycblsc.model.AddCartEvent;
+import com.ycblsc.model.HideSearchEvent;
 import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.model.home.ProuductTypeModel;
 import com.ycblsc.model.home.ShopInfoModel;
@@ -43,6 +50,8 @@ import org.greenrobot.eventbus.ThreadMode;
 
 public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentShoppingLayoutBinding> implements IShoppingView {
 
+    private FragmentTransaction mTransaction;
+    private FragmentManager mFm;
 
     @Override
     public int getLayoutId() {
@@ -64,8 +73,10 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
     private int mPage = 1;
     private int mSize = 10;
     private String mShoppingId = "";//体验店id
-    private String mMaxTime="";//配送时间
-    private String mAddress="";//配送范围
+    private String mMaxTime = "";//配送时间
+    private String mAddress = "";//配送范围
+    private ShoppingSearchFragment mShoppingSearchFragment = null;//搜索列表
+
     @Override
     protected void initData() {
         super.initData();
@@ -79,7 +90,17 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
     @Override
     protected void initEvent() {
         super.initEvent();
-
+        mBinding.imgSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String trim = mBinding.etSearch.getText().toString().trim();
+                if (!TextUtils.isEmpty(trim)) {
+                    showSearch(trim);
+                } else {
+                    showToast("请输入搜索关键字!");
+                }
+            }
+        });
     }
 
 
@@ -256,8 +277,8 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
             mShoppingId = model.getReturnData().get(0).getId() + "";
             mBinding.tvShoppingName.setText(model.getReturnData().get(0).getS_name());//体验店
             mBinding.tvSendFanwei.setText(model.getReturnData().get(0).getSendAddress());//配送范围
-            mMaxTime=model.getReturnData().get(0).getMaxTime()+"";
-            mAddress=model.getReturnData().get(0).getSendAddress();
+            mMaxTime = model.getReturnData().get(0).getMaxTime() + "";
+            mAddress = model.getReturnData().get(0).getSendAddress();
             MyApplication.getInstance().setEasyId(mShoppingId);//保存便利架ID
             mPresenter.getProductType(mShoppingId);
             mPresenter.getRecommend(mShoppingId);
@@ -266,11 +287,48 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void AddCartEvent(AddCartEvent event) {
-        for (ProductListModel.ReturnDataBean dataBean :mGoodsList) {
-            if (event.getId().equals(dataBean.getId()+"")) {
+        for (ProductListModel.ReturnDataBean dataBean : mGoodsList) {
+            if (event.getId().equals(dataBean.getId() + "")) {
                 ((MainActivity) aty).AddShoppingCart(dataBean);
             }
         }
+    }
+
+    private void showSearch(String search) {
+        mFm = getFragmentManager();
+        mTransaction = mFm.beginTransaction();
+        if (mShoppingSearchFragment == null) {
+            mShoppingSearchFragment = new ShoppingSearchFragment();
+            mTransaction.add(R.id.fly_search, mShoppingSearchFragment);
+            mShoppingSearchFragment.setShoppingId(mShoppingId);
+            mShoppingSearchFragment.setMaxTime(mMaxTime);
+            mShoppingSearchFragment.setAddress(mAddress);
+        }
+        mTransaction.show(mShoppingSearchFragment);
+        mTransaction.commitAllowingStateLoss();
+        mShoppingSearchFragment.serach(search);
+        HideKeyboard(mBinding.etSearch);
+    }
+
+    //隐藏虚拟键盘
+    public static void HideKeyboard(View v) {
+        InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm.isActive()) {
+            imm.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
+
+        }
+    }
+
+    private void hideSearch() {
+        mFm = getFragmentManager();
+        mTransaction = mFm.beginTransaction();
+        mTransaction.hide(mShoppingSearchFragment);
+        mTransaction.commitAllowingStateLoss();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void hideSearchEvent(HideSearchEvent event) {
+        hideSearch();
     }
 
     @Override

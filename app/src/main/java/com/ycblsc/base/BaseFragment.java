@@ -96,7 +96,7 @@ public abstract class BaseFragment<P extends BaseFragmentPresenter, B extends Vi
             WidgetLayoutEmptyBinding emptyBinding = DataBindingUtil.inflate(inflater, R.layout.widget_layout_empty, null, false);
             emptyBinding.setStateModel(mStateModel);
             fly.addView(emptyBinding.getRoot());
-            lly.addView(fly);
+            lly.addView(fly, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             mTitleBarLayout.setLeftListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
