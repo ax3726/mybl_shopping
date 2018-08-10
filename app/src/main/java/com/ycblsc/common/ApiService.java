@@ -2,6 +2,7 @@ package com.ycblsc.common;
 
 
 import com.ycblsc.model.BaseBean;
+import com.ycblsc.model.SelectAddressModel;
 import com.ycblsc.model.WEXModel;
 import com.ycblsc.model.home.HeadListModel;
 import com.ycblsc.model.home.ProductListModel;
@@ -238,7 +239,7 @@ public interface ApiService {
 
     //获取个人收货地址
     @GET("AppService2.aspx?CMD=LoadMemberAddressData")
-    Flowable<BaseBean> getLoadMemberAddressData(@Query("id") String id);
+    Flowable<SelectAddressModel> getLoadMemberAddressData(@Query("id") String id);
 
     //新增地址
     @POST("AppServicePost2.aspx?CMD=InsertMemberAddressData")
