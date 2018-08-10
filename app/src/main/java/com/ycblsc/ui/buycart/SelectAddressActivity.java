@@ -76,7 +76,7 @@ public class SelectAddressActivity extends BaseActivity<BasePresenter, ActivityS
 
     }
 
-    //获取个人地址222222
+    //获取个人地址11111
     public void getAddressData(String id) {
         Api.getApi2().getLoadMemberAddressData(id)
                 .compose(callbackOnIOToMainThread())
