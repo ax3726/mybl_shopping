@@ -44,7 +44,7 @@ import java.util.List;
 public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBinding> implements BaseView {
 
     private HomeFragment mHomeFragment;
-    private ShoppingFragment mShoppingFragment;
+   // private ShoppingFragment mShoppingFragment;
     private TimeLimitAddressFragment mTimeLimitAddressFragment;//限时达地址
     private BuyCartFragment mBuyCartFragment;
     private MineFragment mMineFragment;
@@ -119,15 +119,14 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
 
     private void initFragment() {
         mHomeFragment = new HomeFragment();
-       mShoppingFragment = new ShoppingFragment();
-        mTimeLimitAddressFragment=new TimeLimitAddressFragment();
+      //  mShoppingFragment = new ShoppingFragment();
+        mTimeLimitAddressFragment = new TimeLimitAddressFragment();
         mBuyCartFragment = new BuyCartFragment();
         mMineFragment = new MineFragment();
 
 
         mFragments.add(mHomeFragment);
-      mFragments.add(mShoppingFragment);
-
+        mFragments.add(mTimeLimitAddressFragment);
         mFragments.add(mBuyCartFragment);
         mFragments.add(mMineFragment);
         mFm = getSupportFragmentManager();

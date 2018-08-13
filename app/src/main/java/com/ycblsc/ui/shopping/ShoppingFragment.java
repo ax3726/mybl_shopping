@@ -76,14 +76,20 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
     private String mMaxTime = "";//配送时间
     private String mAddress = "";//配送范围
     private ShoppingSearchFragment mShoppingSearchFragment = null;//搜索列表
+    private String storeId;
+
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
+    }
 
     @Override
     protected void initData() {
         super.initData();
         EventBus.getDefault().register(this);
         initAdapter();
-        mPresenter.getShopInfo2("51");//默认给18数据
-        mShoppingId="51";
+        mPresenter.getShopInfo2(storeId);//默认给18数据
+        mShoppingId=storeId;
         MyApplication.getInstance().setEasyId(mShoppingId);//保存便利架ID
         mPresenter.getProductType(mShoppingId);
         mPresenter.getRecommend(mShoppingId);

@@ -4,7 +4,7 @@
 
     <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/colorWhite"
         android:orientation="vertical">
 
@@ -27,7 +27,6 @@
             android:id="@+id/recycviewAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_marginTop="100px">
 
         </android.support.v7.widget.RecyclerView>

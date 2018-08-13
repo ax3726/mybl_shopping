@@ -1,12 +1,15 @@
 package com.ycblsc.ui.buycart;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.lm.base.library.adapters.recyclerview.CommonAdapter;
 import com.lm.base.library.adapters.recyclerview.MultiItemTypeAdapter;
@@ -39,6 +42,7 @@ public class SelectAddressActivity extends BaseActivity<BasePresenter, ActivityS
     private CommonAdapter<SelectAddressModel.ReturnDataBean> mAdapter;
     private List<SelectAddressModel.ReturnDataBean> mDataList = new ArrayList<>();
     private int posIndex;//记录当前下标
+    private int mSelectedPos = -1;//实现单选  方法二，变量保存当前选中的position
 
     @Override
     protected BasePresenter createPresenter() {
@@ -53,13 +57,20 @@ public class SelectAddressActivity extends BaseActivity<BasePresenter, ActivityS
     @Override
     protected void initTitleBar() {
         super.initTitleBar();
-        //layout_select_address
         mTitleBarLayout.setTitle("选择收货地址");
 
         mBinding.imgConfierm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showToast("" + mDataList.get(posIndex).getS_name());
+                if (mDataList.size() < 0) {
+                    showToast("请先新建收货地址");
+                    return;
+                }
+                Intent intent = new Intent();
+                intent.putExtra("id", mDataList.get(posIndex).getId())
+                        .putExtra("addressName", mDataList.get(posIndex).getS_weizhiFull());
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
     }
@@ -76,7 +87,7 @@ public class SelectAddressActivity extends BaseActivity<BasePresenter, ActivityS
 
     }
 
-    //获取个人地址11111
+    //获取个人地址222
     public void getAddressData(String id) {
         Api.getApi2().getLoadMemberAddressData(id)
                 .compose(callbackOnIOToMainThread())
@@ -88,11 +99,17 @@ public class SelectAddressActivity extends BaseActivity<BasePresenter, ActivityS
                             mDataList.addAll(baseBean.getReturnData());
                             mDataList.get(0).setState(true);
                         }
+                        for (int i = 0; i < mDataList.size(); i++) {
+                            if (mDataList.get(i).isState()) {
+                                mSelectedPos = i;
+                            }
+                        }
                         mAdapter = new CommonAdapter<SelectAddressModel.ReturnDataBean>(aty, R.layout.layout_select_address, mDataList) {
                             @Override
                             protected void convert(ViewHolder holder, SelectAddressModel.ReturnDataBean item, int position) {
                                 LinearLayout linAddress = holder.getView(R.id.linAddress);
                                 RadioButton rad_balance = holder.getView(R.id.rad_balance);
+                                RadioGroup radioGroup = holder.getView(R.id.rad_address);
                                 rad_balance.setText(item.getS_weizhiFull());
                                 if (!item.isState()) {
                                     linAddress.setBackgroundColor(getResources().getColor(R.color.colorWhite));
@@ -101,26 +118,27 @@ public class SelectAddressActivity extends BaseActivity<BasePresenter, ActivityS
                                     linAddress.setBackgroundColor(getResources().getColor(R.color.address_bg));
                                     rad_balance.setChecked(true);
                                 }
+                                rad_balance.setOnClickListener(v -> {
+                                    posIndex = position;
+                                    //实现单选方法二： 设置数据集时，找到默认选中的pos
+                                    if (mSelectedPos != position) {
+                                        //先取消上个item的勾选状态
+                                        mDataList.get(mSelectedPos).setState(false);
+                                        linAddress.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                                        rad_balance.setChecked(false);
+                                        notifyItemChanged(mSelectedPos);
+                                        //设置新Item的勾选状态
+                                        mSelectedPos = position;
+                                        mDataList.get(mSelectedPos).setState(true);
+                                        linAddress.setBackgroundColor(getResources().getColor(R.color.address_bg));
+                                        rad_balance.setChecked(true);
+                                        notifyItemChanged(mSelectedPos);
+                                    }
+                                });
                             }
                         };
                         mBinding.recycviewAddress.setLayoutManager(new LinearLayoutManager(aty));
                         mBinding.recycviewAddress.setAdapter(mAdapter);
-                        mAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
-                                //payMoney = mDataList.get(position).getTf_Money();
-                                posIndex = position;
-                                for (int i = 0; i < mDataList.size(); i++) {
-                                    mDataList.get(i).setState(position == i);
-                                }
-                                mAdapter.notifyDataSetChanged();
-                            }
-
-                            @Override
-                            public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
-                                return false;
-                            }
-                        });
                     }
 
                     @Override

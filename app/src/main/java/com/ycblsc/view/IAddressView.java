@@ -16,5 +16,6 @@ public interface IAddressView extends BaseFragmentView {
 
     void getGetNote(TimeAddressModel baseBean);
 
+    void getLoadShopIdByAddress(BaseBean baseBean);
 
 }

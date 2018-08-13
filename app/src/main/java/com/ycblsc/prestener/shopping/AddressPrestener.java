@@ -35,5 +35,25 @@ public class AddressPrestener extends BaseFragmentPresenter<IAddressView> {
                     }
                 });
     }
+    /*
+       * 获取体验店id
+       * */
+    public void getLoadShopIdByAddress(int id) {
+        Api.getApi2().getLoadShopIdByAddress(id)
+                .compose(callbackOnIOToMainThread())
+                .subscribe(new BaseNetSubscriber<BaseBean>() {
+                    @Override
+                    public void onNext(BaseBean baseBean) {
+                        super.onNext(baseBean);
+                        getView().getLoadShopIdByAddress(baseBean);
+                    }
 
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+
+                    }
+                });
+
+    }
 }
