@@ -83,7 +83,10 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
         EventBus.getDefault().register(this);
         initAdapter();
         mPresenter.getShopInfo2("51");//默认给18数据
-
+        mShoppingId="51";
+        MyApplication.getInstance().setEasyId(mShoppingId);//保存便利架ID
+        mPresenter.getProductType(mShoppingId);
+        mPresenter.getRecommend(mShoppingId);
         mPresenter.getImageData();
     }
 

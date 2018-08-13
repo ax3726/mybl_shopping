@@ -21,6 +21,7 @@ import com.ycblsc.model.AddSearchCartEvent;
 import com.ycblsc.model.BaseBean;
 import com.ycblsc.model.shopping.GoodsInfoModel;
 import com.ycblsc.ui.buycart.PaymentActivity;
+import com.ycblsc.widget.GoodsParameterDialog;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -34,7 +35,8 @@ public class GoodsInfoActivity extends BaseActivity<BasePresenter, ActivityGoods
     private String mMaxTime = "";//配送时间
     private String mAddress = "";//配送范围
     private GoodsInfoModel.ReturnDataBean mDataBean = null;//商品信息
-    private int mType=0;
+    private int mType = 0;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_goods_info;
@@ -77,7 +79,7 @@ public class GoodsInfoActivity extends BaseActivity<BasePresenter, ActivityGoods
         mShopping = getIntent().getStringExtra("shoppingId");
         mMaxTime = getIntent().getStringExtra("time");
         mAddress = getIntent().getStringExtra("address");
-        mType = getIntent().getIntExtra("type",0);
+        mType = getIntent().getIntExtra("type", 0);
 
         mBinding.tvTime.setText(mMaxTime + "分钟");
         mBinding.tvAddress.setText(mAddress);
@@ -121,7 +123,8 @@ public class GoodsInfoActivity extends BaseActivity<BasePresenter, ActivityGoods
         mBinding.wvGoodsInfo.loadDataWithBaseURL(null, getHtmlData(str), "text/html", "utf-8", null);
 
 
-}
+    }
+
     @Override
     protected void initEvent() {
         super.initEvent();
@@ -142,7 +145,7 @@ public class GoodsInfoActivity extends BaseActivity<BasePresenter, ActivityGoods
                 if (mDataBean != null) {
                     startActivity(
                             new Intent(aty, PaymentActivity.class)
-                                    .putExtra("mTotal", mDataBean.getS_price()+"")
+                                    .putExtra("mTotal", mDataBean.getS_price() + "")
                                     .putExtra("goods_data", mDataBean));
                 } else {
                     showToast("商品信息有误!");
@@ -150,7 +153,19 @@ public class GoodsInfoActivity extends BaseActivity<BasePresenter, ActivityGoods
 
             }
         });
+        mBinding.llyParams.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mDataBean != null) {
+                    GoodsParameterDialog goodsParameterDialog = new GoodsParameterDialog(aty, mDataBean.getSd());
+                    goodsParameterDialog.show();
+                } else {
+                    showToast("商品信息有误!");
+                }
+            }
+        });
     }
+
     private String getHtmlData(String bodyHTML) {
         String head = "<head><style>img{max-width: 100%; width:100%; height: auto;}</style></head>";
         return "<html>" + head + "<body>" + bodyHTML + "</body></html>";

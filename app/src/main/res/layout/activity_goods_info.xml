@@ -135,6 +135,7 @@
                         android:textSize="26px" />
 
                     <com.zhy.autolayout.AutoLinearLayout
+                        android:id="@+id/lly_params"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignTop="@+id/tv_hint4"
@@ -195,16 +196,16 @@
                 android:id="@+id/img_buy"
                 android:layout_width="180px"
                 android:layout_height="70px"
-                android:scaleType="fitXY"
                 android:layout_alignParentRight="true"
+                android:scaleType="fitXY"
                 android:src="@drawable/goos_to_buy_icon" />
 
             <ImageView
                 android:id="@+id/img_cart"
                 android:layout_width="180px"
                 android:layout_height="70px"
-                android:scaleType="fitXY"
                 android:layout_toLeftOf="@+id/img_buy"
+                android:scaleType="fitXY"
                 android:src="@drawable/goods_to_cart_icon" />
 
         </com.zhy.autolayout.AutoRelativeLayout>
