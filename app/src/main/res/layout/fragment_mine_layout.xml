@@ -269,7 +269,7 @@
                     android:drawableLeft="@drawable/ic_consumption_record"
                     android:drawablePadding="10px"
                     android:gravity="center"
-                    android:text="商城消费记录"
+                    android:text="限时达消费记录"
                     android:textColor="#736e70"
                     android:textSize="32px" />
 

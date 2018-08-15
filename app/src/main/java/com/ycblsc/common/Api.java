@@ -48,7 +48,7 @@ public class Api {
         if (apiService == null) {
             Retrofit retrofit = new Retrofit.Builder()
                     .client(getOkHttpClient())
-                    .baseUrl(Link.SEREVE)
+                    .baseUrl(Link.SEREVE2)
                     .addConverterFactory(gsonConverterFactory)
                     .addCallAdapterFactory(rxJavaCallAdapterFactory)
                     .build();
