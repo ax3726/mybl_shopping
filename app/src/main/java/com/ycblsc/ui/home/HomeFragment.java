@@ -61,7 +61,7 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
 
     private int mCurPosition = 0;//记录当前分类的下标
     private int mPage = 1;
-    private int mSize = 10;
+    private int mSize = 15;
 
     @Override
     protected HomePrestener createPresenter() {

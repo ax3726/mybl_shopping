@@ -343,7 +343,22 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
         }
         mBuyCartFragment.updatemEasyCartData(mEasyCartList);
     }
-
+    /**
+     * 移除商城购物车
+     */
+    public void RemoveShoppingCart(ProductListModel.ReturnDataBean dataBean, boolean bl) {
+        int index = -1;
+        for (int i = 0; i < mShoppingCartList.size(); i++) {
+            if (dataBean.getId() == mShoppingCartList.get(i).getId()) {
+                index = i;
+                break;
+            }
+        }
+        if (index != -1) {
+            mShoppingCartList.remove(index);
+        }
+        mBuyCartFragment.updatemShoppingCartData(mShoppingCartList);
+    }
 
     /**
      * 移除商城购物车

@@ -45,7 +45,7 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
     private String shopPrice;
     private String mTotal;//总价、订单金额
     private String mPayMode;//支付方式
-    private GoodsInfoModel.ReturnDataBean mDataBean=null;//单个商品信息
+    private GoodsInfoModel.ReturnDataBean mDataBean = null;//单个商品信息
 
     @Override
     public int getLayoutId() {
@@ -138,18 +138,17 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
             dialog.dismiss();
             if (mBinding.radBalance.isChecked()) {
                 initPayMethod();
-            }
-            else if (mBinding.radWeixin.isChecked()) {
+            } else if (mBinding.radWeixin.isChecked()) {
                 WexPay();
 
-            }
-            else  if (mBinding.radAlipay.isChecked()) {
+            } else if (mBinding.radAlipay.isChecked()) {
                 AliPay();//支付宝支付
 
             }
         });
         cancel.setOnClickListener(v -> dialog.dismiss());
     }
+
     /**
      * 微信支付
      */
@@ -161,7 +160,7 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
         } else {
             userId = CacheService.getIntance().getUserId();
         }
-      Api.getApi().getWexPay(userId, "010203", shopCount, shopId, shopPrice, MyApplication.getInstance().getEasyId())
+        Api.getApi().getWexPay(userId, "010203", shopCount, shopId, shopPrice, MyApplication.getInstance().getEasyId())
                 .compose(callbackOnIOToMainThread())
                 .subscribe(new BaseNetSubscriber<WEXModel>() {
                     @Override
@@ -177,6 +176,7 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
 
 
     }
+
     /**
      * 微信支付成功
      */
@@ -201,8 +201,6 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
 
     /**
      * 支付宝支付
-     *
-     *
      */
     private void AliPay() {
 
@@ -267,22 +265,19 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
         proPrice = new StringBuilder();
 
         mData = getIntent().getParcelableArrayListExtra("data");//获取购物车传过来的商品信息11121  其中count字段为商品的个数   并且count是从0开始的  即个数=count+1
-        mDataBean= (GoodsInfoModel.ReturnDataBean) getIntent().getSerializableExtra("goods_data");//单个商品信息
-
-        if (mDataBean!=null) {//单个商品进来的1111
-            shopCount ="1";
-            shopId = String.valueOf(mDataBean.getId());
-            shopPrice =String.valueOf(mDataBean.getS_price());
-            return;
-        }
-
+        mDataBean = (GoodsInfoModel.ReturnDataBean) getIntent().getSerializableExtra("goods_data");//单个商品信息
         if (CacheService.getIntance().isLogin()) {
             initPersonData();
-        }else {
+        } else {
             mBinding.relaPay.setVisibility(View.GONE);
             mBinding.linBanele.setVisibility(View.GONE);
         }
-
+        if (mDataBean != null) {//单个商品进来的1111
+            shopCount = "1";
+            shopId = String.valueOf(mDataBean.getId());
+            shopPrice = String.valueOf(mDataBean.getS_price());
+            return;
+        }
         if (mData.size() > 0) {
             for (int i = 0; i < mData.size(); i++) {
                 proCount.append(mData.get(i).getCount() + 1 + "|");

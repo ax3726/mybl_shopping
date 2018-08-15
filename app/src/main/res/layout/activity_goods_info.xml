@@ -29,7 +29,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#F6E5E8"
-                    android:paddingBottom="20px"
+
                     android:paddingLeft="10px"
                     android:paddingRight="10px"
                     android:paddingTop="15px">
@@ -48,7 +48,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@+id/tv_hint1"
-                        android:text="25.9"
                         android:textColor="#AC122E"
                         android:textSize="36px" />
 
@@ -59,7 +58,8 @@
                         android:layout_alignBaseline="@+id/tv_price"
                         android:layout_marginLeft="4px"
                         android:layout_toRightOf="@+id/tv_price"
-                        android:text="独守空房个is俄方大V是的覅规范if首都哥"
+                        android:text=""
+                        android:layout_marginBottom="20px"
                         android:textColor="@color/color2E2B2B"
                         android:textSize="28px" />
 
@@ -87,7 +87,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20px"
                         android:layout_toRightOf="@+id/tv_hint2"
-                        android:text="15分钟"
+                        android:text=""
                         android:textColor="@color/color2E2B2B"
                         android:textSize="26px" />
 
@@ -108,7 +108,7 @@
                         android:layout_alignBaseline="@+id/tv_hint3"
                         android:layout_marginLeft="20px"
                         android:layout_toRightOf="@+id/tv_hint3"
-                        android:text="地址"
+                        android:text=""
                         android:textColor="@color/color2E2B2B"
                         android:textSize="26px" />
 
@@ -120,6 +120,7 @@
                         android:layout_below="@+id/tv_hint3"
                         android:layout_marginRight="20px"
                         android:layout_marginTop="20px"
+                        android:visibility="gone"
                         android:text="更改配送地址  >"
                         android:textColor="@color/colorBAB2B3"
                         android:textSize="26px" />
@@ -128,7 +129,7 @@
                         android:id="@+id/tv_hint4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_change_add"
+                        android:layout_below="@+id/tv_hint3"
                         android:layout_marginTop="30px"
                         android:text="参    数:"
                         android:textColor="@color/colorBAB2B3"

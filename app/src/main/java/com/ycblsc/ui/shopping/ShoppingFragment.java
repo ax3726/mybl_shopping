@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
@@ -71,16 +72,16 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
     private com.lm.base.library.adapters.abslistview.CommonAdapter<ProductListModel.ReturnDataBean> mTuijianGoodsAdapter;//推荐商品列表
     private int mCurPosition = 0;//记录当前分类的下标
     private int mPage = 1;
-    private int mSize = 10;
+    private int mSize = 15;
     private String mShoppingId = "";//体验店id
     private String mMaxTime = "";//配送时间
     private String mAddress = "";//配送范围
     private ShoppingSearchFragment mShoppingSearchFragment = null;//搜索列表
-    private String storeId;
 
 
     public void setStoreId(String storeId) {
-        this.storeId = storeId;
+        this.mShoppingId = storeId;
+        this.mShoppingId = "51";
     }
 
     @Override
@@ -88,28 +89,37 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
         super.initData();
         EventBus.getDefault().register(this);
         initAdapter();
-        mPresenter.getShopInfo2(storeId);//默认给18数据
-        mShoppingId=storeId;
-        MyApplication.getInstance().setEasyId(mShoppingId);//保存便利架ID
-        mPresenter.getProductType(mShoppingId);
-        mPresenter.getRecommend(mShoppingId);
+        mPresenter.getShopInfo2(mShoppingId);//默认给18数据
         mPresenter.getImageData();
     }
 
     @Override
     protected void initEvent() {
         super.initEvent();
+        mBinding.etSearch.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == event.KEYCODE_ENTER) {
+                    search();
+                }
+                return false;
+            }
+        });
         mBinding.imgSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String trim = mBinding.etSearch.getText().toString().trim();
-                if (!TextUtils.isEmpty(trim)) {
-                    showSearch(trim);
-                } else {
-                    showToast("请输入搜索关键字!");
-                }
+                search();
             }
         });
+    }
+
+    private void search() {
+        String trim = mBinding.etSearch.getText().toString().trim();
+        if (!TextUtils.isEmpty(trim)) {
+            showSearch(trim);
+        } else {
+            showToast("请输入搜索关键字!");
+        }
     }
 
 

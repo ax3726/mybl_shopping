@@ -94,7 +94,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingPrestener, Fragme
                     @Override
                     public void onClick(View v) {
                         if (aty != null) {
-                            ((MainActivity) aty).RemoveShoppingCart(item);
+                            ((MainActivity) aty).RemoveShoppingCart(item,true);
                         }
                     }
                 });

@@ -163,6 +163,7 @@
                                 android:background="#F2F2F2"
                                 android:hint="请输入商品名称进行搜索"
                                 android:paddingBottom="10px"
+                                android:imeOptions="actionSearch"
                                 android:paddingLeft="20px"
                                 android:paddingRight="20px"
                                 android:paddingTop="10px"
@@ -214,6 +215,7 @@
         <com.zhy.autolayout.AutoFrameLayout
             android:id="@+id/fly_search"
             android:layout_width="match_parent"
+            android:imeOptions="actionSearch"
             android:layout_height="match_parent"></com.zhy.autolayout.AutoFrameLayout>
 
     </com.zhy.autolayout.AutoFrameLayout>
