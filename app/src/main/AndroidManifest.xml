@@ -57,11 +57,11 @@
 
         <activity
             android:name=".ui.main.MainActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".ui.main.LoginActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".widget.zxing.android.CaptureActivity"
             android:screenOrientation="portrait"
@@ -145,7 +145,8 @@
                 <data android:scheme="wxfb354855bec653ed" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.shopping.GoodsInfoActivity"></activity>
+        <activity android:name=".ui.shopping.GoodsInfoActivity" />
+        <activity android:name=".ui.mine.ShoppingOrderListActivity"></activity>
     </application>
 
 </manifest>

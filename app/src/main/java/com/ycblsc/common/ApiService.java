@@ -269,4 +269,9 @@ public interface ApiService {
     //获取体验店id
     @GET("AppService2.aspx?CMD=LoadShopIdByAddress")
     Flowable<BaseBean> getLoadShopIdByAddress(@Query("id") int id);
+
+
+    //获取体验店id
+    @GET("AppService2.aspx?CMD=LoadOrderList")
+    Flowable<BaseBean> getLoadOrderList(@Query("id") String id, @Query("page") int page, @Query("rows") int rows, @Query("status") String status);
 }
