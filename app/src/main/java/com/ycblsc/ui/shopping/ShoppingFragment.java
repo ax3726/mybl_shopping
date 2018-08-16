@@ -298,7 +298,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
             mBinding.tvSendFanwei.setText(model.getReturnData().get(0).getSendAddress());//配送范围
             mMaxTime = model.getReturnData().get(0).getMaxTime() + "";
             mAddress = model.getReturnData().get(0).getSendAddress();
-            MyApplication.getInstance().setEasyId(mShoppingId);//保存便利架ID
+            MyApplication.getInstance().setmShoppingId(mShoppingId);//保存体验店ID
             mPresenter.getProductType(mShoppingId);
             mPresenter.getRecommend(mShoppingId);
         }
