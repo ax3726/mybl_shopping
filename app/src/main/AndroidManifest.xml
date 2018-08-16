@@ -110,6 +110,9 @@
             android:name=".ui.buycart.PaymentActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.shopping.PaymentTwoPhaseActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.main.WelcomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">

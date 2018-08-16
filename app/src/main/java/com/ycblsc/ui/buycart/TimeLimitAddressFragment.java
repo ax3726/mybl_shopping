@@ -13,6 +13,7 @@ import com.lm.base.library.adapters.recyclerview.CommonAdapter;
 import com.lm.base.library.adapters.recyclerview.base.ViewHolder;
 import com.ycblsc.R;
 import com.ycblsc.base.BaseFragment;
+import com.ycblsc.common.MyApplication;
 import com.ycblsc.databinding.FragmentShoppingCartBinding;
 import com.ycblsc.databinding.FragmentTimelimitAddressBinding;
 import com.ycblsc.model.BaseBean;
@@ -44,6 +45,7 @@ public class TimeLimitAddressFragment extends BaseFragment<AddressPrestener, Fra
     private int id;//体验店id
     private String addressName;
     private ShoppingFragment mShoppingFragment = null;//商品列表
+
     @Override
     public int getLayoutId() {
         return R.layout.fragment_timelimit_address;
@@ -86,6 +88,7 @@ public class TimeLimitAddressFragment extends BaseFragment<AddressPrestener, Fra
                     return;
                 }
                 if (id != 0) {
+                    MyApplication.getInstance().setShouhuoid(String.valueOf(id));
                     mPresenter.getLoadShopIdByAddress(id);//获取体验店id
                 }
             }
@@ -106,12 +109,13 @@ public class TimeLimitAddressFragment extends BaseFragment<AddressPrestener, Fra
     @Override
     public void getLoadShopIdByAddress(BaseBean baseBean) {
         String id = baseBean.getReturnData().toString();
-        if (id == null|| TextUtils.isEmpty(id)) {
+        if (id == null || TextUtils.isEmpty(id)) {
             showToast("抱歉，附近无可用的体验店，暂时无法提供限时达服务");
         } else {
             showAddress(id);
         }
     }
+
     private void showAddress(String id) {
         mFm = getFragmentManager();
         mTransaction = mFm.beginTransaction();
@@ -124,6 +128,7 @@ public class TimeLimitAddressFragment extends BaseFragment<AddressPrestener, Fra
         mTransaction.show(mShoppingFragment);
         mTransaction.commitAllowingStateLoss();
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {

@@ -133,7 +133,7 @@ public class GoodsInfoActivity extends BaseActivity<BasePresenter, ActivityGoods
             public void onClick(View v) {
                 if (mDataBean != null) {
                     startActivity(
-                            new Intent(aty, PaymentActivity.class)
+                            new Intent(aty, PaymentTwoPhaseActivity.class)
                                     .putExtra("mTotal", mDataBean.getS_price() + "")
                                     .putExtra("goods_data", mDataBean));
                     finish();

@@ -32,6 +32,15 @@ public class MyApplication extends Application {
 
     public String mEasyId="";//便利架ID
     public String mShoppingId="";//体验店ID
+    public String shouhuoid="";//收货地址ID
+
+    public String getShouhuoid() {
+        return shouhuoid;
+    }
+
+    public void setShouhuoid(String shouhuoid) {
+        this.shouhuoid = shouhuoid;
+    }
 
     public String getEasyId() {
         return mEasyId;

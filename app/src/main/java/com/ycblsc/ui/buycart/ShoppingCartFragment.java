@@ -12,6 +12,7 @@ import com.ycblsc.databinding.FragmentShoppingCartBinding;
 import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.prestener.shopping.ShoppingPrestener;
 import com.ycblsc.ui.main.MainActivity;
+import com.ycblsc.ui.shopping.PaymentTwoPhaseActivity;
 import com.ycblsc.utils.MyBigDecimal;
 
 import java.text.DecimalFormat;
@@ -137,7 +138,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingPrestener, Fragme
                     }
                     if (beans.size() > 0) {
                         startActivity(
-                                new Intent(getActivity(), PaymentActivity.class)
+                                new Intent(getActivity(), PaymentTwoPhaseActivity.class)
                                         .putExtra("mTotal", mTotal)
                                         .putParcelableArrayListExtra("data", beans));
                     } else {

@@ -274,4 +274,24 @@ public interface ApiService {
     //获取体验店id
     @GET("AppService2.aspx?CMD=LoadOrderList")
     Flowable<BaseBean> getLoadOrderList(@Query("id") String id, @Query("page") int page, @Query("rows") int rows, @Query("status") String status);
+    //二期支付接口
+    //余额/支付宝支付
+    @POST("AppServicePost2.aspx?CMD=Order")
+    Flowable<BaseBean> getPay2(@Query("id") String id
+            , @Query("orderType") String orderType
+            , @Query("proCount") String proCount
+            , @Query("proId") String proId
+            , @Query("proPrice") String proPrice
+            , @Query("shopid") String shopid
+            , @Query("shouhuoid") String shouhuoid);
+
+    //微信支付
+    @POST("AppServicePost2.aspx?CMD=Order")
+    Flowable<WEXModel> getWexPay2(@Query("id") String id
+            , @Query("orderType") String orderType
+            , @Query("proCount") String proCount
+            , @Query("proId") String proId
+            , @Query("proPrice") String proPrice
+            , @Query("shopid") String shopid
+            , @Query("shouhuoid") String shouhuoid);
 }
