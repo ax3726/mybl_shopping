@@ -204,7 +204,7 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
                 break;
             //商城消费记录
             case R.id.rela_shopreocde:
-                showToast("暂未开放");
+             startActivity(ShoppingOrderListActivity.class);
                 break;
         }
     }

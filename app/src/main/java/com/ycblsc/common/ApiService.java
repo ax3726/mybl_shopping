@@ -16,6 +16,7 @@ import com.ycblsc.model.shopping.GoodsInfoModel;
 import com.ycblsc.model.shopping.ImageDataModel;
 import com.ycblsc.model.shopping.NewAddressModel;
 import com.ycblsc.model.shopping.ShoppingInfoModel;
+import com.ycblsc.model.shopping.ShoppingOrderListModel;
 import com.ycblsc.model.shopping.TimeAddressModel;
 
 import java.util.HashMap;
@@ -271,9 +272,9 @@ public interface ApiService {
     Flowable<BaseBean> getLoadShopIdByAddress(@Query("id") int id);
 
 
-    //获取体验店id
-    @GET("AppService2.aspx?CMD=LoadOrderList")
-    Flowable<BaseBean> getLoadOrderList(@Query("id") String id, @Query("page") int page, @Query("rows") int rows, @Query("status") String status);
+    //获取限时达订单列表
+    @GET("AppService2.aspx?CMD=LoadOrderListFull")
+    Flowable<ShoppingOrderListModel> getLoadOrderList(@Query("customId") String id, @Query("page") int page, @Query("rows") int rows, @Query("status") String status);
     //二期支付接口
     //余额/支付宝支付
     @POST("AppServicePost2.aspx?CMD=Order")

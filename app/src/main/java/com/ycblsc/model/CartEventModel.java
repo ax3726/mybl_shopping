@@ -9,8 +9,16 @@ import java.util.ArrayList;
  */
 
 public class CartEventModel {
-
+    private int type;//0 便利架  1 限时达
     private ArrayList<ProductListModel.ReturnDataBean> dataBeans=new ArrayList<>();
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
 
     public ArrayList<ProductListModel.ReturnDataBean> getDataBeans() {
         return dataBeans;
@@ -20,7 +28,8 @@ public class CartEventModel {
         this.dataBeans = dataBeans;
     }
 
-    public CartEventModel(ArrayList<ProductListModel.ReturnDataBean> dataBeans) {
+    public CartEventModel(int type, ArrayList<ProductListModel.ReturnDataBean> dataBeans) {
+        this.type = type;
         this.dataBeans = dataBeans;
     }
 }

@@ -9,7 +9,6 @@ import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
@@ -21,7 +20,6 @@ import com.ycblsc.R;
 import com.ycblsc.base.BaseActivity;
 import com.ycblsc.base.BaseView;
 import com.ycblsc.databinding.ActivityMainBinding;
-import com.ycblsc.model.AddCartEvent;
 import com.ycblsc.model.CartEventModel;
 import com.ycblsc.model.MainEvent;
 import com.ycblsc.model.home.ProductListModel;
@@ -30,7 +28,6 @@ import com.ycblsc.ui.buycart.BuyCartFragment;
 import com.ycblsc.ui.buycart.TimeLimitAddressFragment;
 import com.ycblsc.ui.home.HomeFragment;
 import com.ycblsc.ui.mine.MineFragment;
-import com.ycblsc.ui.shopping.ShoppingFragment;
 import com.ycblsc.utils.DoubleClickExitHelper;
 import com.zhy.autolayout.AutoRelativeLayout;
 
@@ -44,7 +41,7 @@ import java.util.List;
 public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBinding> implements BaseView {
 
     private HomeFragment mHomeFragment;
-   // private ShoppingFragment mShoppingFragment;
+    // private ShoppingFragment mShoppingFragment;
     private TimeLimitAddressFragment mTimeLimitAddressFragment;//限时达地址
     private BuyCartFragment mBuyCartFragment;
     private MineFragment mMineFragment;
@@ -119,7 +116,7 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
 
     private void initFragment() {
         mHomeFragment = new HomeFragment();
-      //  mShoppingFragment = new ShoppingFragment();
+        //  mShoppingFragment = new ShoppingFragment();
         mTimeLimitAddressFragment = new TimeLimitAddressFragment();
         mBuyCartFragment = new BuyCartFragment();
         mMineFragment = new MineFragment();
@@ -343,6 +340,7 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
         }
         mBuyCartFragment.updatemEasyCartData(mEasyCartList);
     }
+
     /**
      * 移除商城购物车
      */
@@ -456,10 +454,22 @@ public class MainActivity extends BaseActivity<MainPrestener, ActivityMainBindin
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void ClearCart(CartEventModel messageEvent) {
-        for (ProductListModel.ReturnDataBean bean : messageEvent.getDataBeans()) {
-            RemoveEasyCart(bean, true);
+        if (messageEvent == null) {
+            return;
         }
-        mBuyCartFragment.updatemEasyCartData(mEasyCartList);
+        if (messageEvent.getType() == 0) {
+            for (ProductListModel.ReturnDataBean bean : messageEvent.getDataBeans()) {
+                RemoveEasyCart(bean, true);
+            }
+            mBuyCartFragment.updatemEasyCartData(mEasyCartList);
+
+        } else {
+            for (ProductListModel.ReturnDataBean bean : messageEvent.getDataBeans()) {
+                RemoveShoppingCart(bean, true);
+            }
+            mBuyCartFragment.updatemShoppingCartData(mShoppingCartList);
+
+        }
 
     }
 

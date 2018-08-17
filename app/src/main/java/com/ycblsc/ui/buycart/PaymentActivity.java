@@ -409,7 +409,9 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
      * 购买成功成功， 清除购物车
      */
     private void clearCart() {
-        EventBus.getDefault().post(new CartEventModel(mData));
+        if (mData!=null) {
+            EventBus.getDefault().post(new CartEventModel(0,mData));
+        }
     }
 
     @Override

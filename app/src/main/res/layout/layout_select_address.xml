@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="贵州省贵阳市花果区"
-                android:textSize="32px" />
+                android:textSize="13dp" />
 
             <!--</com.zhy.autolayout.AutoRelativeLayout>-->
 

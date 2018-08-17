@@ -408,7 +408,9 @@ public class PaymentTwoPhaseActivity extends BaseActivity<BasePresenter, Activit
      * 购买成功成功， 清除购物车
      */
     private void clearCart() {
-        EventBus.getDefault().post(new CartEventModel(mData));
+
+
+        EventBus.getDefault().post(new CartEventModel(1,mData));
     }
 
     @Override
