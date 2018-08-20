@@ -13,10 +13,12 @@ import com.lm.base.library.adapters.recyclerview.CommonAdapter;
 import com.lm.base.library.adapters.recyclerview.base.ViewHolder;
 import com.ycblsc.R;
 import com.ycblsc.base.BaseFragment;
+import com.ycblsc.common.CacheService;
 import com.ycblsc.common.MyApplication;
 import com.ycblsc.databinding.FragmentShoppingCartBinding;
 import com.ycblsc.databinding.FragmentTimelimitAddressBinding;
 import com.ycblsc.model.BaseBean;
+import com.ycblsc.model.SelectAddressModel;
 import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.model.shopping.TimeAddressModel;
 import com.ycblsc.prestener.shopping.AddressPrestener;
@@ -60,6 +62,7 @@ public class TimeLimitAddressFragment extends BaseFragment<AddressPrestener, Fra
     protected void initData() {
         super.initData();
         mPresenter.getGetNote("serviceNote");//限时达说明111111
+        mPresenter.getAddressData(CacheService.getIntance().getUserId());//个人地址
     }
 
     @Override
@@ -115,14 +118,22 @@ public class TimeLimitAddressFragment extends BaseFragment<AddressPrestener, Fra
             showAddress(id);
         }
     }
+     //获取个人地址
+    @Override
+    public void getAddressData(SelectAddressModel baseBean) {
+        if (baseBean.getReturnData().size() > 0) {
+            mBinding.tvAddress.setText(baseBean.getReturnData().get(0).getS_weizhiFull());
+            id = baseBean.getReturnData().get(0).getId();
+        }
+    }
 
     private void showAddress(String id) {
         mFm = getFragmentManager();
         mTransaction = mFm.beginTransaction();
         if (mShoppingFragment == null) {
             mShoppingFragment = new ShoppingFragment();
-            mTransaction.add(R.id.fly_address, mShoppingFragment);
             mShoppingFragment.setStoreId(id);
+            mTransaction.add(R.id.fly_address, mShoppingFragment);
             mBinding.linShowAddress.setVisibility(View.GONE);
         }
         mTransaction.show(mShoppingFragment);

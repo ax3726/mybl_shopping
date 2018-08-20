@@ -2,6 +2,7 @@ package com.ycblsc.view;
 
 import com.ycblsc.base.BaseFragmentView;
 import com.ycblsc.model.BaseBean;
+import com.ycblsc.model.SelectAddressModel;
 import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.model.home.ProuductTypeModel;
 import com.ycblsc.model.shopping.ImageDataModel;
@@ -17,5 +18,7 @@ public interface IAddressView extends BaseFragmentView {
     void getGetNote(TimeAddressModel baseBean);
 
     void getLoadShopIdByAddress(BaseBean baseBean);
+
+    void getAddressData(SelectAddressModel baseBean);
 
 }
