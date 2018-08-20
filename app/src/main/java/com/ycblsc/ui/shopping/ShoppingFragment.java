@@ -148,6 +148,18 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
                         }
                     }
                 });
+                holder.setOnClickListener(R.id.llt_item, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(aty, GoodsInfoActivity.class);
+                        intent.putExtra("id", item.getId() + "");
+                        intent.putExtra("shoppingId", mShoppingId);
+                        intent.putExtra("time", mMaxTime);
+                        intent.putExtra("address", mAddress);
+                        intent.putExtra("type", 3);
+                        startActivity(intent);
+                    }
+                });
             }
         };
         mBinding.glGoods.setAdapter(mTuijianGoodsAdapter);
@@ -306,9 +318,17 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void AddCartEvent(AddCartEvent event) {
-        for (ProductListModel.ReturnDataBean dataBean : mGoodsList) {
-            if (event.getId().equals(dataBean.getId() + "")) {
-                ((MainActivity) aty).AddShoppingCart(dataBean);
+        if (event.getType() == 0) {
+            for (ProductListModel.ReturnDataBean dataBean : mGoodsList) {
+                if (event.getId().equals(dataBean.getId() + "")) {
+                    ((MainActivity) aty).AddShoppingCart(dataBean);
+                }
+            }
+        } else {
+            for (ProductListModel.ReturnDataBean dataBean : mTuijianGoodsList) {
+                if (event.getId().equals(dataBean.getId() + "")) {
+                    ((MainActivity) aty).AddShoppingCart(dataBean);
+                }
             }
         }
     }

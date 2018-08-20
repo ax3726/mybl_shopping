@@ -275,6 +275,7 @@ public interface ApiService {
     //获取限时达订单列表
     @GET("AppService2.aspx?CMD=LoadOrderListFull")
     Flowable<ShoppingOrderListModel> getLoadOrderList(@Query("customId") String id, @Query("page") int page, @Query("rows") int rows, @Query("status") String status);
+
     //二期支付接口
     //余额/支付宝支付
     @POST("AppServicePost2.aspx?CMD=Order")
@@ -295,4 +296,8 @@ public interface ApiService {
             , @Query("proPrice") String proPrice
             , @Query("shopid") String shopid
             , @Query("shouhuoid") String shouhuoid);
+
+    //确认收货
+    @POST("AppServicePost2.aspx?CMD=GetOrder")
+    Flowable<BaseBean> confirmOrder(@Query("id") String id, @Query("orderId") int orderId);
 }

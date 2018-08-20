@@ -117,6 +117,7 @@
     </com.zhy.autolayout.AutoLinearLayout>
 
     <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/lly_ok"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -146,6 +147,7 @@
         android:background="@color/colorF7F7F7" />
 
     <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/lly_ok_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -177,6 +179,7 @@
     </com.zhy.autolayout.AutoLinearLayout>
 
     <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/lly_pay_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -205,4 +208,9 @@
             android:textColor="#ACA7A7"
             android:textSize="26px" />
     </com.zhy.autolayout.AutoLinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20px"
+        android:background="@color/colorF7F7F7" />
 </com.zhy.autolayout.AutoLinearLayout>

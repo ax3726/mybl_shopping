@@ -122,8 +122,10 @@ public class GoodsInfoActivity extends BaseActivity<BasePresenter, ActivityGoods
             public void onClick(View v) {
                 if (mType == 1) {
                     EventBus.getDefault().post(new AddSearchCartEvent(mId));
+                } else if (mType == 3) {//推荐
+                    EventBus.getDefault().post(new AddCartEvent(mId,1));
                 } else {
-                    EventBus.getDefault().post(new AddCartEvent(mId));
+                    EventBus.getDefault().post(new AddCartEvent(mId,0));
                 }
                 showToast("添加购物车成功!");
             }
