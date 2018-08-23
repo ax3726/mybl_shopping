@@ -3,6 +3,7 @@ package com.ycblsc.prestener.shopping;
 import com.ycblsc.base.BaseFragmentPresenter;
 import com.ycblsc.common.Api;
 import com.ycblsc.model.BaseBean;
+import com.ycblsc.model.SelectAddressModel;
 import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.model.home.ProuductTypeModel;
 import com.ycblsc.model.shopping.ImageDataModel;
@@ -55,5 +56,23 @@ public class AddressPrestener extends BaseFragmentPresenter<IAddressView> {
                     }
                 });
 
+    }
+    //获取个人地址
+    public void getAddressData(String id) {
+        Api.getApi2().getLoadMemberAddressData(id)
+                .compose(callbackOnIOToMainThread())
+                .subscribe(new BaseNetSubscriber<SelectAddressModel>() {
+                    @Override
+                    public void onNext(SelectAddressModel baseBean) {
+                        super.onNext(baseBean);
+                        getView().getAddressData(baseBean);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+
+                    }
+                });
     }
 }

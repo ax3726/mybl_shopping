@@ -142,7 +142,11 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
                 WexPay();
 
             } else if (mBinding.radAlipay.isChecked()) {
-                AliPay();//支付宝支付
+                if (System.currentTimeMillis()/1000>=1538323200){
+                    showToast("暂未开通！");
+                }else {
+                    AliPay();//支付宝支付
+                }
 
             }
         });

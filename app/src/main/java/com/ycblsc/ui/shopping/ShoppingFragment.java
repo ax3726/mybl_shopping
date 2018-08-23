@@ -81,7 +81,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
 
     public void setStoreId(String storeId) {
         this.mShoppingId = storeId;
-        this.mShoppingId = "51";
+       // this.mShoppingId = "51";
     }
 
     @Override

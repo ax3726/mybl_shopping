@@ -141,8 +141,12 @@ public class PaymentTwoPhaseActivity extends BaseActivity<BasePresenter, Activit
                 WexPay();
 
             } else if (mBinding.radAlipay.isChecked()) {
-                AliPay();//支付宝支付
-
+                // long str=System.currentTimeMillis()/1000;//1534769510718
+                if (System.currentTimeMillis() / 1000 >= 1538323200) {
+                    showToast("暂未开通！");
+                } else {
+                    AliPay();//支付宝支付
+                }
             }
         });
         cancel.setOnClickListener(v -> dialog.dismiss());
@@ -410,7 +414,7 @@ public class PaymentTwoPhaseActivity extends BaseActivity<BasePresenter, Activit
     private void clearCart() {
 
 
-        EventBus.getDefault().post(new CartEventModel(1,mData));
+        EventBus.getDefault().post(new CartEventModel(1, mData));
     }
 
     @Override
