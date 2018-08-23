@@ -5,15 +5,86 @@
     android:background="@color/colorWhite"
     android:orientation="vertical">
 
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="15px"
+        android:paddingLeft="50px"
+        android:paddingBottom="15px"
+        android:background="#EFCFD5">
+
+        <TextView
+            android:id="@+id/tv_time_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2017-11-23"
+            android:textColor="#1F1F1F"
+            android:textSize="29px" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="订单金额"
+            android:layout_marginLeft="20px"
+            android:textColor="#1F1F1F"
+            android:textSize="29px" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10px"
+            android:text="￥"
+            android:textColor="@color/colorED1E6A" />
+        <TextView
+            android:id="@+id/tv_money1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="47.4"
+            android:layout_marginLeft="5px"
+            android:textColor="#1F1F1F"
+            android:textSize="29px" />
+    </com.zhy.autolayout.AutoLinearLayout>
+
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rc_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <View
+    <com.zhy.autolayout.AutoRelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="20px"
-        android:background="@color/colorF7F7F7" />
+        android:background="@color/colorF7F7F7"
+        android:paddingTop="10px"
+        android:paddingBottom="10px"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_toLeftOf="@+id/tv_money_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="订单合计"
+            android:layout_marginLeft="20px"
+            android:textColor="#1F1F1F"
+            android:textSize="29px" />
+        <TextView
+            android:id="@+id/tv_money_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10px"
+            android:layout_centerInParent="true"
+            android:text="￥"
+            android:textColor="@color/colorED1E6A" />
+        <TextView
+            android:layout_toRightOf="@+id/tv_money_hint"
+            android:id="@+id/tv_money_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="47.4"
+            android:layout_marginLeft="5px"
+            android:textColor="#1F1F1F"
+            android:textSize="29px" />
+
+    </com.zhy.autolayout.AutoRelativeLayout>
+
 
     <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="match_parent"
@@ -64,12 +135,14 @@
         android:paddingLeft="100px">
 
         <ImageView
+            android:id="@+id/img_order_time"
             android:layout_width="38px"
             android:layout_height="38px"
             android:layout_marginRight="40px"
             android:src="@drawable/shopping_cart_choose_icon" />
 
         <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="用户下单 :"
@@ -94,12 +167,14 @@
         android:paddingLeft="100px">
 
         <ImageView
+            android:id="@+id/img_send_time"
             android:layout_width="38px"
             android:layout_height="38px"
             android:layout_marginRight="40px"
             android:src="@drawable/shopping_cart_choose_icon" />
 
         <TextView
+            android:id="@+id/tv_send_time_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="蚁巢发货 :"
@@ -125,6 +200,7 @@
         android:paddingLeft="178px">
 
         <TextView
+            android:id="@+id/tv_qian"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -156,12 +232,14 @@
         android:paddingTop="20px">
 
         <ImageView
+            android:id="@+id/img_ok_time"
             android:layout_width="38px"
             android:layout_height="38px"
             android:layout_marginRight="40px"
             android:src="@drawable/shopping_cart_choose_icon" />
 
         <TextView
+            android:id="@+id/tv_ok_time_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="用户签收 :"
@@ -187,12 +265,14 @@
         android:paddingLeft="100px">
 
         <ImageView
+            android:id="@+id/img_pay_con"
             android:layout_width="38px"
             android:layout_height="38px"
             android:layout_marginRight="40px"
             android:src="@drawable/shopping_cart_choose_icon" />
 
         <TextView
+            android:id="@+id/tv_pay_con_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="超时赔付 :"
@@ -209,8 +289,4 @@
             android:textSize="26px" />
     </com.zhy.autolayout.AutoLinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="20px"
-        android:background="@color/colorF7F7F7" />
 </com.zhy.autolayout.AutoLinearLayout>

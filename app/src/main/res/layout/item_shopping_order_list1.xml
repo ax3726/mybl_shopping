@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FBFAE8"
+        android:paddingBottom="25px"
+        android:paddingLeft="25px"
+        android:paddingRight="25px"
+        android:paddingTop="25px">
+
+        <TextView
+            android:id="@+id/tv_hint1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="消费时间:"
+            android:textColor="#26261F"
+            android:textSize="28px" />
+
+        <TextView
+            android:id="@+id/tv_order_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/tv_hint2"
+            android:layout_toRightOf="@+id/tv_hint1"
+            android:text="2018/8/22 15:30"
+            android:textColor="#96968B"
+            android:textSize="28px" />
+
+        <TextView
+            android:id="@+id/tv_hint2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/tv_money_count"
+            android:text="总计消费:"
+            android:textColor="#26261F"
+            android:textSize="28px" />
+
+        <TextView
+            android:id="@+id/tv_money_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+
+            android:layout_marginRight="40px"
+            android:text="￥24.00"
+            android:textColor="#96968B"
+            android:textSize="28px" />
+
+
+        <TextView
+            android:id="@+id/tv_hint3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_hint1"
+            android:layout_marginTop="20px"
+            android:text="限时达体验店:"
+            android:textColor="#26261F"
+            android:textSize="28px" />
+
+        <TextView
+            android:id="@+id/tv_tiyan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tv_hint3"
+            android:layout_toRightOf="@+id/tv_hint3"
+            android:text="序偶姑姑"
+            android:textColor="#96968B"
+            android:textSize="28px" />
+
+        <TextView
+            android:id="@+id/tv_hint4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_hint3"
+            android:layout_marginTop="20px"
+            android:text="配送时间:"
+            android:textColor="#26261F"
+            android:textSize="28px" />
+
+        <TextView
+            android:id="@+id/tv_min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tv_hint4"
+            android:layout_toRightOf="@+id/tv_hint4"
+            android:text="15分钟"
+            android:textColor="#96968B"
+            android:textSize="28px" />
+
+        <TextView
+            android:id="@+id/tv_hint5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_hint4"
+            android:layout_marginTop="20px"
+            android:text="超时赔付:"
+            android:textColor="#26261F"
+            android:textSize="28px" />
+
+        <TextView
+            android:id="@+id/tv_chao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tv_hint5"
+            android:layout_toRightOf="@+id/tv_hint5"
+            android:text="15分钟"
+            android:textColor="#96968B"
+            android:textSize="28px" />
+
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/colorE7E7E7" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rc_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    </android.support.v7.widget.RecyclerView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/colorE7E7E7" />
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20px"
+        android:paddingTop="20px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:layout_toLeftOf="@+id/tv_money"
+            android:text="总计消费:"
+            android:textColor="#1F1F1F"
+            android:textSize="29px" />
+
+        <TextView
+            android:id="@+id/tv_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="10px"
+            android:layout_marginRight="50px"
+            android:text="￥47.4"
+            android:textColor="@color/colorED1E6A" />
+
+
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/colorE7E7E7" />
+</com.zhy.autolayout.AutoLinearLayout>
