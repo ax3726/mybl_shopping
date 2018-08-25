@@ -11,6 +11,8 @@ import com.ycblsc.model.shopping.ImageDataModel;
 import com.ycblsc.model.shopping.ShoppingInfoModel;
 import com.ycblsc.view.IShoppingView;
 
+import org.greenrobot.eventbus.EventBus;
+
 /**
  * Created by Administrator on 2017/12/25 0025.
  */
@@ -65,8 +67,8 @@ public class ShoppingPrestener extends BaseFragmentPresenter<IShoppingView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        super.onError(e);
-
+                      //  super.onError(e);
+                        EventBus.getDefault().post("Shopflag");
                     }
                 });
     }

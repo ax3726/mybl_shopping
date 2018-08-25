@@ -31,6 +31,7 @@ import com.ycblsc.model.mine.NotificationModel;
 import com.ycblsc.model.mine.PersonInfoModel;
 import com.ycblsc.model.shopping.ImageDataModel;
 import com.ycblsc.prestener.mine.MinePrestener;
+import com.ycblsc.ui.main.LoginActivity;
 import com.ycblsc.ui.main.RegisterActivity;
 import com.ycblsc.view.IMineView;
 
@@ -165,6 +166,7 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
             mPresenter.getPersonMessage(CacheService.getIntance().getUserId(), 1, 10);//个人通知信息
         } else {
             mBinding.tvPhone.setVisibility(View.GONE);
+            mBinding.btnLoginIn.setVisibility(View.VISIBLE);
             mBinding.realBalance.setVisibility(View.GONE);
             mBinding.relaAddress.setVisibility(View.GONE);
             mBinding.linSetting.setVisibility(View.GONE);
@@ -172,6 +174,7 @@ public class MineFragment extends BaseFragment<MinePrestener, FragmentMineLayout
             mBinding.relarRecord.setVisibility(View.GONE);
             mBinding.relaShopreocde.setVisibility(View.GONE);
             mBinding.relaOlder.setVisibility(View.GONE);
+            mBinding.btnLoginIn.setOnClickListener(v -> startActivity(LoginActivity.class));
         }
     }
 

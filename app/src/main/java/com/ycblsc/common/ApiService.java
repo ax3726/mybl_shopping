@@ -300,4 +300,9 @@ public interface ApiService {
     //确认收货
     @POST("AppServicePost2.aspx?CMD=GetOrder")
     Flowable<BaseBean> confirmOrder(@Query("id") String id, @Query("orderId") int orderId);
+
+    //限时达匹配不到数据显示  参数falseNote
+    @POST("AppService2.aspx?CMD=GetNote")
+    Flowable<BaseBean> GetNote(@Query("d_Code") String d_Code);
+
 }

@@ -23,6 +23,7 @@ import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.model.shopping.TimeAddressModel;
 import com.ycblsc.prestener.shopping.AddressPrestener;
 import com.ycblsc.prestener.shopping.ShoppingPrestener;
+import com.ycblsc.ui.main.LoginActivity;
 import com.ycblsc.ui.main.MainActivity;
 import com.ycblsc.ui.shopping.ShoppingFragment;
 import com.ycblsc.ui.shopping.ShoppingSearchFragment;
@@ -61,8 +62,15 @@ public class TimeLimitAddressFragment extends BaseFragment<AddressPrestener, Fra
     @Override
     protected void initData() {
         super.initData();
-        mPresenter.getGetNote("serviceNote");//限时达说明
-        mPresenter.getAddressData(CacheService.getIntance().getUserId());//个人地址
+        if (CacheService.getIntance().isLogin()) {
+            mPresenter.getGetNote("serviceNote");//限时达说明
+            mPresenter.getAddressData(CacheService.getIntance().getUserId());//个人地址
+        } else {
+            mBinding.btnLoginIn.setVisibility(View.VISIBLE);
+            mBinding.imgUnderstand.setVisibility(View.GONE);
+            //跳转登录页面
+            mBinding.btnLoginIn.setOnClickListener(v -> startActivity(LoginActivity.class));
+        }
     }
 
     @Override
@@ -118,7 +126,8 @@ public class TimeLimitAddressFragment extends BaseFragment<AddressPrestener, Fra
             showAddress(id);
         }
     }
-     //获取个人地址
+
+    //获取个人地址
     @Override
     public void getAddressData(SelectAddressModel baseBean) {
         if (baseBean.getReturnData().size() > 0) {

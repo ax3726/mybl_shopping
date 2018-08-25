@@ -108,6 +108,10 @@ public class NewAddressActivity extends BaseActivity<BasePresenter, ActivityNewA
                     showToast("请先选择县");
                     return;
                 }
+                if (TextUtils.isEmpty(address)) {
+                    showToast("请输入详情地址");
+                    return;
+                }
                 if (TextUtils.isEmpty(name)) {
                     showToast("请输入姓名");
                     return;
@@ -118,10 +122,6 @@ public class NewAddressActivity extends BaseActivity<BasePresenter, ActivityNewA
                 }
                 if (phone.length() < 11) {
                     showToast("请输入正确的手机号");
-                    return;
-                }
-                if (TextUtils.isEmpty(address)) {
-                    showToast("请输入详情地址");
                     return;
                 }
                 try {

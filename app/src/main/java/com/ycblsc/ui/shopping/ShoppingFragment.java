@@ -77,11 +77,11 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
     private String mMaxTime = "";//配送时间
     private String mAddress = "";//配送范围
     private ShoppingSearchFragment mShoppingSearchFragment = null;//搜索列表
-
+    int mShoppingFalg = 0;
 
     public void setStoreId(String storeId) {
         this.mShoppingId = storeId;
-       // this.mShoppingId = "51";
+        // this.mShoppingId = "51";
     }
 
     @Override
@@ -115,6 +115,10 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
 
     private void search() {
         String trim = mBinding.etSearch.getText().toString().trim();
+        if (mShoppingFalg == 1) {
+            showToast("该收货地址附近无可用体验店，请尝试其他地址!");
+            return;
+        }
         if (!TextUtils.isEmpty(trim)) {
             showSearch(trim);
         } else {
@@ -332,7 +336,12 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
             }
         }
     }
-
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void MainShoping(String event) {
+       if (!TextUtils.isEmpty(event)){
+           mShoppingFalg=1;
+       }
+    }
     private void showSearch(String search) {
         mFm = getFragmentManager();
         mTransaction = mFm.beginTransaction();

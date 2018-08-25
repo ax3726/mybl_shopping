@@ -148,6 +148,30 @@
             </com.zhy.autolayout.AutoLinearLayout>
 
             <EditText
+                android:id="@+id/edDetails"
+                android:layout_width="500px"
+                android:layout_height="150px"
+                android:layout_marginLeft="60px"
+                android:background="@color/colorE7E7E7"
+                android:gravity="left"
+                android:hint="请输入详情地址及门牌号"
+                android:paddingLeft="20px"
+                android:paddingTop="10px"
+                android:textColor="@color/colorBlack"
+                android:textColorHint="@color/background"
+                android:textSize="30px" />
+
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50px"
+            android:layout_marginLeft="30px"
+            android:orientation="horizontal">
+
+            <EditText
                 android:id="@+id/etName"
                 android:layout_width="300px"
                 android:layout_height="60px"
@@ -160,37 +184,22 @@
                 android:textColorHint="@color/background"
                 android:textSize="30px" />
 
+            <EditText
+                android:id="@+id/edPhone"
+                android:layout_width="300px"
+                android:layout_height="60px"
+                android:layout_marginLeft="60px"
+                android:background="@color/colorE7E7E7"
+                android:hint="请输入手机号码"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:paddingLeft="20px"
+                android:textColor="@color/colorBlack"
+                android:textColorHint="@color/background"
+                android:textSize="30px" />
+
         </com.zhy.autolayout.AutoLinearLayout>
 
-        <EditText
-            android:id="@+id/edPhone"
-            android:layout_width="300px"
-            android:layout_height="60px"
-            android:layout_marginLeft="60px"
-            android:layout_marginTop="50px"
-            android:background="@color/colorE7E7E7"
-            android:hint="请输入手机号码"
-            android:inputType="phone"
-            android:maxLength="11"
-            android:paddingLeft="20px"
-            android:textColor="@color/colorBlack"
-            android:textColorHint="@color/background"
-            android:textSize="30px" />
-
-        <EditText
-            android:id="@+id/edDetails"
-            android:layout_width="500px"
-            android:layout_height="150px"
-            android:layout_marginLeft="60px"
-            android:layout_marginTop="50px"
-            android:background="@color/colorE7E7E7"
-            android:gravity="left"
-            android:hint="请输入详情地址及门牌号"
-            android:paddingLeft="20px"
-            android:paddingTop="10px"
-            android:textColor="@color/colorBlack"
-            android:textColorHint="@color/background"
-            android:textSize="30px" />
 
         <ImageView
             android:id="@+id/imgConfierm"

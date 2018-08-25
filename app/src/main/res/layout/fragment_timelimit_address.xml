@@ -36,7 +36,6 @@
                     android:layout_marginLeft="60px"
                     android:layout_marginRight="60px"
                     android:layout_marginTop="10px"
-                    android:text="地址"
                     android:textSize="30px" />
 
                 <TextView
@@ -46,7 +45,6 @@
                     android:layout_marginLeft="60px"
                     android:layout_marginRight="60px"
                     android:layout_marginTop="10px"
-                    android:text="开咯噶几轮廓感"
                     android:textSize="30px" />
 
 
@@ -57,6 +55,18 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="50px"
                     android:src="@drawable/ic_search_store" />
+
+                <Button
+                    android:id="@+id/btn_login_in"
+                    android:layout_width="400px"
+                    android:layout_height="80px"
+                    android:layout_marginTop="30px"
+                    android:text="会员登录"
+                    android:textSize="34px"
+                    android:visibility="gone"
+                    android:layout_gravity="center"
+                    android:textColor="@color/colorBlack"
+                    android:background="@drawable/shape_login1_bg" />
 
             </com.zhy.autolayout.AutoLinearLayout>
 
