@@ -65,8 +65,8 @@
                     android:textSize="34px"
                     android:visibility="gone"
                     android:layout_gravity="center"
-                    android:textColor="@color/colorBlack"
-                    android:background="@drawable/shape_login1_bg" />
+                    android:textColor="@color/colorWhite"
+                    android:background="@drawable/shape_login_mine" />
 
             </com.zhy.autolayout.AutoLinearLayout>
 

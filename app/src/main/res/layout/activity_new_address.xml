@@ -147,22 +147,23 @@
 
             </com.zhy.autolayout.AutoLinearLayout>
 
-            <EditText
-                android:id="@+id/edDetails"
-                android:layout_width="500px"
-                android:layout_height="150px"
-                android:layout_marginLeft="60px"
-                android:background="@color/colorE7E7E7"
-                android:gravity="left"
-                android:hint="请输入详情地址及门牌号"
-                android:paddingLeft="20px"
-                android:paddingTop="10px"
-                android:textColor="@color/colorBlack"
-                android:textColorHint="@color/background"
-                android:textSize="30px" />
-
 
         </com.zhy.autolayout.AutoLinearLayout>
+
+        <EditText
+            android:id="@+id/edDetails"
+            android:layout_width="500px"
+            android:layout_height="150px"
+            android:layout_marginLeft="60px"
+            android:background="@color/colorE7E7E7"
+            android:gravity="left"
+            android:hint="请输入详情地址及门牌号"
+            android:paddingLeft="20px"
+            android:paddingTop="10px"
+            android:layout_marginTop="30px"
+            android:textColor="@color/colorBlack"
+            android:textColorHint="@color/background"
+            android:textSize="30px" />
 
         <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
@@ -177,7 +178,7 @@
                 android:layout_height="60px"
                 android:layout_marginLeft="30px"
                 android:background="@color/colorE7E7E7"
-                android:hint="请输入姓名"
+                android:hint="姓名"
                 android:maxLength="6"
                 android:paddingLeft="20px"
                 android:textColor="@color/colorBlack"
@@ -190,7 +191,7 @@
                 android:layout_height="60px"
                 android:layout_marginLeft="60px"
                 android:background="@color/colorE7E7E7"
-                android:hint="请输入手机号码"
+                android:hint="联系电话"
                 android:inputType="phone"
                 android:maxLength="11"
                 android:paddingLeft="20px"

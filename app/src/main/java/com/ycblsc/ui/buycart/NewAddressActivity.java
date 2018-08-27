@@ -23,6 +23,7 @@ import com.ycblsc.databinding.ActivityNewAddressBinding;
 import com.ycblsc.databinding.ActivitySelectAddressBinding;
 import com.ycblsc.model.BaseBean;
 import com.ycblsc.model.home.ProductListModel;
+import com.ycblsc.model.mine.PersonInfoModel;
 import com.ycblsc.model.shopping.NewAddressModel;
 import com.ycblsc.ui.main.MainActivity;
 import com.ycblsc.utils.MyBigDecimal;
@@ -60,6 +61,7 @@ public class NewAddressActivity extends BaseActivity<BasePresenter, ActivityNewA
     protected void initTitleBar() {
         super.initTitleBar();
         mTitleBarLayout.setTitle("新增收货地址");
+        getPersonInfo(CacheService.getIntance().getUserId());//获取个人信息
         //选择省
         mBinding.linProvince.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -294,6 +296,25 @@ public class NewAddressActivity extends BaseActivity<BasePresenter, ActivityNewA
                                 finish();
                             }
                         }.start();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+
+                    }
+                });
+    }
+    //获取个人信息
+    public void getPersonInfo(String id) {
+        Api.getApi().getPersonInfo(id)
+                .compose(callbackOnIOToMainThread())
+                .subscribe(new BaseNetSubscriber<PersonInfoModel>() {
+                    @Override
+                    public void onNext(PersonInfoModel baseBean) {
+                        super.onNext(baseBean);
+                        mBinding.etName.setHint(baseBean.getReturnData().get(0).getName());
+                        mBinding.edPhone.setHint(baseBean.getReturnData().get(0).getTelphone());
                     }
 
                     @Override
