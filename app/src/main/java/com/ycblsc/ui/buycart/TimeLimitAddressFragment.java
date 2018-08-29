@@ -46,7 +46,7 @@ public class TimeLimitAddressFragment extends BaseFragment<AddressPrestener, Fra
     private FragmentManager mFm;
     private static final int SELECT_ADDRESS_LIST = 200;//选择地址
     private int id;//体验店id
-    private String addressName;
+    private String addressName,telphone,userName;
     private ShoppingFragment mShoppingFragment = null;//商品列表
 
     @Override
@@ -133,6 +133,8 @@ public class TimeLimitAddressFragment extends BaseFragment<AddressPrestener, Fra
         if (baseBean.getReturnData().size() > 0) {
             mBinding.tvAddress.setText(baseBean.getReturnData().get(0).getS_weizhiFull());
             id = baseBean.getReturnData().get(0).getId();
+            mBinding.tvPhone.setText(baseBean.getReturnData().get(0).getTelphone());
+            mBinding.tvUserName.setText(baseBean.getReturnData().get(0).getS_name());
         }
     }
 
@@ -156,7 +158,11 @@ public class TimeLimitAddressFragment extends BaseFragment<AddressPrestener, Fra
                 case SELECT_ADDRESS_LIST:
                     id = data.getIntExtra("id", 0);
                     addressName = data.getStringExtra("addressName");
+                    userName = data.getStringExtra("userName");
+                    telphone = data.getStringExtra("telphone");
                     mBinding.tvAddress.setText(addressName);
+                    mBinding.tvPhone.setText(telphone);
+                    mBinding.tvUserName.setText(userName);
                     break;
 
             }

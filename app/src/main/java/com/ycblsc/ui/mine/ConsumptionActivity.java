@@ -128,6 +128,8 @@ public class ConsumptionActivity extends BaseActivity<ConsumptionPrestener, Acti
             if (consumptionModel.getReturnData().size() < mSize) {
                 mBinding.srlConsumptionList.finishLoadmoreWithNoMoreData();
             }
+        }else {
+            showToast("亲，没有任何记录哦！");
         }
         mConsumptiondapter.notifyDataSetChanged();
     }

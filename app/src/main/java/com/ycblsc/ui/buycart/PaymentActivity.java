@@ -22,6 +22,7 @@ import com.ycblsc.model.WEXModel;
 import com.ycblsc.model.home.ProductListModel;
 import com.ycblsc.model.mine.PersonInfoModel;
 import com.ycblsc.model.shopping.GoodsInfoModel;
+import com.ycblsc.ui.mine.ShoppingOrderListActivity;
 import com.ycblsc.utils.PayHelper;
 import com.ycblsc.utils.SharedPreferencesUtils;
 
@@ -197,7 +198,8 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
                         sleep(1000);
                     } catch (InterruptedException e) {
                     }
-                    finish();
+                    startActivity(ShoppingOrderListActivity.class);
+                   // finish();
                 }
             }.start();
         }
@@ -235,7 +237,8 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
                                             sleep(1000);
                                         } catch (InterruptedException e) {
                                         }
-                                        finish();
+                                        startActivity(ShoppingOrderListActivity.class);
+                                       // finish();
                                     }
                                 }.start();
                             }
@@ -338,7 +341,8 @@ public class PaymentActivity extends BaseActivity<BasePresenter, ActivityPayBind
                                     sleep(1000);
                                 } catch (InterruptedException e) {
                                 }
-                                finish();
+                                startActivity(ShoppingOrderListActivity.class);
+                              //  finish();
                             }
                         }.start();
                     }

@@ -281,6 +281,8 @@ public class ShoppingOrderListActivity extends BaseActivity<BasePresenter, Activ
                             if (returnData.size() < mSize) {
                                 mBinding.srlBody.finishLoadmoreWithNoMoreData();
                             }
+                        }else {
+                            showToast("亲，没有任何记录哦！");
                         }
                         mAdapter.notifyDataSetChanged();
                         finishRefersh();

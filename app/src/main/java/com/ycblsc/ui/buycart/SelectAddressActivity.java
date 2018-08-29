@@ -68,7 +68,9 @@ public class SelectAddressActivity extends BaseActivity<BasePresenter, ActivityS
                 }
                 Intent intent = new Intent();
                 intent.putExtra("id", mDataList.get(posIndex).getId())
-                        .putExtra("addressName", mDataList.get(posIndex).getS_weizhiFull());
+                        .putExtra("addressName", mDataList.get(posIndex).getS_weizhiFull())
+                        .putExtra("telphone", mDataList.get(posIndex).getTelphone())
+                        .putExtra("userName", mDataList.get(posIndex).getS_name());
                 setResult(RESULT_OK, intent);
                 finish();
             }

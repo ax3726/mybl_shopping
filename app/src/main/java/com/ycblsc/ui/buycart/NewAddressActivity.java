@@ -313,8 +313,8 @@ public class NewAddressActivity extends BaseActivity<BasePresenter, ActivityNewA
                     @Override
                     public void onNext(PersonInfoModel baseBean) {
                         super.onNext(baseBean);
-                        mBinding.etName.setHint(baseBean.getReturnData().get(0).getName());
-                        mBinding.edPhone.setHint(baseBean.getReturnData().get(0).getTelphone());
+                        mBinding.etName.setText(baseBean.getReturnData().get(0).getName());
+                        mBinding.edPhone.setText(baseBean.getReturnData().get(0).getTelphone());
                     }
 
                     @Override

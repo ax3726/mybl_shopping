@@ -182,6 +182,8 @@ public class ShoppingSearchFragment extends BaseFragment<BaseFragmentPresenter, 
                             if (baseBean.getReturnData().size() < mSize) {
                                 mBinding.srlBody.finishLoadmoreWithNoMoreData();
                             }
+                        }else {
+                            showToast("亲，没有任何商品哦！");
                         }
                         mGoodsListAdapter.notifyDataSetChanged();
                         finishRefersh();
