@@ -193,6 +193,7 @@
 
     <com.zhy.autolayout.AutoLinearLayout
         android:id="@+id/lly_ok"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -205,7 +206,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="用户签收 :"
-            android:textColor="#1F1F1F"
+            android:textColor="#ACA7A7"
             android:textSize="26px" />
 
         <ImageView
@@ -217,10 +218,7 @@
 
     </com.zhy.autolayout.AutoLinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="20px"
-        android:background="@color/colorF7F7F7" />
+
 
     <com.zhy.autolayout.AutoLinearLayout
         android:id="@+id/lly_ok_time"
@@ -229,7 +227,7 @@
         android:orientation="horizontal"
         android:paddingBottom="50px"
         android:paddingLeft="100px"
-        android:paddingTop="20px">
+      >
 
         <ImageView
             android:id="@+id/img_ok_time"

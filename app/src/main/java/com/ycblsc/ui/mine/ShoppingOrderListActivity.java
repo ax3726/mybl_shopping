@@ -100,6 +100,7 @@ public class ShoppingOrderListActivity extends BaseActivity<BasePresenter, Activ
                 TextView tv_moeny = holder.getView(R.id.tv_money1);
                 TextView tv_qian = holder.getView(R.id.tv_qian);
                 TextView tv_money_count = holder.getView(R.id.tv_money_count);
+                LinearLayout lly_ok = holder.getView(R.id.lly_ok);
 
 
                 ImageView img_ok = holder.getView(R.id.img_ok);
@@ -142,11 +143,13 @@ public class ShoppingOrderListActivity extends BaseActivity<BasePresenter, Activ
                 }
 
                 if ("010704".equals(dataBean.getStatus())) {//待确认
-                    tv_qian.setTextColor(Color.parseColor("#1F1F1F"));
-                    img_ok.setEnabled(true);
+                  //  tv_qian.setTextColor(Color.parseColor("#1F1F1F"));
+//                    img_ok.setVisibility(View.VISIBLE);
+                    lly_ok.setVisibility(View.VISIBLE);
                 } else {
-                    tv_qian.setTextColor(Color.parseColor("#ACA7A7"));
-                    img_ok.setEnabled(false);
+//                    img_ok.setVisibility(View.GONE);
+                 //   tv_qian.setTextColor(Color.parseColor("#ACA7A7"));
+                    lly_ok.setVisibility(View.GONE);
                 }
 
 
