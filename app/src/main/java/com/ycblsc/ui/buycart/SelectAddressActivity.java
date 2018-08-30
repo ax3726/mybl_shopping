@@ -111,7 +111,6 @@ public class SelectAddressActivity extends BaseActivity<BasePresenter, ActivityS
                             protected void convert(ViewHolder holder, SelectAddressModel.ReturnDataBean item, int position) {
                                 LinearLayout linAddress = holder.getView(R.id.linAddress);
                                 RadioButton rad_balance = holder.getView(R.id.rad_balance);
-                                RadioGroup radioGroup = holder.getView(R.id.rad_address);
                                 rad_balance.setText(item.getS_weizhiFull());
                                 if (!item.isState()) {
                                     linAddress.setBackgroundColor(getResources().getColor(R.color.colorWhite));

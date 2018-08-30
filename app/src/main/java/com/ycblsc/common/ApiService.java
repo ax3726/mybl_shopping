@@ -305,4 +305,8 @@ public interface ApiService {
     @POST("AppService2.aspx?CMD=GetNote")
     Flowable<BaseBean> GetNote(@Query("d_Code") String d_Code);
 
+    //选择地址确认返回
+    @POST("AppServicePost2.aspx?CMD=SetAddrByDefault")
+    Flowable<BaseBean> GetSetAddrByDefault(@Query("defaultAddrId") int defaultAddrId
+            , @Query("id") String id);
 }

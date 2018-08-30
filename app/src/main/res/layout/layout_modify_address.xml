@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/linAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:orientation="vertical"
+        android:paddingBottom="30px"
+        android:paddingTop="30px">
+
+
+        <!--<RadioGroup-->
+        <!--android:id="@+id/rad_address"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="20px"-->
+        <!--android:orientation="vertical"-->
+        <!--android:paddingBottom="20px"-->
+        <!--android:paddingTop="20px">-->
+
+
+        <RadioButton
+            android:id="@+id/rad_balance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:text="贵州省贵阳市花果区"
+            android:textSize="13dp" />
+
+        <!--</RadioGroup>-->
+
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+</layout>

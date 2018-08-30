@@ -6,17 +6,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorWhite"
+        android:paddingBottom="20px"
+        android:paddingTop="20px"
         android:orientation="vertical">
 
 
-        <RadioGroup
-            android:id="@+id/rad_address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20px"
-            android:orientation="vertical"
-            android:paddingBottom="20px"
-            android:paddingTop="20px">
+        <!--<RadioGroup-->
+            <!--android:id="@+id/rad_address"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="20px"-->
+            <!--android:orientation="vertical"-->
+            <!--android:paddingBottom="20px"-->
+            <!--android:paddingTop="20px">-->
 
             <!--<com.zhy.autolayout.AutoRelativeLayout-->
             <!--android:id="@+id/rela_pay"-->
@@ -34,7 +36,7 @@
             <!--</com.zhy.autolayout.AutoRelativeLayout>-->
 
 
-        </RadioGroup>
+        <!--</RadioGroup>-->
 
 
     </com.zhy.autolayout.AutoLinearLayout>
