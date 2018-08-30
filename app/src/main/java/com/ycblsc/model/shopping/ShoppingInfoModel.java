@@ -81,7 +81,7 @@ public class ShoppingInfoModel {
         private String jingdu;
         private String weidu;
         private int maxTime;
-        private int maxArea;
+        private String maxArea;
         private String sendAddress;
         private String s_weizhiFull;
 
@@ -213,11 +213,11 @@ public class ShoppingInfoModel {
             this.maxTime = maxTime;
         }
 
-        public int getMaxArea() {
+        public String getMaxArea() {
             return maxArea;
         }
 
-        public void setMaxArea(int maxArea) {
+        public void setMaxArea(String maxArea) {
             this.maxArea = maxArea;
         }
 
