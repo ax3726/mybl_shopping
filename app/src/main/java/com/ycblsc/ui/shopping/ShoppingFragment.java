@@ -9,12 +9,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.lm.base.library.utils.Utils;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -72,7 +74,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
     private com.lm.base.library.adapters.abslistview.CommonAdapter<ProductListModel.ReturnDataBean> mTuijianGoodsAdapter;//推荐商品列表
     private int mCurPosition = 0;//记录当前分类的下标
     private int mPage = 1;
-    private int mSize = 15;
+    private int mSize = 20;
     private String mShoppingId = "";//体验店id
     private String mMaxTime = "";//配送时间
     private String mAddress = "";//配送范围
@@ -126,6 +128,21 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
         }
     }
 
+    @Override
+    protected void initView(Bundle savedInstanceState) {
+        super.initView(savedInstanceState);
+        int height = aty.getWindow().getWindowManager().getDefaultDisplay().getHeight();
+
+        int result = 0;
+        int resourceId = aty.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = aty.getResources().getDimensionPixelSize(resourceId);
+        }
+
+        height=height- (int) Utils.dip2px(aty,40)-result;
+        LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,height);
+        mBinding.llyShopping.setLayoutParams(layoutParams);
+    }
 
     private void initAdapter() {
 
@@ -234,8 +251,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
         mBinding.rcGoodsList.setLayoutManager(new LinearLayoutManager(aty));
         mBinding.rcGoodsList.setAdapter(mGoodsListAdapter);
 
-        mBinding.rcGoodsType.setNestedScrollingEnabled(false);
-        mBinding.rcGoodsList.setNestedScrollingEnabled(false);
+
 
         mBinding.srlShopping.setEnableRefresh(false);
         mBinding.srlShopping.setRefreshFooter(new ClassicsFooter(aty));//设置 Footer 样式
@@ -279,7 +295,9 @@ public class ShoppingFragment extends BaseFragment<ShoppingPrestener, FragmentSh
                 mBinding.srlShopping.finishLoadmoreWithNoMoreData();
             }
         }
+
         mGoodsListAdapter.notifyDataSetChanged();
+        mBinding.rcGoodsList.scrollTo(0,0);
     }
 
     @Override

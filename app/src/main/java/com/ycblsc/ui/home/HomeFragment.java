@@ -1,8 +1,10 @@
 package com.ycblsc.ui.home;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.lm.base.library.adapters.recyclerview.CommonAdapter;
 import com.lm.base.library.adapters.recyclerview.base.ViewHolder;
+import com.lm.base.library.utils.Utils;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -61,7 +64,7 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
 
     private int mCurPosition = 0;//记录当前分类的下标
     private int mPage = 1;
-    private int mSize = 15;
+    private int mSize = 20;
 
     @Override
     protected HomePrestener createPresenter() {
@@ -80,9 +83,24 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
             }
         });*/
         initAdapter();
-        mPresenter.getShopInfo("18");//默认给18数据
+      //  mPresenter.getShopInfo("18");//默认给18数据
         mPresenter.getImageData();
         mBinding.srlGoodsList.finishLoadmoreWithNoMoreData();
+    }
+    @Override
+    protected void initView(Bundle savedInstanceState) {
+        super.initView(savedInstanceState);
+        int height = aty.getWindow().getWindowManager().getDefaultDisplay().getHeight();
+
+        int result = 0;
+        int resourceId = aty.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = aty.getResources().getDimensionPixelSize(resourceId);
+        }
+
+        height=height- (int) Utils.dip2px(aty,40)-result;
+        LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,height);
+        mBinding.llyShopping.setLayoutParams(layoutParams);
     }
 
     @Override
@@ -196,9 +214,9 @@ public class HomeFragment extends BaseFragment<HomePrestener, FragmentHomeLayout
         mBinding.rcGoodsList.setLayoutManager(new LinearLayoutManager(aty));
         mBinding.rcGoodsList.setAdapter(mGoodsListAdapter);
 
-        mBinding.rcGoodsType.setNestedScrollingEnabled(false);
+   /*     mBinding.rcGoodsType.setNestedScrollingEnabled(false);
         mBinding.rcGoodsList.setNestedScrollingEnabled(false);
-
+*/
         mBinding.srlGoodsList.setEnableRefresh(false);
         mBinding.srlGoodsList.setRefreshFooter(new ClassicsFooter(aty));//设置 Footer 样式
 

@@ -143,7 +143,7 @@ public class PaymentTwoPhaseActivity extends BaseActivity<BasePresenter, Activit
 
             } else if (mBinding.radAlipay.isChecked()) {
                 // long str=System.currentTimeMillis()/1000;//1534769510718
-                if (System.currentTimeMillis() / 1000 >= 1538323200) {
+                if (System.currentTimeMillis() / 1000 >= 1538872372) {
                     showToast("暂未开通！");
                 } else {
                     AliPay();//支付宝支付
